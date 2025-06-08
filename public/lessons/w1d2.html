@@ -248,11 +248,11 @@
                     options: [
                         'Lighthouses are no longer useful.',
                         'Lighthouses, traditionally vital for maritime safety, now serve as important cultural symbols.',
-                        'GPS is a more modern navigation tool.',
-                        'Lighthouses are built on rocky shores.'
+                        'GPS and radar are better than lighthouses.',
+                        'Lighthouses are always on rocky shores.'
                     ],
                     correctAnswer: 'Lighthouses, traditionally vital for maritime safety, now serve as important cultural symbols.',
-                    explanation: 'This statement captures the full scope of the passage, acknowledging the lighthouse\'s historical role ("traditionally vital for maritime safety") and its modern significance ("now serve as important cultural symbols").'
+                    explanation: 'The passage contrasts the lighthouse\'s past practical role with its current symbolic one. It acknowledges the change in technology ("less essential") but emphasizes their enduring status as "powerful cultural symbols," which is the central point.'
                 }
             ]
         };
@@ -263,95 +263,172 @@
             const resultsScreen = document.getElementById('results-screen');
             let currentStep = 0;
             let score = 0;
-            let questionsAnswered = 0;
 
             function startLesson() {
                 lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
-                showStep(currentStep);
+                displayStep();
             }
 
-            function showStep(stepIndex) {
-                const step = lessonData.steps[stepIndex];
-                if (!step) return;
+            function displayStep() {
+                const step = lessonData.steps[currentStep];
+                let content = `<div class="card">`;
 
-                const card = document.createElement('div');
-                card.className = 'card active';
-
-                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
-                
                 if (step.type === 'briefing') {
-                    content += `<div class="card-content">${step.content}</div>`;
-                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                    content += `<h2>${step.header}</h2><div class="card-content">${step.content}</div>`;
+                    content += `<button class="btn btn-primary" id="next-btn">Start</button>`;
                 } else {
-                    questionsAnswered++;
-                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
-                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
-                    content += `<div class="card-content">`;
-
-                    if (step.passage) {
-                        content += `<p class="passage">${step.passage}</p>`;
-                    }
-
-                    content += `<p class="prompt">${step.prompt}</p>`;
-
-                    if (step.type === 'mcq') {
-                        content += `<div class="options">`;
-                        step.options.forEach((option) => {
-                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
-                        });
-                        content += `</div>`;
-                    } else if (step.type === 'grid-in') {
-                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
-                    }
-                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                    content += `
+                        <div class="card-header">
+                            <h2>${step.header} (${currentStep}/${lessonData.steps.length - 1})</h2>
+                        </div>
+                        <div class="card-content">
+                            ${step.passage ? `<div class="passage"><p>${step.passage}</p></div>` : ''}
+                            <p>${step.prompt}</p>
+                            ${renderQuestion(step)}
+                        </div>
+                        <div class="answer-explanation" id="explanation-${currentStep}"></div>
+                    `;
                 }
-                
-                card.innerHTML = content;
-                lessonDeck.innerHTML = '';
-                lessonDeck.appendChild(card);
+                content += `</div>`;
+                lessonDeck.innerHTML = content;
+                attachEventListeners();
+            }
 
-                if (step.type === 'briefing') {
-                    document.getElementById('next-btn').addEventListener('click', () => {
-                        currentStep++;
-                        showStep(currentStep);
+            function renderQuestion(step) {
+                if (step.type === 'mcq') {
+                    return `
+                        <div class="options">
+                            <ul>
+                                ${step.options.map(o => `<li>${o}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    return `
+                        <input type="text" id="grid-in-answer" class="form-input">
+                        <button class="btn btn-primary" id="submit-btn">Submit</button>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    const sentences = [...step.sentences];
+                    for (let i = sentences.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                    }
+                    return `
+                        <div id="scrambled-container">
+                            ${sentences.map((s, i) => `<div class="scrambled-sentence" draggable="true" data-index="${i}">${s}</div>`).join('')}
+                        </div>
+                        <button id="submit-btn" class="btn btn-primary">Check Order</button>
+                    `;
+                }
+                return '';
+            }
+
+            function attachEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    const nextBtn = document.getElementById('next-btn');
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            currentStep++;
+                            displayStep();
+                        });
+                    }
+                } else if (step.type === 'mcq') {
+                    const options = document.querySelectorAll('.options li');
+                    options.forEach(option => {
+                        option.addEventListener('click', () => handleMCQAnswer(option.textContent));
                     });
-                } else {
-                    if (step.type === 'mcq') {
-                        document.querySelectorAll('.option-btn').forEach(btn => {
-                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
-                        });
-                    } else if (step.type === 'grid-in') {
-                        document.getElementById('submit-grid-in').addEventListener('click', () => {
-                            const userAnswer = document.getElementById('grid-in-input').value;
-                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
-                        });
-                    }
+                } else if (step.type === 'grid-in') {
+                    const submitBtn = document.getElementById('submit-btn');
+                    submitBtn.addEventListener('click', () => {
+                        const answer = document.getElementById('grid-in-answer').value;
+                        handleGridInAnswer(answer);
+                    });
+                } else if (step.type === 'scrambled-paragraph') {
+                    const submitBtn = document.getElementById('submit-btn');
+                    submitBtn.addEventListener('click', handleScrambledAnswer);
+                    
+                    const container = document.getElementById('scrambled-container');
+                    let draggedItem = null;
+
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => e.target.style.display = '', 0);
+                        draggedItem = null;
+                    });
+
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
                 }
             }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not([style*="display: none"])')];
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
 
-            function handleAnswer(userAnswer, step, container) {
-                const feedbackDiv = container.parentElement.querySelector('.feedback');
-                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
-                
+            function handleMCQAnswer(selectedOption) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedOption === step.correctAnswer;
                 if (isCorrect) {
                     score += lessonData.pointsPerQuestion;
-                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
-                } else {
-                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
                 }
-                
-                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
-                feedbackDiv.style.display = 'block';
+                showExplanation(isCorrect, step.explanation);
+            }
 
-                const nextButton = document.createElement('button');
-                nextButton.innerText = 'Next';
-                nextButton.className = 'next-btn';
-                feedbackDiv.appendChild(nextButton);
+            function handleGridInAnswer(answer) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                showExplanation(isCorrect, step.explanation);
+            }
+
+            function handleScrambledAnswer() {
+                const step = lessonData.steps[currentStep];
+                const container = document.getElementById('scrambled-container');
+                const userOrder = [...container.querySelectorAll('.scrambled-sentence')].map(el => el.textContent);
+                const isCorrect = JSON.stringify(userOrder) === JSON.stringify(step.correctOrder);
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                showExplanation(isCorrect, step.explanation);
+            }
+
+            function showExplanation(isCorrect, explanationText) {
+                const explanationDiv = document.getElementById(`explanation-${currentStep}`);
+                explanationDiv.style.display = 'block';
+                explanationDiv.innerHTML = `
+                    <p class="correct-answer">${isCorrect ? 'Correct!' : 'Incorrect.'}</p>
+                    <p>${explanationText}</p>
+                    <button id="next-btn" class="btn btn-primary">Next</button>
+                `;
                 
-                nextButton.addEventListener('click', () => {
+                document.getElementById('next-btn').addEventListener('click', () => {
                     currentStep++;
                     if (currentStep < lessonData.steps.length) {
-                        showStep(currentStep);
+                        displayStep();
                     } else {
                         showResults();
                     }
@@ -359,26 +436,22 @@
             }
 
             function showResults() {
-                localStorage.setItem('w1d2-complete', 'true');
-                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
-                const percentage = Math.round((score / totalPossibleScore) * 100);
-                
-                resultsScreen.innerHTML = `
-                    <div class="card">
-                        <div class="card-header"><h2>Mission Complete!</h2></div>
-                        <div class="card-content">
-                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
-                            <p>Accuracy: ${percentage}%</p>
-                            <a href="../index.html" class="button">Return to Dashboard</a>
-                        </div>
-                    </div>
-                `;
+                const lessonId = window.location.pathname.split('/').pop().replace('.html', '');
+                localStorage.setItem(lessonId, 'completed');
+
                 lessonDeck.style.display = 'none';
                 resultsScreen.style.display = 'block';
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <h2>Lesson Complete!</h2>
+                        <p>Your Score: ${score} / ${lessonData.pointsPerQuestion * (lessonData.steps.length -1)}</p>
+                        <a href="../index.html" class="btn btn-primary">Back to Dashboard</a>
+                    </div>
+                `;
             }
 
             startLesson();
         });
     </script>
 </body>
-</html> 
+</html>

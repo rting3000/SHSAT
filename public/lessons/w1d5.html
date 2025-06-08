@@ -248,142 +248,171 @@
                     prompt: 'A weather forecast says there is a 40% chance of rain. What is the probability that it will NOT rain?',
                     passage: 'Express your answer as a percentage.',
                     correctAnswer: '60',
-                    explanation: 'The total probability of all outcomes is 100%. If the chance of rain is 40%, the chance of no rain is 100% - 40% = 60%.'
+                    explanation: 'The probability of all outcomes must add up to 100%. So, the probability of no rain is 100% - 40% = 60%.'
                 },
-                {
+                 {
                     type: 'grid-in',
                     header: 'Math Challenge 10',
-                    prompt: 'You roll two standard six-sided dice. What is the probability that the sum of the numbers is 12?',
-                    passage: 'Express your answer as a fraction.',
-                    correctAnswer: '1/36',
-                    explanation: 'When rolling two dice, there are 6 * 6 = 36 possible outcomes. The only way to get a sum of 12 is by rolling a 6 on both dice. This is only one possible outcome. So, the probability is 1/36.'
+                    prompt: 'You roll two six-sided dice. What is the probability that the sum of the numbers is 7?',
+                    passage: 'Express your answer as a simple fraction (e.g., 1/6).',
+                    correctAnswer: '1/6',
+                    explanation: 'There are 6 * 6 = 36 possible outcomes. The combinations that sum to 7 are (1,6), (2,5), (3,4), (4,3), (5,2), and (6,1). That is 6 favorable outcomes. The probability is 6/36, which simplifies to 1/6.'
                 }
             ]
         };
 
-        // Standard lesson engine script
+        // --- Core Lesson Engine ---
         document.addEventListener('DOMContentLoaded', () => {
-            const lessonHeader = document.getElementById('lesson-header');
-            const lessonDeck = document.getElementById('lesson-deck');
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
             const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
             let currentStep = 0;
             let score = 0;
-            let questionsAnswered = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
 
-            function startLesson() {
-                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
-                showStep(currentStep);
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
             }
 
-            function showStep(stepIndex) {
-                const step = lessonData.steps[stepIndex];
-                if (!step) return;
-
-                const card = document.createElement('div');
-                card.className = 'card active';
-
-                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
-                
-                if (step.type === 'briefing') {
-                    content += `<div class="card-content">${step.content}</div>`;
-                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
-                } else {
-                    questionsAnswered++;
-                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
-                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
-                    content += `<div class="card-content">`;
-
-                    if (step.passage) {
-                        content += `<p class="passage">${step.passage}</p>`;
-                    }
-
-                    content += `<p class="prompt">${step.prompt}</p>`;
-
-                    if (step.type === 'mcq') {
-                        content += `<div class="options">`;
-                        step.options.forEach((option) => {
-                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
-                        });
-                        content += `</div>`;
-                    } else if (step.type === 'grid-in') {
-                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
-                    }
-                    content += `</div><div class="feedback" style="display: none;"></div>`;
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
                 }
-                
-                card.innerHTML = content;
-                lessonDeck.innerHTML = '';
-                lessonDeck.appendChild(card);
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
 
                 if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                } else if (step.type === 'scrambled-paragraph') {
+                    // New logic for scrambled-paragraph will go here
+                    // For now, let's just show the sentences and options
+                    const sentenceContainer = document.createElement('div');
+                    step.sentences.forEach(s => {
+                        const p = document.createElement('p');
+                        p.textContent = `(${s.id}) ${s.text}`;
+                        sentenceContainer.appendChild(p);
+                    });
+                    content += sentenceContainer.innerHTML;
+                    
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
                     document.getElementById('next-btn').addEventListener('click', () => {
                         currentStep++;
-                        showStep(currentStep);
+                        renderStep();
                     });
-                } else {
-                    if (step.type === 'mcq') {
-                        document.querySelectorAll('.option-btn').forEach(btn => {
-                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
-                        });
-                    } else if (step.type === 'grid-in') {
-                        document.getElementById('submit-grid-in').addEventListener('click', () => {
-                            const userAnswer = document.getElementById('grid-in-input').value;
-                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
-                        });
-                    }
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
                 }
             }
 
-            function handleAnswer(userAnswer, step, container) {
-                const feedbackDiv = container.parentElement.querySelector('.feedback');
-                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
-                
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
                 if (isCorrect) {
                     score += lessonData.pointsPerQuestion;
-                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
-                } else {
-                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
-                }
-                
-                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
-                feedbackDiv.style.display = 'block';
-
-                const nextButton = document.createElement('button');
-                nextButton.innerText = 'Next';
-                nextButton.className = 'next-btn';
-                feedbackDiv.appendChild(nextButton);
-                
-                nextButton.addEventListener('click', () => {
-                    currentStep++;
-                    if (currentStep < lessonData.steps.length) {
-                        showStep(currentStep);
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
                     } else {
-                        showResults();
+                         document.getElementById('grid-in-answer').classList.add('correct');
                     }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
                 });
             }
 
             function showResults() {
-                localStorage.setItem('w1d5-complete', 'true');
-                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
-                const percentage = Math.round((score / totalPossibleScore) * 100);
-                
-                resultsScreen.innerHTML = `
-                    <div class="card">
-                        <div class="card-header"><h2>Mission Complete!</h2></div>
-                        <div class="card-content">
-                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
-                            <p>Accuracy: ${percentage}%</p>
-                            <a href="../index.html" class="button">Return to Dashboard</a>
-                        </div>
-                    </div>
-                `;
-                lessonDeck.style.display = 'none';
+                deck.style.display = 'none';
                 resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
             }
 
-            startLesson();
+            init();
         });
     </script>
 </body>
-</html>
+</html> 

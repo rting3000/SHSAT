@@ -19,7 +19,6 @@
             title: "Mission: Advanced Operations",
             subtitle: "Week 1, Day 6",
             pointsPerQuestion: 10,
-            completion_id: 'w1d6',
             steps: [
                 {
                     type: 'briefing',
@@ -218,259 +217,160 @@
             ]
         };
 
-        // Standard lesson engine script
+        // --- Core Lesson Engine ---
         document.addEventListener('DOMContentLoaded', () => {
-            const lessonHeader = document.getElementById('lesson-header');
-            const lessonDeck = document.getElementById('lesson-deck');
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
             const resultsScreen = document.getElementById('results-screen');
-            const completionId = lessonData.completion_id;
+            const lessonId = window.location.pathname.split('/').pop();
 
             let currentStep = 0;
             let score = 0;
-            let questionsAnswered = 0;
-            let completedQuestions = new Set(JSON.parse(localStorage.getItem(completionId)) || []);
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
 
-            function startLesson() {
-                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
-                showStep(currentStep);
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
             }
 
-            function showStep(stepIndex) {
-                const step = lessonData.steps[stepIndex];
-                if (!step) {
-                    showFinalResults();
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
                     return;
                 }
 
+                const step = lessonData.steps[currentStep];
                 const card = document.createElement('div');
-                card.className = 'card active';
+                card.className = `card ${step.type}-card`;
 
-                let content = `<h2>${step.header}</h2>`;
-                if (step.passage) {
-                    content += `<div class="passage">${step.passage}</div>`;
-                }
-                if (step.prompt) {
-                    content += `<p class="prompt">${step.prompt}</p>`;
-                }
-                
-                if (step.type === 'mcq') {
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq') {
                     content += '<div class="options">';
-                    step.options.forEach(option => {
-                        content += `<button class="option">${option}</button>`;
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
                     });
                     content += '</div>';
                 } else if (step.type === 'grid-in') {
-                    content += `
-                        <div class="grid-in-container">
-                            <input type="text" class="grid-in-input" maxlength="10">
-                            <button class="submit-btn">Submit</button>
-                        </div>
-                    `;
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
                 } else if (step.type === 'scrambled-paragraph') {
-                    content += `<div id="scrambled-container"></div>`;
-                    content += `<button id="check-scrambled-btn" class="submit-btn">Check Order</button>`;
-                } else if (step.type === 'briefing') {
-                    content += `<div class="briefing-content">${step.content}</div>`;
-                    content += `<button class="next-btn">Continue</button>`;
+                    // New logic for scrambled-paragraph will go here
+                    // For now, let's just show the sentences and options
+                    const sentenceContainer = document.createElement('div');
+                    step.sentences.forEach(s => {
+                        const p = document.createElement('p');
+                        p.textContent = `(${s.id}) ${s.text}`;
+                        sentenceContainer.appendChild(p);
+                    });
+                    content += sentenceContainer.innerHTML;
+                    
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
                 }
-
                 card.innerHTML = content;
-                lessonDeck.innerHTML = '';
-                lessonDeck.appendChild(card);
-                
-                if (step.type === 'scrambled-paragraph') {
-                    setupScrambledParagraph(step);
-                }
-
-                addCardEventListeners(step);
+                deck.appendChild(card);
+                addEventListeners();
             }
 
-            function addCardEventListeners(step) {
-                if (step.type === 'mcq') {
-                    const optionButtons = document.querySelectorAll('.option');
-                    optionButtons.forEach(button => {
-                        button.addEventListener('click', () => handleAnswer(step, button.textContent));
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
                     });
                 } else if (step.type === 'grid-in') {
-                    const submitButton = document.querySelector('.submit-btn');
-                    const inputField = document.querySelector('.grid-in-input');
-                    submitButton.addEventListener('click', () => handleAnswer(step, inputField.value.trim()));
-                    inputField.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') {
-                            handleAnswer(step, inputField.value.trim());
-                        }
-                    });
-                } else if (step.type === 'scrambled-paragraph') {
-                    document.getElementById('check-scrambled-btn').addEventListener('click', () => {
-                         handleScrambledAnswer(step);
-                    });
-                } else if (step.type === 'briefing') {
-                    document.querySelector('.next-btn').addEventListener('click', () => {
-                        currentStep++;
-                        showStep(currentStep);
-                    });
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
                 }
             }
-            
-            function handleAnswer(step, selectedAnswer) {
-                const isCorrect = selectedAnswer === step.correctAnswer;
-                if (step.type !== 'briefing') {
-                    questionsAnswered++;
-                    if (isCorrect) {
-                        score += lessonData.pointsPerQuestion;
-                    }
-                }
-                
-                showFeedback(step, isCorrect, selectedAnswer);
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
             }
 
-            function showFeedback(step, isCorrect, selectedAnswer) {
-                const card = document.querySelector('.card');
-                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
-                
-                if (!isCorrect) {
-                     feedbackHtml += `<p><strong>Your answer:</strong> ${selectedAnswer}</p>`;
-                     feedbackHtml += `<p><strong>Correct answer:</strong> ${step.correctAnswer}</p>`;
-                }
 
-                feedbackHtml += `<div class="explanation"><p>${step.explanation}</p></div>`;
-                feedbackHtml += `<button class="next-btn">Next</button>`;
 
-                card.innerHTML = feedbackHtml;
-                document.querySelector('.next-btn').addEventListener('click', () => {
-                    currentStep++;
-                    showStep(currentStep);
-                });
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
             }
 
-            function setupScrambledParagraph(step) {
-                const container = document.getElementById('scrambled-container');
-                const sentences = [...step.sentences]; // Create a mutable copy
-                // Simple shuffle
-                for (let i = sentences.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
-                }
-
-                sentences.forEach((sentence, index) => {
-                    const sentenceDiv = document.createElement('div');
-                    sentenceDiv.className = 'scrambled-sentence';
-                    sentenceDiv.textContent = sentence;
-                    sentenceDiv.dataset.originalIndex = step.sentences.indexOf(sentence);
-                    sentenceDiv.setAttribute('draggable', true);
-                    sentenceDiv.id = `sentence-${index}`;
-                    
-                    sentenceDiv.addEventListener('dragstart', handleDragStart);
-                    sentenceDiv.addEventListener('dragover', handleDragOver);
-                    sentenceDiv.addEventListener('drop', handleDrop);
-                    sentenceDiv.addEventListener('dragend', handleDragEnd);
-
-                    container.appendChild(sentenceDiv);
-                });
-            }
-            
-            let draggedItem = null;
-
-            function handleDragStart(e) {
-                draggedItem = this;
-                setTimeout(() => {
-                    this.style.display = 'none';
-                }, 0);
-            }
-
-            function handleDragOver(e) {
-                e.preventDefault();
-            }
-
-            function handleDrop(e) {
-                e.preventDefault();
-                if (this !== draggedItem) {
-                    const allItems = Array.from(document.querySelectorAll('.scrambled-sentence'));
-                    const draggedIndex = allItems.indexOf(draggedItem);
-                    const targetIndex = allItems.indexOf(this);
-
-                    if (draggedIndex < targetIndex) {
-                        this.parentNode.insertBefore(draggedItem, this.nextSibling);
-                    } else {
-                        this.parentNode.insertBefore(draggedItem, this);
-                    }
-                }
-            }
-            
-            function handleDragEnd() {
-                setTimeout(() => {
-                    if (draggedItem) {
-                        draggedItem.style.display = 'block';
-                        draggedItem = null;
-                    }
-                }, 0);
-            }
-
-            function handleScrambledAnswer(step) {
-                const container = document.getElementById('scrambled-container');
-                const currentOrder = Array.from(container.children).map(child => child.textContent);
-                
-                let isCorrect = true;
-                for(let i = 0; i < currentOrder.length; i++) {
-                    if(currentOrder[i] !== step.correctOrder[i]) {
-                        isCorrect = false;
-                        break;
-                    }
-                }
-                
-                questionsAnswered++;
-                 if (isCorrect) {
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
                     score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
                 }
 
-                showScrambledFeedback(step, isCorrect);
-            }
-            
-            function showScrambledFeedback(step, isCorrect) {
-                const card = document.querySelector('.card');
-                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
-                feedbackHtml += `<p>${step.explanation}</p>`;
-                feedbackHtml += `<strong>The correct order is:</strong><ol>`;
-                step.correctOrder.forEach(sentence => {
-                    feedbackHtml += `<li>${sentence}</li>`;
-                });
-                feedbackHtml += `</ol>`;
-                feedbackHtml += `<button class="next-btn">Next</button>`;
-                
-                card.innerHTML = feedbackHtml;
-                document.querySelector('.next-btn').addEventListener('click', () => {
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
                     currentStep++;
-                    showStep(currentStep);
+                    renderStep();
                 });
             }
 
-
-            function showFinalResults() {
-                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
-                lessonDeck.style.display = 'none';
+            function showResults() {
+                deck.style.display = 'none';
                 resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
                 resultsScreen.innerHTML = `
-                    <div class="card active">
-                        <h2>Mission Complete!</h2>
-                        <p>You've completed ${lessonData.subtitle}.</p>
-                        <h3>Your Score: ${score} / ${totalQuestions * lessonData.pointsPerQuestion}</h3>
-                        <p>You answered ${questionsAnswered} questions.</p>
-                        <a href="../index.html" class="button">Return to Dashboard</a>
-                    </div>
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
                 `;
-                markLessonAsComplete();
-            }
-            
-            function markLessonAsComplete() {
-                if (completionId) {
-                    const completedLessons = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
-                    completedLessons.add(completionId);
-                    localStorage.setItem('completedLessons', JSON.stringify([...completedLessons]));
-                }
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
             }
 
-            startLesson();
+            init();
         });
     </script>
 </body>
-</html>
+</html> 
