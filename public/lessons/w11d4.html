@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 4 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head><body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 4</h1>
+            <h2>Test Strategy Review</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Lesson Complete!</h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d4",
+            title: "Week 11, Day 4: Test Strategy Review",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'Reviewing Your Practice Tests',
+                    text: `The most important part of taking practice tests is reviewing them effectively.
+                    
+                    1.  **Categorize Your Errors:** Go through every question you got wrong. Was it a careless mistake, a knowledge gap, or a time management issue?
+                    
+                    2.  **Create an Error Log:** For each mistake, write down the question, why you got it wrong, and what the correct concept or strategy is. Reviewing this log is one of the most powerful study techniques.
+                    
+                    3.  **Don't Ignore "Guesses":** Review questions you answered correctly but were unsure about. You might have gotten lucky, and understanding the 'why' will solidify your knowledge.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'Pacing and Time Management',
+                    text: `The SHSAT is a race against the clock.
+                    
+                    -   **Know Your Pace:** You have 180 minutes for 114 questions. That's about 1.5 minutes per question. Some will be faster, some slower.
+                    
+                    -   **Don't Get Stuck:** If a question is too hard, make your best guess, flag it, and move on. You can come back later if you have time. It's better to answer 5 easy questions than to spend 10 minutes on one hard one.
+                    
+                    -   **Check the Clock:** Check your time at the halfway point of each section to ensure you're on track.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'ELA Section Strategies',
+                    text: `**Reading Comprehension:**
+                    - Read the questions *before* reading the passage to know what to look for.
+                    - The answer is always in the text. Don't use outside knowledge. Find direct evidence to support your choice.
+
+                    **Revising & Editing:**
+                    - Read the entire paragraph first to get the context.
+                    - For grammar questions, focus on the specific rules being tested (fragments, run-ons, subject-verb agreement, etc.).
+                    - For "best placement" or "main idea" questions, consider the flow and purpose of the paragraph.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'Math Section Strategies',
+                    text: `**Multiple Choice:**
+                    -   **Back-solving:** Plug the answer choices back into the problem. Start with B or C.
+                    -   **Estimation:** Eliminate answers that are clearly too big or too small.
+                    -   **Draw a Picture:** For geometry problems, a quick sketch can make the solution obvious.
+
+                    **Grid-Ins:**
+                    -   There is no penalty for guessing, so never leave a grid-in blank.
+                    -   Read the question carefully. Are you solving for the radius or the area? The price or the discount?
+                    -   Double-check your bubbling. A simple mistake here can cost you points.`
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                const card = createBriefingCard(questionData);
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        currentQuestionIndex++;
+                        saveProgress();
+                        renderQuestion();
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                const buttonText = (currentQuestionIndex === lessonData.questions.length - 1) ? 'Finish' : 'Next';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">${buttonText}</button>
+                `;
+                return card;
+            }
+
+            function displayFinalScore() {
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                const progress = {
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

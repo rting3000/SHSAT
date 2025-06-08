@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 5 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 5</h1>
+            <h2>Full Practice Test #3</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Your Score: <span id="final-score"></span></h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d5",
+            title: "Week 11, Day 5: Full Practice Test #3",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'Full Practice Test #3',
+                    text: 'This is your third full-length practice test. Find a quiet space, set a timer for 180 minutes, and complete the entire test in one sitting. Try to simulate the real test environment as closely as possible. Good luck!'
+                },
+                // ELA Section
+                {
+                    type: 'passage',
+                    passage_title: 'The Art of Bonsai',
+                    passage: "Bonsai is the ancient Japanese art form of growing ornamental, artificially dwarfed trees in containers. Contrary to popular belief, bonsai are not a special species of tree; in fact, any tree species can be used. The practice focuses on long-term cultivation and shaping of one or more small trees growing in a container. It involves techniques like pruning, root reduction, potting, defoliation, and grafting to produce small trees that mimic the shape and style of mature, full-size trees. The ultimate goal of a bonsai artist is to create a miniaturized but realistic representation of nature. It is a practice that requires patience, artistry, and a deep understanding of horticulture. A single bonsai tree can be tended for generations, becoming a living heirloom.",
+                    questions: [
+                        {
+                            question: "The primary purpose of the passage is to...",
+                            options: {
+                                A: "argue that bonsai is the most difficult art form.",
+                                B: "provide a brief introduction to the art of bonsai.",
+                                C: "list the specific tools required for bonsai.",
+                                D: "criticize the practice of artificially dwarfing trees."
+                            },
+                            answer: "B"
+                        },
+                        {
+                            question: "Which of the following is a common misconception about bonsai, according to the passage?",
+                            options: {
+                                A: "Bonsai requires great patience.",
+                                B: "Bonsai trees are a specific, naturally small species.",
+                                C: "Bonsai involves pruning and shaping.",
+                                D: "Bonsai trees can live for a very long time."
+                            },
+                            answer: "B"
+                        },
+                        {
+                            question: "The passage suggests that a bonsai artist must be skilled in both...",
+                            options: {
+                                A: "painting and sculpting.",
+                                B: "gardening and poetry.",
+                                C: "aesthetics and plant science.",
+                                D: "history and philosophy."
+                            },
+                            answer: "C"
+                        }
+                    ]
+                },
+                {
+                    type: 'revising_editing',
+                    passage_title: 'The Rise of the Skyscraper',
+                    passage: "(1) The modern skyscraper, a symbol of urban ambition, has a fascinating history. (2) Prior to the late 19th century, the height of buildings were limited by the strength of their walls. (3) The taller the building, the thicker the supporting walls needed to be, making very tall structures impractical. (4) The development of steel-frame construction, however, changed everything. (5) This innovation allowed the building's weight to be carried by an internal metal skeleton, rather than the walls themselves. (6) Walls could now be much thinner and lighter, they became mere 'curtains' enclosing the structure. (7) The invention of the safety elevator by Elisha Otis was another crucial development, making tall buildings practical for human use.",
+                    questions: [
+                        {
+                            question: "What is the best way to revise the underlined portion of sentence 2? '...the height of buildings were limited...'",
+                            options: {
+                                A: "was limited",
+                                B: "are limited",
+                                C: "have been limited",
+                                D: "were being limited"
+                            },
+                            answer: "A",
+                            explanation: "The subject is 'height' (singular), so the verb should be 'was' (singular past tense)."
+                        },
+                        {
+                            question: "Which of the following is the best way to combine sentences 5 and 6?",
+                            options: {
+                                A: "This innovation allowed the building's weight to be carried by an internal metal skeleton, rather than the walls themselves, walls could now be much thinner and lighter, becoming mere 'curtains' enclosing the structure.",
+                                B: "By allowing the building's weight to be carried by an internal metal skeleton, walls could now be much thinner and lighter, becoming mere 'curtains' enclosing the structure.",
+                                C: "This innovation allowed the building's weight to be carried by an internal metal skeleton rather than the walls themselves; consequently, walls could become much thinner and lighter 'curtains' enclosing the structure.",
+                                D: "The innovation of a metal skeleton carried the weight, so the walls became thinner 'curtains'."
+                            },
+                            answer: "C",
+                            explanation: "Option C uses a semicolon and a conjunctive adverb ('consequently') to create a grammatically correct and logical connection between the two ideas."
+                        }
+                    ]
+                },
+                // Math Section
+                {
+                    question: "If a car travels at an average speed of 50 miles per hour, how many minutes does it take to travel 10 miles?",
+                    options: { A: "5", B: "10", C: "12", D: "20" },
+                    answer: "C"
+                },
+                {
+                    question: "What is the greatest common factor of 48, 72, and 120?",
+                    options: { A: "12", B: "16", C: "24", D: "48" },
+                    answer: "C"
+                },
+                {
+                    question: "If x = 4, y = -1, and z = 3, what is the value of the expression x(y^2 - z)?",
+                    options: { A: "-8", B: "-2", C: "2", D: "8" },
+                    answer: "A"
+                },
+                {
+                    question: "The ratio of boys to girls in a class is 3:5. If there are 32 students in the class, how many are boys?",
+                    options: { A: "9", B: "12", C: "15", D: "20" },
+                    answer: "B"
+                },
+                {
+                    question: "In a coordinate plane, what is the distance between the points (-2, 3) and (4, -5)?",
+                    options: { A: "6", B: "8", C: "10", D: "14" },
+                    answer: "C"
+                },
+                {
+                    question: "A pizza is divided into 8 equal slices. If John eats 3/4 of the pizza, how many slices did he eat?",
+                    type: "grid_in",
+                    answer: "6"
+                },
+                {
+                    question: "The sum of three consecutive integers is 96. What is the largest of the three integers?",
+                    type: "grid_in",
+                    answer: "33"
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const finalScoreElement = document.getElementById('final-score');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let userAnswers = {};
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    score = progress.score || 0;
+                    userAnswers = progress.userAnswers || {};
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                let card;
+
+                switch (questionData.type) {
+                    case 'briefing':
+                        card = createBriefingCard(questionData);
+                        break;
+                    case 'passage':
+                    case 'revising_editing':
+                        card = createPassageCard(questionData);
+                        break;
+                    case 'grid_in':
+                        card = createGridInCard(questionData);
+                        break;
+                    default:
+                        card = createMultipleChoiceCard(questionData);
+                }
+                
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        handleNext(questionData);
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">Start Test</button>
+                `;
+                return card;
+            }
+
+            function createPassageCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card passage-card';
+                let questionsHtml = '';
+                data.questions.forEach((q, index) => {
+                    const questionId = `${currentQuestionIndex}-${index}`;
+                    questionsHtml += `
+                        <div class="passage-question">
+                            <p>${index + 1}. ${q.question}</p>
+                            ${Object.entries(q.options).map(([key, value]) => `
+                                <label>
+                                    <input type="radio" name="question-${questionId}" value="${key}" ${userAnswers[questionId] === key ? 'checked' : ''}>
+                                    ${key}. ${value}
+                                </label>
+                            `).join('')}
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <h3>${data.passage_title}</h3>
+                    <div class="passage-text">${data.passage.replace(/\n/g, '<br>')}</div>
+                    <div class="passage-questions-container">
+                        ${questionsHtml}
+                    </div>
+                    <button class="next-btn">Next Section</button>
+                `;
+
+                card.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.addEventListener('change', (event) => {
+                        const [qIndex, subIndex] = event.target.name.split('-').slice(1).map(Number);
+                        const questionId = `${qIndex}-${subIndex}`;
+                        userAnswers[questionId] = event.target.value;
+                        saveProgress();
+                    });
+                });
+
+                return card;
+            }
+            
+            function createMultipleChoiceCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>Question</h3>
+                    <p>${data.question}</p>
+                    <div class="options">
+                        ${Object.entries(data.options).map(([key, value]) => `
+                            <label>
+                                <input type="radio" name="option" value="${key}" ${userAnswers[currentQuestionIndex] === key ? 'checked' : ''}>
+                                ${key}. ${value}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button class="next-btn">Next</button>
+                `;
+                 card.querySelector('.options').addEventListener('change', (event) => {
+                    userAnswers[currentQuestionIndex] = event.target.value;
+                    saveProgress();
+                });
+                return card;
+            }
+
+            function createGridInCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>Question</h3>
+                    <p>${data.question}</p>
+                    <input type="text" class="grid-in-input" value="${userAnswers[currentQuestionIndex] || ''}" placeholder="Enter your answer">
+                    <button class="next-btn">Next</button>
+                `;
+                card.querySelector('.grid-in-input').addEventListener('input', (event) => {
+                    userAnswers[currentQuestionIndex] = event.target.value;
+                    saveProgress();
+                });
+                return card;
+            }
+
+            function handleNext(questionData) {
+                if (questionData.type === 'passage' || questionData.type === 'revising_editing') {
+                    questionData.questions.forEach((q, index) => {
+                        const questionId = `${currentQuestionIndex}-${index}`;
+                        if (userAnswers[questionId] && userAnswers[questionId] === q.answer) {
+                            score++;
+                        }
+                    });
+                } else if (questionData.type === 'grid_in') {
+                     if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].toString().trim() === questionData.answer.toString().trim()) {
+                        score++;
+                    }
+                } else if (questionData.type !== 'briefing') {
+                    if (userAnswers[currentQuestionIndex] === questionData.answer) {
+                        score++;
+                    }
+                }
+
+                currentQuestionIndex++;
+                saveProgress();
+                renderQuestion();
+            }
+
+            function displayFinalScore() {
+                let totalQuestions = 0;
+                 lessonData.questions.forEach(q => {
+                    if (q.type === 'passage' || q.type === 'revising_editing') {
+                        totalQuestions += q.questions.length;
+                    } else if (q.type !== 'briefing') {
+                        totalQuestions++;
+                    }
+                });
+
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                finalScoreElement.textContent = `${score} / ${totalQuestions}`;
+                
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

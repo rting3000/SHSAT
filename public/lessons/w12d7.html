@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12, Day 7: Test Day! - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 12, Day 7: Test Day!</h1>
+            <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 12, Day 7: Test Day!",
+            learning_objectives: [
+                "To review final test-day tips for success.",
+                "To reinforce a confident and calm mindset.",
+                "To celebrate the completion of the 12-week preparation program."
+            ],
+            items: [
+                {
+                    type: 'briefing',
+                    title: "The Day is Here!",
+                    text: "The day is here! All your hard work, practice, and preparation have led to this moment. Today is not about last-minute studying; it's about executing the plan you've practiced so well. Trust yourself."
+                },
+                {
+                    type: 'briefing',
+                    title: "Morning Logistics",
+                    text: "Eat a good breakfast, but not too heavy—stick to foods you normally eat. Give yourself plenty of time. Arrive at the test center a little early to find your room and settle in without rushing. A calm start makes a big difference."
+                },
+                {
+                    type: 'briefing',
+                    title: "During the Test: Execute Your Strategy",
+                    text: "Stay calm and focused. Trust your first instincts, but don't be afraid to double-check if you have time. Use your pacing strategies to manage the clock effectively. If you get stuck on a difficult question, make your best educated guess and move on. Don't let one question derail your confidence."
+                },
+                 {
+                    type: 'briefing',
+                    title: "After the Test: Celebrate!",
+                    text: "When you walk out of that test center, you are done. Regardless of the outcome, you should be incredibly proud of the dedication, discipline, and effort you've shown over these 12 weeks. You committed to a challenging goal and saw it through. Well done!"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Acknowledge all your hard work. You've earned it.",
+                    options: [
+                        "I did it. I completed the 12-week plan and took the test."
+                    ],
+                    answer: 0,
+                    explanation: "Congratulations! You have accomplished something amazing. Be proud of every single step you took on this journey. You are ready for the next chapter. We hope this program has helped you build not just knowledge, but also confidence and discipline."
+                }
+            ]
+        };
+
+        function buildLesson() {
+            const lessonContainer = document.getElementById('lesson-container');
+            let currentItemIndex = 0;
+            let score = 0;
+            let incorrectAnswers = [];
+
+            function showItem(index) {
+                lessonContainer.innerHTML = '';
+                const item = lessonData.items[index];
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'lesson-item';
+
+                if (item.type === 'briefing') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p><button id="next-btn">Continue</button>`;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentItemIndex++;
+                        if (currentItemIndex < lessonData.items.length) {
+                            showItem(currentItemIndex);
+                        } else {
+                            showFinalScore();
+                        }
+                    });
+                } else if (item.type === 'multiple_choice') {
+                    let optionsHtml = '';
+                    item.options.forEach((option, i) => {
+                        optionsHtml += `<div class="option"><label><input type="radio" name="mc" value="${i}"> ${option}</label></div>`;
+                    });
+                    itemDiv.innerHTML = `
+                        <h3>Final Step</h3>
+                        <p>${item.question}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <button id="submit-btn">Finish Program</button>
+                    `;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const selectedOption = document.querySelector('input[name="mc"]:checked');
+                        if (selectedOption) {
+                           showFeedback(true, item.explanation);
+                        }
+                    });
+                }
+                 else if (item.type === 'scrambled_paragraph') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.instructions}</p>`;
+                    const sentencesDiv = document.createElement('div');
+                    sentencesDiv.id = 'sentences';
+                    // Display sentences in their initial, scrambled order
+                    item.scrambled.forEach(sentence => {
+                        const p = document.createElement('p');
+                        p.textContent = sentence;
+                        p.className = 'sentence-option';
+                        p.draggable = true;
+                        sentencesDiv.appendChild(p);
+                    });
+                    itemDiv.appendChild(sentencesDiv);
+                    itemDiv.innerHTML += `<button id="submit-btn">Submit Order</button>`;
+                    lessonContainer.appendChild(itemDiv);
+
+                    // Drag and drop functionality
+                    let draggedItem = null;
+                    sentencesDiv.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => {
+                            e.target.style.display = 'none';
+                        }, 0);
+                    });
+                    sentencesDiv.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            draggedItem.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+
+                    sentencesDiv.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(sentencesDiv, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            sentencesDiv.appendChild(draggedItem);
+                        } else {
+                            sentencesDiv.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const submittedOrder = Array.from(sentencesDiv.getElementsByTagName('p')).map(p => p.textContent);
+                        let isCorrect = true;
+                        for(let i = 0; i < item.correct_order.length; i++) {
+                            if(submittedOrder[i] !== item.correct_order[i]) {
+                                isCorrect = false;
+                                break;
+                            }
+                        }
+
+                        if (isCorrect) {
+                            score++;
+                        } else {
+                             incorrectAnswers.push({
+                                question: item.instructions,
+                                yourAnswer: submittedOrder.join(' | '),
+                                correctAnswer: item.correct_order.join(' | ')
+                            });
+                        }
+                        showFeedback(isCorrect, item.explanation);
+                    });
+                }
+            }
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sentence-option:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback-correct';
+                feedbackDiv.innerHTML = `
+                    <h4>Congratulations!</h4>
+                    <p>${explanation}</p>
+                    <button id="next-feedback-btn">Finish</button>
+                `;
+                lessonContainer.appendChild(feedbackDiv);
+                document.getElementById('next-feedback-btn').addEventListener('click', () => {
+                    currentItemIndex++;
+                    if (currentItemIndex < lessonData.items.length) {
+                        showItem(currentItemIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+            }
+
+            function showFinalScore() {
+                // Mark lesson as completed
+                localStorage.setItem(lessonData.title, 'completed');
+
+                lessonContainer.innerHTML = `
+                    <h2>Program Complete!</h2>
+                    <p>You have officially completed the 12-Week SHSAT Prep Program. Be incredibly proud of your accomplishment!</p>
+                    <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+                `;
+            }
+
+            // Initial call to build the first item
+            showItem(currentItemIndex);
+        }
+
+        // Start the lesson
+        buildLesson();
+    </script>
+</body>
+</html> 

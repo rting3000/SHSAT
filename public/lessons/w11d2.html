@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 2 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 2</h1>
+            <h2>Full ELA Section Practice</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Your Score: <span id="final-score"></span></h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d2",
+            title: "Week 11, Day 2: Full ELA Section Practice",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'Full ELA Section Simulation',
+                    text: 'This session is a full-length ELA practice test. It includes Reading Comprehension and Revising/Editing sections. Pace yourself as you would on the actual test. You have 90 minutes for the entire SHSAT, so allocate your time wisely between ELA and Math.'
+                },
+                // Reading Comprehension Passage 1
+                {
+                    type: 'passage',
+                    passage_title: 'The Great Barrier Reef',
+                    passage: "The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometres. The reef is located in the Coral Sea, off the coast of Queensland, Australia. It is so large that it can be seen from outer space and is the world's biggest single structure made by living organisms. This reef structure is composed of and built by billions of tiny organisms, known as coral polyps. It supports a wide diversity of life and was selected as a World Heritage Site in 1981. A large part of the reef is protected by the Great Barrier Reef Marine Park, which helps to limit the impact of human use, such as fishing and tourism. However, the reef is facing significant threats from climate change, pollution, and coral bleaching.",
+                    questions: [
+                        {
+                            question: "What is the main idea of the passage?",
+                            options: {
+                                A: "The Great Barrier Reef is a popular tourist destination.",
+                                B: "The Great Barrier Reef is a large and important ecosystem facing threats.",
+                                C: "Coral polyps are the primary builders of the reef.",
+                                D: "The Great Barrier Reef can be seen from space."
+                            },
+                            answer: "B"
+                        },
+                        {
+                            question: "According to the passage, the Great Barrier Reef is constructed by...",
+                            options: {
+                                A: "a single, large organism.",
+                                B: "over 900 islands.",
+                                C: "billions of tiny organisms.",
+                                D: "the Australian government."
+                            },
+                            answer: "C"
+                        },
+                        {
+                            question: "What is a significant threat to the reef mentioned in the passage?",
+                            options: {
+                                A: "Lack of protection",
+                                B: "Volcanic activity",
+                                C: "Overfishing by sharks",
+                                D: "Climate change"
+                            },
+                            answer: "D"
+                        },
+                         {
+                            question: "The passage suggests that the Great Barrier Reef Marine Park serves to...",
+                            options: {
+                                A: "encourage more tourism.",
+                                B: "eliminate all human activity.",
+                                C: "mitigate the negative effects of human activities.",
+                                D: "conduct scientific experiments on coral polyps."
+                            },
+                            answer: "C"
+                        },
+                        {
+                            question: "The phrase 'supports a wide diversity of life' most nearly means...",
+                            options: {
+                                A: "it provides a foundation for many different kinds of plants and animals.",
+                                B: "it is a good place for humans to live.",
+                                C: "it is a structure that holds up a variety of things.",
+                                D: "it offers financial help to many organisms."
+                            },
+                            answer: "A"
+                        }
+                    ]
+                },
+                // Revising/Editing Passage 1
+                {
+                    type: 'revising_editing',
+                    passage_title: 'The History of the Bicycle',
+                    passage: "(1) The bicycle is a common mode of transportation today, but its invention was a long and complex process. (2) The earliest precursor to the bicycle was the 'dandy horse,' invented by Baron Karl von Drais in Germany in 1817. (3) This machine had two wheels and a seat, but it had no pedals; riders pushed it along with their feet. (4) Over the next several decades, numerous inventors made improvements. (5) Adding pedals to the front wheel, which made it the first machine to be called a 'bicycle.' (6) Later, the 'high-wheeler' or 'penny-farthing' became popular, with its enormous front wheel and tiny back wheel. (7) These were fast but also very dangerous. (8) The invention of the chain-driven 'safety bicycle' in the 1880s, with its equally sized wheels, made cycling accessible to a much wider audience and led to the bike boom of the 1890s.",
+                    questions: [
+                        {
+                            question: "Which of the following is the best way to revise sentence 5?",
+                            options: {
+                                A: "Adding pedals to the front wheel made it the first machine to be called a 'bicycle.'",
+                                B: "Pedals were added to the front wheel, it was the first machine called a 'bicycle.'",
+                                C: "The first machine called a 'bicycle' had pedals added to the front wheel.",
+                                D: "An important improvement was adding pedals to the front wheel, this created the first 'bicycle.'"
+                            },
+                            answer: "D",
+                            explanation: "Sentence 5 is a fragment. Option D correctly incorporates it into a complete, clear sentence."
+                        },
+                        {
+                            question: "In context, which of the following is the best version of the underlined portion of sentence 7? 'These were fast but also very dangerous.'",
+                            options: {
+                                A: "(As it is now)",
+                                B: "It was fast and dangerous.",
+                                C: "These were fast, and also very dangerous.",
+                                D: "They were fast, but they were also very dangerous."
+                            },
+                            answer: "A",
+                            explanation: "The original sentence is grammatically correct and stylistically sound. The other options are either repetitive or less concise."
+                        },
+                        {
+                            question: "Which sentence, if added between sentence 7 and 8, would best support the transition?",
+                            options: {
+                                A: "Penny-farthings are now collector's items.",
+                                B: "Clearly, a safer design was needed to make cycling popular.",
+                                C: "The brakes on these early bicycles were not very effective.",
+                                D: "Many people enjoyed racing on penny-farthings."
+                            },
+                            answer: "B",
+                            explanation: "This sentence effectively bridges the danger of the penny-farthing (sentence 7) with the introduction of the 'safety bicycle' (sentence 8)."
+                        },
+                        {
+                            question: "What is the most logical way to combine sentences 2 and 3?",
+                            options: {
+                                A: "Invented by Baron Karl von Drais in 1817, the 'dandy horse' was a machine with two wheels and a seat, but no pedals, so riders pushed it along with their feet.",
+                                B: "The earliest precursor to the bicycle was the 'dandy horse,' invented by Baron Karl von Drais in Germany in 1817, this machine had two wheels and a seat but no pedals; riders pushed it along with their feet.",
+                                C: "The 'dandy horse' of 1817 had two wheels and a seat, no pedals, and was pushed by the rider's feet.",
+                                D: "Baron Karl von Drais invented the 'dandy horse' in 1817; it was a two-wheeled, seat-equipped machine without pedals that riders pushed with their feet."
+                            },
+                            answer: "D",
+                            explanation: "Option D uses a semicolon to correctly join two closely related independent clauses, creating a clear and concise sentence."
+                        },
+                        {
+                            question: "Which of the following sentences would be the most effective concluding sentence for the paragraph?",
+                            options: {
+                                A: "Therefore, the bicycle has a rich and interesting history.",
+                                B: "This basic design is still what we use for bicycles today.",
+                                C: "Bicycles come in many shapes and sizes now.",
+                                D: "The 1890s were a fun time for cycling."
+                            },
+                            answer: "B",
+                            explanation: "This sentence effectively concludes the historical overview by connecting the final invention mentioned (the safety bicycle) to the present day."
+                        }
+                    ]
+                },
+                // Reading Comprehension Passage 2
+                {
+                    type: 'passage',
+                    passage_title: 'The Dust Bowl',
+                    passage: "The Dust Bowl was a period of severe dust storms that greatly damaged the ecology and agriculture of the American and Canadian prairies during the 1930s. The phenomenon was caused by a combination of severe drought and a failure to apply dryland farming methods to prevent wind erosion. The deep plowing of the virgin topsoil of the Great Plains had displaced the native, deep-rooted grasses that normally trapped soil and moisture even during periods of drought and high winds. As the drought of the early 1930s deepened, the unprotected soil turned to dust, which the prevailing winds blew away in huge clouds that sometimes blackened the sky. These choking billows of dust—named 'black blizzards' or 'black rollers'—traveled cross-country, reaching as far as the East Coast. Millions of acres of farmland became useless, and hundreds of thousands of people were forced to leave their homes in one of the largest migrations in American history.",
+                    questions: [
+                        {
+                            question: "The passage is primarily concerned with...",
+                            options: {
+                                A: "the history of farming in the Great Plains.",
+                                B: "the causes and effects of the Dust Bowl.",
+                                C: "the great migration of the 1930s.",
+                                D: "the weather patterns of the American prairies."
+                            },
+                            answer: "B"
+                        },
+                        {
+                            question: "According to the passage, what was a key man-made factor leading to the Dust Bowl?",
+                            options: {
+                                A: "Building too many cities",
+                                B: "Over-irrigation of farmland",
+                                B: "Planting the wrong types of crops",
+                                D: "Plowing that removed protective native grasses"
+                            },
+                            answer: "D"
+                        },
+                        {
+                            question: "The term 'black blizzards' refers to...",
+                            options: {
+                                A: "a type of winter storm.",
+                                B: "the economic depression of the 1930s.",
+                                C: "massive dust storms.",
+                                D: "a migration of people."
+                            },
+                            answer: "C"
+                        },
+                        {
+                            question: "What can be inferred from the passage about the native grasses of the Great Plains?",
+                            options: {
+                                A: "They were not useful for agriculture.",
+                                B: "They played a crucial role in preventing soil erosion.",
+                                C: "They required a great deal of water to survive.",
+                                D: "They were the primary cause of the dust storms."
+                            },
+                            answer: "B"
+                        },
+                         {
+                            question: "The passage states that one major consequence of the Dust Bowl was that...",
+                            options: {
+                                A: "farming methods were immediately improved.",
+                                B: "the government provided massive financial aid.",
+                                C: "many people had to relocate from their homes.",
+                                D: "the East Coast became a major farming region."
+                            },
+                            answer: "C"
+                        }
+                    ]
+                },
+                 // Revising/Editing Passage 2
+                {
+                    type: 'revising_editing',
+                    passage_title: 'The Importance of Sleep',
+                    passage: "(1) Getting enough quality sleep is crucial for health and well-being. (2) During sleep, the body works to support healthy brain function and maintain physical health. (3) In children and teens, sleep also helps support growth and development. (4) The damage from sleep deficiency can occur in an instant, or it can harm you over time. (5) For example, ongoing sleep deficiency can raise your risk for some chronic health problems. (6) It can also affect how well you think, react, work, learn, and get along with others. (7) Many people do not get enough sleep. (8) For example, students who stay up late to study for a test. (9) This strategy is often counterproductive, as a lack of sleep impairs memory and concentration.",
+                    questions: [
+                        {
+                            question: "Which of the following is the best way to revise sentence 8?",
+                            options: {
+                                A: "For instance, students who are staying up late to study for a test.",
+                                B: "Consider, for example, students who stay up late to study for a test.",
+                                C: "An example being students who stay up late to study for a test.",
+                                D: "Students, for example, stay up late to study for a test."
+                            },
+                            answer: "B",
+                            explanation: "Sentence 8 is a fragment. Option B correctly turns it into a complete sentence that flows logically from sentence 7."
+                        },
+                        {
+                            question: "Which of the following would be the most logical placement for sentence 3?",
+                            options: {
+                                A: "Where it is now.",
+                                B: "At the beginning of the paragraph.",
+                                C: "After sentence 6.",
+                                D: "After sentence 9."
+                            },
+                            answer: "A",
+                            explanation: "The current placement is logical. It follows the general statement about brain and physical health with a specific point about children and teens before moving on to the negative consequences of sleep deficiency."
+                        },
+                        {
+                            question: "Which transition word or phrase could best be added to the beginning of sentence 9?",
+                            options: {
+                                A: "However,",
+                                B: "Therefore,",
+                                C: "In addition,",
+                                D: "Similarly,"
+                            },
+                            answer: "A",
+                            explanation: "'However' provides the best contrast between the perceived strategy (studying late) and its actual negative outcome."
+                        },
+                         {
+                            question: "Which sentence is least relevant to the main idea of the paragraph?",
+                            options: {
+                                A: "Sentence 1",
+                                B: "Sentence 4",
+                                C: "Sentence 7",
+                                D: "There are no irrelevant sentences."
+                            },
+                            answer: "D",
+                            explanation: "All sentences in the paragraph contribute directly to the main idea about the importance of sleep and the consequences of not getting enough."
+                        },
+                        {
+                            question: "The overall tone of the passage can best be described as...",
+                            options: {
+                                A: "humorous and lighthearted.",
+                                B: "skeptical and questioning.",
+                                C: "informative and cautionary.",
+                                D: "formal and academic."
+                            },
+                            answer: "C",
+                            explanation: "The passage provides information about the importance of sleep while also warning about the negative effects of sleep deficiency."
+                        }
+                    ]
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const finalScoreElement = document.getElementById('final-score');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let userAnswers = {};
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    score = progress.score || 0;
+                    userAnswers = progress.userAnswers || {};
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                let card;
+
+                switch (questionData.type) {
+                    case 'briefing':
+                        card = createBriefingCard(questionData);
+                        break;
+                    case 'passage':
+                    case 'revising_editing':
+                        card = createPassageCard(questionData);
+                        break;
+                    case 'scrambled_paragraph':
+                        card = createScrambledParagraphCard(questionData);
+                        break;
+                    default:
+                        card = createMultipleChoiceCard(questionData);
+                }
+                
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        handleNext(questionData);
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">Start</button>
+                `;
+                return card;
+            }
+
+            function createPassageCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card passage-card';
+                let questionsHtml = '';
+                data.questions.forEach((q, index) => {
+                    const questionId = `${currentQuestionIndex}-${index}`;
+                    questionsHtml += `
+                        <div class="passage-question">
+                            <p>${index + 1}. ${q.question}</p>
+                            ${Object.entries(q.options).map(([key, value]) => `
+                                <label>
+                                    <input type="radio" name="question-${questionId}" value="${key}" ${userAnswers[questionId] === key ? 'checked' : ''}>
+                                    ${key}. ${value}
+                                </label>
+                            `).join('')}
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <h3>${data.passage_title}</h3>
+                    <div class="passage-text">${data.passage.replace(/\n/g, '<br>')}</div>
+                    <div class="passage-questions-container">
+                        ${questionsHtml}
+                    </div>
+                    <button class="next-btn">Next</button>
+                `;
+
+                card.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.addEventListener('change', (event) => {
+                        const [qIndex, subIndex] = event.target.name.split('-').slice(1).map(Number);
+                        const questionId = `${qIndex}-${subIndex}`;
+                        userAnswers[questionId] = event.target.value;
+                        saveProgress();
+                    });
+                });
+
+                return card;
+            }
+            
+            function createMultipleChoiceCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>Question ${currentQuestionIndex + 1}</h3>
+                    <p>${data.question}</p>
+                    <div class="options">
+                        ${Object.entries(data.options).map(([key, value]) => `
+                            <label>
+                                <input type="radio" name="option" value="${key}" ${userAnswers[currentQuestionIndex] === key ? 'checked' : ''}>
+                                ${key}. ${value}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button class="next-btn">Next</button>
+                `;
+                 card.querySelector('.options').addEventListener('change', (event) => {
+                    userAnswers[currentQuestionIndex] = event.target.value;
+                    saveProgress();
+                });
+                return card;
+            }
+
+            function createScrambledParagraphCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card scrambled-paragraph-card';
+                
+                const sentences = data.sentences;
+                let shuffled;
+                // Use saved order if available, otherwise shuffle
+                if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].order) {
+                    shuffled = userAnswers[currentQuestionIndex].order.map(index => sentences[index]);
+                } else {
+                    shuffled = [...sentences].sort(() => Math.random() - 0.5);
+                }
+
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.instructions}</p>
+                    <div id="sortable-sentences">
+                        ${shuffled.map((sentence, i) => `
+                            <div class="sortable-sentence" data-original-index="${sentences.indexOf(sentence)}">
+                                ${sentence}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="next-btn">Check Order & Next</button>
+                `;
+
+                // Simple drag and drop functionality
+                const sortableContainer = card.querySelector('#sortable-sentences');
+                let draggedItem = null;
+
+                sortableContainer.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    setTimeout(() => {
+                        e.target.style.display = 'none';
+                    }, 0);
+                });
+
+                sortableContainer.addEventListener('dragend', (e) => {
+                    setTimeout(() => {
+                        draggedItem.style.display = '';
+                        draggedItem = null;
+                        
+                        // Save the new order
+                        const currentOrderIndices = [...sortableContainer.children].map(child => parseInt(child.dataset.originalIndex));
+                         if (!userAnswers[currentQuestionIndex]) {
+                            userAnswers[currentQuestionIndex] = {};
+                        }
+                        userAnswers[currentQuestionIndex].order = currentOrderIndices;
+                        saveProgress();
+                    }, 0);
+                });
+
+                sortableContainer.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(sortableContainer, e.clientY);
+                    if (afterElement == null) {
+                        sortableContainer.appendChild(draggedItem);
+                    } else {
+                        sortableContainer.insertBefore(draggedItem, afterElement);
+                    }
+                });
+
+                function getDragAfterElement(container, y) {
+                    const draggableElements = [...container.querySelectorAll('.sortable-sentence:not(.dragging)')];
+                    return draggableElements.reduce((closest, child) => {
+                        const box = child.getBoundingClientRect();
+                        const offset = y - box.top - box.height / 2;
+                        if (offset < 0 && offset > closest.offset) {
+                            return { offset: offset, element: child };
+                        } else {
+                            return closest;
+                        }
+                    }, { offset: Number.NEGATIVE_INFINITY }).element;
+                }
+
+                // Add draggable attribute to sentences
+                card.querySelectorAll('.sortable-sentence').forEach(item => {
+                    item.draggable = true;
+                });
+
+                return card;
+            }
+
+            function handleNext(questionData) {
+                if (questionData.type === 'passage' || questionData.type === 'revising_editing') {
+                    let allAnswered = true;
+                    questionData.questions.forEach((q, index) => {
+                        const questionId = `${currentQuestionIndex}-${index}`;
+                        if (!userAnswers[questionId]) {
+                            allAnswered = false;
+                        } else {
+                            if (userAnswers[questionId] === q.answer) {
+                                score++;
+                            }
+                        }
+                    });
+                } else if (questionData.type === 'scrambled_paragraph') {
+                    const sortableContainer = document.getElementById('sortable-sentences');
+                    const currentOrder = [...sortableContainer.children].map(child => parseInt(child.dataset.originalIndex));
+                     if (!userAnswers[currentQuestionIndex]) {
+                        userAnswers[currentQuestionIndex] = {};
+                    }
+                    userAnswers[currentQuestionIndex].order = currentOrder;
+
+                    const correctOrder = questionData.correct_order;
+                    let isCorrect = true;
+                    if (currentOrder.length === correctOrder.length) {
+                        for (let i = 0; i < correctOrder.length; i++) {
+                            if (currentOrder[i] !== correctOrder[i]) {
+                                isCorrect = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        isCorrect = false;
+                    }
+
+                    if (isCorrect) {
+                        score++;
+                    }
+                    userAnswers[currentQuestionIndex].isCorrect = isCorrect;
+
+                } else if (questionData.type !== 'briefing') {
+                    if (userAnswers[currentQuestionIndex] === questionData.answer) {
+                        score++;
+                    }
+                }
+
+                currentQuestionIndex++;
+                saveProgress();
+                renderQuestion();
+            }
+
+            function displayFinalScore() {
+                let totalQuestions = 0;
+                 lessonData.questions.forEach(q => {
+                    if (q.type === 'passage' || q.type === 'revising_editing') {
+                        totalQuestions += q.questions.length;
+                    } else if (q.type !== 'briefing') {
+                        totalQuestions++;
+                    }
+                });
+
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                finalScoreElement.textContent = `${score} / ${totalQuestions}`;
+                
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

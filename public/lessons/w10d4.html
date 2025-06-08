@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10, Day 4: SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="lesson-container">
+        <h1>Week 10, Day 4</h1>
+        <div id="lesson-content"></div>
+        <button id="next-btn" style="display: none;">Next</button>
+        <div id="results-screen" style="display: none;">
+            <h2>Lesson Complete!</h2>
+            <p>Your score: <span id="score"></span></p>
+            <p><span id="total-correct"></span> correct out of <span id="total-questions"></span></p>
+            <a href="../index.html" class="home-btn">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 10, Day 4",
+            completed: false,
+            questions: [
+                { type: 'briefing', text: 'This lesson focuses on timed practice to build stamina and accuracy under pressure.' },
+                { type: 'mcq', question: 'Solve for y: 3(y + 2) = 2(y + 5)', options: ['1', '2', '3', '4'], answer: '4' },
+                { type: 'mcq', question: 'Which sentence uses commas correctly?', options: ['I like apples, and oranges.', 'I like, apples and oranges.', 'I like apples and, oranges.', 'I like apples, and I like oranges.'], answer: 'I like apples, and I like oranges.' },
+                { type: 'mcq', question: 'What is the area of a circle with a radius of 5 cm? (Use π ≈ 3.14)', options: ['15.7 cm²', '31.4 cm²', '78.5 cm²', '25 cm²'], answer: '78.5 cm²' },
+                { type: 'mcq', question: 'Identify the literary device: "The wind whispered through the trees."', options: ['Metaphor', 'Simile', 'Personification', 'Hyperbole'], answer: 'Personification' },
+                { type: 'mcq', question: 'A car travels at 60 miles per hour. How far will it travel in 2.5 hours?', options: ['120 miles', '150 miles', '180 miles', '100 miles'], answer: '150 miles' },
+                { type: 'mcq', question: 'Which of the following is an opinion?', options: ['The Earth revolves around the Sun.', 'Shakespeare wrote "Hamlet".', 'Sunsets are more beautiful than sunrises.', 'Water boils at 100 degrees Celsius.'], answer: 'Sunsets are more beautiful than sunrises.' },
+                { type: 'mcq', question: 'What is 15% of 200?', options: ['15', '30', '45', '20'], answer: '30' },
+                { type: 'mcq', question: 'The protagonist in a story is the...', options: ['Main character', 'Villain', 'Narrator', 'Supporting character'], answer: 'Main character' },
+                { type: 'mcq', question: 'What is the next number in the sequence: 2, 5, 10, 17, __?', options: ['26', '25', '24', '23'], answer: '26' },
+                { type: 'mcq', question: 'Identify the sentence fragment.', options: ['She walked to the store.', 'Running through the park.', 'The cat is sleeping.', 'He finished his homework.'], answer: 'Running through the park.' },
+                { type: 'mcq', question: 'The sum of the angles in a triangle is always...', options: ['90 degrees', '180 degrees', '360 degrees', 'Depends on the triangle'], answer: '180 degrees' },
+                { type: 'mcq', question: 'Which word is a synonym for "ephemeral"?', options: ['Eternal', 'Fleeting', 'Strong', 'Distant'], answer: 'Fleeting' },
+                { type: 'mcq', question: 'If a rectangle has a length of 8 inches and a width of 5 inches, what is its perimeter?', options: ['13 inches', '26 inches', '40 inches', '21 inches'], answer: '26 inches' },
+                { type: 'mcq', question: 'What does the prefix "mal-" mean?', options: ['Good', 'Many', 'Bad', 'Before'], answer: 'Bad' },
+                { type: 'mcq', question: 'A bag contains 3 red marbles, 4 blue marbles, and 5 green marbles. What is the probability of picking a blue marble?', options: ['1/3', '1/4', '1/12', '4/12'], answer: '4/12' },
+                { type: 'mcq', question: 'Choose the correct verb: "The team ___ ready for the game."', options: ['is', 'are'], answer: 'is' },
+                { type: 'mcq', question: 'Find the average of the following numbers: 10, 20, 30, 40, 50', options: ['25', '30', '35', '150'], answer: '30' },
+                { type: 'mcq', question: 'What is the main purpose of a thesis statement?', options: ['To summarize the text', 'To present the main argument', 'To provide background information', 'To hook the reader'], answer: 'To present the main argument' },
+                { type: 'mcq', question: 'What is the value of 5! (5 factorial)?', options: ['15', '25', '60', '120'], answer: '120' },
+                { type: 'mcq', question: 'Which sentence is in passive voice?', options: ['The dog chased the ball.', 'The ball was chased by the dog.', 'The dog is chasing the ball.', 'The dog will chase the ball.'], answer: 'The ball was chased by the dog.' },
+            ]
+        };
+
+        const lessonContent = document.getElementById('lesson-content');
+        const nextButton = document.getElementById('next-btn');
+        const resultsScreen = document.getElementById('results-screen');
+        const scoreEl = document.getElementById('score');
+        const totalCorrectEl = document.getElementById('total-correct');
+        const totalQuestionsEl = document.getElementById('total-questions');
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let selectedAnswers = [];
+
+        function startLesson() {
+            showQuestion(currentQuestionIndex);
+        }
+
+        function showQuestion(index) {
+            const questionData = lessonData.questions[index];
+            lessonContent.innerHTML = ''; 
+
+            if (questionData.type === 'briefing') {
+                const briefingText = document.createElement('p');
+                briefingText.className = 'briefing-text';
+                briefingText.textContent = questionData.text;
+                lessonContent.appendChild(briefingText);
+            } else if (questionData.type === 'mcq') {
+                const questionText = document.createElement('p');
+                questionText.className = 'question-text';
+                questionText.textContent = questionData.question;
+                lessonContent.appendChild(questionText);
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options-container';
+                questionData.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option;
+                    button.onclick = () => selectAnswer(button, option, questionData.answer);
+                    optionsContainer.appendChild(button);
+                });
+                lessonContent.appendChild(optionsContainer);
+            } else if (questionData.type === 'scrambled_paragraph') {
+                const questionText = document.createElement('p');
+                questionText.className = 'question-text';
+                questionText.textContent = questionData.instruction;
+                lessonContent.appendChild(questionText);
+
+                const sentencesContainer = document.createElement('div');
+                sentencesContainer.id = 'sentences-container';
+                questionData.sentences.forEach((sentence, i) => {
+                    const sentEl = document.createElement('div');
+                    sentEl.className = 'sentence';
+                    sentEl.textContent = sentence;
+                    sentEl.dataset.originalIndex = i + 1;
+                    sentencesContainer.appendChild(sentEl);
+                });
+                lessonContent.appendChild(sentencesContainer);
+            }
+            
+            if (index < lessonData.questions.length -1) {
+                nextButton.style.display = 'block';
+            } else {
+                nextButton.style.display = 'none';
+                setTimeout(showResults, 1000); 
+            }
+        }
+
+        function selectAnswer(button, selectedOption, correctAnswer) {
+            const buttons = lessonContent.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true; // Disable all buttons after one is clicked
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selectedOption) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (selectedOption === correctAnswer) {
+                correctAnswers++;
+            }
+            selectedAnswers[currentQuestionIndex] = selectedOption;
+             if (currentQuestionIndex >= lessonData.questions.length - 1) {
+                setTimeout(showResults, 1000);
+            }
+        }
+
+       function handleNextClick() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < lessonData.questions.length) {
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function showResults() {
+            lessonContent.style.display = 'none';
+            nextButton.style.display = 'none';
+            resultsScreen.style.display = 'block';
+
+            const totalQuestions = lessonData.questions.filter(q => q.type !== 'briefing').length;
+            const score = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
+
+            scoreEl.textContent = `${score.toFixed(2)}%`;
+            totalCorrectEl.textContent = correctAnswers;
+            totalQuestionsEl.textContent = totalQuestions;
+
+            localStorage.setItem(lessonData.title.replace(/ /g, ''), 'completed');
+        }
+
+        nextButton.addEventListener('click', handleNextClick);
+
+        startLesson();
+    </script>
+</body>
+</html>

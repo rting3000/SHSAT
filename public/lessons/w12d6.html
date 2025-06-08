@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12, Day 6: Review and Final Prep - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 12, Day 6: Review and Final Prep</h1>
+            <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 12, Day 6: Review and Final Prep",
+            learning_objectives: [
+                "Conduct a light review of the most recent practice test.",
+                "Finalize all test-day logistics, including what to pack and transportation.",
+                "Build confidence and focus on a positive mindset before the exam."
+            ],
+            items: [
+                {
+                    type: 'briefing',
+                    title: "Light Review, Not Heavy Lifting",
+                    text: "This is your last day of active preparation. Today is for a light review of your practice test from yesterday and for getting all your logistics in order for test day. The goal is to feel confident and organized, not to cram. Avoid intensive studying."
+                },
+                {
+                    type: 'briefing',
+                    title: "Scoring Your Practice Test",
+                    text: "Score your practice test from yesterday. For any questions you got wrong, quickly read the explanations. Don't spend more than an hour on this. The goal is to spot any last-minute patterns or simple mistakes, not re-learn entire topics. The heavy lifting is done."
+                },
+                {
+                    type: 'briefing',
+                    title: "Final Test-Day Checklist",
+                    text: "Pack your bag now to avoid any rushing tomorrow morning. Include your:<br><ul><li>Admission Ticket</li><li>Photo ID</li><li>Several sharpened #2 pencils</li><li>A good eraser</li><li>A watch (not a smartwatch!)</li><li>A water bottle and a small, healthy snack</li></ul>Double-check the test location and your transportation plan."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "How are you feeling about test day?",
+                    options: [
+                        "I've prepared and I'm ready to do my best.",
+                        "I'm a little nervous, but I trust my preparation."
+                    ],
+                    answer: 0, // Both answers are positive affirmations.
+                    explanation: "It's completely normal to feel a mix of excitement and nerves. You have put in an incredible amount of work over the past 12 weeks. Trust in your preparation and all the effort you've dedicated. You are ready for this challenge. Believe in yourself!"
+                }
+            ]
+        };
+
+        function buildLesson() {
+            const lessonContainer = document.getElementById('lesson-container');
+            let currentItemIndex = 0;
+            let score = 0;
+            let incorrectAnswers = [];
+
+            function showItem(index) {
+                lessonContainer.innerHTML = '';
+                const item = lessonData.items[index];
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'lesson-item';
+
+                if (item.type === 'briefing') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p><button id="next-btn">Continue</button>`;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentItemIndex++;
+                        if (currentItemIndex < lessonData.items.length) {
+                            showItem(currentItemIndex);
+                        } else {
+                            showFinalScore();
+                        }
+                    });
+                } else if (item.type === 'multiple_choice') {
+                    let optionsHtml = '';
+                    item.options.forEach((option, i) => {
+                        optionsHtml += `<div class="option"><label><input type="radio" name="mc" value="${i}"> ${option}</label></div>`;
+                    });
+                    itemDiv.innerHTML = `
+                        <h3>Question</h3>
+                        <p>${item.question}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <button id="submit-btn">Submit</button>
+                    `;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const selectedOption = document.querySelector('input[name="mc"]:checked');
+                        if (selectedOption) {
+                            const userAnswer = parseInt(selectedOption.value, 10);
+                            // In this special case, any answer is "correct" as it's a confidence booster.
+                            showFeedback(true, item.explanation);
+                        }
+                    });
+                }
+                 else if (item.type === 'scrambled_paragraph') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.instructions}</p>`;
+                    const sentencesDiv = document.createElement('div');
+                    sentencesDiv.id = 'sentences';
+                    // Display sentences in their initial, scrambled order
+                    item.scrambled.forEach(sentence => {
+                        const p = document.createElement('p');
+                        p.textContent = sentence;
+                        p.className = 'sentence-option';
+                        p.draggable = true;
+                        sentencesDiv.appendChild(p);
+                    });
+                    itemDiv.appendChild(sentencesDiv);
+                    itemDiv.innerHTML += `<button id="submit-btn">Submit Order</button>`;
+                    lessonContainer.appendChild(itemDiv);
+
+                    // Drag and drop functionality
+                    let draggedItem = null;
+                    sentencesDiv.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => {
+                            e.target.style.display = 'none';
+                        }, 0);
+                    });
+                    sentencesDiv.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            draggedItem.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+
+                    sentencesDiv.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(sentencesDiv, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            sentencesDiv.appendChild(draggedItem);
+                        } else {
+                            sentencesDiv.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const submittedOrder = Array.from(sentencesDiv.getElementsByTagName('p')).map(p => p.textContent);
+                        let isCorrect = true;
+                        for(let i = 0; i < item.correct_order.length; i++) {
+                            if(submittedOrder[i] !== item.correct_order[i]) {
+                                isCorrect = false;
+                                break;
+                            }
+                        }
+
+                        if (isCorrect) {
+                            score++;
+                        } else {
+                             incorrectAnswers.push({
+                                question: item.instructions,
+                                yourAnswer: submittedOrder.join(' | '),
+                                correctAnswer: item.correct_order.join(' | ')
+                            });
+                        }
+                        showFeedback(isCorrect, item.explanation);
+                    });
+                }
+            }
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sentence-option:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback-correct'; // Always show positive feedback for this lesson's question
+                feedbackDiv.innerHTML = `
+                    <h4>You've got this!</h4>
+                    <p>${explanation}</p>
+                    <button id="next-feedback-btn">Next</button>
+                `;
+                lessonContainer.appendChild(feedbackDiv);
+                document.getElementById('next-feedback-btn').addEventListener('click', () => {
+                    currentItemIndex++;
+                    if (currentItemIndex < lessonData.items.length) {
+                        showItem(currentItemIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+            }
+
+            function showFinalScore() {
+                // Mark lesson as completed
+                localStorage.setItem(lessonData.title, 'completed');
+
+                lessonContainer.innerHTML = `
+                    <h2>Lesson Complete!</h2>
+                    <p>You have finished this lesson. Your progress has been saved.</p>
+                    <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+                `;
+                 if (incorrectAnswers.length > 0) {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.innerHTML = '<h3>Review Your Incorrect Answers:</h3>';
+                    incorrectAnswers.forEach(ans => {
+                        reviewDiv.innerHTML += `
+                            <div class="review-item">
+                                <p><strong>Question:</strong> ${ans.question}</p>
+                                <p><strong>Your Answer:</strong> ${ans.yourAnswer}</p>
+                                <p><strong>Correct Answer:</strong> ${ans.correctAnswer}</p>
+                            </div>
+                        `;
+                    });
+                    lessonContainer.appendChild(reviewDiv);
+                }
+            }
+
+            // Initial call to build the first item
+            showItem(currentItemIndex);
+        }
+
+        // Start the lesson
+        buildLesson();
+    </script>
+</body>
+</html>

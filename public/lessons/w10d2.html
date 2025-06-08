@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10, Day 2: SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="lesson-container">
+        <h1>Week 10, Day 2</h1>
+        <div id="lesson-content"></div>
+        <button id="next-btn" style="display: none;">Next</button>
+        <div id="results-screen" style="display: none;">
+            <h2>Lesson Complete!</h2>
+            <p>Your score: <span id="score"></span></p>
+            <p><span id="total-correct"></span> correct out of <span id="total-questions"></span></p>
+            <a href="../index.html" class="home-btn">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 10, Day 2",
+            completed: false,
+            questions: [
+                { type: 'briefing', text: 'Today we continue our final polish with a mix of ELA and Math questions. Focus on applying the strategies you have learned.' },
+                { type: 'mcq', question: 'Solve the inequality: 2x + 5 > 15', options: ['x > 5', 'x < 5', 'x > 10', 'x < 10'], answer: 'x > 5' },
+                { type: 'mcq', question: 'A recipe calls for 2 cups of flour for every 3 cups of sugar. If you use 6 cups of flour, how much sugar do you need?', options: ['4 cups', '6 cups', '8 cups', '9 cups'], answer: '9 cups' },
+                { type: 'mcq', question: 'What is the slope of the line passing through the points (2, 3) and (4, 7)?', options: ['1/2', '2', '3/2', '3'], answer: '2' },
+                { type: 'mcq', question: 'Identify the verb tense in the sentence: "She will have finished her homework by 8 PM."', options: ['Present Perfect', 'Past Perfect', 'Future Perfect', 'Simple Future'], answer: 'Future Perfect' },
+                { type: 'mcq', question: 'The word "ephemeral" means:', options: ['long-lasting', 'beautiful', 'short-lived', 'unimportant'], answer: 'short-lived' },
+                { type: 'mcq', question: 'What is the median of the following numbers: 12, 5, 9, 18, 15, 7?', options: ['9', '10.5', '12', '13.5'], answer: '10.5' },
+                { type: 'mcq', question: 'Which sentence is grammatically correct?', options: ['The dog wagged it\\\'s tail.', 'The dog wagged its tail.', 'The dogs wagged it\\\'s tail.', 'The dogs wagged its tail.'], answer: 'The dog wagged its tail.' },
+                { type: 'mcq', question: 'If the area of a square is 64 square units, what is the length of one side?', options: ['4 units', '6 units', '8 units', '16 units'], answer: '8 units' },
+                { type: 'mcq', question: 'The main purpose of a thesis statement in an essay is to:', options: ['Summarize the entire essay', 'Present the main argument or point', 'Provide background information', 'Hook the reader'], answer: 'Present the main argument or point' },
+                { type: 'mcq', question: 'Factor the expression: x^2 - 9', options: ['(x-3)(x-3)', '(x+3)(x+3)', '(x-3)(x+3)', '(x-9)(x+1)'], answer: '(x-3)(x+3)' },
+                { type: 'mcq', question: 'What is the sum of the interior angles of a hexagon?', options: ['360 degrees', '540 degrees', '720 degrees', '900 degrees'], answer: '720 degrees' },
+                { type: 'mcq', question: 'Choose the best transition word: "He studied diligently for the test; ________, he received a high score."', options: ['however', 'consequently', 'furthermore', 'nevertheless'], answer: 'consequently' },
+                { type: 'mcq', question: 'A cylinder has a radius of 4 inches and a height of 10 inches. What is its volume? (Use π ≈ 3.14)', options: ['125.6 cubic inches', '251.2 cubic inches', '401.92 cubic inches', '502.4 cubic inches'], answer: '502.4 cubic inches' },
+                { type: 'mcq', question: '"To be, or not to be" is a famous line from which Shakespearean play?', options: ['Macbeth', 'Romeo and Juliet', 'Hamlet', 'Othello'], answer: 'Hamlet' },
+                { type: 'mcq', question: 'What is the value of x if 4/x = x/9?', options: ['3', '4', '6', '12'], answer: '6' },
+                { type: 'mcq', question: 'Which of the following would best be described as a "primary source"?', options: ['A textbook chapter about the Civil War', 'A biography of Abraham Lincoln', 'A letter written by a soldier during the Civil War', 'A documentary about the Civil War'], answer: 'A letter written by a soldier during the Civil War' },
+                { type: 'mcq', question: 'If you roll a standard six-sided die, what is the probability of rolling an even number?', options: ['1/6', '1/3', '1/2', '2/3'], answer: '1/2' },
+                { type: 'mcq', question: 'The "denouement" of a story refers to its:', options: ['beginning', 'climax', 'rising action', 'resolution'], answer: 'resolution' },
+                { type: 'mcq', question: 'Simplify: 3(x + 2y) - 2(2x - y)', options: ['-x + 8y', '-x + 4y', '7x + 8y', '7x + 4y'], answer: '-x + 8y' },
+                { type: 'mcq', question: 'What is the greatest common factor of 48 and 72?', options: ['12', '16', '24', '36'], answer: '24' }
+            ]
+        };
+
+        const lessonContent = document.getElementById('lesson-content');
+        const nextBtn = document.getElementById('next-btn');
+        const resultsScreen = document.getElementById('results-screen');
+        const scoreEl = document.getElementById('score');
+        const totalCorrectEl = document.getElementById('total-correct');
+        const totalQuestionsEl = document.getElementById('total-questions');
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let selectedAnswer = null;
+
+        function showQuestion(index) {
+            const questionData = lessonData.questions[index];
+            lessonContent.innerHTML = '';
+            selectedAnswer = null;
+
+            if (questionData.type === 'briefing') {
+                const briefingText = document.createElement('p');
+                briefingText.textContent = questionData.text;
+                lessonContent.appendChild(briefingText);
+                nextBtn.textContent = 'Start Lesson';
+            } else if (questionData.type === 'mcq') {
+                const questionText = document.createElement('p');
+                questionText.textContent = questionData.question;
+                lessonContent.appendChild(questionText);
+
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'mcq-options';
+                questionData.options.forEach(option => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = option;
+                    listItem.addEventListener('click', () => selectAnswer(listItem, option, questionData.answer));
+                    optionsList.appendChild(listItem);
+                });
+                lessonContent.appendChild(optionsList);
+                nextBtn.textContent = 'Next';
+            } else if (questionData.type === 'scrambled_paragraph') {
+                const instructionText = document.createElement('p');
+                instructionText.textContent = 'Unscramble the following sentences to form a coherent paragraph. Drag and drop the sentences into the correct order.';
+                lessonContent.appendChild(instructionText);
+
+                const dropZone = document.createElement('div');
+                dropZone.id = 'drop-zone';
+                dropZone.className = 'scrambled-paragraph';
+
+                const scrambledSentences = [...questionData.sentences].sort(() => Math.random() - 0.5);
+
+                scrambledSentences.forEach((sentence, i) => {
+                    const sentenceDiv = document.createElement('div');
+                    sentenceDiv.textContent = sentence;
+                    sentenceDiv.className = 'draggable';
+                    sentenceDiv.draggable = true;
+                    sentenceDiv.id = `sentence-${i}`;
+                    sentenceDiv.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('text/plain', e.target.id);
+                    });
+                    dropZone.appendChild(sentenceDiv);
+                });
+
+                lessonContent.appendChild(dropZone);
+
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                });
+
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const id = e.dataTransfer.getData('text/plain');
+                    const draggableElement = document.getElementById(id);
+                    const dropZone = e.target.closest('#drop-zone');
+                    if (dropZone) {
+                        const allDraggables = [...dropZone.querySelectorAll('.draggable')];
+                        const hoverElement = allDraggables.find(child => {
+                             const box = child.getBoundingClientRect();
+                             return e.clientY < box.top + box.height / 2;
+                        });
+                        if(hoverElement) {
+                            dropZone.insertBefore(draggableElement, hoverElement);
+                        } else {
+                            dropZone.appendChild(draggableElement);
+                        }
+                    }
+                });
+                 nextBtn.textContent = 'Submit Order';
+            }
+            
+            nextBtn.style.display = 'block';
+            if (questionData.type === 'mcq') {
+                 nextBtn.disabled = true;
+            } else {
+                nextBtn.disabled = false;
+            }
+        }
+
+        function selectAnswer(element, selected, correct) {
+            const options = document.querySelectorAll('.mcq-options li');
+            options.forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.pointerEvents = 'none'; 
+            });
+
+            element.classList.add('selected');
+            selectedAnswer = selected;
+            
+            if (selected === correct) {
+                element.classList.add('correct');
+                correctAnswers++;
+            } else {
+                element.classList.add('incorrect');
+                options.forEach(opt => {
+                    if (opt.textContent === correct) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            nextBtn.disabled = false;
+        }
+        
+        function handleScrambledParagraph() {
+            const dropZone = document.getElementById('drop-zone');
+            const userOrder = [...dropZone.querySelectorAll('.draggable')].map(div => div.textContent);
+            const correctOrder = lessonData.questions[currentQuestionIndex].sentences;
+            
+            let isCorrect = true;
+            for(let i=0; i < correctOrder.length; i++) {
+                if(userOrder[i] !== correctOrder[i]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            if(isCorrect) {
+                correctAnswers++;
+                dropZone.style.border = '2px solid green';
+            } else {
+                dropZone.style.border = '2px solid red';
+            }
+            
+            [...dropZone.querySelectorAll('.draggable')].forEach(el => el.draggable = false);
+
+        }
+
+        function showResults() {
+            lessonContent.style.display = 'none';
+            nextBtn.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            
+            const total = lessonData.questions.filter(q => q.type !== 'briefing').length;
+            const score = total > 0 ? Math.round((correctAnswers / total) * 100) : 100;
+
+            scoreEl.textContent = `${score}%`;
+            totalCorrectEl.textContent = correctAnswers;
+            totalQuestionsEl.textContent = total;
+
+            const storageKey = `lessonStatus_${lessonData.title.replace(/\s+/g, '_')}`;
+            localStorage.setItem(storageKey, 'Completed');
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const questionData = lessonData.questions[currentQuestionIndex];
+
+            if (questionData.type === 'scrambled_paragraph') {
+                handleScrambledParagraph();
+                 setTimeout(() => {
+                    currentQuestionIndex++;
+                    loadNext();
+                }, 1500); 
+                return; 
+            }
+            
+            if (questionData.type === 'mcq' && selectedAnswer === null) {
+                return;
+            }
+
+
+            currentQuestionIndex++;
+            loadNext();
+        });
+
+        function loadNext() {
+             if (currentQuestionIndex < lessonData.questions.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                showResults();
+            }
+        }
+
+        showQuestion(currentQuestionIndex);
+    </script>
+</body>
+</html>

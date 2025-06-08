@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10, Day 5: SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="lesson-container">
+        <h1>Week 10, Day 5</h1>
+        <div id="lesson-content"></div>
+        <button id="next-btn" style="display: none;">Next</button>
+        <div id="results-screen" style="display: none;">
+            <h2>Lesson Complete!</h2>
+            <p>Your score: <span id="score"></span></p>
+            <p><span id="total-correct"></span> correct out of <span id="total-questions"></span></p>
+            <a href="../index.html" class="home-btn">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 10, Day 5",
+            completed: false,
+            questions: [
+                { type: 'briefing', text: 'This lesson provides a targeted review of weak spots identified during practice sessions. Focus on understanding the reasoning behind correct answers.' },
+                { type: 'mcq', question: 'Which sentence demonstrates correct parallel structure?', options: ['She likes to run, swimming, and to bike.', 'She likes running, swimming, and biking.', 'She likes to run, to swim, and biking.', 'She likes running, to swim, and to bike.'], answer: 'She likes running, swimming, and biking.' },
+                { type: 'mcq', question: 'If a sweater that originally cost $50 is on sale for 20% off, what is the sale price?', options: ['$10', '$30', '$40', '$45'], answer: '$40' },
+                { type: 'mcq', question: 'The word "ambiguous" most nearly means...', options: ['Clear', 'Uncertain', 'Angry', 'Joyful'], answer: 'Uncertain' },
+                { type: 'mcq', question: 'A train travels 450 miles in 5 hours. What is its average speed in miles per hour?', options: ['80 mph', '85 mph', '90 mph', '95 mph'], answer: '90 mph' },
+                { type: 'mcq', question: 'Which of the following is a run-on sentence?', options: ['I went to the store I bought some milk.', 'I went to the store, and I bought some milk.', 'I went to the store. I bought some milk.', 'After going to the store, I bought some milk.'], answer: 'I went to the store I bought some milk.' },
+                { type: 'mcq', question: 'What is the volume of a cube with a side length of 4 cm?', options: ['12 cm³', '16 cm³', '32 cm³', '64 cm³'], answer: '64 cm³' },
+                { type: 'mcq', question: 'In the sentence, "The quick brown fox jumps over the lazy dog," which word is the adjective?', options: ['quick', 'jumps', 'over', 'dog'], answer: 'quick' },
+                { type: 'mcq', question: 'Simplify the expression: 3x + 2(x - 5) - x', options: ['4x - 10', '4x + 10', '5x - 5', '5x - 10'], answer: '4x - 10' },
+                { type: 'mcq', question: 'What is the primary theme of "To Kill a Mockingbird"?', options: ['The importance of courage', 'The injustice of racism', 'The loss of innocence', 'All of the above'], answer: 'All of the above' },
+                { type: 'mcq', question: 'If two lines are parallel, what can be said about their slopes?', options: ['They are equal', 'They are opposite reciprocals', 'They are negative', 'One is zero'], answer: 'They are equal' },
+                { type: 'mcq', question: 'Choose the word that is spelled correctly.', options: ['Neccessary', 'Necesary', 'Necessary', 'Neccesary'], answer: 'Necessary' },
+                { type: 'mcq', question: 'A recipe calls for 2 cups of flour to make 12 cookies. How many cups of flour are needed to make 30 cookies?', options: ['3 cups', '4 cups', '5 cups', '6 cups'], answer: '5 cups' },
+                { type: 'mcq', question: 'What is the function of an apostrophe in the word "it\'s"?', options: ['To show possession', 'To form a plural', 'To indicate a contraction', 'To separate clauses'], answer: 'To indicate a contraction' },
+                { type: 'mcq', question: 'The angles of a quadrilateral always add up to...', options: ['180 degrees', '270 degrees', '360 degrees', '540 degrees'], answer: '360 degrees' },
+                { type: 'mcq', question: 'Which sentence is an example of a simile?', options: ['He is a lion in battle.', 'The classroom was a zoo.', 'She is as busy as a bee.', 'The wind howled in the night.'], answer: 'She is as busy as a bee.' },
+                { type: 'mcq', question: 'A test has 50 questions. If a student answers 45 correctly, what is their score as a percentage?', options: ['85%', '90%', '92%', '95%'], answer: '90%' },
+                { type: 'mcq', question: 'What does "point of view" refer to in literature?', options: ['The main character\'s opinion', 'The narrator\'s perspective', 'The setting of the story', 'The conflict of the plot'], answer: 'The narrator\'s perspective' },
+                { type: 'mcq', question: 'Solve for x: x/3 + 4 = 7', options: ['3', '6', '9', '12'], answer: '9' },
+                { type: 'mcq', question: 'The denouement of a plot is...', options: ['The introduction', 'The rising action', 'The climax', 'The resolution'], answer: 'The resolution' },
+                { type: 'mcq', question: 'If the probability of an event occurring is 0.2, what is the probability of the event not occurring?', options: ['0.2', '0.5', '0.8', '1.0'], answer: '0.8' },
+            ]
+        };
+
+        const lessonContent = document.getElementById('lesson-content');
+        const nextButton = document.getElementById('next-btn');
+        const resultsScreen = document.getElementById('results-screen');
+        const scoreEl = document.getElementById('score');
+        const totalCorrectEl = document.getElementById('total-correct');
+        const totalQuestionsEl = document.getElementById('total-questions');
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let selectedAnswers = [];
+
+        function startLesson() {
+            showQuestion(currentQuestionIndex);
+        }
+
+        function showQuestion(index) {
+            const questionData = lessonData.questions[index];
+            lessonContent.innerHTML = ''; 
+
+            if (questionData.type === 'briefing') {
+                const briefingText = document.createElement('p');
+                briefingText.className = 'briefing-text';
+                briefingText.textContent = questionData.text;
+                lessonContent.appendChild(briefingText);
+            } else if (questionData.type === 'mcq') {
+                const questionText = document.createElement('p');
+                questionText.className = 'question-text';
+                questionText.textContent = questionData.question;
+                lessonContent.appendChild(questionText);
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options-container';
+                questionData.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option;
+                    button.onclick = () => selectAnswer(button, option, questionData.answer);
+                    optionsContainer.appendChild(button);
+                });
+                lessonContent.appendChild(optionsContainer);
+            } else if (questionData.type === 'scrambled_paragraph') {
+                const questionText = document.createElement('p');
+                questionText.className = 'question-text';
+                questionText.textContent = questionData.instruction;
+                lessonContent.appendChild(questionText);
+
+                const sentencesContainer = document.createElement('div');
+                sentencesContainer.id = 'sentences-container';
+                questionData.sentences.forEach((sentence, i) => {
+                    const sentEl = document.createElement('div');
+                    sentEl.className = 'sentence';
+                    sentEl.textContent = sentence;
+                    sentEl.dataset.originalIndex = i + 1;
+                    sentencesContainer.appendChild(sentEl);
+                });
+                lessonContent.appendChild(sentencesContainer);
+            }
+            
+            if (index < lessonData.questions.length -1) {
+                nextButton.style.display = 'block';
+            } else {
+                nextButton.style.display = 'none';
+                setTimeout(showResults, 1000); 
+            }
+        }
+
+        function selectAnswer(button, selectedOption, correctAnswer) {
+            const buttons = lessonContent.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true; // Disable all buttons after one is clicked
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selectedOption) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (selectedOption === correctAnswer) {
+                correctAnswers++;
+            }
+            selectedAnswers[currentQuestionIndex] = selectedOption;
+             if (currentQuestionIndex >= lessonData.questions.length - 1) {
+                setTimeout(showResults, 1000);
+            }
+        }
+
+       function handleNextClick() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < lessonData.questions.length) {
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function showResults() {
+            lessonContent.style.display = 'none';
+            nextButton.style.display = 'none';
+            resultsScreen.style.display = 'block';
+
+            const totalQuestions = lessonData.questions.filter(q => q.type !== 'briefing').length;
+            const score = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
+
+            scoreEl.textContent = `${score.toFixed(2)}%`;
+            totalCorrectEl.textContent = correctAnswers;
+            totalQuestionsEl.textContent = totalQuestions;
+
+            localStorage.setItem(lessonData.title.replace(/ /g, ''), 'completed');
+        }
+
+        nextButton.addEventListener('click', handleNextClick);
+
+        startLesson();
+    </script>
+</body>
+</html>

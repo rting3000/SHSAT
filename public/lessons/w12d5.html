@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12, Day 5: Full-Length Practice Test - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 12, Day 5: Full-Length Practice Test</h1>
+            <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 12, Day 5: Full-Length Practice Test",
+            learning_objectives: [
+                "Simulate real test conditions to build stamina and time management skills.",
+                "Take a complete SHSAT practice test from start to finish.",
+                "Assess overall performance and identify any final areas for review."
+            ],
+            items: [
+                {
+                    type: 'briefing',
+                    title: "Simulating the Real Test",
+                    text: "Today is about simulating the real test experience. Find a quiet space where you won't be interrupted. Set a timer for 3 hours (180 minutes) and take a full-length practice test without breaks, just like on test day. The goal is to build mental stamina and practice your pacing strategy under pressure."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Once you have completed the full-length practice test, confirm below.",
+                    options: [
+                        "I have completed the full-length practice test.",
+                        "I will complete it now."
+                    ],
+                    answer: 0,
+                    explanation: "Fantastic work! Completing a full simulation is a major accomplishment. This experience is invaluable for preparing you for the mental and physical demands of the actual SHSAT. You're building the endurance you need to perform your best."
+                },
+                {
+                    type: 'briefing',
+                    title: "What to Do After the Test",
+                    text: "After you finish, don't worry about scoring it immediately. Take a break. The main goal for today was the simulation itself. We will focus on reviewing your performance tomorrow. For now, relax and congratulate yourself on completing a full practice exam."
+                }
+            ]
+        };
+
+        function buildLesson() {
+            const lessonContainer = document.getElementById('lesson-container');
+            let currentItemIndex = 0;
+            let score = 0;
+            let incorrectAnswers = [];
+
+            function showItem(index) {
+                lessonContainer.innerHTML = '';
+                const item = lessonData.items[index];
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'lesson-item';
+
+                if (item.type === 'briefing') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p><button id="next-btn">Continue</button>`;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentItemIndex++;
+                        if (currentItemIndex < lessonData.items.length) {
+                            showItem(currentItemIndex);
+                        } else {
+                            showFinalScore();
+                        }
+                    });
+                } else if (item.type === 'multiple_choice') {
+                    let optionsHtml = '';
+                    item.options.forEach((option, i) => {
+                        optionsHtml += `<div class="option"><label><input type="radio" name="mc" value="${i}"> ${option}</label></div>`;
+                    });
+                    itemDiv.innerHTML = `
+                        <h3>Question</h3>
+                        <p>${item.question}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <button id="submit-btn">Submit</button>
+                    `;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const selectedOption = document.querySelector('input[name="mc"]:checked');
+                        if (selectedOption) {
+                            const userAnswer = parseInt(selectedOption.value, 10);
+                            if (userAnswer === item.answer) {
+                                score++;
+                                showFeedback(true, item.explanation);
+                            } else {
+                                incorrectAnswers.push({ question: item.question, yourAnswer: item.options[userAnswer], correctAnswer: item.options[item.answer] });
+                                showFeedback(false, item.explanation);
+                            }
+                        }
+                    });
+                }
+                 else if (item.type === 'scrambled_paragraph') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.instructions}</p>`;
+                    const sentencesDiv = document.createElement('div');
+                    sentencesDiv.id = 'sentences';
+                    // Display sentences in their initial, scrambled order
+                    item.scrambled.forEach(sentence => {
+                        const p = document.createElement('p');
+                        p.textContent = sentence;
+                        p.className = 'sentence-option';
+                        p.draggable = true;
+                        sentencesDiv.appendChild(p);
+                    });
+                    itemDiv.appendChild(sentencesDiv);
+                    itemDiv.innerHTML += `<button id="submit-btn">Submit Order</button>`;
+                    lessonContainer.appendChild(itemDiv);
+
+                    // Drag and drop functionality
+                    let draggedItem = null;
+                    sentencesDiv.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => {
+                            e.target.style.display = 'none';
+                        }, 0);
+                    });
+                    sentencesDiv.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            draggedItem.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+
+                    sentencesDiv.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(sentencesDiv, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            sentencesDiv.appendChild(draggedItem);
+                        } else {
+                            sentencesDiv.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const submittedOrder = Array.from(sentencesDiv.getElementsByTagName('p')).map(p => p.textContent);
+                        let isCorrect = true;
+                        for(let i = 0; i < item.correct_order.length; i++) {
+                            if(submittedOrder[i] !== item.correct_order[i]) {
+                                isCorrect = false;
+                                break;
+                            }
+                        }
+
+                        if (isCorrect) {
+                            score++;
+                        } else {
+                             incorrectAnswers.push({
+                                question: item.instructions,
+                                yourAnswer: submittedOrder.join(' | '),
+                                correctAnswer: item.correct_order.join(' | ')
+                            });
+                        }
+                        showFeedback(isCorrect, item.explanation);
+                    });
+                }
+            }
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sentence-option:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
+                feedbackDiv.innerHTML = `
+                    <h4>${isCorrect ? 'Correct!' : 'Incorrect'}</h4>
+                    <p>${explanation}</p>
+                    <button id="next-feedback-btn">Next</button>
+                `;
+                lessonContainer.appendChild(feedbackDiv);
+                document.getElementById('next-feedback-btn').addEventListener('click', () => {
+                    currentItemIndex++;
+                    if (currentItemIndex < lessonData.items.length) {
+                        showItem(currentItemIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+            }
+
+            function showFinalScore() {
+                // Mark lesson as completed
+                localStorage.setItem(lessonData.title, 'completed');
+
+                lessonContainer.innerHTML = `
+                    <h2>Lesson Complete!</h2>
+                    <p>You have finished this lesson. Your progress has been saved.</p>
+                    <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+                `;
+                 if (incorrectAnswers.length > 0) {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.innerHTML = '<h3>Review Your Incorrect Answers:</h3>';
+                    incorrectAnswers.forEach(ans => {
+                        reviewDiv.innerHTML += `
+                            <div class="review-item">
+                                <p><strong>Question:</strong> ${ans.question}</p>
+                                <p><strong>Your Answer:</strong> ${ans.yourAnswer}</p>
+                                <p><strong>Correct Answer:</strong> ${ans.correctAnswer}</p>
+                            </div>
+                        `;
+                    });
+                    lessonContainer.appendChild(reviewDiv);
+                }
+            }
+
+            // Initial call to build the first item
+            showItem(currentItemIndex);
+        }
+
+        // Start the lesson
+        buildLesson();
+    </script>
+</body>
+</html>

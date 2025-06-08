@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5, Day 6: Timed Math Mini-Section - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 5, Day 6: Timed Math Mini-Section</h1>
+            <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 5, Day 6: Timed Math Mini-Section",
+            learning_objectives: [
+                "Practice solving math problems under timed conditions.",
+                "Review a variety of math topics from previous weeks.",
+                "Build confidence and efficiency in the math section."
+            ],
+            items: [
+                {
+                    type: 'briefing',
+                    title: "Math Speed and Accuracy",
+                    text: "Today's focus is on applying your math skills under time pressure. You will complete a 15-question mini-section in 20 minutes. This will help you practice pacing and quick problem-solving, which are crucial for the SHSAT."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "If 3x + 7 = 19, what is the value of x?",
+                    options: ["2", "3", "4", "5"],
+                    answer: 2,
+                    explanation: "To solve for x, first subtract 7 from both sides: 3x = 12. Then, divide by 3: x = 4."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "A train travels 120 miles in 2 hours. What is its average speed in miles per hour?",
+                    options: ["50 mph", "60 mph", "70 mph", "80 mph"],
+                    answer: 1,
+                    explanation: "Speed is calculated as distance divided by time. 120 miles / 2 hours = 60 mph."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "What is the area of a circle with a radius of 5?",
+                    options: ["5π", "10π", "25π", "50π"],
+                    answer: 2,
+                    explanation: "The formula for the area of a circle is A = πr². With a radius (r) of 5, the area is π * 5² = 25π."
+                }
+            ]
+        };
+
+        function buildLesson() {
+            const lessonContainer = document.getElementById('lesson-container');
+            let currentItemIndex = 0;
+            let score = 0;
+            let incorrectAnswers = [];
+
+            function showItem(index) {
+                lessonContainer.innerHTML = '';
+                const item = lessonData.items[index];
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'lesson-item';
+
+                if (item.type === 'briefing') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p><button id="next-btn">Continue</button>`;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentItemIndex++;
+                        if (currentItemIndex < lessonData.items.length) {
+                            showItem(currentItemIndex);
+                        } else {
+                            showFinalScore();
+                        }
+                    });
+                } else if (item.type === 'multiple_choice') {
+                    let optionsHtml = '';
+                    item.options.forEach((option, i) => {
+                        optionsHtml += `<div class="option"><label><input type="radio" name="mc" value="${i}"> ${option}</label></div>`;
+                    });
+                    itemDiv.innerHTML = `
+                        <h3>Question</h3>
+                        <p>${item.question}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <button id="submit-btn">Submit</button>
+                    `;
+                    lessonContainer.appendChild(itemDiv);
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const selectedOption = document.querySelector('input[name="mc"]:checked');
+                        if (selectedOption) {
+                            const userAnswer = parseInt(selectedOption.value, 10);
+                            if (userAnswer === item.answer) {
+                                score++;
+                                showFeedback(true, item.explanation);
+                            } else {
+                                incorrectAnswers.push({ question: item.question, yourAnswer: item.options[userAnswer], correctAnswer: item.options[item.answer] });
+                                showFeedback(false, item.explanation);
+                            }
+                        }
+                    });
+                }
+                 else if (item.type === 'scrambled_paragraph') {
+                    itemDiv.innerHTML = `<h3>${item.title}</h3><p>${item.instructions}</p>`;
+                    const sentencesDiv = document.createElement('div');
+                    sentencesDiv.id = 'sentences';
+                    item.scrambled.forEach(sentence => {
+                        const p = document.createElement('p');
+                        p.textContent = sentence;
+                        p.className = 'sentence-option';
+                        p.draggable = true;
+                        sentencesDiv.appendChild(p);
+                    });
+                    itemDiv.appendChild(sentencesDiv);
+                    itemDiv.innerHTML += `<button id="submit-btn">Submit Order</button>`;
+                    lessonContainer.appendChild(itemDiv);
+
+                    let draggedItem = null;
+                    sentencesDiv.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => {
+                            e.target.style.display = 'none';
+                        }, 0);
+                    });
+                    sentencesDiv.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            draggedItem.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    sentencesDiv.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(sentencesDiv, e.clientY);
+                        if (afterElement == null) {
+                            sentencesDiv.appendChild(draggedItem);
+                        } else {
+                            sentencesDiv.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+
+                    document.getElementById('submit-btn').addEventListener('click', () => {
+                        const submittedOrder = Array.from(sentencesDiv.getElementsByTagName('p')).map(p => p.textContent);
+                        let isCorrect = JSON.stringify(submittedOrder) === JSON.stringify(item.correct_order);
+                        if (isCorrect) {
+                            score++;
+                        } else {
+                             incorrectAnswers.push({
+                                question: item.instructions,
+                                yourAnswer: submittedOrder.join(' | '),
+                                correctAnswer: item.correct_order.join(' | ')
+                            });
+                        }
+                        showFeedback(isCorrect, item.explanation);
+                    });
+                }
+            }
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sentence-option:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
+                feedbackDiv.innerHTML = `
+                    <h4>${isCorrect ? 'Correct!' : 'Incorrect'}</h4>
+                    <p>${explanation}</p>
+                    <button id="next-feedback-btn">Next</button>
+                `;
+                lessonContainer.appendChild(feedbackDiv);
+                document.getElementById('next-feedback-btn').addEventListener('click', () => {
+                    currentItemIndex++;
+                    if (currentItemIndex < lessonData.items.length) {
+                        showItem(currentItemIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+            }
+
+            function showFinalScore() {
+                localStorage.setItem(lessonData.title, 'completed');
+                lessonContainer.innerHTML = `
+                    <h2>Lesson Complete!</h2>
+                    <p>You got ${score} out of ${lessonData.items.length - 1} questions correct.</p>
+                    <a href="../index.html" class="back-to-dashboard">Back to Dashboard</a>
+                `;
+                 if (incorrectAnswers.length > 0) {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.innerHTML = '<h3>Review Your Incorrect Answers:</h3>';
+                    incorrectAnswers.forEach(ans => {
+                        reviewDiv.innerHTML += `
+                            <div class="review-item">
+                                <p><strong>Question:</strong> ${ans.question}</p>
+                                <p><strong>Your Answer:</strong> ${ans.yourAnswer}</p>
+                                <p><strong>Correct Answer:</strong> ${ans.correctAnswer}</p>
+                            </div>
+                        `;
+                    });
+                    lessonContainer.appendChild(reviewDiv);
+                }
+            }
+            showItem(currentItemIndex);
+        }
+        buildLesson();
+    </script>
+</body>
+</html> 

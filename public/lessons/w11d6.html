@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 6 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 6</h1>
+            <h2>Rest and Targeted Review</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Lesson Complete!</h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d6",
+            title: "Week 11, Day 6: Rest and Targeted Review",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'The Importance of Rest',
+                    text: `You've completed three full practice tests this week. Your brain needs time to consolidate all that information.
+                    
+                    Active recovery is as important as active studying. True learning happens when you give your mind a chance to process. Avoid burnout by taking a real break today. Don't do any SHSAT-related work unless it's reviewing your error log.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'Targeted Review',
+                    text: `If you do choose to study, make it focused and efficient.
+                    
+                    1.  **Review Your Error Log:** This is the highest-yield activity you can do. Look for patterns. Are you consistently missing geometry questions? Or comma splices?
+                    
+                    2.  **Drill Your Weaknesses:** Spend 30-60 minutes (no more!) on your #1 weakest area. Don't try to cover everything. Just focus on that single topic.
+                    
+                    3.  **Plan for Test Day:** Mentally walk through your test day plan. What time will you wake up? What will you eat for breakfast? How will you manage your nerves? Visualizing success can be a powerful tool.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'Final Preparations',
+                    text: `With one week to go, your focus should shift from learning new material to mastering what you already know and building confidence.
+                    
+                    -   **Confidence is Key:** Trust in the work you've done. You have spent weeks preparing. You are ready.
+                    -   **Logistics:** Make sure you know where your testing center is, how you'll get there, and what you need to bring (ID, pencils, etc.).
+                    -   **Relax:** Do something you enjoy today. Watch a movie, go for a walk, talk to friends. Enter the final week feeling refreshed, not exhausted.`
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                const card = createBriefingCard(questionData);
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        currentQuestionIndex++;
+                        saveProgress();
+                        renderQuestion();
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                const buttonText = (currentQuestionIndex === lessonData.questions.length - 1) ? 'Finish' : 'Next';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">${buttonText}</button>
+                `;
+                return card;
+            }
+
+            function displayFinalScore() {
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                const progress = {
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

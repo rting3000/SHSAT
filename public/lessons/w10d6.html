@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10, Day 6 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 10: Day 6</h1>
+            <h2>Rest & Review</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="text-align: center; margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 10, Day 6: Rest & Review",
+            briefing: {
+                title: "Rest and Review",
+                text: "Today is a day for rest and light review. It's important to let your brain consolidate information. These questions are a mix of topics from the past few weeks. Don't stress, just do your best."
+            },
+            questions: [
+                {
+                    type: 'multiple_choice',
+                    question: "Which of the following sentences contains a dangling modifier?",
+                    options: [
+                        "Having finished the assignment, Jill turned on the TV.",
+                        "After reading the original study, the article remains unconvincing.",
+                        "The dog, a golden retriever, wagged its tail happily.",
+                        "To get a good grade, you must study hard."
+                    ],
+                    answer: "After reading the original study, the article remains unconvincing.",
+                    explanation: "A dangling modifier is a phrase or clause that is not clearly and logically related to the word or words it modifies. In this case, 'After reading the original study' seems to modify 'the article,' but an article cannot read. It should be rephrased, for example: 'After I read the original study, I found the article unconvincing.'"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "If 3x - 7 = 11, what is the value of 5x + 2?",
+                    options: [
+                        "28",
+                        "30",
+                        "32",
+                        "34"
+                    ],
+                    answer: "32",
+                    explanation: "First, solve for x in the equation 3x - 7 = 11. Add 7 to both sides: 3x = 18. Divide by 3: x = 6. Now substitute x = 6 into the expression 5x + 2: 5(6) + 2 = 30 + 2 = 32."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Identify the literary device used in the following sentence: 'The wind whispered through the trees.'",
+                    options: [
+                        "Metaphor",
+                        "Simile",
+                        "Personification",
+                        "Hyperbole"
+                    ],
+                    answer: "Personification",
+                    explanation: "Personification is a literary device where human qualities or actions are attributed to inanimate objects. The wind cannot literally 'whisper,' so this is an example of personification."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "A bag contains 5 red marbles, 4 blue marbles, and 3 green marbles. If one marble is drawn at random, what is the probability that it is NOT blue?",
+                    options: [
+                        "1/3",
+                        "1/2",
+                        "2/3",
+                        "3/4"
+                    ],
+                    answer: "2/3",
+                    explanation: "There are a total of 5 + 4 + 3 = 12 marbles. The number of marbles that are NOT blue is 5 (red) + 3 (green) = 8. The probability is the number of favorable outcomes divided by the total number of outcomes: 8/12, which simplifies to 2/3."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which sentence is grammatically correct?",
+                    options: [
+                        "The team is getting their uniforms tomorrow.",
+                        "The team are getting its uniforms tomorrow.",
+                        "The team is getting its uniform tomorrow.",
+                        "The team is getting its uniforms tomorrow."
+                    ],
+                    answer: "The team is getting its uniforms tomorrow.",
+                    explanation: "'Team' is a collective noun and is treated as a singular entity in this context, so it takes the singular verb 'is' and the singular pronoun 'its'."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "If a circle has a circumference of 16π, what is its area?",
+                    options: [
+                        "8π",
+                        "16π",
+                        "32π",
+                        "64π"
+                    ],
+                    answer: "64π",
+                    explanation: "The formula for the circumference of a circle is C = 2πr. We are given C = 16π. So, 16π = 2πr. Divide both sides by 2π to find the radius, r = 8. The formula for the area of a circle is A = πr². Substitute r = 8: A = π(8)² = 64π."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "What is the main purpose of a topic sentence in a paragraph?",
+                    options: [
+                        "To provide a concluding thought.",
+                        "To introduce the main idea of the paragraph.",
+                        "To offer a supporting detail or example.",
+                        "To transition to the next paragraph."
+                    ],
+                    answer: "To introduce the main idea of the paragraph.",
+                    explanation: "The topic sentence states the main point or argument of the paragraph it introduces. All other sentences in the paragraph should support or elaborate on the topic sentence."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "What is the slope of the line that passes through the points (2, 5) and (6, 13)?",
+                    options: [
+                        "1/2",
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    answer: "2",
+                    explanation: "The formula for the slope (m) is (y2 - y1) / (x2 - x1). Using the given points: m = (13 - 5) / (6 - 2) = 8 / 4 = 2."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which of the following would be considered a primary source?",
+                    options: [
+                        "A textbook chapter about the American Revolution.",
+                        "A biography of George Washington.",
+                        "A letter written by a soldier during the American Revolution.",
+                        "A documentary about the American Revolution."
+                    ],
+                    answer: "A letter written by a soldier during the American Revolution.",
+                    explanation: "A primary source is a firsthand account or original document from the time period being studied. A letter from a soldier is a direct piece of evidence from that time. The other options are secondary sources, which analyze or interpret primary sources."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "The sum of three consecutive integers is 96. What is the largest of these integers?",
+                    options: [
+                        "31",
+                        "32",
+                        "33",
+                        "34"
+                    ],
+                    answer: "33",
+                    explanation: "Let the three consecutive integers be x, x+1, and x+2. Their sum is x + (x+1) + (x+2) = 96. Combine like terms: 3x + 3 = 96. Subtract 3 from both sides: 3x = 93. Divide by 3: x = 31. The integers are 31, 32, and 33. The largest is 33."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which choice best corrects the punctuation error in the sentence: 'She enjoys several activities, hiking, swimming and cycling.'",
+                    options: [
+                        "She enjoys several activities hiking, swimming and cycling.",
+                        "She enjoys several activities; hiking, swimming, and cycling.",
+                        "She enjoys several activities: hiking, swimming, and cycling.",
+                        "She enjoys several activities hiking, swimming, and cycling!"
+                    ],
+                    answer: "She enjoys several activities: hiking, swimming, and cycling.",
+                    explanation: "A colon is used to introduce a list of items that explains or elaborates on the preceding clause. The clause 'She enjoys several activities' is an independent clause, and the colon correctly introduces the list of those activities."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "If a rectangle has a perimeter of 30 and a width of 5, what is its length?",
+                    options: [
+                        "5",
+                        "10",
+                        "15",
+                        "20"
+                    ],
+                    answer: "10",
+                    explanation: "The formula for the perimeter of a rectangle is P = 2l + 2w. We are given P = 30 and w = 5. So, 30 = 2l + 2(5). Simplify: 30 = 2l + 10. Subtract 10 from both sides: 20 = 2l. Divide by 2 to find the length, l = 10."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "The author's tone can best be described as the author's...",
+                    options: [
+                        "main argument.",
+                        "attitude toward the subject.",
+                        "choice of words.",
+                        "reason for writing."
+                    ],
+                    answer: "attitude toward the subject.",
+                    explanation: "Tone refers to the author's attitude or feelings about the subject they are writing about. It's conveyed through word choice, sentence structure, and overall style."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Solve for x: (2x + 5) / 3 = 7",
+                    options: [
+                        "6",
+                        "8",
+                        "10",
+                        "12"
+                    ],
+                    answer: "8",
+                    explanation: "To solve for x, first multiply both sides of the equation by 3: 2x + 5 = 21. Then, subtract 5 from both sides: 2x = 16. Finally, divide by 2: x = 8."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which of the following is a run-on sentence?",
+                    options: [
+                        "I like to write, and I also like to read.",
+                        "She went to the store she bought some milk.",
+                        "Because it was raining, we stayed inside.",
+                        "He ran quickly; he was late for the bus."
+                    ],
+                    answer: "She went to the store she bought some milk.",
+                    explanation: "A run-on sentence occurs when two or more independent clauses are connected without proper punctuation. 'She went to the store' and 'she bought some milk' are both independent clauses. They could be separated by a period, a semicolon, or a comma and a conjunction."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "A store offers a 20% discount on all items. If a shirt originally costs $25, what is the sale price?",
+                    options: [
+                        "$5",
+                        "$15",
+                        "$20",
+                        "$24"
+                    ],
+                    answer: "$20",
+                    explanation: "First, calculate the discount amount: 20% of $25 is 0.20 * 25 = $5. Then, subtract the discount from the original price: $25 - $5 = $20. Alternatively, you can calculate 80% of the original price: 0.80 * 25 = $20."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "What does the word 'ephemeral' mean?",
+                    options: [
+                        "Long-lasting",
+                        "Beautiful",
+                        "Short-lived",
+                        "Complicated"
+                    ],
+                    answer: "Short-lived",
+                    explanation: "Ephemeral means lasting for a very short time; transitory. For example, 'the ephemeral beauty of a butterfly.'"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "If a and b are positive integers, and a/b = 3.5, what is a possible value for a + b?",
+                    options: [
+                        "7",
+                        "9",
+                        "12",
+                        "14"
+                    ],
+                    answer: "9",
+                    explanation: "3.5 can be written as the fraction 7/2. So, a/b = 7/2. This means a=7 and b=2 is a possible pair of values. Their sum is a + b = 7 + 2 = 9."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which word is a synonym for 'ubiquitous'?",
+                    options: [
+                        "Rare",
+                        "Omnipresent",
+                        "Secretive",
+                        "Necessary"
+                    ],
+                    answer: "Omnipresent",
+                    explanation: "Ubiquitous means present, appearing, or found everywhere. Omnipresent has the same meaning."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "The area of a square is 81. What is the length of its diagonal?",
+                    options: [
+                        "9",
+                        "9√2",
+                        "18",
+                        "18√2"
+                    ],
+                    answer: "9√2",
+                    explanation: "The area of a square is side * side (s²). If s² = 81, then the side length s = 9. The diagonal of a square can be found using the Pythagorean theorem (a² + b² = c²) where a and b are the sides and c is the diagonal. So, 9² + 9² = d². 81 + 81 = d². 162 = d². d = √162 = √(81 * 2) = 9√2."
+                }
+            ]
+        };
+
+        // --- Standard Lesson Engine ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const lessonContainer = document.getElementById('lesson-container');
+        const scoreContainer = document.getElementById('score-container');
+        const lessonId = window.location.pathname.split('/').pop();
+
+        function startLesson() {
+            if (lessonData.briefing) {
+                showBriefing();
+            } else {
+                showQuestion();
+            }
+        }
+
+        function showBriefing() {
+            lessonContainer.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <h2>${lessonData.briefing.title}</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>${lessonData.briefing.text.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <button class="btn btn-primary" id="start-questions-btn">Start Questions</button>
+                </div>
+            `;
+            document.getElementById('start-questions-btn').addEventListener('click', () => {
+                showQuestion();
+            });
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex >= lessonData.questions.length) {
+                showFinalScore();
+                return;
+            }
+
+            const q = lessonData.questions[currentQuestionIndex];
+            let content = '';
+
+            if (q.type === 'multiple_choice') {
+                const optionsHtml = q.options.map((option, index) =>
+                    `<li onclick="selectAnswer(this, '${option}', '${q.answer}')">${option}</li>`
+                ).join('');
+
+                content = `
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Question ${currentQuestionIndex + 1} of ${lessonData.questions.length}</h2>
+                        </div>
+                        <div class="card-content">
+                            ${q.passage ? `<div class="passage"><p>${q.passage.replace(/\n/g, '<br>')}</p></div>` : ''}
+                            <p>${q.question}</p>
+                            <div class="options">
+                                <ul>${optionsHtml}</ul>
+                            </div>
+                            <div class="answer-explanation" id="explanation-${currentQuestionIndex}">
+                                <p><strong>Correct Answer:</strong> <span class="correct-answer">${q.answer}</span></p>
+                                <p>${q.explanation}</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="next-btn" style="display: none;" onclick="nextQuestion()">Next</button>
+                    </div>
+                `;
+            } else if (q.type === 'scrambled_paragraph') {
+                const sentencesHtml = q.sentences.map((sentence, index) =>
+                    `<li data-original-index="${index}">${sentence}</li>`
+                ).join('');
+
+                content = `
+                     <div class="card">
+                        <div class="card-header">
+                             <h2>Question ${currentQuestionIndex + 1} of ${lessonData.questions.length}</h2>
+                        </div>
+                        <div class="card-content">
+                            <p>${q.instruction}</p>
+                             <ul id="sortable-list" class="options">${sentencesHtml}</ul>
+                             <div class="answer-explanation" id="explanation-${currentQuestionIndex}">
+                                 <p><strong>Correct Order:</strong></p>
+                                 <ol>${q.correct_order.map(i => `<li>${q.sentences[i]}</li>`).join('')}</ol>
+                                 <p><strong>Explanation:</strong> ${q.explanation}</p>
+                             </div>
+                        </div>
+                        <button class="btn btn-primary" id="submit-order-btn">Check Order</button>
+                        <button class="btn btn-primary" id="next-btn" style="display: none;" onclick="nextQuestion()">Next</button>
+                    </div>
+                `;
+            }
+
+
+            lessonContainer.innerHTML = content;
+            if (q.type === 'scrambled_paragraph') {
+                 makeSortable();
+                 document.getElementById('submit-order-btn').addEventListener('click', checkParagraphOrder);
+            }
+        }
+
+        function selectAnswer(element, selected, correct) {
+            const options = element.parentElement.children;
+            for (let li of options) {
+                li.style.pointerEvents = 'none'; // Disable further clicks
+                if (li.textContent === correct) {
+                    li.style.backgroundColor = '#d1f4d1'; // Green
+                    li.style.borderColor = '#28a745';
+                } else if (li.textContent === selected) {
+                    li.style.backgroundColor = '#f8d7da'; // Red
+                    li.style.borderColor = '#dc3545';
+                }
+            }
+
+            if (selected === correct) {
+                score++;
+            }
+
+            document.getElementById(`explanation-${currentQuestionIndex}`).style.display = 'block';
+            document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+
+        function makeSortable() {
+            const list = document.getElementById("sortable-list");
+            let draggedItem = null;
+
+            list.querySelectorAll('li').forEach(item => {
+                item.draggable = true;
+                item.addEventListener('dragstart', () => {
+                    draggedItem = item;
+                    setTimeout(() => item.style.display = 'none', 0);
+                });
+                item.addEventListener('dragend', () => {
+                    setTimeout(() => {
+                        draggedItem.style.display = '';
+                        draggedItem = null;
+                    }, 0);
+                });
+                item.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(list, e.clientY);
+                    if (afterElement == null) {
+                        list.appendChild(draggedItem);
+                    } else {
+                        list.insertBefore(draggedItem, afterElement);
+                    }
+                });
+            });
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('li:not(.dragging)')];
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+        }
+
+        function checkParagraphOrder() {
+            const list = document.getElementById('sortable-list');
+            const userOrder = [...list.querySelectorAll('li')].map(item => parseInt(item.dataset.originalIndex));
+            const correctOrder = lessonData.questions[currentQuestionIndex].correct_order;
+
+            let isCorrect = userOrder.length === correctOrder.length && userOrder.every((val, index) => val === correctOrder[index]);
+
+            if (isCorrect) {
+                score++;
+                list.style.border = '2px solid #28a745';
+            } else {
+                list.style.border = '2px solid #dc3545';
+            }
+
+            document.getElementById(`explanation-${currentQuestionIndex}`).style.display = 'block';
+            document.getElementById('submit-order-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            showQuestion();
+        }
+
+        function showFinalScore() {
+            const percentage = (score / lessonData.questions.length) * 100;
+            lessonContainer.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Lesson Complete!</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Your score: ${score} out of ${lessonData.questions.length} (${percentage.toFixed(1)}%)</p>
+                        <p>You can now close this window or review the questions again.</p>
+                    </div>
+                     <a href="/" class="btn btn-primary">Back to Dashboard</a>
+                </div>
+            `;
+            scoreContainer.innerHTML = `<strong>Final Score: ${score}/${lessonData.questions.length}</strong>`;
+            markLessonCompleted();
+        }
+
+        function markLessonCompleted() {
+            localStorage.setItem(lessonId, 'completed');
+        }
+
+        // Start the lesson when the page loads
+        document.addEventListener('DOMContentLoaded', startLesson);
+    </script>
+</body>
+</html>

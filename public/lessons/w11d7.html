@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 7 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 7</h1>
+            <h2>Final Review of Weakest Topics</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Lesson Complete!</h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d7",
+            title: "Week 11, Day 7: Final Review of Weakest Topics",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'One Last Push',
+                    text: 'This is your last focused study day before the final week. The goal today is not to cram, but to build confidence by reviewing your toughest subjects.'
+                },
+                {
+                    type: 'briefing',
+                    title: 'Analyze Your Error Log',
+                    text: `Take a final, hard look at your error log from all your practice tests.
+                    
+                    - Identify the single most common reason you lose points. Is it a specific math concept like probability? A grammar rule like pronoun-antecedent agreement?
+                    - Spend 60-90 minutes doing a deep dive on that one topic. Watch videos, review notes, and do practice problems related only to that concept.
+                    - The goal is to turn your biggest weakness into a strength, giving you a major confidence boost.`
+                },
+                {
+                    type: 'briefing',
+                    title: 'Mental Preparation',
+                    text: `At this point, your mental state is just as important as your academic knowledge.
+                    
+                    -   **Positive Visualization:** Close your eyes and imagine yourself on test day. Picture yourself calmly working through the test, feeling confident and focused. Imagine the feeling of accomplishment when you finish.
+                    -   **Finalize Logistics:** Pack your bag for test day. Pencils, ID, water bottle, snack, watch. Having everything ready will reduce stress on the day of the test.
+                    -   **REST:** After your focused review session, you are done. Seriously. Your only job for the rest of the day is to relax and get a good night's sleep. Your brain needs it.`
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                const card = createBriefingCard(questionData);
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        currentQuestionIndex++;
+                        saveProgress();
+                        renderQuestion();
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                const buttonText = (currentQuestionIndex === lessonData.questions.length - 1) ? 'Finish' : 'Next';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">${buttonText}</button>
+                `;
+                return card;
+            }
+
+            function displayFinalScore() {
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                const progress = {
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

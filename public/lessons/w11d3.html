@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 3 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 3</h1>
+            <h2>Full Math Section Practice</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h3>Your Score: <span id="final-score"></span></h3>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            lessonId: "w11d3",
+            title: "Week 11, Day 3: Full Math Section Practice",
+            questions: [
+                {
+                    type: 'briefing',
+                    title: 'Full Math Section Simulation',
+                    text: 'This session is a full-length Math practice test. It includes both multiple-choice and grid-in questions covering all major SHSAT math topics. Pace yourself carefully.'
+                },
+                {
+                    question: "If 3x + 5 = 14, what is the value of 6x - 2?",
+                    options: { A: "12", B: "16", C: "18", D: "22" },
+                    answer: "B"
+                },
+                {
+                    question: "A store owner buys a shirt for $15 and sells it for $24. What is the percent profit?",
+                    options: { A: "37.5%", B: "40%", C: "60%", D: "90%" },
+                    answer: "C"
+                },
+                {
+                    question: "What is the area of a circle with a circumference of 16π?",
+                    options: { A: "16π", B: "32π", C: "64π", D: "256π" },
+                    answer: "C"
+                },
+                {
+                    question: "The average of five numbers is 20. If one number is removed, the average of the remaining four numbers is 22. What was the number that was removed?",
+                    options: { A: "12", B: "14", C: "16", D: "20" },
+                    answer: "A"
+                },
+                {
+                    question: "A train travels 180 miles in 3 hours. At this rate, how many miles will it travel in 5 hours?",
+                    options: { A: "240", B: "270", C: "300", D: "330" },
+                    answer: "C"
+                },
+                {
+                    question: "Simplify the expression: (4a^2 * 3b^3) / (6ab)",
+                    options: { A: "2ab^2", B: "2a^2b^2", C: "7ab^2", D: "12a^3b^4" },
+                    answer: "A"
+                },
+                {
+                    question: "A cube has a volume of 125 cubic centimeters. What is the surface area of the cube?",
+                    options: { A: "25 cm^2", B: "100 cm^2", C: "150 cm^2", D: "625 cm^2" },
+                    answer: "C"
+                },
+                {
+                    question: "If p is a prime number greater than 2, which of the following must be odd?",
+                    options: { A: "2p", B: "p + 1", C: "p - 1", D: "p^2" },
+                    answer: "D"
+                },
+                {
+                    question: "A bag contains 5 red marbles, 4 blue marbles, and 3 green marbles. What is the probability of randomly selecting a marble that is NOT blue?",
+                    options: { A: "1/3", B: "1/2", C: "2/3", D: "3/4" },
+                    answer: "C"
+                },
+                {
+                    question: "The sum of the angles in a polygon is 1080°. How many sides does the polygon have?",
+                    options: { A: "6", B: "7", C: "8", D: "9" },
+                    answer: "C"
+                },
+                {
+                    question: "If f(x) = x^2 - 3x + 7, what is f(-2)?",
+                    options: { A: "-3", B: "5", C: "17", D: "21" },
+                    answer: "C"
+                },
+                {
+                    question: "A rectangular garden has a length of 15 feet and a width of 12 feet. A fence is to be built around the garden. What is the length of the fence in feet?",
+                    type: "grid_in",
+                    answer: "54"
+                },
+                {
+                    question: "What is the value of 8 ÷ 0.25?",
+                    type: "grid_in",
+                    answer: "32"
+                },
+                {
+                    question: "The price of a jacket is reduced by 20%. If the new price is $60, what was the original price in dollars?",
+                    type: "grid_in",
+                    answer: "75"
+                },
+                {
+                    question: "The angles of a triangle are in the ratio 2:3:4. What is the measure of the largest angle in degrees?",
+                    type: "grid_in",
+                    answer: "80"
+                },
+                {
+                    question: "Solve for x: (2/3)x - 1 = 5",
+                    type: "grid_in",
+                    answer: "9"
+                }
+            ]
+        };
+
+        (function() {
+            const lessonContainer = document.getElementById('lesson-container');
+            const scoreContainer = document.getElementById('score-container');
+            const finalScoreElement = document.getElementById('final-score');
+            const lessonId = lessonData.lessonId;
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let userAnswers = {};
+
+            function loadProgress() {
+                const savedProgress = localStorage.getItem(lessonId);
+                if (savedProgress) {
+                    const progress = JSON.parse(savedProgress);
+                    score = progress.score || 0;
+                    userAnswers = progress.userAnswers || {};
+                    currentQuestionIndex = progress.currentQuestionIndex || 0;
+                }
+            }
+
+            function saveProgress() {
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: currentQuestionIndex >= lessonData.questions.length
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            function renderQuestion() {
+                lessonContainer.innerHTML = '';
+                if (currentQuestionIndex >= lessonData.questions.length) {
+                    displayFinalScore();
+                    return;
+                }
+
+                const questionData = lessonData.questions[currentQuestionIndex];
+                let card;
+
+                switch (questionData.type) {
+                    case 'briefing':
+                        card = createBriefingCard(questionData);
+                        break;
+                    case 'grid_in':
+                        card = createGridInCard(questionData);
+                        break;
+                    default:
+                        card = createMultipleChoiceCard(questionData);
+                }
+                
+                lessonContainer.appendChild(card);
+                
+                const nextButton = card.querySelector('.next-btn');
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        handleNext(questionData);
+                    });
+                }
+            }
+            
+            function createBriefingCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card briefing-card';
+                card.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.text.replace(/\n/g, '<br>')}</p>
+                    <button class="next-btn">Start</button>
+                `;
+                return card;
+            }
+            
+            function createMultipleChoiceCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>Question ${currentQuestionIndex + 1}</h3>
+                    <p>${data.question}</p>
+                    <div class="options">
+                        ${Object.entries(data.options).map(([key, value]) => `
+                            <label>
+                                <input type="radio" name="option" value="${key}" ${userAnswers[currentQuestionIndex] === key ? 'checked' : ''}>
+                                ${key}. ${value}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button class="next-btn">Next</button>
+                `;
+                 card.querySelector('.options').addEventListener('change', (event) => {
+                    userAnswers[currentQuestionIndex] = event.target.value;
+                    saveProgress();
+                });
+                return card;
+            }
+
+            function createGridInCard(data) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>Question ${currentQuestionIndex + 1}</h3>
+                    <p>${data.question}</p>
+                    <input type="text" class="grid-in-input" value="${userAnswers[currentQuestionIndex] || ''}" placeholder="Enter your answer">
+                    <button class="next-btn">Next</button>
+                `;
+                card.querySelector('.grid-in-input').addEventListener('input', (event) => {
+                    userAnswers[currentQuestionIndex] = event.target.value;
+                    saveProgress();
+                });
+                return card;
+            }
+
+            function handleNext(questionData) {
+                const userAnswer = userAnswers[currentQuestionIndex];
+                if (userAnswer !== undefined && userAnswer.toString().trim() === questionData.answer.toString().trim()) {
+                    score++;
+                }
+
+                currentQuestionIndex++;
+                saveProgress();
+                renderQuestion();
+            }
+
+            function displayFinalScore() {
+                const totalQuestions = lessonData.questions.filter(q => q.type !== 'briefing').length;
+
+                lessonContainer.innerHTML = '';
+                scoreContainer.style.display = 'block';
+                finalScoreElement.textContent = `${score} / ${totalQuestions}`;
+                
+                const progress = {
+                    score,
+                    userAnswers,
+                    currentQuestionIndex,
+                    completed: true
+                };
+                localStorage.setItem(lessonId, JSON.stringify(progress));
+            }
+
+            loadProgress();
+            renderQuestion();
+        })();
+    </script>
+</body>
+</html>

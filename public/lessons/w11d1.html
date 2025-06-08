@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11, Day 1 - SHSAT Prep</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 11: Day 1</h1>
+            <h2>Practice Test 5: ELA Section</h2>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="text-align: center; margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 11, Day 1: Practice Test 5: ELA Section",
+            briefing: {
+                title: "Practice Test 5: ELA Section",
+                text: "This is a full-length ELA practice section. Time yourself to simulate real test conditions. Focus on applying the strategies you've learned for reading comprehension, revising/editing, and grammar."
+            },
+            questions: [
+                 {
+                    type: 'multiple_choice',
+                    passage: "The following is a draft of a student's report.\n\n(1) The Sahara is the largest hot desert in the world, covering over 3.6 million square miles of North Africa. (2) Its vast landscape is not just sand dunes; it also includes rocky plateaus, gravel plains, and salt flats. (3) Many people assume the Sahara is devoid of life. (4) In reality, it is home to a surprising variety of specially adapted plants and animals. (5) For example, the addax antelope has broad, flat hooves to help it walk on sand and can get most of its water from the plants it eats. (6) Another example is the fennec fox with its large ears that help dissipate heat. (7) These creatures are a testament to the resilience of life in extreme environments.",
+                    question: "Which sentence would be the best topic sentence for this paragraph?",
+                    options: [
+                        "Sentence 1",
+                        "Sentence 2",
+                        "Sentence 3",
+                        "Sentence 4"
+                    ],
+                    answer: "Sentence 4",
+                    explanation: "Sentence 4, 'In reality, it is home to a surprising variety of specially adapted plants and animals,' best introduces the main idea of the paragraph, which is about the life that exists in the Sahara. The sentences that follow provide specific examples to support this claim."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The following is a draft of a student's report.\n\n(1) The Sahara is the largest hot desert in the world, covering over 3.6 million square miles of North Africa. (2) Its vast landscape is not just sand dunes; it also includes rocky plateaus, gravel plains, and salt flats. (3) Many people assume the Sahara is devoid of life. (4) In reality, it is home to a surprising variety of specially adapted plants and animals. (5) For example, the addax antelope has broad, flat hooves to help it walk on sand and can get most of its water from the plants it eats. (6) Another example is the fennec fox with its large ears that help dissipate heat. (7) These creatures are a testament to the resilience of life in extreme environments.",
+                    question: "Which of the following would be the most effective way to combine sentences 5 and 6?",
+                    options: [
+                        "For example, the addax antelope has broad, flat hooves to walk on sand and gets water from plants, and another example is the fennec fox with large ears to dissipate heat.",
+                        "Two examples of adapted animals are the addax antelope, with its broad, flat hooves, and the fennec fox, whose large ears help dissipate heat.",
+                        "The addax antelope has broad, flat hooves, the fennec fox has large ears, and they are both adapted to the desert.",
+                        "With broad, flat hooves, the addax antelope can walk on sand, and with large ears, the fennec fox can dissipate heat."
+                    ],
+                    answer: "Two examples of adapted animals are the addax antelope, with its broad, flat hooves, and the fennec fox, whose large ears help dissipate heat.",
+                    explanation: "This option effectively combines the two sentences into a single, grammatically correct sentence that clearly presents the two examples in a parallel structure."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which of the following sentences is grammatically correct?",
+                    options: [
+                        "Each of the students are responsible for their own project.",
+                        "The committee have made its decision.",
+                        "Neither the teacher nor the students were happy with the test results.",
+                        "The flock of birds are flying south for the winter."
+                    ],
+                    answer: "Neither the teacher nor the students were happy with the test results.",
+                    explanation: "When using 'neither...nor', the verb agrees with the subject closer to it. 'Students' is plural, so the plural verb 'were' is correct. In the other sentences, 'Each' and 'flock' are singular subjects that require singular verbs ('is' and 'is', respectively), and 'committee' is a singular collective noun requiring a singular verb ('has')."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The city council's decision to approve the new skyscraper was met with a storm of protest from residents, who argued that it would cast a long shadow over the historic district. They claimed the building would be a monolithic eyesore, completely out of character with the quaint, low-rise architecture of the surrounding area.",
+                    question: "What does the word 'monolithic' most likely mean in the passage?",
+                    options: [
+                        "Ancient and crumbling",
+                        "Large, uniform, and featureless",
+                        "Beautiful and inspiring",
+                        "Small and insignificant"
+                    ],
+                    answer: "Large, uniform, and featureless",
+                    explanation: "The context clues 'skyscraper' and 'eyesore' suggest that 'monolithic' has a negative connotation related to size and lack of detail. It implies a massive, imposing structure without interesting features, which contrasts with the 'quaint' historic district."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Choose the word that correctly completes the sentence: 'The lawyer tried to ___________ a confession from the witness.'",
+                    options: [
+                        "elicit",
+                        "illicit",
+                        "allude",
+                        "elude"
+                    ],
+                    answer: "elicit",
+                    explanation: "'Elicit' means to draw out or evoke a response. 'Illicit' means illegal. 'Allude' means to refer to indirectly. 'Elude' means to escape from."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The art of bonsai is a Japanese tradition of growing miniature trees in containers. It is an art of illusion, creating a miniaturized but realistic representation of nature in the form of a tree. Bonsai are not genetically dwarfed plants. In fact, any tree species can be used to grow one. The miniaturization is achieved through techniques such as pruning, root reduction, potting, and grafting.",
+                    question: "What is the main idea of this paragraph?",
+                    options: [
+                        "Bonsai trees are genetically dwarfed plants.",
+                        "Only certain tree species can be used for bonsai.",
+                        "Bonsai is a Japanese art form that uses specific techniques to create miniature trees.",
+                        "Growing bonsai is an easy and straightforward process."
+                    ],
+                    answer: "Bonsai is a Japanese art form that uses specific techniques to create miniature trees.",
+                    explanation: "This sentence best captures the main points of the paragraph: that bonsai is a Japanese art form and that it involves specific techniques to achieve its miniature size."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which sentence uses the correct verb mood?",
+                    options: [
+                        "If I was you, I would study for the test.",
+                        "I wish I was taller.",
+                        "If I were the president, I would lower taxes.",
+                        "He acts as if he was the king."
+                    ],
+                    answer: "If I were the president, I would lower taxes.",
+                    explanation: "The subjunctive mood is used for hypothetical or contrary-to-fact situations. The correct form is 'If I were...', not 'If I was...'. The other sentences incorrectly use the indicative mood ('was') where the subjunctive mood ('were') is required."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "Many people credit Thomas Edison with inventing the light bulb, and while he did create the first commercially successful one, the history is more complex. Dozens of inventors had been working on 'electric lamps' for decades before Edison. What made Edison's version so successful was his use of a durable, high-resistance carbonized bamboo filament, combined with a better vacuum pump to remove air from the bulb, which prevented the filament from burning out quickly.",
+                    question: "According to the passage, what was the key to the success of Edison's light bulb?",
+                    options: [
+                        "He was the very first person to invent an electric lamp.",
+                        "His light bulb used a unique type of glass.",
+                        "He developed a system for generating electricity.",
+                        "He created a longer-lasting filament and a better vacuum inside the bulb."
+                    ],
+                    answer: "He created a longer-lasting filament and a better vacuum inside the bulb.",
+                    explanation: "The passage explicitly states that Edison's success was due to 'his use of a durable, high-resistance carbonized bamboo filament, combined with a better vacuum pump'."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which of the following is a sentence fragment?",
+                    options: [
+                        "She ran.",
+                        "Because the coffee was too cold.",
+                        "Go to your room.",
+                        "The cat, which had been sleeping, suddenly woke up."
+                    ],
+                    answer: "Because the coffee was too cold.",
+                    explanation: "A sentence fragment is an incomplete sentence. 'Because the coffee was too cold' is a subordinate clause; it has a subject and a verb but cannot stand on its own as a complete thought. It needs an independent clause to be complete (e.g., 'He didn't drink it because the coffee was too cold.')."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "In ancient Rome, the aqueducts were a marvel of engineering. These structures were designed to bring fresh water from distant springs and mountains into the cities and towns. The water flowed entirely by gravity, requiring a precise, steady downward gradient over many miles. Some aqueducts stretched for over 50 miles, a testament to the skill of Roman surveyors and builders.",
+                    question: "What was the primary function of the Roman aqueducts?",
+                    options: [
+                        "To serve as bridges for crossing valleys.",
+                        "To transport goods between cities.",
+                        "To carry fresh water into urban areas.",
+                        "To provide a defensive barrier for the city."
+                    ],
+                    answer: "To carry fresh water into urban areas.",
+                    explanation: "The passage states that the aqueducts 'were designed to bring fresh water from distant springs and mountains into the cities and towns.'"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which sentence contains an error in parallel structure?",
+                    options: [
+                        "He enjoys hiking, swimming, and biking.",
+                        "She is a talented musician, a dedicated student, and a caring friend.",
+                        "The plan is to review our notes, to take a practice test, and celebrating our success.",
+                        "The dog ran across the yard, jumped over the fence, and disappeared into the woods."
+                    ],
+                    answer: "The plan is to review our notes, to take a practice test, and celebrating our success.",
+                    explanation: "Parallel structure requires that items in a list be in the same grammatical form. The first two items are infinitives ('to review', 'to take'), but the third is a gerund ('celebrating'). It should be 'to celebrate'."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The octopus is a fascinating creature of the deep. It has three hearts, blue blood, and can squeeze its boneless body through an opening the size of its eyeball. Perhaps most remarkably, it is considered one of the most intelligent invertebrates. Octopuses have been observed using tools, solving complex mazes, and even showing distinct personalities.",
+                    question: "The author's tone in this passage can best be described as:",
+                    options: [
+                        "Skeptical and questioning",
+                        "Formal and scientific",
+                        "Admiring and intrigued",
+                        "Humorous and lighthearted"
+                    ],
+                    answer: "Admiring and intrigued",
+                    explanation: "Words like 'fascinating', 'marvel', and 'remarkably' convey a sense of wonder and admiration for the octopus's abilities and intelligence."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which sentence has the correct punctuation?",
+                    options: [
+                        "The movie was long, however, it was very entertaining.",
+                        "The movie was long; however, it was very entertaining.",
+                        "The movie was long, however it was very entertaining.",
+                        "The movie was long; however it was very entertaining."
+                    ],
+                    answer: "The movie was long; however, it was very entertaining.",
+                    explanation: "'However' is a conjunctive adverb. When it connects two independent clauses, it must be preceded by a semicolon and followed by a comma."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The Great Barrier Reef, located off the coast of Australia, is the world's largest coral reef system. It is so large, in fact, that it can be seen from outer space. This complex ecosystem is home to thousands of species of fish, corals, and other marine life. Unfortunately, the reef is under threat from climate change, which causes coral bleaching, and from pollution.",
+                    question: "What is the main threat to the Great Barrier Reef mentioned in the passage?",
+                    options: [
+                        "Overfishing by local fishermen.",
+                        "Too many tourists visiting the reef.",
+                        "Climate change and pollution.",
+                        "Invasive species from other parts of the world."
+                    ],
+                    answer: "Climate change and pollution.",
+                    explanation: "The passage explicitly states that 'the reef is under threat from climate change... and from pollution.'"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which word is the best antonym for 'benevolent'?",
+                    options: [
+                        "Kind",
+                        "Generous",
+                        "Malevolent",
+                        "Careful"
+                    ],
+                    answer: "Malevolent",
+                    explanation: "'Benevolent' means well-meaning and kindly. 'Malevolent' means having or showing a wish to do evil to others, making it the direct opposite."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The following is a draft of an email.\n\nDear Mr. Smith,\n\n(1) I am writing to you about the summer internship position. (2) My friend told me you were looking for someone. (3) I have a lot of experience with computers and I am a very hard worker. (4) I have attached my resume for your review. (5) I look forward to hearing from you soon.\n\nSincerely,\nJane Doe",
+                    question: "Which sentence is the least formal and should be revised for a professional email?",
+                    options: [
+                        "Sentence 1",
+                        "Sentence 2",
+                        "Sentence 3",
+                        "Sentence 4"
+                    ],
+                    answer: "Sentence 2",
+                    explanation: "Sentence 2, 'My friend told me you were looking for someone,' is too informal and vague for a professional application. It would be better to state where she learned of the position, for example, 'I am writing to express my interest in the summer internship position I saw advertised on the school's career board.'"
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which of these should be revised to fix an error in apostrophe use?",
+                    options: [
+                        "The dog wagged its tail.",
+                        "They're going to be late.",
+                        "Who's responsible for this?",
+                        "The car's tires are flat."
+                    ],
+                    answer: "The car's tires are flat.",
+                    explanation: "This is the correct answer. The phrase 'The car's tires are flat' correctly uses the apostrophe to indicate possession. The tires belong to the car. In this context, 'car's' is the possessive form of the noun 'car,' and it is used to show that the tires are a part of the car. The other options are also correct in their use of apostrophes: 'its' is a possessive pronoun, 'they're' is a contraction of 'they are,' and 'who's' is a contraction of 'who is' or 'who has.'",
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The placebo effect is a well-documented phenomenon in which a patient experiences real health improvements after receiving a fake or inert treatment, such as a sugar pill. The patient's belief in the treatment is often enough to trigger a physiological response. This effect complicates clinical trials for new drugs, as researchers must prove that the actual drug is more effective than a patient's mere belief in its efficacy.",
+                    question: "What is the primary reason the placebo effect is a challenge for medical researchers?",
+                    options: [
+                        "Sugar pills are expensive to produce.",
+                        "Patients often refuse to take placebos.",
+                        "It is difficult to distinguish a drug's true effect from the effect of a patient's belief.",
+                        "The placebo effect only works for certain illnesses."
+                    ],
+                    answer: "It is difficult to distinguish a drug's true effect from the effect of a patient's belief.",
+                    explanation: "The passage explains that researchers 'must prove that the actual drug is more effective than a patient's mere belief in its efficacy,' which highlights the challenge of separating the two effects."
+                },
+                {
+                    type: 'multiple_choice',
+                    question: "Which sentence uses 'affect' and 'effect' correctly?",
+                    options: [
+                        "The rain will have a negative affect on the crops.",
+                        "The new law will effect many people.",
+                        "His speech did not affect me at all.",
+                        "The loud music had a strange affect on my mood."
+                    ],
+                    answer: "His speech did not affect me at all.",
+                    explanation: "'Affect' is usually a verb meaning 'to influence'. 'Effect' is usually a noun meaning 'a result'. In the correct sentence, 'affect' is used correctly as a verb. In the other sentences, the words are swapped."
+                },
+                {
+                    type: 'multiple_choice',
+                    passage: "The Rosetta Stone, discovered in 1799, was the key that unlocked the secrets of ancient Egyptian hieroglyphs. The stone contained the same text written in three different scripts: Hieroglyphic, Demotic, and Ancient Greek. Since scholars knew Ancient Greek, they could use it to decipher the other two unknown scripts. This breakthrough allowed for the translation of countless other Egyptian texts.",
+                    question: "Why was the Rosetta Stone so important?",
+                    options: [
+                        "It was made of a rare and valuable type of rock.",
+                        "It contained a famous work of ancient literature.",
+                        "It was the first example of ancient art ever discovered.",
+                        "It provided a way to understand a previously untranslatable language."
+                    ],
+                    answer: "It provided a way to understand a previously untranslatable language.",
+                    explanation: "The passage clearly states that the stone was the 'key that unlocked the secrets of ancient Egyptian hieroglyphs' because it allowed scholars to use the known Greek text to 'decipher the other two unknown scripts'."
+                }
+            ]
+        };
+
+        // --- Standard Lesson Engine ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const lessonContainer = document.getElementById('lesson-container');
+        const scoreContainer = document.getElementById('score-container');
+        const lessonId = window.location.pathname.split('/').pop();
+
+        function startLesson() {
+            if (lessonData.briefing) {
+                showBriefing();
+            } else {
+                showQuestion();
+            }
+        }
+
+        function showBriefing() {
+            lessonContainer.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <h2>${lessonData.briefing.title}</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>${lessonData.briefing.text.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <button class="btn btn-primary" id="start-questions-btn">Start Questions</button>
+                </div>
+            `;
+            document.getElementById('start-questions-btn').addEventListener('click', () => {
+                showQuestion();
+            });
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex >= lessonData.questions.length) {
+                showFinalScore();
+                return;
+            }
+
+            const q = lessonData.questions[currentQuestionIndex];
+            let content = '';
+
+            if (q.type === 'multiple_choice') {
+                const optionsHtml = q.options.map((option, index) =>
+                    `<li onclick="selectAnswer(this, '${option.replace(/'/g, "\\'")}', '${q.answer.replace(/'/g, "\\'")}')">${option}</li>`
+                ).join('');
+
+                content = `
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Question ${currentQuestionIndex + 1} of ${lessonData.questions.length}</h2>
+                        </div>
+                        <div class="card-content">
+                            ${q.passage ? `<div class="passage"><p>${q.passage.replace(/\n/g, '<br>')}</p></div>` : ''}
+                            <p>${q.question}</p>
+                            <div class="options">
+                                <ul>${optionsHtml}</ul>
+                            </div>
+                            <div class="answer-explanation" id="explanation-${currentQuestionIndex}">
+                                <p><strong>Correct Answer:</strong> <span class="correct-answer">${q.answer}</span></p>
+                                <p>${q.explanation}</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="next-btn" style="display: none;" onclick="nextQuestion()">Next</button>
+                    </div>
+                `;
+            } else if (q.type === 'scrambled_paragraph') {
+                const sentencesHtml = q.sentences.map((sentence, index) =>
+                    `<li data-original-index="${index}">${sentence}</li>`
+                ).join('');
+
+                content = `
+                     <div class="card">
+                        <div class="card-header">
+                             <h2>Question ${currentQuestionIndex + 1} of ${lessonData.questions.length}</h2>
+                        </div>
+                        <div class="card-content">
+                            <p>${q.instruction}</p>
+                             <ul id="sortable-list" class="options">${sentencesHtml}</ul>
+                             <div class="answer-explanation" id="explanation-${currentQuestionIndex}">
+                                 <p><strong>Correct Order:</strong></p>
+                                 <ol>${q.correct_order.map(i => `<li>${q.sentences[i]}</li>`).join('')}</ol>
+                                 <p><strong>Explanation:</strong> ${q.explanation}</p>
+                             </div>
+                        </div>
+                        <button class="btn btn-primary" id="submit-order-btn">Check Order</button>
+                        <button class="btn btn-primary" id="next-btn" style="display: none;" onclick="nextQuestion()">Next</button>
+                    </div>
+                `;
+            }
+
+
+            lessonContainer.innerHTML = content;
+            if (q.type === 'scrambled_paragraph') {
+                 makeSortable();
+                 document.getElementById('submit-order-btn').addEventListener('click', checkParagraphOrder);
+            }
+        }
+
+        function selectAnswer(element, selected, correct) {
+            const options = element.parentElement.children;
+            for (let li of options) {
+                li.style.pointerEvents = 'none'; // Disable further clicks
+                if (li.textContent === correct) {
+                    li.style.backgroundColor = '#d1f4d1'; // Green
+                    li.style.borderColor = '#28a745';
+                } else if (li.textContent === selected) {
+                    li.style.backgroundColor = '#f8d7da'; // Red
+                    li.style.borderColor = '#dc3545';
+                }
+            }
+
+            if (selected === correct) {
+                score++;
+            }
+
+            document.getElementById(`explanation-${currentQuestionIndex}`).style.display = 'block';
+            document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+
+        function makeSortable() {
+            const list = document.getElementById("sortable-list");
+            let draggedItem = null;
+
+            list.querySelectorAll('li').forEach(item => {
+                item.draggable = true;
+                item.addEventListener('dragstart', () => {
+                    draggedItem = item;
+                    setTimeout(() => item.style.display = 'none', 0);
+                });
+                item.addEventListener('dragend', () => {
+                    setTimeout(() => {
+                        draggedItem.style.display = '';
+                        draggedItem = null;
+                    }, 0);
+                });
+                item.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(list, e.clientY);
+                    if (afterElement == null) {
+                        list.appendChild(draggedItem);
+                    } else {
+                        list.insertBefore(draggedItem, afterElement);
+                    }
+                });
+            });
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('li:not(.dragging)')];
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+        }
+
+        function checkParagraphOrder() {
+            const list = document.getElementById('sortable-list');
+            const userOrder = [...list.querySelectorAll('li')].map(item => parseInt(item.dataset.originalIndex));
+            const correctOrder = lessonData.questions[currentQuestionIndex].correct_order;
+
+            let isCorrect = userOrder.length === correctOrder.length && userOrder.every((val, index) => val === correctOrder[index]);
+
+            if (isCorrect) {
+                score++;
+                list.style.border = '2px solid #28a745';
+            } else {
+                list.style.border = '2px solid #dc3545';
+            }
+
+            document.getElementById(`explanation-${currentQuestionIndex}`).style.display = 'block';
+            document.getElementById('submit-order-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            showQuestion();
+        }
+
+        function showFinalScore() {
+            const percentage = (score / lessonData.questions.length) * 100;
+            lessonContainer.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Lesson Complete!</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Your score: ${score} out of ${lessonData.questions.length} (${percentage.toFixed(1)}%)</p>
+                        <p>You can now close this window or review the questions again.</p>
+                    </div>
+                     <a href="/" class="btn btn-primary">Back to Dashboard</a>
+                </div>
+            `;
+            scoreContainer.innerHTML = `<strong>Final Score: ${score}/${lessonData.questions.length}</strong>`;
+            markLessonCompleted();
+        }
+
+        function markLessonCompleted() {
+            localStorage.setItem(lessonId, 'completed');
+        }
+
+        // Start the lesson when the page loads
+        document.addEventListener('DOMContentLoaded', startLesson);
+    </script>
+</body>
+</html>
