@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D4: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 4",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Pacing and Stamina',
+                    content: `
+                        <p>This is another full-length practice test simulation. The goal today is to focus on your pacing strategy. Are you spending too much time on difficult questions? Are you leaving enough time to review your answers?</p>
+                        <ul>
+                            <li><strong>Focus:</strong> Execute your pacing plan. Aim for consistent speed and accuracy across both the ELA and Math sections.</li>
+                            <li><strong>Goal:</strong> Finish the test with a few minutes to spare for review. Identify any section where your pacing was off.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 1',
+                    prompt: 'Choose the best word to complete the sentence.',
+                    passage: 'The biography was criticized for being too _______, focusing only on the positive aspects of its subject\'s life.',
+                    options: ['hagiographic', 'critical', 'objective', 'comprehensive'],
+                    correctAnswer: 'hagiographic',
+                    explanation: 'Hagiographic means excessively flattering or idealizing, which fits the description of a biography that only focuses on positive aspects.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 2',
+                    prompt: 'What is the function of the second paragraph in relation to the first?',
+                    passage: 'The human brain is remarkably adept at facial recognition. Most people can effortlessly identify thousands of faces and interpret subtle emotional cues from just a glance.\n\nThis ability is rooted in a specific region of the brain called the fusiform gyrus. When this area is damaged, individuals may develop prosopagnosia, or "face blindness," rendering them unable to recognize even their closest relatives.',
+                    options: [
+                        'It provides a counterargument to the claim in the first paragraph.',
+                        'It offers a specific example to illustrate the first paragraph\'s point.',
+                        'It presents a solution to the problem described in the first paragraph.',
+                        'It provides a scientific explanation for the ability described in the first paragraph.'
+                    ],
+                    correctAnswer: 'It provides a scientific explanation for the ability described in the first paragraph.',
+                    explanation: 'The first paragraph describes the ability of facial recognition, and the second paragraph explains the neurological basis for this ability.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 1',
+                    prompt: 'A machine can produce 150 widgets in 45 minutes. At this constant rate, how many widgets can it produce in 2 hours?',
+                    correctAnswer: '400',
+                    explanation: 'First, find the rate per minute: 150 widgets / 45 minutes = 10/3 widgets per minute. 2 hours is 120 minutes. Total widgets = (10/3) * 120 = 10 * 40 = 400 widgets.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Section: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'This simple tool consisted of a bead-filled frame, where calculations were performed by sliding the beads along rods.' },
+                        { id: '2', text: 'Despite its simplicity, it was powerful enough to perform addition, subtraction, multiplication, and division.' },
+                        { id: '3', text: 'For thousands of years, it remained one of the most advanced calculating devices available to merchants and mathematicians alike.' },
+                        { id: '4', text: 'Long before the invention of the electronic calculator, people used the abacus to perform arithmetic.' }
+                    ],
+                    options: ['4, 1, 2, 3', '1, 2, 3, 4', '4, 2, 1, 3', '2, 1, 4, 3'],
+                    correctAnswer: '4, 1, 2, 3',
+                    explanation: 'Sentence 4 is the topic sentence. Sentence 1 describes the abacus. Sentence 2 explains its capabilities. Sentence 3 provides the historical context and conclusion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 4',
+                    prompt: 'Identify the type of error in the following sentence:',
+                    passage: 'Driving through the forest, a deer suddenly darted in front of the car.',
+                    options: ['Comma splice', 'Dangling modifier', 'Subject-verb disagreement', 'Sentence fragment'],
+                    correctAnswer: 'Dangling modifier',
+                    explanation: 'The introductory phrase "Driving through the forest" should modify the person driving, but the sentence is structured so it illogically modifies "a deer".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 2',
+                    prompt: 'The perimeter of a square is 36 inches. What is its area in square inches?',
+                    correctAnswer: '81',
+                    explanation: 'A square has 4 equal sides. The length of one side is the perimeter divided by 4: 36 / 4 = 9 inches. The area of a square is side squared: 9² = 81 square inches.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 5',
+                    prompt: 'The word "ephemeral" is an antonym for:',
+                    options: ['transient', 'fleeting', 'permanent', 'momentary'],
+                    correctAnswer: 'permanent',
+                    explanation: 'Ephemeral means lasting for a very short time. Permanent is its direct opposite.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 6',
+                    prompt: 'What is the most likely reason the author wrote this passage?',
+                    passage: 'Our city\'s proposal to build a new stadium has several major flaws. The estimated cost of $500 million does not account for inevitable overruns. Furthermore, the claim that it will generate a net economic benefit is based on overly optimistic projections that have been disputed by independent economists. We must demand a more transparent and realistic plan.',
+                    options: [
+                        'To entertain the reader with a story about a stadium.',
+                        'To inform the reader about the history of stadiums.',
+                        'To persuade the reader to oppose the current stadium proposal.',
+                        'To describe the architectural features of the proposed stadium.'
+                    ],
+                    correctAnswer: 'To persuade the reader to oppose the current stadium proposal.',
+                    explanation: 'The author clearly takes a negative stance, points out flaws ("major flaws," "overly optimistic projections"), and makes a call to action ("We must demand..."), all of which are hallmarks of persuasive writing.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 3',
+                    prompt: 'If a number is tripled and then decreased by 7, the result is 20. What is the number?',
+                    correctAnswer: '9',
+                    explanation: 'Let the number be x. The equation is 3x - 7 = 20. Add 7 to both sides: 3x = 27. Divide by 3: x = 9.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 7',
+                    prompt: 'Which sentence uses "its" and "it\'s" correctly?',
+                    options: [
+                        'The dog wagged it\'s tail because its happy.',
+                        'The dog wagged its tail because it\'s happy.',
+                        'The dog wagged it\'s tail because it\'s happy.',
+                        'The dog wagged its tail because its happy.'
+                    ],
+                    correctAnswer: 'The dog wagged its tail because it\'s happy.',
+                    explanation: '"Its" is the possessive form (the tail belongs to it). "It\'s" is a contraction of "it is" (it is happy).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 8',
+                    prompt: 'A "red herring" in an argument or story is:',
+                    options: [
+                        'The main conclusion.',
+                        'A piece of supporting evidence.',
+                        'A clue that is intended to be misleading or distracting.',
+                        'An appeal to emotion.'
+                    ],
+                    correctAnswer: 'A clue that is intended to be misleading or distracting.',
+                    explanation: 'A red herring is a literary and rhetorical device that distracts the audience from the real issue or plot point.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 4',
+                    prompt: 'Find the median of the following list of numbers: 9, 4, 2, 7, 10, 5, 8.',
+                    correctAnswer: '7',
+                    explanation: 'First, order the numbers from least to greatest: 2, 4, 5, 7, 8, 9, 10. The median is the middle number in the ordered list. In this set of 7 numbers, the middle number is the 4th one, which is 7.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 9',
+                    prompt: 'Which choice best revises the sentence for clarity and conciseness?',
+                    passage: 'It is a fact that the reason for the delay was because of the bad weather conditions.',
+                    options: [
+                        'The delay was due to the fact of the bad weather.',
+                        'The reason for the delay was the bad weather conditions.',
+                        'The delay was because of the bad weather.',
+                        'The delay was due to bad weather.'
+                    ],
+                    correctAnswer: 'The delay was due to bad weather.',
+                    explanation: 'This option is the most concise and avoids redundant phrases like "It is a fact that," "the reason was because," and "conditions."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 10',
+                    prompt: 'The word "pernicious" most nearly means:',
+                    options: ['beneficial', 'harmless', 'subtly harmful', 'obvious'],
+                    correctAnswer: 'subtly harmful',
+                    explanation: 'Pernicious means having a harmful effect, especially in a gradual or subtle way. It describes something that is damaging but not always immediately apparent.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 5',
+                    prompt: 'A rectangular garden is 20 feet long and 15 feet wide. A fence is to be built around it. If fencing costs $5 per foot, what will be the total cost of the fence?',
+                    correctAnswer: '350',
+                    explanation: 'First, find the perimeter of the garden: P = 2(length + width) = 2(20 + 15) = 2(35) = 70 feet. Then, calculate the total cost: 70 feet * $5/foot = $350.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 11',
+                    prompt: 'Which of these best describes the organization of the passage?',
+                    passage: 'First, gather all your ingredients. Next, mix the dry ingredients in a large bowl. Then, whisk the wet ingredients in a separate bowl. Finally, combine the wet and dry ingredients and bake.',
+                    options: ['Cause and effect', 'Compare and contrast', 'Problem and solution', 'Chronological order'],
+                    correctAnswer: 'Chronological order',
+                    explanation: 'The passage describes a series of steps in the order they should be performed, using signal words like "First," "Next," "Then," and "Finally."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 12',
+                    prompt: 'Which sentence is an example of a rhetorical question?',
+                    options: [
+                        'What time is the meeting?',
+                        'Do you know who won the game?',
+                        'Is the sky blue?',
+                        'Who wouldn\'t want to be successful?'
+                    ],
+                    correctAnswer: 'Who wouldn\'t want to be successful?',
+                    explanation: 'This is a rhetorical question because it is asked to make a point or create a dramatic effect, not to get an actual answer. The implied answer is that everyone wants to be successful.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 6',
+                    prompt: 'What is 3/5 of 50?',
+                    correctAnswer: '30',
+                    explanation: 'To find the fraction of a number, you multiply. (3/5) * 50 = (3 * 50) / 5 = 150 / 5 = 30.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 13',
+                    prompt: 'What is the difference between "affect" and "effect"?',
+                    options: [
+                        '"Affect" is a noun, and "effect" is a verb.',
+                        '"Affect" is a verb meaning to influence, while "effect" is a noun meaning a result.',
+                        'They are interchangeable.',
+                        '"Affect" is a noun meaning emotion, and "effect" is a verb meaning to cause.'
+                    ],
+                    correctAnswer: '"Affect" is a verb meaning to influence, while "effect" is a noun meaning a result.',
+                    explanation: 'This is the most common usage. For example, "The weather will affect our plans." and "The special effect was amazing." ("Affect" can be a noun for emotion, and "effect" can be a verb meaning to bring about, but these are less common uses.)'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 7',
+                    prompt: 'A bag contains 5 red marbles, 4 blue marbles, and 6 green marbles. If a marble is drawn at random, what is the probability that it is NOT blue? Express your answer as a fraction.',
+                    correctAnswer: '11/15',
+                    explanation: 'There are a total of 5 + 4 + 6 = 15 marbles. The number of marbles that are NOT blue is 5 (red) + 6 (green) = 11. The probability is the number of favorable outcomes divided by the total number of outcomes, which is 11/15.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

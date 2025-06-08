@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D7: Week 9 Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Week 9 Review",
+            subtitle: "Consolidating Simulation Skills",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Week 9 Debrief',
+                    content: `
+                        <p>You have completed a demanding week of full test simulations. Today is about reviewing your performance across the entire week, consolidating your strategies, and building confidence.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> High-level review. What went well? What still needs work? Solidify your test-day strategy for timing, guessing, and managing stress.</li>
+                            <li><strong>Goal:</strong> Enter Week 10 feeling confident and prepared. You have built incredible endurance and insight this week.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'Strategy Review: Question 1',
+                    prompt: 'After a week of simulations, you notice you consistently run out of time on the math section. What is the BEST first step to address this?',
+                    options: [
+                        'Skip the last 5 math questions automatically.',
+                        'Practice doing math problems even faster, sacrificing some accuracy.',
+                        'Analyze your practice tests to see which types of questions are taking the most time.',
+                        'Decide to guess randomly on any question that seems too hard.'
+                    ],
+                    correctAnswer: 'Analyze your practice tests to see which types of questions are taking the most time.',
+                    explanation: 'The first step is always to diagnose the problem with data. By analyzing your performance, you can see if you are getting bogged down on specific concepts (e.g., word problems, geometry) and create a more targeted plan.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 2',
+                    prompt: 'Which sentence demonstrates the clearest and most professional tone?',
+                    options: [
+                        'The report was, like, totally awesome and full of great stuff.',
+                        'It\'s obvious the report is good, anyone can see that.',
+                        'The report offers a comprehensive analysis of the quarterly data.',
+                        'The report is a pretty decent piece of work, I guess.'
+                    ],
+                    correctAnswer: 'The report offers a comprehensive analysis of the quarterly data.',
+                    explanation: 'This sentence uses precise, formal language and avoids slang, personal opinion, and casual phrasing, making it the most professional.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 1',
+                    prompt: 'What is the next number in the sequence: 3, 7, 16, 32, 57, ...?',
+                    correctAnswer: '93',
+                    explanation: 'This is a multi-level sequence. The differences between the terms are: 4, 9, 16, 25. These are the squares of 2, 3, 4, 5. The next difference should be 6 squared, which is 36. So, the next number is 57 + 36 = 93.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Review: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'Its light, porous structure allows it to float in water, making it useful for rafts and fishing net floats.' },
+                        { id: '2', text: 'Balsa wood, despite being a hardwood, is known for its extreme lightness.' },
+                        { id: '3', text: 'Furthermore, its high strength-to-weight ratio has made it a popular material for building models, especially model airplanes.' },
+                        { id: '4', text: 'This unusual property stems from its large cells that are filled with water when the tree is living, which then become empty air pockets after drying.' }
+                    ],
+                    options: ['2, 1, 3, 4', '2, 4, 1, 3', '3, 1, 4, 2', '4, 2, 1, 3'],
+                    correctAnswer: '2, 4, 1, 3',
+                    explanation: 'Sentence 2 introduces the topic (lightness of balsa wood). Sentence 4 explains the reason for this property. Sentence 1 gives one use based on its lightness. Sentence 3 gives another, related use.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 4',
+                    prompt: 'The word "ephemeral" is most similar in meaning to:',
+                    options: ['eternal', 'transient', 'powerful', 'essential'],
+                    correctAnswer: 'transient',
+                    explanation: 'Both "ephemeral" and "transient" refer to things that last for only a short time.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 2',
+                    prompt: 'The ratio of boys to girls in a class is 4:5. If there are 36 students in total, how many girls are there?',
+                    correctAnswer: '20',
+                    explanation: 'The ratio 4:5 means there are 4+5=9 parts in total. To find the value of one part, divide the total number of students by the total number of parts: 36 / 9 = 4. Since there are 5 parts representing girls, the number of girls is 5 * 4 = 20.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 5',
+                    prompt: 'Which of the following sentences has correct parallel structure?',
+                    options: [
+                        'She likes running, to swim, and to ride a bike.',
+                        'He was responsible for stocking the shelves, cleaning the floors, and to assist customers.',
+                        'The plan is to study hard, to practice consistently, and performing well on the test.',
+                        'The coach told the players that they should get a lot of sleep, that they should eat a good breakfast, and that they should arrive early.'
+                    ],
+                    correctAnswer: 'The coach told the players that they should get a lot of sleep, that they should eat a good breakfast, and that they should arrive early.',
+                    explanation: 'This sentence maintains parallel structure by repeating the "that they should" clause for each item in the series. The other options mix verb forms (e.g., gerunds and infinitives).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 6',
+                    prompt: 'An "ad hominem" argument is a fallacy that:',
+                    options: [
+                        'Assumes that because two things are alike in one respect, they are alike in other respects.',
+                        'Attacks the person making the argument, rather than the argument itself.',
+                        'Asserts that a proposition is true because it has not yet been proven false.',
+                        'Distracts from the main point with an irrelevant topic.'
+                    ],
+                    correctAnswer: 'Attacks the person making the argument, rather than the argument itself.',
+                    explanation: 'Ad hominem, which is Latin for "to the person," is a logical fallacy where someone refutes an argument by attacking the character, motive, or other attribute of the person making it.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 3',
+                    prompt: 'A circle has a circumference of 18π cm. What is its area?',
+                    correctAnswer: '81π',
+                    explanation: 'The formula for circumference is C = 2πr. If 18π = 2πr, we can divide both sides by 2π to find the radius, r = 9. The formula for area is A = πr². So, A = π(9)² = 81π cm².'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 7',
+                    prompt: 'Choose the word that best fits the context of the sentence.',
+                    passage: 'The detective remained _______, refusing to be swayed by the emotional pleas of the suspect.',
+                    options: ['stoic', 'volatile', 'garrulous', 'lenient'],
+                    correctAnswer: 'stoic',
+                    explanation: 'A stoic person can endure pain or hardship without showing their feelings or complaining. This fits the context of the detective who is unmoved by emotional pleas.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 8',
+                    prompt: 'The main difference between a summary and a paraphrase is that a summary:',
+                    options: [
+                        'Is always longer than the original text.',
+                        'Uses the exact same words as the original text.',
+                        'Is a brief statement of the main points, while a paraphrase restates the content in different words.',
+                        'Includes personal opinions and analysis.'
+                    ],
+                    correctAnswer: 'Is a brief statement of the main points, while a paraphrase restates the content in different words.',
+                    explanation: 'A summary condenses the source material to its essential ideas. A paraphrase is a restatement of the source material in your own words, often of similar length to the original.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 4',
+                    prompt: 'If a sweater costs $40 after a 20% discount, what was its original price?',
+                    correctAnswer: '50',
+                    explanation: 'If the price is 20% off, it means the current price is 80% of the original. Let the original price be P. So, 0.80 * P = $40. To find P, divide $40 by 0.80. P = 40 / 0.8 = 50. The original price was $50.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 9',
+                    prompt: 'Which choice is the best way to correct the comma splice in the sentence?',
+                    passage: 'The team practiced for weeks, they were ready for the championship.',
+                    options: [
+                        'The team practiced for weeks, and they were ready for the championship.',
+                        'The team practiced for weeks they were ready for the championship.',
+                        'The team practiced for weeks, however, they were ready for the championship.',
+                        'No error.'
+                    ],
+                    correctAnswer: 'The team practiced for weeks, and they were ready for the championship.',
+                    explanation: 'A comma splice occurs when two independent clauses are joined only by a comma. It can be corrected by adding a coordinating conjunction (like "and"), making it a compound sentence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 10',
+                    prompt: 'The word "prosaic" most nearly means:',
+                    options: ['extraordinary', 'poetic', 'dull or commonplace', 'exciting'],
+                    correctAnswer: 'dull or commonplace',
+                    explanation: 'Prosaic means having the style or diction of prose as opposed to poetry; lacking poetic beauty. It is a synonym for ordinary or dull.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 5',
+                    prompt: 'The price of a stock increased from $25 to $30. What was the percent increase?',
+                    correctAnswer: '20',
+                    explanation: 'The amount of increase is $30 - $25 = $5. The percent increase is (Amount of Increase / Original Amount) * 100. So, (5 / 25) * 100 = (1/5) * 100 = 20%.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 11',
+                    prompt: 'What literary device is used in the phrase "the wind whispered through the trees"?',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Personification',
+                    explanation: 'Personification is giving human qualities or abilities to inanimate objects or abstract ideas. The wind cannot literally "whisper."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 12',
+                    prompt: 'Which of these is a valid theme?',
+                    options: [
+                        'Love',
+                        'A character learns that love requires sacrifice.',
+                        'A boy and a girl fall in love.',
+                        'Love and hate'
+                    ],
+                    correctAnswer: 'A character learns that love requires sacrifice.',
+                    explanation: 'A theme is not just a topic (like "Love"), but a complete statement or message about that topic that is conveyed by the work.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 6',
+                    prompt: 'A test has 50 questions. If a student answers 88% of them correctly, how many questions did the student answer incorrectly?',
+                    correctAnswer: '6',
+                    explanation: 'If 88% were correct, then 100% - 88% = 12% were incorrect. To find the number of incorrect questions, calculate 12% of 50: 0.12 * 50 = 6.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 13',
+                    prompt: 'When analyzing a poem, "meter" refers to its:',
+                    options: [
+                        'Rhyme scheme.',
+                        'Figurative language.',
+                        'Rhythmic structure.',
+                        'Overall message.'
+                    ],
+                    correctAnswer: 'Rhythmic structure.',
+                    explanation: 'Meter is the basic rhythmic structure of a verse or lines in a verse. It consists of the number of syllables and the pattern of emphasis on those syllables.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 7',
+                    prompt: 'If 2x + y = 10 and x - y = 2, what is the value of x?',
+                    correctAnswer: '4',
+                    explanation: 'You can solve this system of equations by elimination. Add the two equations together: (2x + y) + (x - y) = 10 + 2. The y terms cancel out, leaving 3x = 12. Divide by 3 to get x = 4.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

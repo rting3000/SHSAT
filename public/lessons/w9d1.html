@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D1: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 1",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Test-Day Readiness',
+                    content: `
+                        <p>Welcome to Milestone 3. This is it—the final push. This week, we begin full test simulations to build the mental and physical stamina required for the real SHSAT. Today, you'll tackle the first half of a full-length practice test.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> Timing, endurance, and applying all learned strategies under pressure.</li>
+                            <li><strong>Goal:</strong> Complete the section accurately within the time limit. Identify any remaining areas of weakness for targeted review.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 1',
+                    prompt: 'Choose the best word to complete the sentence.',
+                    passage: 'Her argument was so _______ that even her opponents had to agree with her reasoning.',
+                    options: ['tenuous', 'cogent', 'fallacious', 'subjective'],
+                    correctAnswer: 'cogent',
+                    explanation: 'Cogent means clear, logical, and convincing. This fits the context of opponents agreeing with her reasoning.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 2',
+                    prompt: 'What is the main idea of the passage?',
+                    passage: 'The discovery of penicillin by Alexander Fleming in 1928 was a watershed moment in medicine. Before penicillin, infections that are now easily treatable were often fatal. The introduction of this antibiotic revolutionized surgery, infection treatment, and public health, saving countless lives.',
+                    options: [
+                        'Alexander Fleming discovered penicillin in 1928.',
+                        'Penicillin is an important antibiotic.',
+                        'The discovery of penicillin had a profound and revolutionary impact on modern medicine.',
+                        'Infections were very dangerous before antibiotics.'
+                    ],
+                    correctAnswer: 'The discovery of penicillin had a profound and revolutionary impact on modern medicine.',
+                    explanation: 'This statement best captures the overall significance and main point of the passage.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 1',
+                    prompt: 'If a train travels at a constant speed of 75 miles per hour, how many miles will it travel in 4 hours and 20 minutes?',
+                    correctAnswer: '325',
+                    explanation: 'First, convert 20 minutes to hours: 20/60 = 1/3 hours. So the total time is 4 and 1/3 hours, or 13/3 hours. Distance = Rate × Time, so 75 * (13/3) = 25 * 13 = 325 miles.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Section: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'This outer layer, called the bark, protects the tree from insects, disease, and weather.' },
+                        { id: '2', text: 'Just inside the bark is the phloem, which transports sugars from the leaves to the rest of the tree.' },
+                        { id: '3', text: 'A tree trunk is composed of several distinct layers, each with a specific function.' },
+                        { id: '4', text: 'Deeper still is the xylem, which carries water from the roots up to the leaves.' }
+                    ],
+                    options: ['3, 1, 2, 4', '1, 2, 3, 4', '3, 4, 2, 1', '2, 1, 4, 3'],
+                    correctAnswer: '3, 1, 2, 4',
+                    explanation: 'Sentence 3 is the clear topic sentence. Sentence 1 describes the outermost layer. Sentences 2 and 4 then logically move inward, describing the phloem and then the xylem.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 4',
+                    prompt: 'Which of the following is punctuated correctly?',
+                    options: [
+                        'The movie, was long, and boring.',
+                        'The movie was long, and boring.',
+                        'The movie was long and boring.',
+                        'The movie was long, and, boring.'
+                    ],
+                    correctAnswer: 'The movie was long and boring.',
+                    explanation: 'No comma is needed when joining two adjectives ("long" and "boring") with "and" to describe the same noun ("movie").'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 2',
+                    prompt: 'A shirt is on sale for 30% off the original price. If the sale price is $28, what was the original price?',
+                    correctAnswer: '40',
+                    explanation: 'If there is a 30% discount, the sale price represents 70% of the original price. So, 0.70 * Original Price = $28. Original Price = $28 / 0.70 = $40.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 5',
+                    prompt: 'What can be inferred from the passage?',
+                    passage: 'The detective noted the perfectly manicured lawn, the spotless floors, and the vase of fresh flowers on the table. Yet, a single muddy footprint was visible on the pristine white rug.',
+                    options: [
+                        'The owner of the house is a gardener.',
+                        'The detective is not very observant.',
+                        'The muddy footprint is an important, out-of-place clue.',
+                        'The house is not well taken care of.'
+                    ],
+                    correctAnswer: 'The muddy footprint is an important, out-of-place clue.',
+                    explanation: 'The passage contrasts the extreme cleanliness of the house with the single, out-of-place muddy footprint, implying it is a significant clue.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 6',
+                    prompt: 'Choose the best revision for the sentence.',
+                    passage: 'Having finished her homework, the television was turned on.',
+                    options: [
+                        'Having finished her homework, the television turned on.',
+                        'After she finished her homework, the television was turned on.',
+                        'Having finished her homework, she turned on the television.',
+                        'The television was turned on after the homework was finished by her.'
+                    ],
+                    correctAnswer: 'Having finished her homework, she turned on the television.',
+                    explanation: 'This revision corrects the dangling modifier. The original sentence implies the television finished the homework.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 3',
+                    prompt: 'The sum of three consecutive integers is 147. What is the largest of the three integers?',
+                    correctAnswer: '50',
+                    explanation: 'Let the integers be x, x+1, and x+2. The equation is x + (x+1) + (x+2) = 147. Simplify: 3x + 3 = 147. Subtract 3: 3x = 144. Divide by 3: x = 48. The integers are 48, 49, and 50. The largest is 50.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 7',
+                    prompt: 'What is the primary purpose of the passage?',
+                    passage: 'Our city\'s recycling program is failing. Despite resident participation, a recent report revealed that nearly 60% of our recyclables are contaminated and end up in landfills. The city must invest in better sorting technology and a public education campaign to address this critical issue.',
+                    options: [
+                        'To praise the residents for their recycling efforts.',
+                        'To explain the process of recycling.',
+                        'To persuade the city to take action to improve the recycling program.',
+                        'To entertain readers with a story about recycling.'
+                    ],
+                    correctAnswer: 'To persuade the city to take action to improve the recycling program.',
+                    explanation: 'The passage identifies a problem, states its severity, and proposes specific solutions, which is a clear persuasive structure.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 8',
+                    prompt: 'Which word is a synonym for "ephemeral"?',
+                    options: ['eternal', 'transient', 'essential', 'robust'],
+                    correctAnswer: 'transient',
+                    explanation: 'Ephemeral means lasting for a very short time. Transient has a very similar meaning.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 4',
+                    prompt: 'Solve for x: 2(x + 7) - 3x = 12',
+                    correctAnswer: '2',
+                    explanation: 'Distribute the 2: 2x + 14 - 3x = 12. Combine x terms: -x + 14 = 12. Subtract 14 from both sides: -x = -2. Therefore, x = 2.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 9',
+                    prompt: 'Which sentence uses commas correctly?',
+                    options: [
+                        'The car, a red convertible was speeding.',
+                        'The car, a red convertible, was speeding.',
+                        'The car a red convertible, was speeding.',
+                        'The car a red convertible was speeding.'
+                    ],
+                    correctAnswer: 'The car, a red convertible, was speeding.',
+                    explanation: 'Commas are needed to set off an appositive phrase ("a red convertible"), which renames or provides more information about the noun it follows.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 10',
+                    prompt: 'The line "The classroom was a zoo" is an example of:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'This is a direct comparison between the classroom and a zoo without using "like" or "as", suggesting the classroom was chaotic.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 5',
+                    prompt: 'A map has a scale of 1 inch = 25 miles. If two cities are 5.5 inches apart on the map, how many miles apart are they in reality?',
+                    correctAnswer: '137.5',
+                    explanation: 'Multiply the map distance by the scale factor: 5.5 inches * 25 miles/inch = 137.5 miles.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 11',
+                    prompt: 'Choose the word that best fits the context of the sentence.',
+                    passage: 'Despite the storm, the captain remained _______ and steered the ship through the turbulent waters.',
+                    options: ['flustered', 'agitated', 'unflappable', 'panicked'],
+                    correctAnswer: 'unflappable',
+                    explanation: 'Unflappable means remaining calm in a crisis, which fits the context of the captain\'s behavior during a storm.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 12',
+                    prompt: 'From which point of view is the passage written?',
+                    passage: 'He walked down the street, wondering what he would do next. He felt a sense of dread, but he knew he couldn\'t give up. Unbeknownst to him, a mysterious figure watched him from a nearby alley.',
+                    options: [
+                        'First-person',
+                        'Third-person limited',
+                        'Third-person omniscient',
+                        'Second-person'
+                    ],
+                    correctAnswer: 'Third-person omniscient',
+                    explanation: 'The narrator knows the thoughts and feelings of the main character ("He felt a sense of dread") and also knows information that the character does not (the "mysterious figure"). This all-knowing perspective is omniscient.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 6',
+                    prompt: 'The area of a circle is 49π square inches. What is the circumference of the circle, in terms of π?',
+                    correctAnswer: '14π',
+                    explanation: 'The formula for the area of a circle is A = πr². If 49π = πr², then r² = 49, and the radius (r) is 7. The formula for circumference is C = 2πr. So, C = 2π(7) = 14π.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 13',
+                    prompt: 'Which sentence has a subject-verb agreement error?',
+                    options: [
+                        'The pack of wolves run through the forest.',
+                        'The team is playing well today.',
+                        'My favorite pair of shoes is missing.',
+                        'There are five books on the shelf.'
+                    ],
+                    correctAnswer: 'The pack of wolves run through the forest.',
+                    explanation: 'The subject is "pack" (singular), not "wolves". Therefore, the verb should be singular: "runs".'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 7',
+                    prompt: 'What is 40% of 1/2 of 60?',
+                    correctAnswer: '12',
+                    explanation: 'First, find 1/2 of 60, which is 30. Then, find 40% of 30. 0.40 * 30 = 12.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

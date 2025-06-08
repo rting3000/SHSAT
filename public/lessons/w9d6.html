@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D6: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 6",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Final Simulation before Review',
+                    content: `
+                        <p>This is your final full practice test for Week 9. Apply everything you have learned this week about error analysis, pacing, and targeted review. This is your chance to put it all together.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> A confident, strategic performance. Trust your instincts, manage your time wisely, and stay focused.</li>
+                            <li><strong>Goal:</strong> Achieve your best score of the week. Identify any lingering issues to tackle in the final review day tomorrow.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 1',
+                    prompt: 'Which word means "to formally absolve from guilt"?',
+                    options: ['inculpate', 'exonerate', 'incriminate', 'reprimand'],
+                    correctAnswer: 'exonerate',
+                    explanation: 'To exonerate is to absolve someone from blame for a fault or wrongdoing, especially after due consideration of the case.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 2',
+                    prompt: 'What is the main purpose of a topic sentence in a paragraph?',
+                    options: [
+                        'To provide a concluding thought.',
+                        'To introduce the main idea of the paragraph.',
+                        'To give a supporting detail.',
+                        'To transition to the next paragraph.'
+                    ],
+                    correctAnswer: 'To introduce the main idea of the paragraph.',
+                    explanation: 'The topic sentence states the central point or argument that the rest of the paragraph will support and develop.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 1',
+                    prompt: 'A car travels at an average speed of 50 miles per hour for 3 hours and then at an average speed of 60 miles per hour for 2 hours. What is the average speed for the entire trip?',
+                    correctAnswer: '54',
+                    explanation: 'Total distance = (50 mph * 3 hrs) + (60 mph * 2 hrs) = 150 miles + 120 miles = 270 miles. Total time = 3 hrs + 2 hrs = 5 hours. Average speed = Total Distance / Total Time = 270 / 5 = 54 mph.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Section: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'Unlike the more familiar honeybee, most of these species are solitary.' },
+                        { id: '2', text: 'This means that a single female is responsible for building a nest and gathering pollen and nectar for her offspring.' },
+                        { id: '3', text: 'North America is home to over 4,000 native species of bees.' },
+                        { id: '4', text: 'Many of them are highly effective pollinators for native plants and agricultural crops.' }
+                    ],
+                    options: ['3, 4, 1, 2', '3, 1, 2, 4', '1, 2, 4, 3', '3, 2, 1, 4'],
+                    correctAnswer: '3, 1, 2, 4',
+                    explanation: 'Sentence 3 introduces the topic. Sentence 1 presents a key characteristic (solitary nature). Sentence 2 explains what "solitary" means in this context. Sentence 4 concludes by stating their importance.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 4',
+                    prompt: 'The word "ambivalent" means:',
+                    options: ['having strong feelings', 'being opposed to something', 'having mixed or contradictory feelings', 'not caring'],
+                    correctAnswer: 'having mixed or contradictory feelings',
+                    explanation: 'To be ambivalent about something is to be uncertain because you have simultaneous conflicting feelings.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 2',
+                    prompt: 'If x/6 = 5/3, what is the value of x?',
+                    correctAnswer: '10',
+                    explanation: 'To solve the proportion, you can cross-multiply: 3 * x = 6 * 5. This gives 3x = 30. Divide both sides by 3 to get x = 10.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 5',
+                    prompt: 'Which of the following is NOT a coordinating conjunction?',
+                    options: ['For', 'And', 'Nor', 'Although'],
+                    correctAnswer: 'Although',
+                    explanation: '"Although" is a subordinating conjunction, which introduces a dependent clause. The coordinating conjunctions can be remembered with the acronym FANBOYS (For, And, Nor, But, Or, Yet, So).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 6',
+                    prompt: 'What is the literary term for a seemingly absurd or self-contradictory statement which, when investigated, may prove to be well-founded or true?',
+                    options: ['Oxymoron', 'Paradox', 'Irony', 'Hyperbole'],
+                    correctAnswer: 'Paradox',
+                    explanation: 'A paradox is a statement that appears self-contradictory but contains a deeper truth. For example, "You have to be cruel to be kind."'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 3',
+                    prompt: 'A box contains 20 items, of which 5 are defective. If two items are selected at random without replacement, what is the probability that both are defective? Express as a fraction.',
+                    correctAnswer: '1/19',
+                    explanation: 'The probability of the first item being defective is 5/20. After selecting one, there are 19 items left and 4 are defective. The probability of the second being defective is 4/19. The total probability is (5/20) * (4/19) = (1/4) * (4/19) = 4/76 = 1/19.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 7',
+                    prompt: 'Which sentence is written in the passive voice?',
+                    options: [
+                        'The dog chased the cat.',
+                        'The cat was chased by the dog.',
+                        'The dog is chasing the cat now.',
+                        'The cat ran from the dog.'
+                    ],
+                    correctAnswer: 'The cat was chased by the dog.',
+                    explanation: 'In the passive voice, the subject of the sentence receives the action. Here, "The cat" is the subject and it is receiving the action of being chased. A passive construction often includes a form of "to be" plus a past participle (was chased).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 8',
+                    prompt: 'A "euphemism" is a word or expression used in place of one that may be found to be:',
+                    options: ['more accurate', 'more scientific', 'harsh, unpleasant, or embarrassing', 'grammatically incorrect'],
+                    correctAnswer: 'harsh, unpleasant, or embarrassing',
+                    explanation: 'A euphemism is a mild or indirect word substituted for one considered to be too harsh or blunt. For example, using "passed away" instead of "died."'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 4',
+                    prompt: 'What is the surface area of a cube with a side length of 4 cm?',
+                    correctAnswer: '96',
+                    explanation: 'A cube has 6 identical square faces. The area of one face is side * side = 4 * 4 = 16 cm². The total surface area is the area of one face multiplied by the number of faces: 16 * 6 = 96 cm².'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 9',
+                    prompt: 'Which sentence contains a dangling modifier?',
+                    options: [
+                        'After finishing my homework, I went to bed.',
+                        'Hungry, the pizza was devoured.',
+                        'The book on the table is mine.',
+                        'Walking to the store, I saw a friend.'
+                    ],
+                    correctAnswer: 'Hungry, the pizza was devoured.',
+                    explanation: 'The modifier "Hungry" is dangling because it does not logically modify the subject "the pizza." It should modify the person or people who were hungry.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 10',
+                    prompt: 'The word "ubiquitous" is best defined as:',
+                    options: ['rare', 'complicated', 'present everywhere', 'hidden'],
+                    correctAnswer: 'present everywhere',
+                    explanation: 'Ubiquitous means appearing or found everywhere, like smartphones in the modern world.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 5',
+                    prompt: 'If a triangle has a base of 10 inches and a height of 7 inches, what is its area in square inches?',
+                    correctAnswer: '35',
+                    explanation: 'The area of a triangle is calculated with the formula A = (1/2) * base * height. So, A = (1/2) * 10 * 7 = 5 * 7 = 35 square inches.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 11',
+                    prompt: 'What is the central theme of a story where a character must overcome their fear of public speaking to deliver an important presentation?',
+                    options: [
+                        'The importance of friendship.',
+                        'The struggle against injustice.',
+                        'The challenge of overcoming personal fears.',
+                        'The pursuit of wealth.'
+                    ],
+                    correctAnswer: 'The challenge of overcoming personal fears.',
+                    explanation: 'The core conflict and character development revolve around the protagonist confronting and conquering an internal struggle, which is their fear.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 12',
+                    prompt: 'Choose the sentence with the correct comma usage.',
+                    options: [
+                        'I need to buy milk, bread and eggs.',
+                        'She is a smart, and funny person.',
+                        'He walked into the room, and sat down.',
+                        'When you are ready, please give me a call.'
+                    ],
+                    correctAnswer: 'When you are ready, please give me a call.',
+                    explanation: 'A comma is correctly used after an introductory clause or phrase ("When you are ready").'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 6',
+                    prompt: 'What percentage of 80 is 20?',
+                    correctAnswer: '25',
+                    explanation: 'To find the percentage, you can set up the equation (Part / Whole) * 100. So, (20 / 80) * 100 = (1/4) * 100 = 25. So, 20 is 25% of 80.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 13',
+                    prompt: 'An author\'s "bias" refers to:',
+                    options: [
+                        'The main idea of the text.',
+                        'The use of figurative language.',
+                        'A preference or inclination that inhibits impartial judgment.',
+                        'The organizational structure of the passage.'
+                    ],
+                    correctAnswer: 'A preference or inclination that inhibits impartial judgment.',
+                    explanation: 'Bias is a prejudice in favor of or against one thing, person, or group compared with another, usually in a way considered to be unfair.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 7',
+                    prompt: 'Simplify the expression: 3(x + 2y) - (2x - y)',
+                    correctAnswer: 'x + 7y',
+                    explanation: 'First, distribute the 3: 3x + 6y. Then, distribute the negative sign: -2x + y. Now combine like terms: (3x - 2x) + (6y + y) = x + 7y.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

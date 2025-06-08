@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D3: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 3",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Error Analysis Focus',
+                    content: `
+                        <p>Today's simulation is followed by a crucial step: Error Analysis. Completing the test is only half the battle. Understanding your mistakes is where real learning happens.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> Simulate the full test environment. Mark questions you are unsure about as you go.</li>
+                            <li><strong>Goal:</strong> After the test, categorize each mistake. Was it a careless error, a concept gap, or a time-management issue? This analysis will guide your final review.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 1',
+                    prompt: 'Choose the best word to complete the sentence.',
+                    passage: 'The politician\'s speech was filled with _______, promising sweeping reforms without offering any specific plans.',
+                    options: ['specificity', 'pragmatism', 'platitudes', 'data'],
+                    correctAnswer: 'platitudes',
+                    explanation: 'Platitudes are remarks or statements, especially ones with a moral content, that have been used too often to be interesting or thoughtful. This fits the context of promising reforms without specific plans.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 2',
+                    prompt: 'Which sentence demonstrates correct parallel structure?',
+                    options: [
+                        'The coach told the players to get a lot of sleep, that they should eat a good meal, and to be on time.',
+                        'The book is both informative and it is also entertaining.',
+                        'He likes hiking, swimming, and to ride his bicycle.',
+                        'She is a talented artist, a dedicated musician, and a brilliant scientist.'
+                    ],
+                    correctAnswer: 'She is a talented artist, a dedicated musician, and a brilliant scientist.',
+                    explanation: 'This sentence uses a parallel structure of three nouns with their corresponding adjectives (talented artist, dedicated musician, brilliant scientist).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 1',
+                    prompt: 'A cylindrical tank has a radius of 10 feet and a height of 20 feet. What is the volume of the tank in terms of π?',
+                    correctAnswer: '2000π',
+                    explanation: 'The volume of a cylinder is V = πr²h. V = π * (10)² * 20 = π * 100 * 20 = 2000π cubic feet.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Section: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'This network of fungi and roots, known as a mycorrhizal network, allows trees to share resources like water and nutrients.' },
+                        { id: '2', text: 'Moreover, they can send chemical signals to warn neighboring trees of insect attacks.' },
+                        { id: '3', text: 'Scientists have discovered that trees in a forest are not isolated individuals but are connected to one another through an underground fungal network.' },
+                        { id: '4', text: 'This "wood wide web" suggests a level of cooperation and communication among trees previously thought impossible.' }
+                    ],
+                    options: ['3, 2, 1, 4', '1, 3, 2, 4', '3, 1, 2, 4', '4, 1, 2, 3'],
+                    correctAnswer: '3, 1, 2, 4',
+                    explanation: 'Sentence 3 introduces the main idea. Sentence 1 explains what the network is. Sentence 2 adds another function of the network. Sentence 4 provides a concluding summary of this phenomenon.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 4',
+                    prompt: 'The word "ubiquitous" is best defined as:',
+                    options: ['rare', 'complicated', 'present everywhere', 'hidden'],
+                    correctAnswer: 'present everywhere',
+                    explanation: 'Ubiquitous means appearing or found everywhere, like smartphones in the modern world.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 2',
+                    prompt: 'If a store buys a jacket for $60 and marks it up by 75%, what is the selling price?',
+                    correctAnswer: '105',
+                    explanation: 'First, calculate the markup amount: 75% of $60 is 0.75 * 60 = $45. Then, add the markup to the original cost: $60 + $45 = $105.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 5',
+                    prompt: 'Which of the following sentences is a run-on sentence?',
+                    options: [
+                        'The sun set, and the stars appeared.',
+                        'I love to write papers I would write one every day if I had the time.',
+                        'She is a great student; she always does her homework.',
+                        'Because it was raining, we decided to stay inside.'
+                    ],
+                    correctAnswer: 'I love to write papers I would write one every day if I had the time.',
+                    explanation: 'This is a run-on sentence because two independent clauses are joined without proper punctuation or a conjunction. It could be fixed with a semicolon, a period, or a comma and a conjunction.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 6',
+                    prompt: 'What literary device is used in the phrase "The wind whispered through the trees"?',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Alliteration'],
+                    correctAnswer: 'Personification',
+                    explanation: 'Personification gives human qualities or abilities (like whispering) to inanimate objects (like the wind).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 3',
+                    prompt: 'What is the mean of the following set of numbers: 15, 25, 30, 10, 20?',
+                    correctAnswer: '20',
+                    explanation: 'To find the mean (average), add all the numbers together and divide by the count of the numbers. Sum = 15+25+30+10+20 = 100. Count = 5. Mean = 100 / 5 = 20.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 7',
+                    prompt: 'Choose the word that is spelled incorrectly.',
+                    options: ['accommodate', 'separate', 'definitely', 'goverment'],
+                    correctAnswer: 'goverment',
+                    explanation: 'The correct spelling is "government."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 8',
+                    prompt: 'Which statement is the most objective summary of the passage?',
+                    passage: 'The new city ordinance, which bans plastic bags, has been met with mixed reactions. Supporters herald it as a major victory for the environment, citing reductions in litter and waterway pollution. Opponents, however, argue it places an unfair burden on small businesses and low-income residents who must now purchase reusable bags.',
+                    options: [
+                        'The new plastic bag ban is a wonderful environmental policy.',
+                        'The foolish new law against plastic bags is hurting local businesses.',
+                        'A new city ordinance banning plastic bags has elicited both support for its environmental benefits and opposition due to its perceived economic burdens.',
+                        'People who support the bag ban care about the planet, while those who oppose it do not.'
+                    ],
+                    correctAnswer: 'A new city ordinance banning plastic bags has elicited both support for its environmental benefits and opposition due to its perceived economic burdens.',
+                    explanation: 'This statement neutrally presents both sides of the issue described in the passage without inserting any opinion or bias.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 4',
+                    prompt: 'A pizza is divided into 8 equal slices. If a person eats 3 slices, what percentage of the pizza has been eaten?',
+                    correctAnswer: '37.5',
+                    explanation: 'The fraction of the pizza eaten is 3/8. To convert this to a percentage, divide 3 by 8 and multiply by 100. 3 / 8 = 0.375. 0.375 * 100 = 37.5%.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 9',
+                    prompt: 'Which of the following is an appropriate use of a semicolon?',
+                    options: [
+                        'I like cake; but I prefer pie.',
+                        'The storm was intense; the power went out for hours.',
+                        'She bought three things; a book; a pen; and a notebook.',
+                        'He was tired; so he went to bed.'
+                    ],
+                    correctAnswer: 'The storm was intense; the power went out for hours.',
+                    explanation: 'A semicolon can be used to join two closely related independent clauses. The fact that the power went out is closely related to the intensity of the storm.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 10',
+                    prompt: 'The word "mitigate" means to:',
+                    options: ['worsen', 'understand', 'make less severe', 'ignore'],
+                    correctAnswer: 'make less severe',
+                    explanation: 'To mitigate means to make something bad less severe, serious, or painful. For example, efforts to mitigate the effects of a disaster.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 5',
+                    prompt: 'Solve the inequality: 3x - 5 > 10',
+                    correctAnswer: 'x > 5',
+                    explanation: 'Add 5 to both sides: 3x > 15. Divide by 3: x > 5.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 11',
+                    prompt: 'What is the main idea of a passage if it discusses the invention of the printing press, its impact on literacy, the spread of information, and the Renaissance?',
+                    options: [
+                        'Johannes Gutenberg invented the printing press.',
+                        'The printing press was a pivotal invention that profoundly transformed European society.',
+                        'The Renaissance was a time of great change.',
+                        'Literacy rates increased after the printing press was invented.'
+                    ],
+                    correctAnswer: 'The printing press was a pivotal invention that profoundly transformed European society.',
+                    explanation: 'This statement is the most comprehensive and captures the overarching theme that connects all the details (the invention, literacy, information spread, and the Renaissance).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 12',
+                    prompt: 'Identify the misplaced modifier in the sentence.',
+                    passage: 'Covered in mud, the pig was bathed by the farmer.',
+                    options: [
+                        'No error',
+                        'Covered in mud',
+                        'the pig',
+                        'by the farmer'
+                    ],
+                    correctAnswer: 'No error',
+                    explanation: 'The modifier "Covered in mud" correctly describes "the pig." If it were misplaced, it might read "Covered in mud, the farmer bathed the pig," implying the farmer was muddy.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 6',
+                    prompt: 'The original price of an item is $80. It is on sale for 20% off. Then, a 10% sales tax is applied to the discounted price. What is the final cost?',
+                    correctAnswer: '70.40',
+                    explanation: 'Discount: 20% of $80 is 0.20 * 80 = $16. Discounted price: $80 - $16 = $64. Sales tax: 10% of $64 is 0.10 * 64 = $6.40. Final cost: $64 + $6.40 = $70.40.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 13',
+                    prompt: 'Which word suggests a negative connotation?',
+                    options: ['aroma', 'scent', 'stench', 'fragrance'],
+                    correctAnswer: 'stench',
+                    explanation: 'While all words relate to smell, "stench" specifically implies a very foul and unpleasant one, carrying a negative connotation.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 7',
+                    prompt: 'There are 25 students in a class. 12 of them are boys. What is the ratio of girls to the total number of students?',
+                    correctAnswer: '13:25',
+                    explanation: 'First, find the number of girls: 25 total students - 12 boys = 13 girls. The ratio of girls to total students is 13 to 25, or 13:25.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

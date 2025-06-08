@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D5: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 5",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Targeted Review',
+                    content: `
+                        <p>There is no full test today. Instead, you will focus on targeted practice based on the errors you identified in the previous simulations. This is a critical day for shoring up weaknesses.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> Drill down into the specific question types and topics that have been giving you trouble.</li>
+                            <li><strong>Goal:</strong> Turn your weaknesses into strengths. Spend quality time understanding the concepts, not just memorizing answers.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 1',
+                    prompt: 'Which word is a synonym for "laconic"?',
+                    options: ['verbose', 'garrulous', 'terse', 'long-winded'],
+                    correctAnswer: 'terse',
+                    explanation: 'Laconic means using very few words. Terse is the best synonym, also meaning abrupt or brief.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 2',
+                    prompt: 'Identify the error in the sentence, if any.',
+                    passage: 'Each of the students are responsible for their own materials.',
+                    options: [
+                        'No error',
+                        'Spelling',
+                        'Subject-Verb Agreement',
+                        'Punctuation'
+                    ],
+                    correctAnswer: 'Subject-Verb Agreement',
+                    explanation: 'The subject is "Each," which is singular. Therefore, the verb should be "is," not "are." (Each... is responsible).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 1',
+                    prompt: 'The average of four numbers is 15. If three of the numbers are 10, 12, and 20, what is the fourth number?',
+                    correctAnswer: '18',
+                    explanation: 'If the average of four numbers is 15, their sum is 4 * 15 = 60. The sum of the three known numbers is 10 + 12 + 20 = 42. The fourth number must be 60 - 42 = 18.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Review: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'This technique allows them to navigate and locate prey in complete darkness.' },
+                        { id: '2', text: 'They emit high-frequency sounds and then listen for the echoes that bounce back from objects in their environment.' },
+                        { id: '3', text: 'By interpreting these echoes, they can form a detailed mental map of their surroundings.' },
+                        { id: '4', text: 'Bats are famous for their sophisticated use of echolocation.' }
+                    ],
+                    options: ['4, 1, 2, 3', '4, 2, 3, 1', '2, 3, 1, 4', '1, 4, 2, 3'],
+                    correctAnswer: '4, 2, 3, 1',
+                    explanation: 'Sentence 4 introduces the topic. Sentence 2 explains the first step of the process. Sentence 3 explains the second step. Sentence 1 provides a summary of the ability.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 4',
+                    prompt: 'Choose the best revision for the sentence.',
+                    passage: 'The artist, who was also a musician, her paintings were very colorful.',
+                    options: [
+                        'The artist, a musician, her paintings were colorful.',
+                        'The artist, who was also a musician, created colorful paintings.',
+                        'Her paintings were colorful, the artist also being a musician.',
+                        'The paintings of the artist were colorful, and she was a musician.'
+                    ],
+                    correctAnswer: 'The artist, who was also a musician, created colorful paintings.',
+                    explanation: 'This revision creates a clear and grammatically correct sentence by providing a main verb ("created") for the subject ("The artist"). The original sentence was a fragment.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 2',
+                    prompt: 'A shirt originally costing $50 is on sale for 25% off. What is the sale price?',
+                    correctAnswer: '37.50',
+                    explanation: 'First, find the discount amount: 25% of $50 is 0.25 * 50 = $12.50. Then subtract the discount from the original price: $50 - $12.50 = $37.50.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 5',
+                    prompt: 'The word "gregarious" most nearly means:',
+                    options: ['shy', 'sociable', 'unfriendly', 'introverted'],
+                    correctAnswer: 'sociable',
+                    explanation: 'Gregarious means fond of company; sociable.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 6',
+                    prompt: 'What is the tone of the passage?',
+                    passage: 'With a heavy heart, she packed the last of her belongings. Each item, from the faded photograph to the worn-out teddy bear, seemed to whisper a memory of a time long past, a home she could never return to. A single tear traced a path down her dusty cheek.',
+                    options: ['Joyful', 'Angry', 'Melancholy', 'Suspenseful'],
+                    correctAnswer: 'Melancholy',
+                    explanation: 'The tone is one of sadness and longing for the past. Words like "heavy heart," "worn-out," "time long past," and "single tear" create a melancholy mood.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 3',
+                    prompt: 'Solve for y: 4(y - 2) = 20',
+                    correctAnswer: '7',
+                    explanation: 'Distribute the 4: 4y - 8 = 20. Add 8 to both sides: 4y = 28. Divide by 4: y = 7.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 7',
+                    prompt: 'Which punctuation mark is used to introduce a list or an explanation?',
+                    options: ['Semicolon', 'Colon', 'Hyphen', 'Apostrophe'],
+                    correctAnswer: 'Colon',
+                    explanation: 'A colon is used after an independent clause to introduce a list, an explanation, an example, or a quotation. For example: "She had three goals: to graduate, to get a job, and to travel the world."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 8',
+                    prompt: 'The phrase "The apple of my eye" is an example of:',
+                    options: ['An idiom', 'A simile', 'A paradox', 'Personification'],
+                    correctAnswer: 'An idiom',
+                    explanation: 'An idiom is a phrase whose meaning cannot be understood from the ordinary meaning of its words. "The apple of my eye" refers to someone cherished above all others.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 4',
+                    prompt: 'The sum of the angles in a pentagon is 540 degrees. If a regular pentagon has 5 equal angles, what is the measure of each angle?',
+                    correctAnswer: '108',
+                    explanation: 'Divide the total degrees by the number of angles: 540 / 5 = 108 degrees.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 9',
+                    prompt: 'What is the primary conflict in a story about a mountain climber battling a blizzard to reach a summit?',
+                    options: [
+                        'Character vs. Self',
+                        'Character vs. Society',
+                        'Character vs. Nature',
+                        'Character vs. Technology'
+                    ],
+                    correctAnswer: 'Character vs. Nature',
+                    explanation: 'The main conflict is between the protagonist (the climber) and a force of nature (the blizzard).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 10',
+                    prompt: 'The word "auspicious" means:',
+                    options: ['unfavorable', 'threatening', 'conducive to success; favorable', 'boring'],
+                    correctAnswer: 'conducive to success; favorable',
+                    explanation: 'An auspicious sign or start to something suggests it is likely to be successful.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 5',
+                    prompt: 'What is the least common multiple (LCM) of 12 and 15?',
+                    correctAnswer: '60',
+                    explanation: 'Multiples of 12 are 12, 24, 36, 48, 60... Multiples of 15 are 15, 30, 45, 60... The least common multiple is 60.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 11',
+                    prompt: 'Which sentence has the correct subject-pronoun agreement?',
+                    options: [
+                        'If a student wants to succeed, they must study.',
+                        'If a student wants to succeed, you must study.',
+                        'A student must study if he or she wants to succeed.',
+                        'When a student wants to succeed, we must study.'
+                    ],
+                    correctAnswer: 'A student must study if he or she wants to succeed.',
+                    explanation: 'The singular pronoun "he or she" correctly refers to the singular subject "A student." While "they" is often used in modern English, "he or she" is traditionally considered more formally correct.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 12',
+                    prompt: 'A story told from the "I" perspective is written in which point of view?',
+                    options: ['First-person', 'Second-person', 'Third-person limited', 'Third-person omniscient'],
+                    correctAnswer: 'First-person',
+                    explanation: 'The first-person point of view uses the pronoun "I" (and sometimes "we") to narrate the story.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 6',
+                    prompt: 'What is the value of x if 3^x = 81?',
+                    correctAnswer: '4',
+                    explanation: 'You need to figure out how many times you multiply 3 by itself to get 81. 3 * 3 = 9. 9 * 3 = 27. 27 * 3 = 81. You multiplied it 4 times, so x=4.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review: Question 13',
+                    prompt: 'What is the best way to combine the two sentences?',
+                    passage: 'The movie was exciting. It was also very long.',
+                    options: [
+                        'The movie was exciting, and it was also very long.',
+                        'The exciting movie was also very long.',
+                        'The movie was exciting and long.',
+                        'All of the above are grammatically correct and effective.'
+                    ],
+                    correctAnswer: 'All of the above are grammatically correct and effective.',
+                    explanation: 'All three options are valid ways to combine the sentences. Option C is the most concise, but A and B are also perfectly acceptable and grammatically correct.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Review: Question 7',
+                    prompt: 'Convert 0.65 to a fraction in simplest form.',
+                    correctAnswer: '13/20',
+                    explanation: '0.65 is equivalent to 65/100. To simplify, find the greatest common divisor of 65 and 100, which is 5. Divide both the numerator and the denominator by 5: 65 ÷ 5 = 13 and 100 ÷ 5 = 20. The simplified fraction is 13/20.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W9D2: Full Test Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Full Test Simulation",
+            subtitle: "Week 9, Day 2",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Test-Day Readiness',
+                    content: `
+                        <p>Welcome to Milestone 3. This is it—the final push. This week, we begin full test simulations to build the mental and physical stamina required for the real SHSAT. Today, you'll tackle the first half of a full-length practice test.</p>
+                        <ul>
+                            <li><strong>Focus:</strong> Timing, endurance, and applying all learned strategies under pressure.</li>
+                            <li><strong>Goal:</strong> Complete the section accurately within the time limit. Identify any remaining areas of weakness for targeted review.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 1',
+                    prompt: 'Choose the best word to complete the sentence.',
+                    passage: 'The artist was known for her _______ use of color, creating vibrant and eye-catching paintings.',
+                    options: ['muted', 'subtle', 'exuberant', 'dull'],
+                    correctAnswer: 'exuberant',
+                    explanation: 'Exuberant means full of energy, excitement, and cheerfulness, which fits the description of vibrant and eye-catching paintings.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 2',
+                    prompt: 'What is the main purpose of the first paragraph?',
+                    passage: 'The giant squid is one of the most elusive creatures on Earth. For centuries, the only evidence of its existence came from carcasses washed ashore or the sucker-shaped scars on whales. It was not until 2004 that the first images of a live giant squid were captured in its deep-sea habitat, solving a long-standing mystery of the oceans.',
+                    options: [
+                        'To describe the diet of the giant squid.',
+                        'To highlight the historical difficulty in observing the giant squid.',
+                        'To argue for more funding for marine biology.',
+                        'To explain the anatomy of the giant squid.'
+                    ],
+                    correctAnswer: 'To highlight the historical difficulty in observing the giant squid.',
+                    explanation: 'The paragraph focuses on the lack of direct evidence and the "long-standing mystery," emphasizing how hard it was to find and study the creature.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 1',
+                    prompt: 'If a car rental costs $45 per day plus $0.15 per mile, what is the total cost of renting a car for 3 days and driving 250 miles?',
+                    correctAnswer: '172.50',
+                    explanation: 'Daily cost: 3 days * $45/day = $135. Mileage cost: 250 miles * $0.15/mile = $37.50. Total cost: $135 + $37.50 = $172.50.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Section: Question 3',
+                    prompt: 'Choose the best order for the sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: '1', text: 'Ultimately, this process of cooling and hardening forms igneous rock.' },
+                        { id: '2', text: 'When volcanoes erupt, they expel molten rock called lava.' },
+                        { id: '3', text: 'This exposure to the cooler air or water causes the lava to lose heat rapidly.' },
+                        { id: '4', text: 'As this lava flows onto the Earth\'s surface, it is exposed to the atmosphere or ocean.' }
+                    ],
+                    options: ['2, 4, 3, 1', '1, 2, 3, 4', '2, 1, 4, 3', '4, 3, 2, 1'],
+                    correctAnswer: '2, 4, 3, 1',
+                    explanation: 'Sentence 2 introduces lava. Sentence 4 describes what happens to the lava. Sentence 3 explains the consequence of that exposure. Sentence 1 provides the conclusion of the entire process.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 4',
+                    prompt: 'Identify the error in the sentence.',
+                    passage: 'Neither the students nor the teacher were aware of the schedule change.',
+                    options: ['No error', 'Spelling', 'Punctuation', 'Subject-Verb Agreement'],
+                    correctAnswer: 'Subject-Verb Agreement',
+                    explanation: 'When using "neither...nor," the verb should agree with the subject closest to it. "Teacher" is singular, so the verb should be "was," not "were."'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 2',
+                    prompt: 'The ratio of boys to girls in a class is 5:3. If there are 40 students in total, how many girls are there?',
+                    correctAnswer: '15',
+                    explanation: 'The ratio 5:3 means there are 5+3=8 parts in total. To find the value of one part, divide the total number of students by the total parts: 40 / 8 = 5. There are 3 parts girls, so multiply 3 * 5 = 15 girls.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 5',
+                    prompt: 'The word "voracious" most nearly means:',
+                    options: ['sleepy', 'insatiable', 'picky', 'indifferent'],
+                    correctAnswer: 'insatiable',
+                    explanation: 'Voracious describes a huge appetite that is impossible to satisfy, making "insatiable" the best synonym.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 6',
+                    prompt: 'What is the tone of the passage?',
+                    passage: 'For years, city officials have promised to repair the crumbling infrastructure of our public parks. Yet, playgrounds remain dangerously outdated, and walking paths are riddled with cracks. It is a shameful display of neglect that jeopardizes the safety of our children and the well-being of our community.',
+                    options: ['Joyful', 'Nostalgic', 'Critical', 'Humorous'],
+                    correctAnswer: 'Critical',
+                    explanation: 'The author uses words like "crumbling," "dangerously outdated," "shameful," and "neglect" to express a strongly negative and critical viewpoint.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 3',
+                    prompt: 'A rectangular prism has a length of 8 cm, a width of 5 cm, and a volume of 240 cubic cm. What is its height?',
+                    correctAnswer: '6',
+                    explanation: 'Volume = length × width × height. So, 240 = 8 × 5 × h. 240 = 40h. Divide by 40: h = 6 cm.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 7',
+                    prompt: 'Which sentence is grammatically correct?',
+                    options: [
+                        'The team, along with their coach, are celebrating.',
+                        'The team, along with their coach, is celebrating.',
+                        'The team are celebrating, along with their coach.',
+                        'The team is celebrating along with there coach.'
+                    ],
+                    correctAnswer: 'The team, along with their coach, is celebrating.',
+                    explanation: 'The subject is "team" (singular). The phrase "along with their coach" is a prepositional phrase and does not affect the verb. Therefore, the singular verb "is" is correct.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 8',
+                    prompt: 'What does the idiom "to bite the bullet" mean?',
+                    options: [
+                        'To eat something unpleasant',
+                        'To go to the dentist',
+                        'To get injured',
+                        'To endure a difficult situation with courage'
+                    ],
+                    correctAnswer: 'To endure a difficult situation with courage',
+                    explanation: 'The idiom "to bite the bullet" means to face a difficult or painful situation with bravery and stoicism.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 4',
+                    prompt: 'If (2x/5) + 3 = 7, what is the value of x?',
+                    correctAnswer: '10',
+                    explanation: 'Subtract 3 from both sides: 2x/5 = 4. Multiply both sides by 5: 2x = 20. Divide by 2: x = 10.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 9',
+                    prompt: 'Which of the following would best support the author\'s argument?',
+                    passage: 'Mandatory school uniforms can lead to a more disciplined academic environment. They reduce distractions related to fashion choices and can diminish the visible socioeconomic disparities between students, fostering a greater sense of community.',
+                    options: [
+                        'A survey showing that most students dislike uniforms.',
+                        'A study linking school uniforms to higher test scores and lower disciplinary incidents.',
+                        'An article about the high cost of school uniforms.',
+                        'A report on the latest fashion trends among teenagers.'
+                    ],
+                    correctAnswer: 'A study linking school uniforms to higher test scores and lower disciplinary incidents.',
+                    explanation: 'This option provides concrete evidence that directly supports the claims made in the passage about discipline and the academic environment.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 10',
+                    prompt: 'The phrase "a cacophony of sounds" refers to:',
+                    options: ['A soft, melodic tune', 'A loud, harmonious chord', 'A harsh, discordant mixture of sounds', 'A silent, empty space'],
+                    correctAnswer: 'A harsh, discordant mixture of sounds',
+                    explanation: 'Cacophony refers to a loud, jarring, and unpleasant mix of noises.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 5',
+                    prompt: 'The angles of a triangle are in the ratio 2:3:5. What is the measure of the largest angle in degrees?',
+                    correctAnswer: '90',
+                    explanation: 'The sum of angles in a triangle is 180°. The sum of the ratio parts is 2+3+5=10. 180° / 10 = 18° per part. The largest angle is 5 parts, so 5 * 18° = 90°.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 11',
+                    prompt: 'Choose the sentence with the correct pronoun usage.',
+                    options: [
+                        'Me and my friend went to the store.',
+                        'My friend and I went to the store.',
+                        'The store was visited by my friend and I.',
+                        'Give the groceries to my friend and I.'
+                    ],
+                    correctAnswer: 'My friend and I went to the store.',
+                    explanation: '"I" is the correct subject pronoun. A good way to check is to remove "My friend and," leaving "I went to the store," which is correct.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 12',
+                    prompt: 'What is the main function of a topic sentence in a paragraph?',
+                    options: [
+                        'To provide a concluding thought',
+                        'To give a specific supporting detail',
+                        'To introduce the main idea of the paragraph',
+                        'To offer a counterargument'
+                    ],
+                    correctAnswer: 'To introduce the main idea of the paragraph',
+                    explanation: 'The topic sentence states the central point that the rest of the paragraph will develop and support.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 6',
+                    prompt: 'What is the value of 5! (5 factorial)?',
+                    correctAnswer: '120',
+                    explanation: '5 factorial (5!) means 5 × 4 × 3 × 2 × 1. 5 × 4 = 20. 20 × 3 = 60. 60 × 2 = 120. 120 × 1 = 120.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Section: Question 13',
+                    prompt: 'Which of these is the most effective transition between two paragraphs discussing the benefits and drawbacks of a new policy?',
+                    options: [
+                        'In addition, the policy is expensive.',
+                        'However, the policy is not without its critics.',
+                        'For example, the policy will help many people.',
+                        'Therefore, the policy should be implemented immediately.'
+                    ],
+                    correctAnswer: 'However, the policy is not without its critics.',
+                    explanation: 'The word "However" signals a contrast, effectively transitioning from the benefits (the topic of the previous paragraph) to the drawbacks (the topic of the new paragraph).'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Section: Question 7',
+                    prompt: 'A cube has a surface area of 150 square inches. What is its volume in cubic inches?',
+                    correctAnswer: '125',
+                    explanation: 'A cube has 6 identical faces. The area of one face is 150 / 6 = 25 square inches. The side length of a square face is the square root of its area, so √25 = 5 inches. The volume of a cube is side³, so 5³ = 125 cubic inches.'
+                }
+            ]
+        };
+
+        // --- Core Lesson Engine ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('lesson-header');
+            const deck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const lessonId = window.location.pathname.split('/').pop();
+
+            let currentStep = 0;
+            let score = 0;
+            let questionSteps = lessonData.steps.filter(s => s.type !== 'briefing');
+
+            function init() {
+                header.innerHTML = `<h1>${lessonData.title}</h1><h2>${lessonData.subtitle}</h2>`;
+                renderStep();
+            }
+
+            function renderStep() {
+                deck.innerHTML = '';
+                if (currentStep >= lessonData.steps.length) {
+                    showResults();
+                    return;
+                }
+
+                const step = lessonData.steps[currentStep];
+                const card = document.createElement('div');
+                card.className = `card ${step.type}-card`;
+
+                let content = `<h3>${step.header}</h3>`;
+                if (step.passage) content += `<p class="passage">${step.passage}</p>`;
+                if (step.prompt) content += `<p class="prompt">${step.prompt}</p>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button id="next-btn">Start</button>`;
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    content += '<div class="options">';
+                    step.options.forEach(opt => {
+                        content += `<button class="option">${opt}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `<input type="text" id="grid-in-answer" placeholder="Enter your answer">`;
+                    content += `<button id="submit-btn">Submit</button>`;
+                }
+                card.innerHTML = content;
+                deck.appendChild(card);
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                const step = lessonData.steps[currentStep];
+                 if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        renderStep();
+                    });
+                } else if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                    document.querySelectorAll('.option').forEach(btn => {
+                        btn.addEventListener('click', (e) => checkMCQAnswer(e.target));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-btn').addEventListener('click', checkGridInAnswer);
+                }
+            }
+
+            function checkMCQAnswer(selectedButton) {
+                const step = lessonData.steps[currentStep];
+                const isCorrect = selectedButton.textContent === step.correctAnswer;
+                revealAnswer(isCorrect, step.explanation, selectedButton);
+            }
+
+            function checkGridInAnswer() {
+                const step = lessonData.steps[currentStep];
+                const answer = document.getElementById('grid-in-answer').value;
+                const isCorrect = answer.trim().toLowerCase() === step.correctAnswer.toLowerCase();
+                 revealAnswer(isCorrect, step.explanation);
+            }
+
+            function revealAnswer(isCorrect, explanation, selectedButton = null) {
+                const step = lessonData.steps[currentStep];
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    if (selectedButton) {
+                        selectedButton.classList.add('correct');
+                    } else {
+                         document.getElementById('grid-in-answer').classList.add('correct');
+                    }
+                } else {
+                    if (selectedButton) {
+                        selectedButton.classList.add('incorrect');
+                        // Highlight the correct answer
+                        document.querySelectorAll('.option').forEach(btn => {
+                            if (btn.textContent === step.correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    } else {
+                        document.getElementById('grid-in-answer').classList.add('incorrect');
+                    }
+                }
+
+                // Disable all inputs
+                document.querySelectorAll('.option, #submit-btn, #grid-in-answer').forEach(el => el.disabled = true);
+
+                // Show explanation
+                const explanationEl = document.createElement('div');
+                explanationEl.className = 'explanation';
+                explanationEl.innerHTML = `<p>${explanation}</p><button id="next-btn">Next</button>`;
+                deck.querySelector('.card').appendChild(explanationEl);
+
+                // Add event listener to the new "Next" button
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    renderStep();
+                });
+            }
+
+            function showResults() {
+                deck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const finalScore = score;
+                const totalPossible = questionSteps.length * lessonData.pointsPerQuestion;
+
+                resultsScreen.innerHTML = `
+                    <h2>Mission Complete!</h2>
+                    <p>Your Score: ${finalScore} / ${totalPossible}</p>
+                    <p>You answered ${finalScore / lessonData.pointsPerQuestion} out of ${questionSteps.length} questions correctly.</p>
+                    <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                `;
+                
+                // Mark lesson as complete
+                localStorage.setItem(lessonId, 'completed');
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html> 
