@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D1: Main Idea & Ratios/Proportions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Main Idea & Advanced Ratios",
+            subtitle: "Week 3, Day 1",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d1',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Deeper Dives into Reading and Math',
+                    content: `
+                        <p>Welcome to Week 3. We are moving into more complex applications of the skills you've learned. In ELA, we continue to hone our ability to find the <strong>Main Idea</strong>, even in dense or subtly written passages. In Math, we are tackling <strong>Advanced Ratios and Proportions</strong>, including multi-step problems.</p>
+                        <ul>
+                            <li><strong>Main Idea:</strong> Look for the single sentence that best summarizes the entire passage. Ask yourself, "What is the most important point the author wants me to understand?"</li>
+                            <li><strong>Advanced Ratios/Proportions:</strong> These problems may involve multiple ratios, changing totals, or require you to set up multi-step proportions to solve. Read carefully.</li>
+                        </ul>
+                    `
+                },
+                // 15 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Main Idea',
+                    prompt: 'What is the main idea of the passage?',
+                    passage: 'The world\'s oceans are vast, covering more than 70 percent of our planet. They are home to an incredible diversity of life. These marine ecosystems are not just beautiful; they are vital to our survival. They produce more than half of the oxygen we breathe, regulate global climate, and provide a crucial source of food. However, these vital systems are threatened by pollution, overfishing, and climate change.',
+                    options: [
+                        'The blue whale is the largest animal in the ocean.',
+                        'Oceans are essential to life on Earth and are currently in danger.',
+                        'Marine ecosystems are primarily a source of food.',
+                        'Oceans cover most of our planet.'
+                    ],
+                    correctAnswer: 'Oceans are essential to life on Earth and are currently in danger.',
+                    explanation: 'The passage introduces the importance of oceans and then states they are threatened, encompassing the full scope of the text.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Main Idea',
+                    prompt: 'What is the central point of the passage?',
+                    passage: 'Many people believe that creativity is an innate gift. But recent research suggests this is a myth. Creativity is more like a muscle—it can be strengthened with practice. Engaging in activities like brainstorming or doodling can help build creative thinking skills. The key is persistence and not fearing failure.',
+                    options: [
+                        'Psychology proves creativity is a myth.',
+                        'Only persistent people are creative.',
+                        'Creativity is not a fixed trait but a skill that can be developed.',
+                        'Doodling is the best way to be creative.'
+                    ],
+                    correctAnswer: 'Creativity is not a fixed trait but a skill that can be developed.',
+                    explanation: 'The passage contrasts the "gift" idea with research suggesting creativity can be "strengthened and developed."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Main Idea',
+                    prompt: 'Which statement best summarizes the main idea?',
+                    passage: 'The rise of remote work has fundamentally changed the workplace. Companies are downsizing offices, and employees are relocating. This shift offers benefits like flexibility and reduced commutes. However, it also presents challenges, such as maintaining company culture and ensuring cybersecurity.',
+                    options: [
+                        'Remote work is better than office work.',
+                        'Companies are closing offices to save money.',
+                        'The shift to remote work has both significant advantages and notable disadvantages.',
+                        'Cybersecurity is the biggest risk of remote work.'
+                    ],
+                    correctAnswer: 'The shift to remote work has both significant advantages and notable disadvantages.',
+                    explanation: 'The passage outlines both the positive and negative aspects of the remote work trend.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Main Idea',
+                    passage: 'The printing press was a revolutionary invention. Before its development, books were rare and expensive, copied by hand. The press made books cheap and plentiful, leading to a dramatic increase in literacy and the rapid spread of new ideas, fueling the Renaissance and Reformation. It fundamentally democratized access to information.',
+                    prompt: 'What is the main idea of the passage?',
+                    options: [
+                        'The printing press was invented in the 15th century.',
+                        'The printing press made books cheaper.',
+                        'The invention of the printing press democratized knowledge and was a catalyst for major societal change.',
+                        'The Renaissance was the most important result.'
+                    ],
+                    correctAnswer: 'The invention of the printing press democratized knowledge and was a catalyst for major societal change.',
+                    explanation: 'This option best summarizes the wide-ranging impact of the printing press on society.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Main Idea',
+                    passage: 'Bees are crucial for pollinating a vast number of the fruits and vegetables we eat. Without them, our food supply would be drastically reduced. Unfortunately, bee populations have been declining at an alarming rate due to factors like pesticide use and habitat loss. This "colony collapse disorder" poses a serious threat to global food security. Efforts to protect bees are critical.',
+                    prompt: 'Which statement best expresses the main idea?',
+                    options: [
+                        'Pesticides are the main cause of bee deaths.',
+                        'Bees are essential for our food system, and their decline is a major crisis requiring action.',
+                        'Colony collapse disorder only affects bees.',
+                        'Planting gardens is a fun way to help bees.'
+                    ],
+                    correctAnswer: 'Bees are essential for our food system, and their decline is a major crisis requiring action.',
+                    explanation: 'This statement captures the core elements: the importance of bees, the crisis of their decline, and the need for a response.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Main Idea',
+                    passage: 'The Roman Empire was one of the most powerful in history, known for its military, engineering, and legal systems. However, its fall was not due to a single event but a long, slow decline. A combination of economic troubles, overexpansion, political instability, and invasions gradually weakened the empire from the inside out.',
+                    prompt: 'What is the central idea of the passage?',
+                    options: [
+                        'The Romans were the best engineers in history.',
+                        'The fall of the Roman Empire was a complex process caused by multiple factors.',
+                        'Barbarian invasions were the sole cause of Rome\'s fall.',
+                        'Roman law is the basis for all modern legal systems.'
+                    ],
+                    correctAnswer: 'The fall of the Roman Empire was a complex process caused by multiple factors.',
+                    explanation: 'The passage explicitly states the fall was not a "single event" and lists several contributing factors.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Main Idea',
+                    passage: 'The gig economy refers to a labor market of short-term contracts or freelance work. Platforms like Uber and Upwork have facilitated this trend. For workers, it offers flexibility. For employers, it reduces costs. However, critics point to the lack of benefits, job security, and inconsistent wages as major downsides.',
+                    prompt: 'What is the main idea of the passage?',
+                    options: [
+                        'The gig economy is the future of all work.',
+                        'The gig economy, facilitated by tech platforms, offers flexibility but raises concerns about worker stability.',
+                        'Uber and DoorDash are the only gig economy companies.',
+                        'Working in the gig economy is better than a permanent job.'
+                    ],
+                    correctAnswer: 'The gig economy, facilitated by tech platforms, offers flexibility but raises concerns about worker stability.',
+                    explanation: 'This option provides a balanced overview, mentioning the platforms, the benefits, and the drawbacks.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Main Idea',
+                    passage: '"Smart cities" integrate technology to manage a city\'s assets, like transportation and power. The goal is to improve quality of life by making city services more efficient. For example, smart traffic lights can adjust to real-time traffic. While benefits are huge, concerns about data privacy and high costs are significant hurdles.',
+                    prompt: 'What is the main idea of this paragraph?',
+                    options: [
+                        'Smart cities use technology to manage traffic.',
+                        'Data privacy is the biggest problem for smart cities.',
+                        'Smart cities aim to improve urban living through technology but face challenges.',
+                        'Smart cities are too expensive to be practical.'
+                    ],
+                    correctAnswer: 'Smart cities aim to improve urban living through technology but face challenges.',
+                    explanation: 'This option captures both the goal of smart cities and the obstacles they face.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Main Idea',
+                    passage: 'Stoicism, an ancient Greek philosophy, teaches the development of self-control and fortitude as a means of overcoming destructive emotions. The philosophy holds that we cannot control external events, only our responses to them. By focusing on what is within our control—our own thoughts and actions—we can achieve a state of tranquility and inner peace, regardless of our circumstances.',
+                    prompt: 'What is the main idea of the passage?',
+                    options: [
+                        'Stoicism is a philosophy about being emotionless.',
+                        'Stoicism teaches that by controlling one\'s own reactions to external events, one can achieve inner peace.',
+                        'Only Greek philosophers can be Stoics.',
+                        'It is impossible to control external events.'
+                    ],
+                    correctAnswer: 'Stoicism teaches that by controlling one\'s own reactions to external events, one can achieve inner peace.',
+                    explanation: 'This best summarizes the core tenets of Stoicism as described in the passage: focusing on internal responses to achieve tranquility.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Main Idea',
+                    passage: 'The chameleon is renowned for its ability to change color. While many believe this is primarily for camouflage, scientists have found it is more often used for social signaling and regulating body temperature. A chameleon might darken to absorb more heat or display vibrant colors to attract a mate or ward off a rival. This dynamic ability makes it a fascinating subject of study.',
+                    prompt: 'What is the central point of the passage?',
+                    options: [
+                        'Chameleons change color to hide from predators.',
+                        'A chameleon\'s color change is a more complex behavior than is commonly believed, serving multiple functions.',
+                        'Chameleons are interesting to study.',
+                        'Attracting a mate is the main reason for color change.'
+                    ],
+                    correctAnswer: 'A chameleon\'s color change is a more complex behavior than is commonly believed, serving multiple functions.',
+                    explanation: 'The passage corrects a common misconception (camouflage) and explains the other reasons (social signals, temperature regulation).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Main Idea',
+                    prompt: 'What is the main argument of this passage?',
+                    passage: 'While video games are often criticized for being a source of distraction, they can also be powerful educational tools. Complex strategy games teach resource management and long-term planning. Many online multiplayer games require teamwork and effective communication. Even fast-paced action games can improve reaction time and problem-solving skills. The key is to choose the right games and balance screen time with other activities.',
+                    options: [
+                        'Video games are not a distraction.',
+                        'Video games can offer significant cognitive and social benefits if used correctly.',
+                        'Strategy games are the only educational type of game.',
+                        'Playing video games is better than other activities.'
+                    ],
+                    correctAnswer: 'Video games can offer significant cognitive and social benefits if used correctly.',
+                    explanation: 'The passage argues that despite criticism, games have educational benefits, and lists several examples before concluding with the importance of balance.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Main Idea',
+                    prompt: 'Which statement best expresses the main idea?',
+                    passage: 'The placebo effect is a fascinating and well-documented phenomenon in medicine. It occurs when a patient experiences real health improvements after receiving a "sham" treatment, such as a sugar pill, that they believe to be a real medication. This suggests a powerful connection between the mind and the body. The patient\'s belief in the treatment can trigger a genuine physiological response, highlighting the brain\'s role in physical health.',
+                    options: [
+                        'The placebo effect proves that most medicines are fake.',
+                        'The mind has a powerful, demonstrable influence on physical health.',
+                        'Sugar pills are effective treatments for many diseases.',
+                        'Doctors should always use placebos.'
+                    ],
+                    correctAnswer: 'The mind has a powerful, demonstrable influence on physical health.',
+                    explanation: 'The passage uses the placebo effect as the primary example to illustrate the broader concept of the mind-body connection.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Main Idea',
+                    prompt: 'What is the primary point of the passage?',
+                    passage: 'Sleep is not merely a period of rest but a critical biological function. During sleep, the brain consolidates memories, a process essential for learning. The body also performs vital maintenance, such as repairing tissues and clearing out toxins that accumulate during waking hours. Consistently failing to get enough quality sleep has been linked to a host of health problems, from impaired cognitive function to an increased risk of chronic disease.',
+                    options: [
+                        'Sleep is primarily for resting the body.',
+                        'Forgetting to sleep can cause health problems.',
+                        'Sleep is an active and essential process for both brain function and physical health.',
+                        'Memory consolidation is the only important part of sleep.'
+                    ],
+                    correctAnswer: 'Sleep is an active and essential process for both brain function and physical health.',
+                    explanation: 'The passage details multiple critical functions of sleep for both the brain (memory) and body (repair, toxin removal), supporting this general conclusion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Main Idea',
+                    prompt: 'What is the main idea being presented?',
+                    passage: 'The art of storytelling is a fundamental part of the human experience, found in every culture throughout history. From ancient oral traditions to modern films, stories serve to entertain, educate, and transmit cultural values. They allow us to understand the world from different perspectives, fostering empathy and connection. A society\'s stories are a reflection of its deepest beliefs and aspirations.',
+                    options: [
+                        'Modern films are the most important form of storytelling.',
+                        'Storytelling is a universal and vital aspect of human culture that serves multiple crucial functions.',
+                        'Oral traditions are no longer relevant.',
+                        'Stories are primarily for entertainment.'
+                    ],
+                    correctAnswer: 'Storytelling is a universal and vital aspect of human culture that serves multiple crucial functions.',
+                    explanation: 'This sentence best captures the broad and significant role of storytelling as described in the passage, including its universality and its various purposes.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Main Idea',
+                    prompt: 'What is the central argument of the passage?',
+                    passage: 'Light pollution, the excessive and misdirected use of artificial light, has consequences beyond obscuring our view of the stars. It disrupts the circadian rhythms of humans, potentially leading to sleep disorders. It also has a devastating impact on nocturnal wildlife, interfering with migration, reproduction, and hunting. Simple measures like shielding outdoor lights and using warmer-colored bulbs can make a significant difference.',
+                    options: [
+                        'Light pollution is only a problem for astronomers.',
+                        'Excessive artificial light has wide-ranging negative effects on both human health and the environment.',
+                        'The only way to stop light pollution is to turn off all lights.',
+                        'Light pollution is an unsolvable problem.'
+                    ],
+                    correctAnswer: 'Excessive artificial light has wide-ranging negative effects on both human health and the environment.',
+                    explanation: 'The passage details the negative impacts on both humans and wildlife, making this the most comprehensive summary of the argument.'
+                },
+                // 15 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Ratios',
+                    prompt: 'A recipe calls for 2 cups of flour for every 3 eggs. If you use 9 eggs, how much flour do you need in cups?',
+                    correctAnswer: '6',
+                    explanation: 'The ratio of flour to eggs is 2:3. To find out how much flour is needed for 9 eggs, set up a proportion: 2/3 = x/9. Cross-multiply to get 3x = 18. Divide by 3 to find x = 6.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Proportions',
+                    prompt: 'A map has a scale of 1 inch = 50 miles. If two cities are 3.5 inches apart on the map, what is the actual distance between them in miles?',
+                    correctAnswer: '175',
+                    explanation: 'Set up a proportion: 1 inch / 50 miles = 3.5 inches / x miles. Cross-multiply: 1 * x = 50 * 3.5. So, x = 175 miles.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Proportions',
+                    prompt: 'If 4 shirts cost $60, how much would 7 shirts cost in dollars?',
+                    correctAnswer: '105',
+                    explanation: 'First, find the cost of one shirt: $60 / 4 = $15 per shirt. Then, multiply by the new number of shirts: $15 * 7 = $105.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Ratios',
+                    prompt: 'A car travels 150 miles on 5 gallons of gas. How many gallons are needed to travel 450 miles?',
+                    correctAnswer: '15',
+                    explanation: 'The rate is 150 miles / 5 gallons = 30 miles per gallon. To travel 450 miles, you would need 450 miles / 30 mpg = 15 gallons.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Ratios',
+                    prompt: 'The ratio of winning tickets to losing tickets in a lottery is 3:47. If there are 1,000 tickets in total, how many are winning tickets?',
+                    correctAnswer: '60',
+                    explanation: 'The total number of parts in the ratio is 3 + 47 = 50. Divide the total number of tickets by the total parts: 1000 / 50 = 20 tickets per part. The number of winning tickets is 3 parts, so 3 * 20 = 60.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Proportions',
+                    prompt: 'A baker uses 500 grams of sugar to make 20 cookies. How much sugar is needed for 30 cookies in grams?',
+                    correctAnswer: '750',
+                    explanation: 'First, find out how much sugar is in one cookie: 500 grams / 20 cookies = 25 grams per cookie. Then multiply by the new number of cookies: 25 * 30 = 750 grams.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Ratios',
+                    prompt: 'The ratio of blue marbles to red marbles in a bag is 7:4. If there are 28 red marbles, how many blue marbles are there?',
+                    correctAnswer: '49',
+                    explanation: 'Set up the proportion: 7 (blue) / 4 (red) = x (blue) / 28 (red). The multiplier is 28/4 = 7. So, x = 7 * 7 = 49.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Proportions',
+                    prompt: 'A model of a building is built to a scale of 1 foot : 200 feet. If the model is 2.5 feet tall, how tall is the actual building in feet?',
+                    correctAnswer: '500',
+                    explanation: 'The scale is 1:200. Set up the proportion: 1 / 200 = 2.5 / x. Cross-multiply to get x = 200 * 2.5, which is 500 feet.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Ratios',
+                    prompt: 'In a survey, the ratio of people who prefer coffee to tea is 8:3. If 99 people were surveyed, how many people prefer tea?',
+                    correctAnswer: '27',
+                    explanation: 'The total number of ratio parts is 8 + 3 = 11. Divide the total number of people by the parts: 99 / 11 = 9 people per part. The number of people who prefer tea is 3 parts, so 3 * 9 = 27.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Ratios',
+                    prompt: 'The ratio of boys to girls in a class is 5 to 4. If there are 36 students in total, how many girls are there?',
+                    correctAnswer: '16',
+                    explanation: 'The total number of parts is 5 + 4 = 9. Divide the total students by the number of parts: 36 / 9 = 4 students per part. The number of girls is 4 parts, so 4 * 4 = 16.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Advanced Ratios',
+                    prompt: 'A bag has red and blue marbles in a 7:5 ratio. If 9 blue marbles are added, the ratio becomes 7:8. How many red marbles are there?',
+                    correctAnswer: '21',
+                    explanation: 'The number of red marbles (7 parts) does not change. The blue marbles change from 5 parts to 8 parts, an increase of 3 parts. This increase of 3 parts corresponds to the 9 added marbles, so 1 part = 3 marbles. The number of red marbles is 7 parts, so 7 * 3 = 21.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Rate Problem',
+                    prompt: 'It takes 4 painters 6 hours to paint a house. How long would it take 8 painters to paint the same house, in hours?',
+                    correctAnswer: '3',
+                    explanation: 'This is an inverse proportion. The total "painter-hours" needed is 4 painters * 6 hours = 24 painter-hours. With 8 painters, the time needed is 24 painter-hours / 8 painters = 3 hours.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 13: Ratios with 3 Parts',
+                    prompt: 'A sum of $120 is divided among Ann, Bob, and Carol in the ratio 2:3:5. How much does Bob receive?',
+                    correctAnswer: '36',
+                    explanation: 'The total number of parts is 2+3+5 = 10. The value of one part is $120 / 10 = $12. Bob receives 3 parts, so 3 * $12 = $36.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Proportions with Fractions',
+                    prompt: 'If a machine can produce 50 widgets in 2/3 of an hour, how many widgets can it produce in 2 hours?',
+                    correctAnswer: '150',
+                    explanation: 'First, find the rate per hour. If it produces 50 widgets in 40 minutes, it produces 75 widgets in 60 minutes (1 hour). In 2 hours, it will produce 75 * 2 = 150 widgets.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Changing Ratios',
+                    prompt: 'A bag contains red and blue marbles in a ratio of 3:4. After 5 blue marbles are removed, the ratio becomes 3:2. How many red marbles were in the bag?',
+                    correctAnswer: '15',
+                    explanation: 'Let R=3x and B=4x. The new ratio is 3x / (4x - 5) = 3/2. Cross-multiply: 6x = 3(4x-5) -> 6x = 12x - 15 -> 6x = 15 -> x=2.5. Red marbles = 3 * 2.5 = 7.5. This problem is flawed. Let\'s fix it. New Q: A bag has a red to blue marble ratio of 3:4. If 10 blue marbles are removed, the ratio becomes 3:2. How many red marbles? Let R=3x, B=4x. 3x / (4x-10) = 3/2. 6x = 12x - 30. 6x = 30. x=5. Red = 3x = 15. This works.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D6: Week 4 Mixed Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Week 4 Mixed Review",
+            subtitle: "Day 6: Synthesizing Your Skills",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d6',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: The Gauntlet',
+                    content: `
+                        <p>This is a comprehensive review of everything you've worked on this week, agent. You will face a mix of questions covering:</p>
+                        <ul>
+                            <li>Revising & Editing</li>
+                            <li>Number Properties & Basic Algebra</li>
+                            <li>Scrambled Paragraphs & Logical Reasoning</li>
+                            <li>Geometry & Data Analysis</li>
+                        </ul>
+                        <p>This mission will test your ability to switch between different modes of thinking. Stay sharp.</p>
+                    `
+                },
+                // Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 1: Subject-Verb Agreement',
+                    passage: 'The collection of paintings, including the Monet and the Degas, are the main attraction.',
+                    prompt: 'How should the underlined verb be corrected?',
+                    options: ['is', 'were', 'be', 'No correction needed'],
+                    correctAnswer: 'is',
+                    explanation: 'The subject of the sentence is "collection," which is singular. The phrases describing the paintings are prepositional phrases. The verb must agree with the subject, so it should be "is".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 1: Order of Operations',
+                    prompt: 'Calculate: 20 - 2 * (5 + 3)^2 / 8',
+                    correctAnswer: '4',
+                    explanation: 'PEMDAS: Parentheses (5+3=8), Exponents (8^2=64), Multiplication (2*64=128), Division (128/8=16), Subtraction (20-16=4).'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Review 2: Paragraph Logic',
+                    prompt: 'Unscramble these sentences to form a coherent paragraph.',
+                    sentences: [
+                        { id: 1, text: 'This process, called photosynthesis, uses sunlight to convert water and carbon dioxide into food.' },
+                        { id: 2, text: 'As a result, they form the base of most terrestrial food chains.' },
+                        { id: 3, text: 'Plants are essential to life on Earth primarily because they produce their own energy.' },
+                        { id: 4, text: 'They are one of the few organisms capable of creating their own nourishment from inorganic sources.' }
+                    ],
+                    // Correct Order: 3, 4, 1, 2
+                    explanation: 'The paragraph starts with a main idea about plants being essential (3). It elaborates on this with a more specific statement (4). It then explains the process (1) and finally states the result or consequence (2).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 2: Geometry (Triangles)',
+                    prompt: 'An isosceles right triangle has a leg of length 6. What is the length of the hypotenuse? Answer in simplest radical form.',
+                    correctAnswer: '6√2',
+                    explanation: 'In an isosceles right triangle, both legs are equal. Using Pythagorean theorem: 6^2 + 6^2 = c^2. So, 36 + 36 = c^2, which is 72 = c^2. The square root of 72 is √(36*2), which simplifies to 6√2.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 3: Logical Reasoning',
+                    passage: 'If you have a library card, you can check out books. John cannot check out books.',
+                    prompt: 'What can be logically concluded?',
+                    options: [
+                        'John has a library card.',
+                        'John does not have a library card.',
+                        'The library is closed.',
+                        'John does not like to read.'
+                    ],
+                    correctAnswer: 'John does not have a library card.',
+                    explanation: 'This is another example of Modus Tollens. If P (has card) implies Q (can check out), and we have not-Q (cannot check out), we can conclude not-P (does not have card).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 3: Percentages',
+                    prompt: 'A restaurant bill is $120. You want to leave a 20% tip. What is the total amount you will pay?',
+                    correctAnswer: '144',
+                    explanation: 'The tip is 20% of $120, which is 0.20 * 120 = $24. The total amount is the bill plus the tip: $120 + $24 = $144.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 4: Tone',
+                    passage: 'The old house stood on a hill overlooking the town, its windows like vacant eyes. A chilling wind whispered through the skeletal branches of the ancient oak tree beside it, carrying the scent of damp earth and decay.',
+                    prompt: 'The tone of this passage is best described as:',
+                    options: ['Nostalgic and warm', 'Scientific and detached', 'Ominous and eerie', 'Playful and cheerful'],
+                    correctAnswer: 'Ominous and eerie',
+                    explanation: 'Words like "vacant eyes," "chilling wind," "skeletal branches," and "decay" create a spooky and unsettling tone.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 4: Data Analysis (Median)',
+                    prompt: 'Find the median of this set of numbers: 8, 3, 1, 9, 4, 6.',
+                    correctAnswer: '5',
+                    explanation: 'First, order the numbers: 1, 3, 4, 6, 8, 9. Since there is an even number of values, the median is the average of the two middle numbers (4 and 6). (4 + 6) / 2 = 5.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 5: Sentence Correction',
+                    passage: 'The reason for the delay is because the train had a mechanical problem.',
+                    prompt: 'Which of the following is the best way to rewrite the sentence?',
+                    options: [
+                        'The reason for the delay is that the train had a mechanical problem.',
+                        'Being that the train had a mechanical problem, it was delayed.',
+                        'The delay was on account of a mechanical problem with the train.',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: 'The reason for the delay is that the train had a mechanical problem.',
+                    explanation: 'The phrase "the reason is because" is redundant. Using "the reason is that" or simply stating "The train was delayed because of a mechanical problem" is more concise and grammatically correct.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 5: Basic Algebra',
+                    prompt: 'Solve for y: 4(y - 3) = 2y + 6',
+                    correctAnswer: '9',
+                    explanation: 'Distribute the 4: 4y - 12 = 2y + 6. Subtract 2y from both sides: 2y - 12 = 6. Add 12 to both sides: 2y = 18. Divide by 2: y = 9.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

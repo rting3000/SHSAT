@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D5: Paired Passages & Area</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Paired Passages & Area/Perimeter",
+            subtitle: "Week 2, Day 5",
+            pointsPerQuestion: 10,
+            completion_id: 'w2d5',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Synthesis and Measurement',
+                    content: `
+                        <p>Today we level up. In ELA, you'll face <strong>Paired Passages</strong>, where you must read two related texts and answer questions about each one and the relationship between them. In Math, you'll be calculating <strong>Area and Perimeter</strong> of various shapes.</p>
+                        <ul>
+                            <li><strong>Paired Passages:</strong> The key is to identify the main idea of each passage first. Then, look for points of agreement, disagreement, or different perspectives on the same topic. Questions will often ask you to synthesize information from both texts.</li>
+                            <li><strong>Area & Perimeter:</strong> <strong>Perimeter</strong> is the distance around a shape (add up all the sides). <strong>Area</strong> is the space inside a shape. Key formulas: Area of a rectangle = length × width. Area of a triangle = (1/2) × base × height.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 1: Agreement',
+                    prompt: 'Based on both passages, which statement would both authors most likely agree with?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> The rise of automation is a cause for significant concern. For every robot added to a factory floor, human workers are displaced. While proponents argue that automation creates new, higher-skilled jobs, this ignores the reality for millions of workers whose skills are now obsolete. We must prioritize policies that protect human employment, even if it means slowing the pace of technological adoption.</p>
+                        <p><strong>Passage 2:</strong> Historically, every major technological shift has been met with fears of mass unemployment. The industrial revolution, the computer age—both were predicted to end work as we knew it. Yet, human ingenuity prevailed. New industries emerged, creating jobs that were previously unimaginable. Automation is no different. It will eliminate tedious jobs, freeing up human workers to focus on more creative, collaborative, and complex problem-solving tasks.</p>
+                    `,
+                    options: [
+                        'Automation will have no significant impact on the job market.',
+                        'The primary goal of automation is to make work more creative.',
+                        'Technological advancement inevitably leads to changes in the labor force.',
+                        'Governments should actively slow down the adoption of new technologies.'
+                    ],
+                    correctAnswer: 'Technological advancement inevitably leads to changes in the labor force.',
+                    explanation: 'Both authors agree that automation is a major technological shift that will change jobs. They disagree on whether this change is positive or negative, but they both acknowledge the change itself is happening.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'Paired Passages 2: Disagreement',
+                    prompt: 'What is the primary point of disagreement between the two authors?',
+                     passage: `
+                        <p><strong>Passage 1:</strong> The rise of automation is a cause for significant concern. For every robot added to a factory floor, human workers are displaced. While proponents argue that automation creates new, higher-skilled jobs, this ignores the reality for millions of workers whose skills are now obsolete. We must prioritize policies that protect human employment, even if it means slowing the pace of technological adoption.</p>
+                        <p><strong>Passage 2:</strong> Historically, every major technological shift has been met with fears of mass unemployment. The industrial revolution, the computer age—both were predicted to end work as we knew it. Yet, human ingenuity prevailed. New industries emerged, creating jobs that were previously unimaginable. Automation is no different. It will eliminate tedious jobs, freeing up human workers to focus on more creative, collaborative, and complex problem-solving tasks.</p>
+                    `,
+                    options: [
+                        'Whether automation is a form of technology.',
+                        'Whether the overall outcome of automation for human workers is positive or negative.',
+                        'Whether new jobs will be created.',
+                        'Whether old jobs will be eliminated.'
+                    ],
+                    correctAnswer: 'Whether the overall outcome of automation for human workers is positive or negative.',
+                    explanation: 'Author 1 sees the outcome as negative ("significant concern," "displaced workers"), while Author 2 sees it as positive ("human ingenuity prevailed," "freeing up workers").'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 3: Author 1\'s View',
+                    prompt: 'How would Author 1 likely respond to Author 2\'s claim that automation frees workers for "more creative" tasks?',
+                     passage: `
+                        <p><strong>Passage 1:</strong> The rise of automation is a cause for significant concern. For every robot added to a factory floor, human workers are displaced. While proponents argue that automation creates new, higher-skilled jobs, this ignores the reality for millions of workers whose skills are now obsolete. We must prioritize policies that protect human employment, even if it means slowing the pace of technological adoption.</p>
+                        <p><strong>Passage 2:</strong> Historically, every major technological shift has been met with fears of mass unemployment. The industrial revolution, the computer age—both were predicted to end work as we knew it. Yet, human ingenuity prevailed. New industries emerged, creating jobs that were previously unimaginable. Automation is no different. It will eliminate tedious jobs, freeing up human workers to focus on more creative, collaborative, and complex problem-solving tasks.</p>
+                    `,
+                    options: [
+                        'By agreeing that creativity is the most important skill.',
+                        'By arguing that this ignores the immediate problem of unemployment for those with obsolete skills.',
+                        'By suggesting that robots can also be creative.',
+                        'By claiming that most workers do not want to be creative.'
+                    ],
+                    correctAnswer: 'By arguing that this ignores the immediate problem of unemployment for those with obsolete skills.',
+                    explanation: 'Author 1 is focused on the "reality for millions of workers whose skills are now obsolete." They would see Author 2\'s point as an idealistic view that ignores the real-world harm to displaced workers.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 4: Author 2\'s View',
+                    prompt: 'Author 2 would most likely describe Author 1\'s viewpoint as:',
+                     passage: `
+                        <p><strong>Passage 1:</strong> The rise of automation is a cause for significant concern. For every robot added to a factory floor, human workers are displaced. While proponents argue that automation creates new, higher-skilled jobs, this ignores the reality for millions of workers whose skills are now obsolete. We must prioritize policies that protect human employment, even if it means slowing the pace of technological adoption.</p>
+                        <p><strong>Passage 2:</strong> Historically, every major technological shift has been met with fears of mass unemployment. The industrial revolution, the computer age—both were predicted to end work as we knew it. Yet, human ingenuity prevailed. New industries emerged, creating jobs that were previously unimaginable. Automation is no different. It will eliminate tedious jobs, freeing up human workers to focus on more creative, collaborative, and complex problem-solving tasks.</p>
+                    `,
+                    options: [
+                        'Forward-thinking and innovative.',
+                        'Unrealistically optimistic.',
+                        'Similar to the historical fears that have always accompanied new technology.',
+                        'Focused on the wrong type of technology.'
+                    ],
+                    correctAnswer: 'Similar to the historical fears that have always accompanied new technology.',
+                    explanation: 'Author 2 explicitly frames their argument by stating that "every major technological shift has been met with fears of mass unemployment," directly implying that Author 1\'s concerns are part of a repeating historical pattern.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 5: Tone',
+                    prompt: 'What best describes the tone of Passage 1 compared to Passage 2?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> The rise of automation is a cause for significant concern. For every robot added to a factory floor, human workers are displaced. While proponents argue that automation creates new, higher-skilled jobs, this ignores the reality for millions of workers whose skills are now obsolete. We must prioritize policies that protect human employment, even if it means slowing the pace of technological adoption.</p>
+                        <p><strong>Passage 2:</strong> Historically, every major technological shift has been met with fears of mass unemployment. The industrial revolution, the computer age—both were predicted to end work as we knew it. Yet, human ingenuity prevailed. New industries emerged, creating jobs that were previously unimaginable. Automation is no different. It will eliminate tedious jobs, freeing up human workers to focus on more creative, collaborative, and complex problem-solving tasks.</p>
+                    `,
+                    options: [
+                        'Passage 1 is optimistic, while Passage 2 is pessimistic.',
+                        'Passage 1 is cautionary, while Passage 2 is optimistic.',
+                        'Passage 1 is neutral, while Passage 2 is biased.',
+                        'Both passages have a humorous tone.'
+                    ],
+                    correctAnswer: 'Passage 1 is cautionary, while Passage 2 is optimistic.',
+                    explanation: 'Passage 1 uses words like "concern" and "obsolete," warning of negative consequences. Passage 2 uses words like "ingenuity prevailed" and "freeing up workers," presenting a hopeful outlook.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 6: Agreement',
+                    prompt: 'On which point would the two authors agree?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> City parks are a vital public good. They provide essential green space for recreation, relaxation, and community events, improving the mental and physical health of residents. They must be funded and protected by the city government to ensure they remain accessible to all.</p>
+                        <p><strong>Passage 2:</strong> While city parks are pleasant, their maintenance is a significant drain on the municipal budget. This public funding could be better used for more critical services like infrastructure and education. Parks should be supported by private donations and corporate sponsorships, not taxpayer dollars.</p>
+                    `,
+                    options: [
+                        'Parks are not important.',
+                        'Parks should be funded by the government.',
+                        'Parks provide a benefit to city residents.',
+                        'Parks are a waste of money.'
+                    ],
+                    correctAnswer: 'Parks provide a benefit to city residents.',
+                    explanation: 'Both authors acknowledge that parks are beneficial. Passage 1 calls them a "vital public good," and Passage 2 calls them "pleasant." Their disagreement is about how they should be funded.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 7: Disagreement',
+                    prompt: 'What is the main point of disagreement between the authors?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> City parks are a vital public good. They provide essential green space for recreation, relaxation, and community events, improving the mental and physical health of residents. They must be funded and protected by the city government to ensure they remain accessible to all.</p>
+                        <p><strong>Passage 2:</strong> While city parks are pleasant, their maintenance is a significant drain on the municipal budget. This public funding could be better used for more critical services like infrastructure and education. Parks should be supported by private donations and corporate sponsorships, not taxpayer dollars.</p>
+                    `,
+                    options: [
+                        'Whether parks are enjoyable.',
+                        'The source of funding for park maintenance.',
+                        'Whether education is a critical service.',
+                        'Whether green space is important.'
+                    ],
+                    correctAnswer: 'The source of funding for park maintenance.',
+                    explanation: 'Author 1 argues for public government funding ("must be funded...by the city government"), while Author 2 argues for private funding ("private donations and corporate sponsorships").'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 8: Underlying Assumption',
+                    prompt: 'A key assumption made by Author 2 is that:',
+                     passage: `
+                        <p><strong>Passage 1:</strong> City parks are a vital public good. They provide essential green space for recreation, relaxation, and community events, improving the mental and physical health of residents. They must be funded and protected by the city government to ensure they remain accessible to all.</p>
+                        <p><strong>Passage 2:</strong> While city parks are pleasant, their maintenance is a significant drain on the municipal budget. This public funding could be better used for more critical services like infrastructure and education. Parks should be supported by private donations and corporate sponsorships, not taxpayer dollars.</p>
+                    `,
+                    options: [
+                        'Private donations and sponsorships would be sufficient to maintain the parks.',
+                        'Taxes are too high.',
+                        'Infrastructure is in good condition.',
+                        'People do not like parks.'
+                    ],
+                    correctAnswer: 'Private donations and sponsorships would be sufficient to maintain the parks.',
+                    explanation: 'Author 2\'s entire argument relies on the idea that an alternative funding source is viable. If private funding isn\'t enough, their proposal to cut public funding falls apart.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 9: Purpose',
+                    prompt: 'What is the primary purpose of Passage 1?',
+                     passage: `
+                        <p><strong>Passage 1:</strong> City parks are a vital public good. They provide essential green space for recreation, relaxation, and community events, improving the mental and physical health of residents. They must be funded and protected by the city government to ensure they remain accessible to all.</p>
+                        <p><strong>Passage 2:</strong> While city parks are pleasant, their maintenance is a significant drain on the municipal budget. This public funding could be better used for more critical services like infrastructure and education. Parks should be supported by private donations and corporate sponsorships, not taxpayer dollars.</p>
+                    `,
+                    options: [
+                        'To argue for public funding of city parks.',
+                        'To describe the different types of trees in parks.',
+                        'To entertain readers with a story about a park.',
+                        'To analyze the city budget.'
+                    ],
+                    correctAnswer: 'To argue for public funding of city parks.',
+                    explanation: 'The passage lists the benefits of parks and concludes with a strong claim that they "must be funded and protected by the city government."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Paired Passages 10: Relationship',
+                    prompt: 'Which statement best describes the relationship between the two passages?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> The internet has democratized information, giving everyone access to a world of knowledge. This unprecedented access fosters education and global understanding.</p>
+                        <p><strong>Passage 2:</strong> While the internet provides access to information, it has also led to the rapid spread of misinformation. The lack of editorial oversight means that false or biased content can be indistinguishable from fact, posing a danger to society.</p>
+                    `,
+                    options: [
+                        'Passage 2 refutes the central claim of Passage 1.',
+                        'Passage 2 provides a qualification or counterpoint to the idea in Passage 1.',
+                        'Both passages argue that the internet is a negative force.',
+                        'Passage 1 is a summary of Passage 2.'
+                    ],
+                    correctAnswer: 'Passage 2 provides a qualification or counterpoint to the idea in Passage 1.',
+                    explanation: 'Passage 1 makes a positive claim. Passage 2 says "While" that is true, it also has a significant negative side. This is a classic point-counterpoint relationship where the second passage qualifies the first.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Perimeter of a Rectangle',
+                    prompt: 'A rectangular garden is 15 feet long and 10 feet wide. How much fencing is needed to enclose the garden?',
+                    correctAnswer: '50',
+                    explanation: 'Perimeter is the distance around the rectangle. The formula is P = 2(length + width). P = 2(15 + 10) = 2(25) = 50 feet.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Area of a Triangle',
+                    prompt: 'What is the area of a triangle with a base of 12 inches and a height of 8 inches?',
+                    correctAnswer: '48',
+                    explanation: 'The formula for the area of a triangle is A = (1/2) * base * height. A = (1/2) * 12 * 8 = 6 * 8 = 48 square inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Area of a Rectangle',
+                    prompt: 'A rectangular room has a length of 14 feet and a width of 11 feet. What is its area in square feet?',
+                    correctAnswer: '154',
+                    explanation: 'Area of a rectangle is length × width. So, Area = 14 * 11 = 154 square feet.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Perimeter of a Square',
+                    prompt: 'A square has a side length of 9 meters. What is its perimeter?',
+                    correctAnswer: '36',
+                    explanation: 'A square has four equal sides. The perimeter is the sum of all sides. P = 4 * side = 4 * 9 = 36 meters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Finding a Missing Dimension',
+                    prompt: 'A rectangle has an area of 120 square cm and a width of 10 cm. What is its length?',
+                    correctAnswer: '12',
+                    explanation: 'Area = length × width. So, 120 = length × 10. Divide by 10 to find the length: 120 / 10 = 12 cm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Area of a Composite Shape',
+                    prompt: 'A shape is formed by a 10x10 square with a 3x4 rectangle cut out from the middle. What is the area of the remaining shape?',
+                    correctAnswer: '88',
+                    explanation: 'First, find the area of the large square: 10 * 10 = 100. Then, find the area of the cutout rectangle: 3 * 4 = 12. Subtract the cutout area from the large area: 100 - 12 = 88.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Perimeter and Area',
+                    prompt: 'A square has an area of 64 square inches. What is its perimeter?',
+                    correctAnswer: '32',
+                    explanation: 'The area of a square is side * side. So, the side length is the square root of 64, which is 8. The perimeter is 4 * side = 4 * 8 = 32 inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Circle Circumference',
+                    prompt: 'A circle has a radius of 5 cm. What is its circumference? (Use π = 3.14)',
+                    correctAnswer: '31.4',
+                    explanation: 'The formula for circumference is C = 2 * π * r.  C = 2 * 3.14 * 5 = 31.4 cm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Circle Area',
+                    prompt: 'A circle has a diameter of 10 meters. What is its area? (Use π = 3.14)',
+                    correctAnswer: '78.5',
+                    explanation: 'The diameter is 10, so the radius is 5. The formula for area is A = π * r^2. A = 3.14 * 5^2 = 3.14 * 25 = 78.5 square meters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Finding Height of a Triangle',
+                    prompt: 'A triangle has an area of 30 square feet and a base of 10 feet. What is its height?',
+                    correctAnswer: '6',
+                    explanation: 'Area = (1/2) * base * height. So, 30 = (1/2) * 10 * height. This simplifies to 30 = 5 * height. Divide by 5 to find the height: 30 / 5 = 6 feet.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

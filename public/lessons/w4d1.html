@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D1: Foundational Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Foundational Review",
+            subtitle: "Week 4, Day 1",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d1',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Sharpening the Tools',
+                    content: `
+                        <p>Welcome to Week 4, agent. This week is dedicated to reviewing and mastering the foundational skills you've learned. We'll be mixing topics to simulate the test environment more closely.</p>
+                        <p>Today's mission is a review of two core concepts:</p>
+                        <ul>
+                            <li><strong>ELA:</strong> Identifying the <strong>Main Idea</strong> of a passage.</li>
+                            <li><strong>Math:</strong> Working with <strong>Ratios, Rates, and Proportions</strong>.</li>
+                        </ul>
+                        <p>These skills are fundamental. Let's ensure they are rock solid. Begin when ready.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Main Idea',
+                    passage: 'The chameleon\'s ability to change color is a famous adaptation. However, contrary to popular belief, it is not primarily used for camouflage. Instead, chameleons change their color to regulate body temperature (darker colors absorb more heat) and to communicate with other chameleons. Different colors can signal aggression, willingness to mate, or fear.',
+                    prompt: 'What is the main idea of this passage?',
+                    options: [
+                        'Chameleons are difficult to see.',
+                        'The popular understanding of why chameleons change color is incorrect; it is mainly for thermoregulation and communication.',
+                        'Chameleons use colors to express fear.',
+                        'All lizards can change color to absorb heat.'
+                    ],
+                    correctAnswer: 'The popular understanding of why chameleons change color is incorrect; it is mainly for thermoregulation and communication.',
+                    explanation: 'The passage opens by introducing the common belief and immediately refutes it ("contrary to popular belief"), then explains the true primary reasons. This option captures that central point.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Main Idea',
+                    passage: 'Beekeeping, or apiculture, has been practiced by humans for millennia. Beyond the production of honey, bees play a vital role in agriculture as pollinators. It is estimated that one-third of the food that we consume each day relies on pollination mainly by bees. The recent decline in bee populations, often termed Colony Collapse Disorder, thus poses a significant threat to global food security.',
+                    prompt: 'The central point of the passage is that:',
+                    options: [
+                        'Humans have been keeping bees for a very long time.',
+                        'Honey is a valuable product.',
+                        'Bees are crucial for agriculture, and their declining population is a serious problem for our food supply.',
+                        'Colony Collapse Disorder is a mysterious phenomenon.'
+                    ],
+                    correctAnswer: 'Bees are crucial for agriculture, and their declining population is a serious problem for our food supply.',
+                    explanation: 'The passage establishes the importance of bees as pollinators for our food and then highlights the danger posed by their declining numbers. This option summarizes that core argument.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Main Idea',
+                    passage: 'The Great Barrier Reef, the world\'s largest coral reef system, is composed of over 2,900 individual reefs and 900 islands. It is one of the most biodiverse ecosystems on Earth, supporting a wide range of life. However, it is under severe threat from climate change, which causes coral bleaching, and from pollution from agricultural runoff. Conservation efforts are underway, but the scale of the problem is immense.',
+                    prompt: 'What is the main idea of the passage?',
+                    options: [
+                        'The Great Barrier Reef is the biggest reef in the world.',
+                        'The Great Barrier Reef is a vast and vital ecosystem that is facing critical threats from human activity.',
+                        'Australia is home to many unique species.',
+                        'Coral bleaching is an interesting scientific process.'
+                    ],
+                    correctAnswer: 'The Great Barrier Reef is a vast and vital ecosystem that is facing critical threats from human activity.',
+                    explanation: 'The passage describes the reef\'s scale and importance (biodiversity) and then immediately focuses on the significant threats it faces, making this the central idea.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Main Idea',
+                    passage: 'While often associated with science fiction, the concept of a "universal translator" is moving closer to reality. Modern machine learning algorithms, particularly deep neural networks, can now translate spoken and written languages with surprising accuracy in real-time. While nuances and cultural context remain challenging, the technology is rapidly improving, breaking down communication barriers in business, travel, and diplomacy.',
+                    prompt: 'Which statement best expresses the main idea?',
+                    options: [
+                        'Science fiction often predicts future technology.',
+                        'Deep neural networks are a type of artificial intelligence.',
+                        'Advances in machine learning are making real-time language translation a practical reality, transforming global communication.',
+                        'The new translators still make mistakes with cultural nuances.'
+                    ],
+                    correctAnswer: 'Advances in machine learning are making real-time language translation a practical reality, transforming global communication.',
+                    explanation: 'This option encapsulates the key points: the technological advance (machine learning), the application (real-time translation), and the impact (breaking down barriers).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Main Idea',
+                    passage: 'The slow food movement began in Italy in the 1980s as a protest against the opening of a McDonald\'s in Rome. It has since grown into a global organization that advocates for preserving traditional and regional cuisine. The movement promotes farming practices that are sustainable for local ecosystems and encourages people to understand where their food comes from, countering the effects of a "fast food" culture.',
+                    prompt: 'The main idea of this passage is that the slow food movement:',
+                    options: [
+                        'Was founded to protest a specific fast-food restaurant.',
+                        'Is a global effort to protect local food traditions and sustainable farming from the influence of fast food culture.',
+                        'Is most popular in Italy.',
+                        'Believes that all fast food is unhealthy.'
+                    ],
+                    correctAnswer: 'Is a global effort to protect local food traditions and sustainable farming from the influence of fast food culture.',
+                    explanation: 'While it started with a specific protest, the passage explains that the movement\'s broader, current purpose is to preserve local food culture and sustainability, making this the main idea.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Main Idea',
+                    passage: 'Dark matter is a mysterious substance that astronomers believe makes up about 27% of the mass in the universe. It does not emit or interact with electromagnetic radiation, such as light, which is why it is "dark." Its existence is inferred from its gravitational effects on visible matter, radiation, and the large-scale structure of the universe. Scientists are still working on numerous experiments to detect it directly.',
+                    prompt: 'What is the central idea of the passage?',
+                    options: [
+                        'Dark matter is a hypothetical substance whose existence is inferred from its gravitational pull, and it remains one of the biggest mysteries in modern astronomy.',
+                        'Dark matter is invisible because it is "dark".',
+                        'The universe is mostly empty space.',
+                        'Scientists will soon discover what dark matter is.'
+                    ],
+                    correctAnswer: 'Dark matter is a hypothetical substance whose existence is inferred from its gravitational pull, and it remains one of the biggest mysteries in modern astronomy.',
+                    explanation: 'This statement summarizes what dark matter is, how we know about it (gravity), and its current status (a mystery), covering all points in the paragraph.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Ratios',
+                    prompt: 'The ratio of cats to dogs at a shelter is 3 to 5. If there are 24 cats, how many dogs are there?',
+                    correctAnswer: '40',
+                    explanation: 'Set up the proportion: 3 cats / 5 dogs = 24 cats / x dogs. To get from 3 to 24, you multiply by 8. So, you must multiply 5 by 8. 5 * 8 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Rates',
+                    prompt: 'A car travels 180 miles in 3 hours. What is its average speed in miles per hour?',
+                    correctAnswer: '60',
+                    explanation: 'Rate = Distance / Time. The rate is 180 miles / 3 hours = 60 miles per hour.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Proportions',
+                    prompt: 'If 5 pencils cost $1.50, how much will 12 pencils cost? (Enter dollars and cents, e.g., 3.60)',
+                    correctAnswer: '3.60',
+                    explanation: 'First, find the cost of one pencil: $1.50 / 5 = $0.30. Then, multiply by 12: $0.30 * 12 = $3.60.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Ratios',
+                    prompt: 'A mixture of concrete is made of 1 part cement, 2 parts sand, and 3 parts gravel. If you use 18 cubic feet of gravel, how many cubic feet of sand do you need?',
+                    correctAnswer: '12',
+                    explanation: 'The ratio of sand to gravel is 2:3. Set up the proportion: 2 sand / 3 gravel = x sand / 18 gravel. To get from 3 to 18, you multiply by 6. So, x = 2 * 6 = 12.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Rates',
+                    prompt: 'A machine can print 150 posters in 5 minutes. How many posters can it print in one hour?',
+                    correctAnswer: '1800',
+                    explanation: 'First, find the rate per minute: 150 posters / 5 minutes = 30 posters per minute. There are 60 minutes in an hour. So, 30 * 60 = 1800 posters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Proportions',
+                    prompt: 'On a map, 2 inches represents 50 miles. How many miles does 5 inches represent?',
+                    correctAnswer: '125',
+                    explanation: 'Set up the proportion: 2 inches / 50 miles = 5 inches / x miles. Cross-multiply: 2x = 5 * 50, so 2x = 250. Divide by 2: x = 125 miles.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Main Idea',
+                    passage: 'The printing press, invented by Johannes Gutenberg around 1440, was a pivotal development in human history. It allowed for the mass production of books and the rapid dissemination of knowledge throughout Europe. This led to a dramatic increase in literacy rates and fueled the Renaissance, the Reformation, and the Age of Enlightenment by making ideas accessible to a wider audience than ever before.',
+                    prompt: 'The central idea of the passage is:',
+                    options: [
+                        'Johannes Gutenberg was a famous inventor.',
+                        'The printing press was a revolutionary invention that democratized knowledge and profoundly shaped Western civilization.',
+                        'The Renaissance was the most important period in European history.',
+                        'Books used to be rare and expensive.'
+                    ],
+                    correctAnswer: 'The printing press was a revolutionary invention that democratized knowledge and profoundly shaped Western civilization.',
+                    explanation: 'This option best summarizes the passage\'s focus on the impact and historical significance of the printing press.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Main Idea',
+                    passage: 'The concept of a "growth mindset," as opposed to a "fixed mindset," was developed by psychologist Carol Dweck. Individuals with a fixed mindset believe their talents are innate gifts, while those with a growth mindset believe their abilities can be developed through dedication and hard work. Dweck\'s research shows that students who adopt a growth mindset are more resilient, embrace challenges, and ultimately achieve more.',
+                    prompt: 'What is the main idea of this passage?',
+                    options: [
+                        'Carol Dweck is an important psychologist.',
+                        'There are two types of mindsets people can have.',
+                        'A growth mindset, the belief that abilities can be developed, leads to greater resilience and achievement compared to a fixed mindset.',
+                        'Students should work harder in school.'
+                    ],
+                    correctAnswer: 'A growth mindset, the belief that abilities can be developed, leads to greater resilience and achievement compared to a fixed mindset.',
+                    explanation: 'The passage defines both mindsets and then highlights the positive outcomes of the growth mindset, making that comparison the central point.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Ratios',
+                    prompt: 'The ratio of winning tickets to losing tickets in a lottery is 3:47. If there are 250 total tickets, how many are winning tickets?',
+                    correctAnswer: '15',
+                    explanation: 'The ratio parts are 3 and 47, so the total number of parts is 3 + 47 = 50. The value of each part is 250 total tickets / 50 parts = 5. The number of winning tickets is 3 parts * 5 = 15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Rates',
+                    prompt: 'A tap leaks at a rate of 50 milliliters per hour. How many liters will it leak in one full day? (1 liter = 1000 ml)',
+                    correctAnswer: '1.2',
+                    explanation: 'First, find the total ml leaked in a day: 50 ml/hour * 24 hours/day = 1200 ml. Then convert to liters: 1200 ml / 1000 ml/liter = 1.2 liters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Proportions',
+                    prompt: 'An artist is making a scale model of a building. The actual building is 300 feet tall, and her model will be 18 inches tall. If a door on the actual building is 7 feet tall, how many inches tall should the door be on the model?',
+                    correctAnswer: '0.42',
+                    explanation: 'Set up the proportion: 300 feet / 18 inches = 7 feet / x inches. Cross-multiply: 300x = 18 * 7 = 126. Solve for x: x = 126 / 300 = 0.42 inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Ratios',
+                    prompt: 'A class has 15 boys and 18 girls. What is the ratio of boys to the total number of students? (Enter as a simplified fraction, e.g., 1/2)',
+                    correctAnswer: '5/11',
+                    explanation: 'The total number of students is 15 + 18 = 33. The ratio of boys to total students is 15/33. Both numbers are divisible by 3, so it simplifies to 5/11.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Rates',
+                    prompt: 'If you can read 45 pages in 90 minutes, how many hours will it take you to read a 200-page book?',
+                    correctAnswer: '400',
+                    explanation: 'Your reading rate is 90 minutes / 45 pages = 2 minutes per page. To read a 200-page book, it will take 200 pages * 2 minutes/page = 400 minutes.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Proportions',
+                    prompt: 'To make a certain shade of green paint, a painter mixes 5 parts blue paint with 2 parts yellow paint. If she needs 35 gallons of green paint in total, how many gallons of blue paint does she need?',
+                    correctAnswer: '25',
+                    explanation: 'The total number of parts in the ratio is 5 + 2 = 7. The total amount of paint is 35 gallons. So, each "part" is worth 35 / 7 = 5 gallons. The painter needs 5 parts of blue paint, so 5 * 5 = 25 gallons.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

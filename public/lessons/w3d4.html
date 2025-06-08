@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D4: Figurative Language & Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Figurative Language & Data Analysis",
+            subtitle: "Week 3, Day 4",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d4',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Colorful Words and Cold, Hard Facts',
+                    content: `
+                        <p>Today's mission covers two very different ways of conveying information. In ELA, we'll dive into <strong>Figurative Language</strong>, learning to identify the techniques authors use to create vivid imagery and meaning. In Math, we will practice <strong>Data Analysis</strong> by calculating mean, median, mode, and range.</p>
+                        <ul>
+                            <li><strong>Figurative Language:</strong> This includes similes, metaphors, personification, hyperbole, and onomatopoeia. Pay close attention to how authors make comparisons or give human traits to objects.</li>
+                            <li><strong>Data Analysis:</strong>
+                                <ul>
+                                    <li><strong>Mean:</strong> The average. Add them up, then divide.</li>
+                                    <li><strong>Median:</strong> The middle value, after you put the numbers in order.</li>
+                                    <li><strong>Mode:</strong> The value that appears most often.</li>
+                                    <li><strong>Range:</strong> The difference between the highest and lowest value.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    `
+                },
+                // 15 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Figurative Language',
+                    prompt: 'Which sentence contains a metaphor?',
+                    options: [
+                        'The wind howled like a wolf.',
+                        'The politician\\\'s promise was a fragile bubble.',
+                        'The stars were like diamonds in the sky.',
+                        'He runs as fast as the wind.'
+                    ],
+                    correctAnswer: 'The politician\\\'s promise was a fragile bubble.',
+                    explanation: 'This is a metaphor because it directly states the promise *was* a bubble, an implicit comparison without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Figurative Language',
+                    prompt: 'Identify the type of figurative language: "The thunder grumbled in the distance."',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Personification',
+                    explanation: 'Personification gives human qualities or actions (grumbling) to inanimate objects (thunder).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Figurative Language',
+                    prompt: 'What is the literary device in: "I\\\'m so hungry I could eat a horse"?',
+                    options: ['Simile', 'Understatement', 'Hyperbole', 'Personification'],
+                    correctAnswer: 'Hyperbole',
+                    explanation: 'Hyperbole is the use of extreme exaggeration for emphasis or effect.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Figurative Language',
+                    prompt: 'Which sentence uses a simile?',
+                    options: [
+                        'The classroom was a zoo.',
+                        'Her smile was a ray of sunshine.',
+                        'The old car coughed and sputtered.',
+                        'The baby\\\'s skin was as soft as velvet.'
+                    ],
+                    correctAnswer: 'The baby\\\'s skin was as soft as velvet.',
+                    explanation: 'This is a simile because it uses the word "as" to make a direct comparison between the skin and velvet.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Figurative Language',
+                    prompt: '"The buzz of the bees was the only sound." The word "buzz" is an example of:',
+                    options: ['Alliteration', 'Onomatopoeia', 'Metaphor', 'Simile'],
+                    correctAnswer: 'Onomatopoeia',
+                    explanation: 'Onomatopoeia is a word that phonetically imitates the sound that it describes.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Figurative Language',
+                    prompt: 'Identify the personification:',
+                    options: [
+                        'The sea was a raging bull.',
+                        'He is as strong as an ox.',
+                        'The wind whispered secrets through the trees.',
+                        'She sells seashells by the seashore.'
+                    ],
+                    correctAnswer: 'The wind whispered secrets through the trees.',
+                    explanation: 'The wind is given the human ability to "whisper secrets," which is personification.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Figurative Language',
+                    prompt: '"The world is a stage, and all the men and women merely players." This is an example of:',
+                    options: ['An extended metaphor', 'A simple simile', 'A hyperbole', 'An understatement'],
+                    correctAnswer: 'An extended metaphor',
+                    explanation: 'It sets up a principal comparison (world/stage) and continues with related comparisons (men and women/players).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Figurative Language',
+                    prompt: 'Which is an example of alliteration?',
+                    options: [
+                        'The cat sat on the mat.',
+                        'Peter Piper picked a peck of pickled peppers.',
+                        'The moon was a ghostly galleon.',
+                        'Boom! The cannon fired.'
+                    ],
+                    correctAnswer: 'Peter Piper picked a peck of pickled peppers.',
+                    explanation: 'Alliteration is the repetition of the same initial consonant sound, in this case, the "p" sound.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Figurative Language',
+                    prompt: '"I have a ton of homework tonight." This is an example of:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Hyperbole',
+                    explanation: 'This is a hyperbole because "a ton" is an extreme exaggeration used for emphasis.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Figurative Language',
+                    prompt: 'What is the literary device in "a sea of troubles"?',
+                    options: ['Simile', 'Metaphor', 'Alliteration', 'Onomatopoeia'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'This metaphor compares "troubles" to a "sea" to emphasize their vast and overwhelming nature without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Figurative Language',
+                    prompt: '"The old floorboards groaned under the weight of his footsteps." This sentence contains:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Personification',
+                    explanation: 'The floorboards are given the human quality of groaning.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Figurative Language',
+                    prompt: 'The phrase "living death" is an example of:',
+                    options: ['Oxymoron', 'Simile', 'Metaphor', 'Personification'],
+                    correctAnswer: 'Oxymoron',
+                    explanation: 'An oxymoron is a figure of speech that combines contradictory words with opposing meanings, like "living" and "death".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Figurative Language',
+                    prompt: 'The leaves danced in the autumn wind. This is an example of:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Personification',
+                    explanation: 'The leaves are given the human action of dancing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Figurative Language',
+                    prompt: '"His mind is a computer." This sentence is a:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'A direct comparison is made between a mind and a computer without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Figurative Language',
+                    prompt: 'Which of the following is NOT an example of onomatopoeia?',
+                    options: ['Splash', 'Moo', 'Whisper', 'Silent'],
+                    correctAnswer: 'Silent',
+                    explanation: '"Splash," "Moo," and "Whisper" all imitate sounds. "Silent" describes the absence of sound.'
+                },
+                // 15 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Data Analysis',
+                    prompt: 'Find the mean (average) of: 10, 15, 20, 25, 30.',
+                    correctAnswer: '20',
+                    explanation: 'To find the mean, add all the numbers (10+15+20+25+30 = 100) and divide by the count of the numbers (5). 100 / 5 = 20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Data Analysis',
+                    prompt: 'What is the median of: 7, 2, 9, 4, 11, 8?',
+                    correctAnswer: '7.5',
+                    explanation: 'First, order the numbers: 2, 4, 7, 8, 9, 11. Since there is an even number of values, the median is the average of the two middle numbers (7 and 8). (7+8)/2 = 7.5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Data Analysis',
+                    prompt: 'Find the mode of: 5, 8, 12, 5, 9, 10, 8, 5.',
+                    correctAnswer: '5',
+                    explanation: 'The mode is the number that appears most frequently. The number 5 appears three times, more than any other number.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Data Analysis',
+                    prompt: 'What is the range of: 14, 2, 25, 17, 9, 21?',
+                    correctAnswer: '23',
+                    explanation: 'The range is the difference between the highest and lowest values. The highest value is 25 and the lowest is 2. So, 25 - 2 = 23.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Data Analysis',
+                    prompt: 'A student\\\'s scores on five tests were 88, 92, 78, 94, and 85. What is the mean score?',
+                    correctAnswer: '87.4',
+                    explanation: 'Sum of scores: 88 + 92 + 78 + 94 + 85 = 437. Number of tests: 5. Mean score: 437 / 5 = 87.4.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Data Analysis',
+                    prompt: 'What is the median of: 15, 13, 18, 16, 14, 17, 13?',
+                    correctAnswer: '15',
+                    explanation: 'First, order the numbers: 13, 13, 14, 15, 16, 17, 18. The median is the middle number, which is 15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Data Analysis',
+                    prompt: 'A pie chart shows that 25% of a school\\\'s 400 students are in the band. How many students are in the band?',
+                    correctAnswer: '100',
+                    explanation: 'Calculate 25% of 400. This is 0.25 * 400 = 100 students.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Data Analysis',
+                    prompt: 'Find the mode of the data set: red, blue, green, blue, yellow, red, blue.',
+                    correctAnswer: 'blue',
+                    explanation: 'The mode is the value that appears most often. "Blue" appears three times, more than any other color.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Data Analysis',
+                    prompt: 'The temperatures for a week were 72, 75, 68, 71, 75, 76, 75. What is the mode temperature?',
+                    correctAnswer: '75',
+                    explanation: 'The mode is the most frequently occurring value. The temperature 75 appears three times.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Data Analysis',
+                    prompt: 'A survey asked 200 students their favorite sport: Soccer (40%), Basketball (30%), Baseball (15%), Other (15%). How many students chose Basketball?',
+                    correctAnswer: '60',
+                    explanation: 'Calculate 30% of 200. This is 0.30 * 200 = 60 students.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Data Analysis',
+                    prompt: 'Find the median of the following test scores: 100, 88, 92, 75, 88, 95.',
+                    correctAnswer: '90',
+                    explanation: 'Order the scores: 75, 88, 88, 92, 95, 100. The two middle scores are 88 and 92. The median is their average: (88+92)/2 = 90.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Data Analysis',
+                    prompt: 'The mean of four numbers is 10. Three of the numbers are 5, 8, and 12. What is the fourth number?',
+                    correctAnswer: '15',
+                    explanation: 'If the mean of four numbers is 10, their sum must be 4 * 10 = 40. The sum of the three known numbers is 5 + 8 + 12 = 25. The fourth number is 40 - 25 = 15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 13: Data Analysis',
+                    prompt: 'What is the range of the set {1, 1, 2, 3, 5, 8, 13}?',
+                    correctAnswer: '12',
+                    explanation: 'The range is the difference between the highest and lowest values. Highest is 13, lowest is 1. Range = 13 - 1 = 12.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Data Analysis',
+                    prompt: 'A spinner has 8 equal sections: 4 red, 3 blue, 1 green. What is the probability of landing on a blue section? (Enter as a decimal)',
+                    correctAnswer: '0.375',
+                    explanation: 'There are 3 blue sections out of a total of 8 sections. The probability is 3/8. As a decimal, 3 / 8 = 0.375.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Data Analysis',
+                    prompt: 'The average height of 3 students is 60 inches. A fourth student who is 68 inches tall joins the group. What is the new average height?',
+                    correctAnswer: '62',
+                    explanation: 'The total height of the first 3 students is 3 * 60 = 180 inches. Add the new student: 180 + 68 = 248 inches. The new average for 4 students is 248 / 4 = 62 inches.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

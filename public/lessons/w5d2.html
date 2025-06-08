@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W5D2: Revising/Editing & Inequalities Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Editing & Inequalities Practice",
+            subtitle: "Week 5, Day 2",
+            pointsPerQuestion: 10,
+            completion_id: 'w5d2',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Continued Practice',
+                    content: `
+                        <p>Agent, consistency is key. Today we continue to drill the skills from yesterday.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> More <strong>Revising and Editing</strong> practice. Focus on identifying the most concise and grammatically correct option.</li>
+                            <li><strong>Math:</strong> More practice with <strong>Linear Equations and Inequalities</strong>. Pay close attention to negative signs and flipping the inequality symbol.</li>
+                        </ul>
+                        <p>Let's reinforce that knowledge.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Punctuation',
+                    passage: 'The artist known for her vibrant paintings and intricate sculptures is having a new exhibition next month.',
+                    prompt: 'Where should a comma be placed in this sentence?',
+                    options: [
+                        'after "artist"',
+                        'after "paintings"',
+                        'after "sculptures"',
+                        'No comma is needed.'
+                    ],
+                    correctAnswer: 'after "sculptures"',
+                    explanation: 'A comma is needed after "sculptures" to set off the introductory phrase "The artist known for her vibrant paintings and intricate sculptures" from the main clause of the sentence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Parallel Structure',
+                    passage: 'The coach told the players that they should get a lot of sleep, that they should not eat junk food, and to drink plenty of water.',
+                    prompt: 'Which revision best corrects the error in parallel structure?',
+                    options: [
+                        '...that they should get a lot of sleep, not eat junk food, and to drink plenty of water.',
+                        '...that they should get a lot of sleep, that they should not eat junk food, and that they should drink plenty of water.',
+                        '...to get a lot of sleep, not eating junk food, and drinking plenty of water.',
+                        'No correction needed.'
+                    ],
+                    correctAnswer: '...that they should get a lot of sleep, that they should not eat junk food, and that they should drink plenty of water.',
+                    explanation: 'To maintain parallel structure, all three clauses in the list should start with "that they should." This creates a consistent grammatical pattern.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Misplaced Modifier',
+                    passage: 'Covered in mud, the pig was bathed by the farmer.',
+                    prompt: 'Which revision best corrects the misplaced modifier?',
+                    options: [
+                        'The farmer bathed the pig covered in mud.',
+                        'The pig was bathed by the farmer covered in mud.',
+                        'The farmer, covered in mud, bathed the pig.',
+                        'No correction needed.'
+                    ],
+                    correctAnswer: 'The farmer bathed the pig covered in mud.',
+                    explanation: 'The phrase "Covered in mud" should describe the pig, not the farmer. This revision places the modifier right next to the word it modifies (pig).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Apostrophe Use',
+                    passage: 'The dogs bowl was empty, so it\'s owner refilled it.',
+                    prompt: 'Which revision corrects the apostrophe errors?',
+                    options: [
+                        'The dog\'s bowl was empty, so its owner refilled it.',
+                        'The dogs\' bowl was empty, so its owner refilled it.',
+                        'The dogs bowl was empty, so its\' owner refilled it.',
+                        'The dog\'s bowl was empty, so it\'s owner refilled it.'
+                    ],
+                    correctAnswer: 'The dog\'s bowl was empty, so its owner refilled it.',
+                    explanation: '"Dog\'s" is the possessive form for one dog. "Its" is the possessive pronoun. "It\'s" is a contraction for "it is."'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Subject-Verb Agreement',
+                    passage: 'Each of the students are responsible for their own project.',
+                    prompt: 'Which revision corrects the subject-verb agreement error?',
+                    options: [
+                        'Each of the students is responsible for their own project.',
+                        'Each of the students are responsible for his or her own project.',
+                        'Each of the students is responsible for his or her own project.',
+                        'No correction needed.'
+                    ],
+                    correctAnswer: 'Each of the students is responsible for his or her own project.',
+                    explanation: 'The subject is "Each," which is singular, so the verb must be "is." The pronoun should also be singular ("his or her") to agree with "Each."'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Linear Equations',
+                    prompt: 'If 3(x - 2) = 2(x + 1), what is the value of x?',
+                    correctAnswer: '8',
+                    explanation: 'Distribute on both sides: 3x - 6 = 2x + 2. Subtract 2x from both sides: x - 6 = 2. Add 6 to both sides: x = 8.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Inequalities',
+                    prompt: 'Find the solution for x: 7x - 5 > 9x + 3',
+                    correctAnswer: 'x < -4',
+                    explanation: 'Subtract 9x from both sides: -2x - 5 > 3. Add 5 to both sides: -2x > 8. Divide by -2 and flip the inequality sign: x < -4.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Word Problem to Equation',
+                    prompt: 'The sum of three consecutive integers is 96. What is the largest of the three integers?',
+                    correctAnswer: '33',
+                    explanation: 'Let the integers be n, n+1, and n+2. The equation is n + (n+1) + (n+2) = 96. Simplify: 3n + 3 = 96. Subtract 3: 3n = 93. Divide by 3: n = 31. The integers are 31, 32, and 33. The largest is 33.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Equations with Decimals',
+                    prompt: 'Solve for m: 0.5m + 2.5 = 4',
+                    correctAnswer: '3',
+                    explanation: 'Subtract 2.5 from both sides: 0.5m = 1.5. Divide by 0.5 (or multiply by 2): m = 3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Inequalities',
+                    prompt: 'If 4 - (x/3) <= 5, what is the smallest possible integer value for x?',
+                    correctAnswer: '-2',
+                    explanation: 'Subtract 4 from both sides: -(x/3) <= 1. Multiply by -3 and flip the inequality sign: x >= -3. The smallest integer that is greater than or equal to -3 is -3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Complex Equation',
+                    prompt: 'Solve for y: (3y + 4) / 2 = y + 5',
+                    correctAnswer: '6',
+                    explanation: 'Multiply both sides by 2: 3y + 4 = 2(y + 5). Distribute the 2: 3y + 4 = 2y + 10. Subtract 2y from both sides: y + 4 = 10. Subtract 4 from both sides: y = 6.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1D3: Paragraphs & Rates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Paragraphs & Rates",
+            subtitle: "Week 1, Day 3",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Order and Speed',
+                    content: `
+                        <p>Agent, today's mission involves logic and speed. In ELA, you'll tackle <strong>Scrambled Paragraphs</strong>, where you must find the most logical order for a set of sentences. In Math, you'll solve <strong>Rate Problems</strong>, which deal with speed, work, and price.</p>
+                        <ul>
+                            <li><strong>Scrambled Paragraphs:</strong> Look for the topic sentence that introduces the main idea. Then, find transition words (like "however," "therefore," "next") that link sentences together.</li>
+                            <li><strong>Rate Problems:</strong> The key formula is often a variation of Distance = Rate × Time. Remember to keep your units consistent!</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 1',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'Q', text: 'Its long neck, however, is not used for reaching high branches as commonly believed.' },
+                        { id: 'R', text: 'The giraffe is the tallest mammal on Earth, known for its distinctive coat patterns.' },
+                        { id: 'S', text: 'Instead, it is primarily used in a combat ritual called "necking," where males swing their necks at each other to establish dominance.' },
+                        { id: 'T', text: 'This unique adaptation has fascinated biologists for centuries.' }
+                    ],
+                    options: ['R, Q, S, T', 'Q, R, T, S', 'R, T, Q, S', 'S, R, Q, T'],
+                    correctAnswer: 'R, T, Q, S',
+                    explanation: 'The best order is R, T, Q, S. Sentence R introduces the topic (the giraffe). Sentence T follows up on the "unique adaptation" mentioned in R. Sentence Q introduces a common misconception about the neck, which is then corrected and explained by Sentence S.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 2',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'W', text: 'This process, called photosynthesis, converts light energy into chemical energy.' },
+                        { id: 'X', text: 'The primary role of leaves on a plant is to produce food.' },
+                        { id: 'Y', text: 'This energy is then stored as sugar, which fuels the plant\'s growth.' },
+                        { id: 'Z', text: 'They do this by absorbing sunlight and carbon dioxide from the air.' }
+                    ],
+                    options: ['X, W, Y, Z', 'X, Z, W, Y', 'Z, Y, W, X', 'W, X, Z, Y'],
+                    correctAnswer: 'X, Z, W, Y',
+                    explanation: 'The logical flow is X, Z, W, Y. Sentence X states the main topic (the role of leaves). Sentence Z explains *how* they perform this role. Sentence W gives the name for this process. Sentence Y explains the result of the process.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 1',
+                    prompt: 'A car travels at an average speed of 50 miles per hour. How long will it take to travel 225 miles?',
+                    passage: 'Express your answer in hours.',
+                    correctAnswer: '4.5',
+                    explanation: 'Using the formula Time = Distance / Rate, you get Time = 225 / 50. Dividing 225 by 50 gives you 4.5. So, it will take 4.5 hours.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 2',
+                    prompt: 'A machine can produce 150 widgets in 3 minutes. At this rate, how many widgets can it produce in one hour?',
+                    passage: '',
+                    options: ['3000', '4500', '450', '5000'],
+                    correctAnswer: '3000',
+                    explanation: 'First, find the rate per minute: 150 widgets / 3 minutes = 50 widgets per minute. Since there are 60 minutes in an hour, multiply the rate by 60: 50 * 60 = 3000 widgets.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 3',
+                    prompt: 'A person types 240 words in 4 minutes. What is their typing speed in words per minute?',
+                    passage: '',
+                    correctAnswer: '60',
+                    explanation: 'Rate = Total / Time. So, 240 words / 4 minutes = 60 words per minute.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 3',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'A', text: 'As a result, they can fly almost silently, making them effective hunters.' },
+                        { id: 'B', text: 'This design muffles the sound of air rushing over their wings.' },
+                        { id: 'C', text: 'Owls possess a unique adaptation for stealthy flight.' },
+                        { id: 'D', text: 'Their flight feathers have a comb-like leading edge and a soft, fringe-like trailing edge.' }
+                    ],
+                    options: ['C, D, B, A', 'A, B, D, C', 'C, A, D, B', 'B, A, C, D'],
+                    correctAnswer: 'C, D, B, A',
+                    explanation: 'The logical order is C, D, B, A. Sentence C introduces the topic (owl flight). Sentence D describes the specific physical trait. Sentence B explains the effect of this trait. Sentence A states the final outcome or result.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 4',
+                    prompt: 'If you buy 5 pounds of apples for $7.50, what is the price per pound?',
+                    passage: 'Answer in dollars.',
+                    correctAnswer: '1.50',
+                    explanation: 'Price per pound = Total Cost / Total Pounds. $7.50 / 5 pounds = $1.50 per pound.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 4',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'M', text: 'Finally, the intense pressure and heat transform the sediment into solid rock.' },
+                        { id: 'N', text: 'The process of forming sedimentary rock begins with the weathering and erosion of existing rocks.' },
+                        { id: 'O', text: 'Over time, these layers build up, and the weight of the upper layers compacts the lower layers.' },
+                        { id: 'P', text: 'These broken pieces, or sediments, are then transported by wind, water, or ice and deposited in layers.' }
+                    ],
+                    options: ['N, M, O, P', 'P, O, M, N', 'N, P, O, M', 'M, N, P, O'],
+                    correctAnswer: 'N, P, O, M',
+                    explanation: 'The correct sequence is N, P, O, M. N introduces the beginning of the process. P describes what happens to the broken pieces. O explains the effect of layering over time. M describes the final step of the transformation.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 5',
+                    prompt: 'A faucet leaks at a rate of 2 ounces per hour. How many ounces will it leak in a full day?',
+                    passage: 'There are 24 hours in a day.',
+                    correctAnswer: '48',
+                    explanation: 'Total Leakage = Rate × Time. 2 ounces/hour * 24 hours = 48 ounces.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 5',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'E', text: 'This initial research is crucial for developing a focused argument.' },
+                        { id: 'F', text: 'After gathering information, the next step is to create an outline.' },
+                        { id: 'G', text: 'Writing a research paper begins with selecting a broad topic and conducting preliminary research.' },
+                        { id: 'H', text: 'Finally, with a solid outline as a guide, you can begin writing the first draft.' }
+                    ],
+                    options: ['G, E, F, H', 'F, H, G, E', 'G, F, E, H', 'E, G, F, H'],
+                    correctAnswer: 'G, E, F, H',
+                    explanation: 'The correct order is G, E, F, H, which follows the standard writing process. G is the clear starting point. E explains the importance of the action in G. F describes the next chronological step. H describes the final step in this sequence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 6',
+                    prompt: 'If a worker can assemble 8 chairs in 4 hours, how many chairs can they assemble in an 8-hour workday?',
+                    passage: '',
+                    options: ['16', '24', '32', '12'],
+                    correctAnswer: '16',
+                    explanation: 'The worker\'s rate is 8 chairs / 4 hours = 2 chairs per hour. In an 8-hour day, they can assemble 2 chairs/hour * 8 hours = 16 chairs.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 7',
+                    prompt: 'A printer can print 12 pages per minute. How long will it take to print a 300-page document?',
+                    passage: 'Answer in minutes.',
+                    correctAnswer: '25',
+                    explanation: 'Time = Total Pages / Rate. 300 pages / 12 pages/minute = 25 minutes.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 6',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'Q', text: 'Its light, porous structure allows it to float in water.' },
+                        { id: 'R', text: 'Pumice is a type of volcanic rock with a very unique property.' },
+                        { id: 'S', text: 'This occurs when gas-rich, frothy lava cools rapidly.' },
+                        { id: 'T', text: 'Because of this, it is often used to make lightweight concrete and as an abrasive in cleaning products.' }
+                    ],
+                    options: ['R, S, Q, T', 'Q, T, R, S', 'R, Q, S, T', 'S, R, Q, T'],
+                    correctAnswer: 'R, S, Q, T',
+                    explanation: 'The logical order is R, S, Q, T. R introduces the rock. S explains how it is formed. Q describes the resulting property (floating). T explains the practical application of this property.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 8',
+                    prompt: 'A train travels 300 miles in 5 hours. What is its average speed in miles per hour?',
+                    passage: '',
+                    options: ['50 mph', '60 mph', '65 mph', '70 mph'],
+                    correctAnswer: '60 mph',
+                    explanation: 'Speed = Distance / Time. 300 miles / 5 hours = 60 miles per hour.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 9',
+                    prompt: 'A hose fills a pool at a rate of 15 gallons per minute. The pool has a capacity of 1,800 gallons. How many hours will it take to fill the pool?',
+                    passage: 'Be careful with units!',
+                    correctAnswer: '2',
+                    explanation: 'First, find the total time in minutes: 1800 gallons / 15 gallons/minute = 120 minutes. Then, convert minutes to hours: 120 minutes / 60 minutes/hour = 2 hours.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 7',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'W', text: 'This network allows them to share nutrients and send warning signals about insect attacks.' },
+                        { id: 'X', text: 'Contrary to their static appearance, trees in a forest are deeply interconnected.' },
+                        { id: 'Y', text: 'This "wood wide web" shows that a forest is more like a single, cooperative organism than a collection of individual trees.' },
+                        { id: 'Z', text: 'They are linked to one another by a vast underground web of fungi.' }
+                    ],
+                    options: ['X, Z, W, Y', 'Z, W, X, Y', 'Y, X, Z, W', 'X, W, Z, Y'],
+                    correctAnswer: 'X, Z, W, Y',
+                    explanation: 'The correct order is X, Z, W, Y. X introduces the main idea. Z explains the physical mechanism of the connection. W describes what the connection is used for. Y provides a concluding thought and a memorable name for the phenomenon.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 10',
+                    prompt: 'An author wrote a 420-page book in 6 months. What was the average number of pages written per month?',
+                    passage: '',
+                    options: ['60', '65', '70', '75'],
+                    correctAnswer: '70',
+                    explanation: 'Average Rate = Total Pages / Total Time. 420 pages / 6 months = 70 pages per month.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 11',
+                    prompt: 'Sunlight takes approximately 8 minutes to reach Earth, which is about 93 million miles away. What is the speed of light in miles per minute?',
+                    passage: '',
+                    correctAnswer: '11625000',
+                    explanation: 'Speed = Distance / Time. 93,000,000 miles / 8 minutes = 11,625,000 miles per minute.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'ELA Challenge 8',
+                    prompt: 'The following sentences are out of order. Choose the best order to form a coherent paragraph.',
+                    sentences: [
+                        { id: 'A', text: 'This allows them to store large amounts of water to survive in arid environments.' },
+                        { id: 'B', text: 'The sharp spines also protect the plant from animals.' },
+                        { id: 'C', text: 'Instead of leaves, they have spines, which reduce water loss.' },
+                        { id: 'D', text: 'Cacti have a range of adaptations for life in the desert.' }
+                    ],
+                    options: ['D, A, C, B', 'D, C, A, B', 'A, B, C, D', 'B, A, D, C'],
+                    correctAnswer: 'D, C, A, B',
+                    explanation: 'The logical flow is D, C, A, B. D is the topic sentence. C and A form a pair, with C introducing the spines and A explaining another adaptation (water storage). B adds another detail about the spines, making it a good follow-up to the C/A pair.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 12',
+                    prompt: 'A factory produces cars at a rate of 12 cars per day. How many days would it take to produce 180 cars?',
+                    passage: '',
+                    options: ['10', '12', '15', '20'],
+                    correctAnswer: '15',
+                    explanation: 'Time = Total / Rate. 180 cars / 12 cars/day = 15 days.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.type === 'scrambled-paragraph' && step.sentences) {
+                        content += `<div class="passage">${step.sentences.map(s => `<p><strong>${s.id}.</strong> ${s.text}</p>`).join('')}</div>`;
+                    } else if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                        document.querySelectorAll('.option-btn').forEach(btn => {
+                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
+                        });
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w1d3-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

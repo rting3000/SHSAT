@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D4: Logical Reasoning & Geometry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Logical Reasoning & Geometry",
+            subtitle: "Week 4, Day 4",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d4',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Thinking Critically, Measuring Spatially',
+                    content: `
+                        <p>Welcome back, agent. Today's mission pushes your thinking into new dimensions.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> You'll tackle <strong>Logical Reasoning</strong> questions. These require you to analyze arguments, identify assumptions, and draw valid conclusions.</li>
+                            <li><strong>Math:</strong> We'll begin our review of <strong>Geometry</strong>, focusing on angles, triangles, and the properties of basic shapes.</li>
+                        </ul>
+                        <p>Read every word. Every detail matters. Good luck.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Logical Reasoning',
+                    passage: 'All students at Northwood High School must wear a uniform. Maria is a student at Northwood High School.',
+                    prompt: 'Based on the statements above, which of the following must be true?',
+                    options: [
+                        'All high schools require uniforms.',
+                        'Maria dislikes wearing a uniform.',
+                        'Maria wears a uniform.',
+                        'Some students at Northwood High School do not wear uniforms.'
+                    ],
+                    correctAnswer: 'Maria wears a uniform.',
+                    explanation: 'This is a straightforward deductive reasoning question. If the first two statements are true, the conclusion must be true.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Logical Reasoning',
+                    passage: 'A study showed that employees who drink coffee have higher productivity. Therefore, to increase productivity, our company should provide free coffee to all employees.',
+                    prompt: 'The argument above assumes that:',
+                    options: [
+                        'Coffee is the cause of the higher productivity.',
+                        'All employees drink coffee.',
+                        'Productivity is not important.',
+                        'Providing free coffee is not expensive.'
+                    ],
+                    correctAnswer: 'Coffee is the cause of the higher productivity.',
+                    explanation: 'The argument observes a correlation (coffee drinkers are more productive) and concludes a causation (coffee *causes* productivity). It assumes there isn\'t another factor causing both, such as more motivated employees happening to also drink coffee.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Logical Reasoning',
+                    passage: 'If it rains, the picnic will be cancelled. The picnic was not cancelled.',
+                    prompt: 'What can be logically concluded from these statements?',
+                    options: [
+                        'It rained.',
+                        'It did not rain.',
+                        'It was sunny.',
+                        'The picnic was held indoors.'
+                    ],
+                    correctAnswer: 'It did not rain.',
+                    explanation: 'This is an example of Modus Tollens. If P implies Q, and Q is false, then P must be false. If rain (P) implies cancellation (Q), and there was no cancellation (not Q), then there was no rain (not P).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Logical Reasoning',
+                    passage: 'Every car that my brother owns is red. My brother just bought a new convertible.',
+                    prompt: 'If the statements above are true, which of the following must also be true?',
+                    options: [
+                        'All red cars are convertibles.',
+                        'My brother\'s new convertible is red.',
+                        'My brother only buys red cars.',
+                        'Some convertibles are not red.'
+                    ],
+                    correctAnswer: 'My brother\'s new convertible is red.',
+                    explanation: 'The first statement applies to ALL cars your brother owns. Since the new convertible is now a car he owns, it must be red.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Logical Reasoning',
+                    passage: 'To be eligible for the film club, a student must be in the 11th or 12th grade. Sarah is in the 10th grade.',
+                    prompt: 'What can be concluded about Sarah?',
+                    options: [
+                        'Sarah is eligible for the film club.',
+                        'Sarah is not interested in films.',
+                        'Sarah is not eligible for the film club.',
+                        'The film club is only for seniors.'
+                    ],
+                    correctAnswer: 'Sarah is not eligible for the film club.',
+                    explanation: 'The rule states a necessary condition for eligibility (being in 11th or 12th grade). Since Sarah does not meet this condition, she is not eligible.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Angles',
+                    prompt: 'An angle measures 40 degrees. What is the measure of its complementary angle?',
+                    correctAnswer: '50',
+                    explanation: 'Complementary angles add up to 90 degrees. So, 90 - 40 = 50 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Angles',
+                    prompt: 'An angle measures 115 degrees. What is the measure of its supplementary angle?',
+                    correctAnswer: '65',
+                    explanation: 'Supplementary angles add up to 180 degrees. So, 180 - 115 = 65 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Triangles',
+                    prompt: 'Two angles in a triangle measure 50 degrees and 70 degrees. What is the measure of the third angle?',
+                    correctAnswer: '60',
+                    explanation: 'The angles in a triangle always add up to 180 degrees. So, 180 - (50 + 70) = 180 - 120 = 60 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Area of a Rectangle',
+                    prompt: 'A rectangle has a length of 12 cm and a width of 8 cm. What is its area in square cm?',
+                    correctAnswer: '96',
+                    explanation: 'The area of a rectangle is length times width. Area = 12 * 8 = 96 cm^2.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Perimeter of a Square',
+                    prompt: 'A square has an area of 49 square inches. What is its perimeter in inches?',
+                    correctAnswer: '28',
+                    explanation: 'The area of a square is side * side. So, the side length is the square root of 49, which is 7 inches. The perimeter is 4 * side, so 4 * 7 = 28 inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Right Triangles',
+                    prompt: 'A right triangle has legs of length 5 and 12. What is the length of the hypotenuse?',
+                    correctAnswer: '13',
+                    explanation: 'Using the Pythagorean theorem (a^2 + b^2 = c^2): 5^2 + 12^2 = c^2. So, 25 + 144 = c^2, which means 169 = c^2. The square root of 169 is 13. This is a classic 5-12-13 triangle.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Angles in a Circle',
+                    prompt: 'What is the total number of degrees in a circle?',
+                    correctAnswer: '360',
+                    explanation: 'A full circle always contains 360 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Isosceles Triangle',
+                    prompt: 'An isosceles triangle has a vertex angle of 100 degrees. What is the measure of one of the base angles?',
+                    correctAnswer: '40',
+                    explanation: 'The sum of angles is 180. Subtract the vertex angle: 180 - 100 = 80 degrees. In an isosceles triangle, the two base angles are equal. So, 80 / 2 = 40 degrees for each base angle.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

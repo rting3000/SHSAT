@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8, Day 7 - Milestone Review</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week 8, Day 7 - Milestone Review</h1>
+            <p>Topics: Coordinate Geometry and Probability & Statistics</p>
+        </header>
+        <main id="lesson-container">
+            <!-- Lesson content will be dynamically generated here -->
+        </main>
+        <div id="score-container" style="display: none;">
+            <h2>Your Score: <span id="final-score"></span></h2>
+            <p><a href="../index.html">Back to Dashboard</a></p>
+        </div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 8 Milestone Review",
+            questions: [
+                {
+                    type: 'briefing',
+                    content: `
+                        <h2>Week 8 Review</h2>
+                        <p>This milestone review covers all the topics from Week 8: <strong>Coordinate Geometry</strong> and <strong>Probability & Statistics</strong>.</p>
+                        <p>You will be tested on your ability to work with points, lines, slopes, and equations in the coordinate plane, as well as your understanding of probability, data analysis, and statistical measures.</p>
+                        <p>There are 30 questions. Good luck!</p>
+                    `
+                },
+                // Coordinate Geometry
+                { type: 'mcq', question: 'What is the distance between the points (2, 3) and (5, 7)?', options: ['3', '4', '5', '7'], answer: '5' },
+                { type: 'mcq', question: 'What is the midpoint of the line segment with endpoints (-1, 8) and (3, -4)?', options: ['(1, 2)', '(2, 4)', '(1, 4)', '(-2, 6)'], answer: '(1, 2)' },
+                { type: 'mcq', question: 'What is the slope of the line passing through the points (0, 0) and (4, 2)?', options: ['2', '1/2', '-2', '-1/2'], answer: '1/2' },
+                { type: 'mcq', question: 'Which equation represents a line parallel to y = 3x - 5?', options: ['y = -3x - 5', 'y = 3x + 1', 'y = (1/3)x - 5', 'y = - (1/3)x + 1'], answer: 'y = 3x + 1' },
+                { type: 'mcq', question: 'Which equation represents a line perpendicular to y = -2x + 7?', options: ['y = 2x + 7', 'y = -2x - 7', 'y = (1/2)x + 3', 'y = (-1/2)x - 3'], answer: 'y = (1/2)x + 3' },
+                { type: 'mcq', question: 'What is the equation of a line with a slope of 4 that passes through the point (1, 6)?', options: ['y = 4x + 2', 'y = 4x - 10', 'y = x + 4', 'y = 6x + 4'], answer: 'y = 4x + 2' },
+                { type: 'mcq', question: 'Find the x-intercept of the line 2x + 5y = 10.', options: ['(10, 0)', '(2, 0)', '(5, 0)', '(0, 5)'], answer: '(5, 0)' },
+                { type: 'mcq', question: 'Find the y-intercept of the line 3y - 9x = 18.', options: ['(0, 18)', '(0, 6)', '(0, 3)', '(0, -2)'], answer: '(0, 6)' },
+                { type: 'mcq', question: 'A line passes through (2, 5) and (6, 5). What type of line is it?', options: ['Vertical', 'Horizontal', 'Sloped Up', 'Sloped Down'], answer: 'Horizontal' },
+                { type: 'mcq', question: 'What is the slope of a vertical line?', options: ['0', '1', '-1', 'Undefined'], answer: 'Undefined' },
+                { type: 'mcq', question: 'The point (a, 5) is on the line y = 2x + 1. What is the value of a?', options: ['1', '2', '3', '4'], answer: '2' },
+                { type: 'mcq', question: 'A circle centered at the origin has a radius of 10. Which point is on the circle?', options: ['(5, 5)', '(6, 8)', '(7, 7)', '(0, 9)'], answer: '(6, 8)' },
+                { type: 'mcq', question: 'What is the slope-intercept form of the equation 6x + 2y = 8?', options: ['y = -3x + 4', 'y = 3x + 4', 'y = -6x + 8', 'y = 6x + 8'], answer: 'y = -3x + 4' },
+                { type: 'mcq', question: 'Which point is a solution to the inequality y > x - 1?', options: ['(0, 0)', '(2, 0)', '(5, 3)', '(-1, -3)'], answer: '(0, 0)' },
+                { type: 'mcq', question: 'What is the equation of the line passing through (0, 3) and (2, 7)?', options: ['y = 2x + 3', 'y = 3x + 2', 'y = 4x + 3', 'y = x + 3'], answer: 'y = 2x + 3' },
+
+                // Probability & Statistics
+                { type: 'mcq', question: 'A single die is rolled. What is the probability of rolling an even number?', options: ['1/6', '1/3', '1/2', '2/3'], answer: '1/2' },
+                { type: 'mcq', question: 'A bag contains 3 red marbles, 5 blue marbles, and 2 green marbles. What is the probability of drawing a blue marble?', options: ['1/2', '1/5', '3/10', '5/8'], answer: '1/2' },
+                { type: 'mcq', question: 'If you flip a coin twice, what is the probability of getting two heads?', options: ['1/8', '1/4', '1/3', '1/2'], answer: '1/4' },
+                { type: 'mcq', question: 'Find the mean of the following data set: 2, 5, 8, 9, 11.', options: ['7', '8', '9', '35'], answer: '7' },
+                { type: 'mcq', question: 'Find the median of the following data set: 10, 20, 15, 25, 5.', options: ['10', '15', '20', '25'], answer: '15' },
+                { type: 'mcq', question: 'Find the mode of the following data set: 2, 4, 4, 6, 7, 7, 7, 9.', options: ['4', '6', '7', '9'], answer: '7' },
+                { type: 'mcq', question: 'Find the range of the following data set: 12, 3, 18, 9, 25.', options: ['12', '16', '22', '25'], answer: '22' },
+                { type: 'mcq', question: 'A spinner has 8 equal sections numbered 1 through 8. What is the probability of spinning a number less than 4?', options: ['1/8', '1/4', '3/8', '1/2'], answer: '3/8' },
+                { type: 'mcq', question: 'There are 10 students in a class. How many ways can a president and vice-president be selected?', options: ['20', '45', '90', '100'], answer: '90' },
+                { type: 'mcq', question: 'What is the probability of drawing an Ace or a King from a standard 52-card deck?', options: ['1/13', '2/13', '4/13', '8/52'], answer: '2/13' },
+                { type: 'mcq', question: 'A box contains 5 apples and 3 oranges. If you pick one fruit without looking, what is the probability it is not an orange?', options: ['3/8', '5/8', '1/5', '1/3'], answer: '5/8' },
+                { type: 'mcq', question: 'The average of four numbers is 15. If three of the numbers are 10, 12, and 20, what is the fourth number?', options: ['15', '18', '42', '60'], answer: '18' },
+                { type: 'mcq', question: 'A survey of 100 students found that 60 like math and 50 like science. 20 students like both. How many students like neither?', options: ['10', '20', '30', '40'], answer: '10' },
+                { type: 'mcq', question: 'A restaurant offers 4 appetizers, 5 main courses, and 3 desserts. How many different meals can be ordered?', options: ['12', '20', '23', '60'], answer: '60' },
+                { type: 'mcq', question: 'What is the probability of a random event that is certain to happen?', options: ['0', '0.5', '1', '100'], answer: '1' },
+            ]
+        };
+
+        const lessonContainer = document.getElementById('lesson-container');
+        const scoreContainer = document.getElementById('score-container');
+        const finalScoreElement = document.getElementById('final-score');
+        const lessonId = window.location.pathname.split('/').pop();
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let questions = [];
+
+        function startLesson() {
+            questions = lessonData.questions;
+            showQuestion(currentQuestionIndex);
+        }
+
+        function showQuestion(index) {
+            lessonContainer.innerHTML = '';
+            const questionData = questions[index];
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            if (questionData.type === 'briefing') {
+                card.innerHTML = `
+                    <div class="briefing-content">${questionData.content}</div>
+                    <button id="next-btn">Start</button>
+                `;
+                lessonContainer.appendChild(card);
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    showQuestion(currentQuestionIndex);
+                });
+            } else if (questionData.type === 'mcq') {
+                const optionsHtml = questionData.options.map((option, i) => `
+                    <div class="option" data-index="${i}">${option}</div>
+                `).join('');
+                card.innerHTML = `
+                    <h3>Question ${index} of ${questions.length -1}</h3>
+                    <p>${questionData.question}</p>
+                    <div class="options-container">${optionsHtml}</div>
+                    <div id="feedback"></div>
+                    <button id="next-btn" style="display:none;">Next</button>
+                `;
+                lessonContainer.appendChild(card);
+
+                card.querySelectorAll('.option').forEach(optionElement => {
+                    optionElement.addEventListener('click', (event) => handleOptionClick(event, questionData));
+                });
+                 document.getElementById('next-btn').addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        showQuestion(currentQuestionIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+
+            } else if (questionData.type === 'scrambled_paragraph') {
+                 const sentences = questionData.sentences;
+                const scrambled = [...sentences].sort(() => Math.random() - 0.5);
+
+                const sentencesHtml = scrambled.map((sentence, i) => `
+                    <div class="scrambled-sentence" draggable="true" data-original-index="${sentences.indexOf(sentence)}">${sentence}</div>
+                `).join('');
+
+                card.innerHTML = `
+                    <h3>Question ${index} of ${questions.length - 1}</h3>
+                    <p>${questionData.instruction}</p>
+                    <div id="scrambled-container">${sentencesHtml}</div>
+                    <div id="feedback"></div>
+                    <button id="submit-order-btn">Submit</button>
+                    <button id="next-btn" style="display:none;">Next</button>
+                `;
+                lessonContainer.appendChild(card);
+
+                const container = document.getElementById('scrambled-container');
+                let draggedItem = null;
+
+                container.addEventListener('dragstart', e => {
+                    draggedItem = e.target;
+                    setTimeout(() => {
+                        e.target.style.display = 'none';
+                    }, 0);
+                });
+
+                container.addEventListener('dragend', e => {
+                    setTimeout(() => {
+                        draggedItem.style.display = 'block';
+                        draggedItem = null;
+                    }, 0);
+                });
+
+                container.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(container, e.clientY);
+                    const draggable = document.querySelector('.dragging');
+                    if (afterElement == null) {
+                        container.appendChild(draggedItem);
+                    } else {
+                        container.insertBefore(draggedItem, afterElement);
+                    }
+                });
+
+                document.getElementById('submit-order-btn').addEventListener('click', () => {
+                    checkScrambledOrder(questionData.sentences);
+                });
+                 document.getElementById('next-btn').addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        showQuestion(currentQuestionIndex);
+                    } else {
+                        showFinalScore();
+                    }
+                });
+            }
+        }
+
+         function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        function checkScrambledOrder(correctOrder) {
+            const container = document.getElementById('scrambled-container');
+            const submittedOrder = [...container.querySelectorAll('.scrambled-sentence')].map(el => el.textContent);
+            const feedback = document.getElementById('feedback');
+            const isCorrect = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+
+            if (isCorrect) {
+                score++;
+                feedback.textContent = 'Correct! The order is perfect.';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite right. Try again or check the solution.';
+                feedback.style.color = 'red';
+            }
+
+            document.getElementById('submit-order-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'block';
+            
+            // Make sentences no longer draggable
+            container.querySelectorAll('.scrambled-sentence').forEach(el => {
+                el.setAttribute('draggable', 'false');
+                el.style.cursor = 'default';
+            });
+        }
+
+        function handleOptionClick(event, questionData) {
+            const selectedOption = event.target;
+            const selectedAnswer = selectedOption.textContent;
+            const correctAnswer = questionData.answer;
+            const feedback = document.getElementById('feedback');
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.style.pointerEvents = 'none'; // Disable further clicks
+            });
+
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                selectedOption.style.backgroundColor = '#28a745'; // Green
+                feedback.textContent = 'Correct!';
+                feedback.style.color = 'green';
+            } else {
+                selectedOption.style.backgroundColor = '#dc3545'; // Red
+                feedback.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+                feedback.style.color = 'red';
+                // Highlight the correct answer
+                 document.querySelectorAll('.option').forEach(opt => {
+                    if (opt.textContent === correctAnswer) {
+                        opt.style.backgroundColor = '#28a745';
+                    }
+                });
+            }
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function showFinalScore() {
+            lessonContainer.style.display = 'none';
+            scoreContainer.style.display = 'block';
+            const percentage = Math.round((score / (questions.length - 1)) * 100); // Exclude briefing
+            finalScoreElement.textContent = `${score} / ${questions.length - 1} (${percentage}%)`;
+            localStorage.setItem(lessonId + '-completed', 'true');
+        }
+
+        // Initialize the lesson
+        startLesson();
+
+    </script>
+</body>
+</html>

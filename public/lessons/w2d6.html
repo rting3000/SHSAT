@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D6: Mid-Week Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Mid-Week Review",
+            subtitle: "Week 2, Day 6",
+            pointsPerQuestion: 10,
+            completion_id: 'w2d6',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Sharpen Your Skills',
+                    content: `
+                        <p>Time for a check-in. This mission is a mixed drill of everything we've covered in Week 2 so far. This is a great chance to see how the skills connect and to spot any areas that need a little more attention before the weekly review.</p>
+                        <ul>
+                            <li><strong>ELA Topics:</strong> Tone/Mood, Word in Context, Arguments, Figurative Language, Paired Passages.</li>
+                            <li><strong>Math Topics:</strong> Advanced Fractions, Multi-Step Equations, Basic Geometry, Area/Perimeter.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 1: Tone',
+                    prompt: 'What is the primary tone of this passage?',
+                    passage: 'It is with the deepest reverence that I stand before this monument, a testament to the courage and sacrifice of those who came before. We owe them a debt we can never truly repay, but we can strive to live by the ideals for which they fought. Their legacy is the foundation upon which our freedom is built.',
+                    options: ['Humorous', 'Skeptical', 'Formal and respectful', 'Casual and informal'],
+                    correctAnswer: 'Formal and respectful',
+                    explanation: 'Words like "deepest reverence," "courage and sacrifice," and "legacy" create a formal and deeply respectful tone.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 2: Multi-Step Equations',
+                    prompt: 'Solve for z:  -2(4z - 3) = -10',
+                    correctAnswer: '2',
+                    explanation: 'Distribute the -2: -8z + 6 = -10. Subtract 6 from both sides: -8z = -16. Divide by -8: z = 2.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 3: Figurative Language',
+                    prompt: 'The phrase "The city was a concrete jungle" is an example of:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'It\'s a metaphor because it directly compares the city to a jungle without using "like" or "as".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 4: Area and Perimeter',
+                    prompt: 'A square has a perimeter of 36 cm. What is its area in square cm?',
+                    correctAnswer: '81',
+                    explanation: 'The perimeter of a square is 4 times its side length (s). So, 4s = 36, which means each side is 9 cm. The area of a square is side * side, so Area = 9 * 9 = 81 sq cm.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'Review 5: Word in Context',
+                    prompt: 'What does "ephemeral" mean in this sentence?',
+                    passage: 'The beauty of the cherry blossoms is ephemeral, lasting only for a week or two each spring.',
+                    options: ['Long-lasting', 'Subtle', 'Short-lived', 'Brightly colored'],
+                    correctAnswer: 'Short-lived',
+                    explanation: 'The context clue "lasting only for a week or two" directly indicates that the beauty is temporary or short-lived.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 6: Advanced Fractions',
+                    prompt: 'Calculate: 4 1/3 - 2 3/4',
+                    correctAnswer: '1 7/12',
+                    explanation: 'Convert to improper fractions: 13/3 - 11/4. Find a common denominator (12): 52/12 - 33/12 = 19/12. Convert back to a mixed number: 1 7/12.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 7: Identifying an Argument\'s Claim',
+                    prompt: 'What is the author\'s main claim?',
+                    passage: 'Every high school student should be required to volunteer in their community. This experience fosters empathy, teaches valuable life skills, and helps students understand the needs of their neighbors. It builds character in a way that the classroom alone cannot.',
+                    options: [
+                        'The classroom does not build character.',
+                        'Volunteering is a good way to spend time.',
+                        'Community volunteering should be a mandatory part of high school education.',
+                        'Students need to understand their neighbors.'
+                    ],
+                    correctAnswer: 'Community volunteering should be a mandatory part of high school education.',
+                    explanation: 'This sentence captures the central argument that the rest of the passage is dedicated to supporting.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 8: Basic Geometry (Angles)',
+                    prompt: 'Two parallel lines are cut by a transversal. One of the consecutive interior angles is 80°. What is the measure of the other consecutive interior angle?',
+                    correctAnswer: '100',
+                    explanation: 'Consecutive interior angles are supplementary, meaning they add up to 180°. So, 180 - 80 = 100°.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 9: Mood',
+                    prompt: 'What mood does the following passage create?',
+                    passage: 'The gentle lapping of waves on the shore, the warm sun on her skin, and the faint, salty breeze rustling the palm leaves overhead all combined to create a perfect afternoon.',
+                    options: ['Tense and anxious', 'Sad and mournful', 'Peaceful and relaxed', 'Exciting and energetic'],
+                    correctAnswer: 'Peaceful and relaxed',
+                    explanation: 'All the sensory details (gentle waves, warm sun, faint breeze) are used to create a mood of calm and relaxation for the reader.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 10: Multi-Step Word Problem',
+                    prompt: 'You buy 5 notebooks for $x each and a pen for $2.50. The total cost is $17.50. What is the cost of one notebook in dollars?',
+                    correctAnswer: '3',
+                    explanation: 'Set up the equation: 5x + 2.50 = 17.50. Subtract 2.50 from both sides: 5x = 15. Divide by 5: x = 3. Each notebook costs $3.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 11: Paired Passages',
+                    prompt: 'How would the author of Passage 2 likely critique the argument in Passage 1?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> To solve our city's traffic problem, we must build more roads. More roads mean more capacity, which will reduce congestion and shorten commute times for everyone.</p>
+                        <p><strong>Passage 2:</strong> The concept of "induced demand" suggests that building more roads actually makes traffic worse. When new roads are built, more people decide to drive, quickly filling the new capacity and leading to the same, or even worse, levels of congestion.</p>
+                    `,
+                    options: [
+                        'By agreeing that more roads are the only solution.',
+                        'By arguing that the premise of Passage 1 is flawed due to the principle of induced demand.',
+                        'By suggesting that public transportation is a better investment.',
+                        'By claiming that commute times are not a problem.'
+                    ],
+                    correctAnswer: 'By arguing that the premise of Passage 1 is flawed due to the principle of induced demand.',
+                    explanation: 'Passage 2 directly explains the concept of "induced demand," which is a well-known counterargument to the idea that building more roads solves traffic congestion. It fundamentally challenges the core assumption of Passage 1.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 12: Area of a Triangle',
+                    prompt: 'A triangle has a height of 10 meters and an area of 40 square meters. What is the length of its base?',
+                    correctAnswer: '8',
+                    explanation: 'Area = (1/2) * base * height. So, 40 = (1/2) * base * 10. This simplifies to 40 = 5 * base. Divide by 5 to find the base: 40 / 5 = 8 meters.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 13: Personification',
+                    prompt: 'Which sentence contains personification?',
+                    options: [
+                        'The computer was a dinosaur, old and slow.',
+                        'The wind whispered secrets through the trees.',
+                        'The runner was as fast as a cheetah.',
+                        'The company’s profits were a rocket ship.'
+                    ],
+                    correctAnswer: 'The wind whispered secrets through the trees.',
+                    explanation: 'The wind, an inanimate force, is given the human quality of whispering, which is personification.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 14: Complex Fractions',
+                    prompt: 'Simplify: (1/2 + 1/4) / (1/2 - 1/4)',
+                    correctAnswer: '3',
+                    explanation: 'Numerator: 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Denominator: 1/2 - 1/4 = 2/4 - 1/4 = 1/4. Result: (3/4) / (1/4) = 3/4 * 4/1 = 3.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 15: Identifying Evidence',
+                    prompt: 'Which part of the passage is the primary evidence for the claim?',
+                    passage: 'Our city needs to expand its recycling program. A recent waste audit found that 40% of the material in our city’s landfill is recyclable material. Expanding the program would significantly reduce landfill waste and benefit the environment.',
+                    options: [
+                        'Our city needs to expand its recycling program.',
+                        'Expanding the program would benefit the environment.',
+                        'A recent waste audit found that 40% of landfill material is recyclable.',
+                        'Reducing landfill waste is important.'
+                    ],
+                    correctAnswer: 'A recent waste audit found that 40% of landfill material is recyclable.',
+                    explanation: 'This is a specific piece of data (the result of a waste audit) used to support the claim that the recycling program needs expansion.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 16: Geometry - Isosceles Triangle',
+                    prompt: 'An isosceles triangle has one base angle that measures 70°. What is the measure of the vertex angle?',
+                    correctAnswer: '40',
+                    explanation: 'The base angles of an isosceles triangle are equal, so the two base angles are both 70°. Their sum is 140°. The sum of all angles in a triangle is 180°, so the vertex angle is 180 - 140 = 40°.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 17: Word in Context',
+                    prompt: 'What does "meticulous" mean?',
+                    passage: 'She was a meticulous planner, accounting for every possible contingency and checking every detail twice.',
+                    options: ['Careless', 'Quick', 'Showing great attention to detail', 'Imaginative'],
+                    correctAnswer: 'Showing great attention to detail',
+                    explanation: 'The context clues "accounting for every possible contingency" and "checking every detail twice" directly illustrate the meaning of meticulous.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 18: Equation with Fractions',
+                    prompt: 'Solve for x: (2x/3) + 5 = 11',
+                    correctAnswer: '9',
+                    explanation: 'Subtract 5 from both sides: 2x/3 = 6. Multiply both sides by 3: 2x = 18. Divide by 2: x = 9.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 19: Simile',
+                    prompt: 'Which sentence contains a simile?',
+                    options: [
+                        'The politician’s promise was a fragile bubble.',
+                        'The old man’s skin was like wrinkled parchment.',
+                        'Time is a thief.',
+                        'The open door beckoned from across the hall.'
+                    ],
+                    correctAnswer: 'The old man’s skin was like wrinkled parchment.',
+                    explanation: 'This is a simile as it uses the word "like" to make a comparison between the skin and parchment.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 20: Area of a Composite Shape',
+                    prompt: 'A picture frame is 10 inches wide and 12 inches tall. The picture opening in the middle is 8 inches wide and 10 inches tall. What is the area of the frame itself?',
+                    correctAnswer: '40',
+                    explanation: 'Calculate the area of the outer rectangle: 10 * 12 = 120 sq inches. Calculate the area of the inner opening: 8 * 10 = 80 sq inches. Subtract the inner area from the outer area to find the area of the frame: 120 - 80 = 40 sq inches.'
+                }
+            ]
+        };
+
+        // Standard lesson engine script
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+            let completedQuestions = new Set(JSON.parse(localStorage.getItem(completionId)) || []);
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<h2>${step.header}</h2>`;
+                if (step.passage) {
+                    content += `<div class="passage">${step.passage}</div>`;
+                }
+                if (step.prompt) {
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                }
+                
+                if (step.type === 'mcq') {
+                    content += '<div class="options">';
+                    step.options.forEach(option => {
+                        content += `<button class="option">${option}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `
+                        <div class="grid-in-container">
+                            <input type="text" class="grid-in-input" maxlength="10">
+                            <button class="submit-btn">Submit</button>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    content += `<div id="scrambled-container"></div>`;
+                    content += `<button id="check-scrambled-btn" class="submit-btn">Check Order</button>`;
+                } else if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button class="next-btn">Continue</button>`;
+                }
+
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+                
+                if (step.type === 'scrambled-paragraph') {
+                    setupScrambledParagraph(step);
+                }
+
+                addCardEventListeners(step);
+            }
+
+            function addCardEventListeners(step) {
+                if (step.type === 'mcq') {
+                    const optionButtons = document.querySelectorAll('.option');
+                    optionButtons.forEach(button => {
+                        button.addEventListener('click', () => handleAnswer(step, button.textContent));
+                    });
+                } else if (step.type === 'grid-in') {
+                    const submitButton = document.querySelector('.submit-btn');
+                    const inputField = document.querySelector('.grid-in-input');
+                    submitButton.addEventListener('click', () => handleAnswer(step, inputField.value.trim()));
+                    inputField.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            handleAnswer(step, inputField.value.trim());
+                        }
+                    });
+                } else if (step.type === 'scrambled-paragraph') {
+                    document.getElementById('check-scrambled-btn').addEventListener('click', () => {
+                         handleScrambledAnswer(step);
+                    });
+                } else if (step.type === 'briefing') {
+                    document.querySelector('.next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                }
+            }
+            
+            function handleAnswer(step, selectedAnswer) {
+                const isCorrect = selectedAnswer === step.correctAnswer;
+                if (step.type !== 'briefing') {
+                    questionsAnswered++;
+                    if (isCorrect) {
+                        score += lessonData.pointsPerQuestion;
+                    }
+                }
+                
+                showFeedback(step, isCorrect, selectedAnswer);
+            }
+
+            function showFeedback(step, isCorrect, selectedAnswer) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                
+                if (!isCorrect) {
+                     feedbackHtml += `<p><strong>Your answer:</strong> ${selectedAnswer}</p>`;
+                     feedbackHtml += `<p><strong>Correct answer:</strong> ${step.correctAnswer}</p>`;
+                }
+
+                feedbackHtml += `<div class="explanation"><p>${step.explanation}</p></div>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+            function setupScrambledParagraph(step) {
+                const container = document.getElementById('scrambled-container');
+                const sentences = [...step.sentences]; // Create a mutable copy
+                // Simple shuffle
+                for (let i = sentences.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                }
+
+                sentences.forEach((sentence, index) => {
+                    const sentenceDiv = document.createElement('div');
+                    sentenceDiv.className = 'scrambled-sentence';
+                    sentenceDiv.textContent = sentence;
+                    sentenceDiv.dataset.originalIndex = step.sentences.indexOf(sentence);
+                    sentenceDiv.setAttribute('draggable', true);
+                    sentenceDiv.id = `sentence-${index}`;
+                    
+                    sentenceDiv.addEventListener('dragstart', handleDragStart);
+                    sentenceDiv.addEventListener('dragover', handleDragOver);
+                    sentenceDiv.addEventListener('drop', handleDrop);
+                    sentenceDiv.addEventListener('dragend', handleDragEnd);
+
+                    container.appendChild(sentenceDiv);
+                });
+            }
+            
+            let draggedItem = null;
+
+            function handleDragStart(e) {
+                draggedItem = this;
+                setTimeout(() => {
+                    this.style.display = 'none';
+                }, 0);
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    const allItems = Array.from(document.querySelectorAll('.scrambled-sentence'));
+                    const draggedIndex = allItems.indexOf(draggedItem);
+                    const targetIndex = allItems.indexOf(this);
+
+                    if (draggedIndex < targetIndex) {
+                        this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                    } else {
+                        this.parentNode.insertBefore(draggedItem, this);
+                    }
+                }
+            }
+            
+            function handleDragEnd() {
+                setTimeout(() => {
+                    if (draggedItem) {
+                        draggedItem.style.display = 'block';
+                        draggedItem = null;
+                    }
+                }, 0);
+            }
+
+            function handleScrambledAnswer(step) {
+                const container = document.getElementById('scrambled-container');
+                const currentOrder = Array.from(container.children).map(child => child.textContent);
+                
+                let isCorrect = true;
+                for(let i = 0; i < currentOrder.length; i++) {
+                    if(currentOrder[i] !== step.correctOrder[i]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                
+                questionsAnswered++;
+                 if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                }
+
+                showScrambledFeedback(step, isCorrect);
+            }
+            
+            function showScrambledFeedback(step, isCorrect) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                feedbackHtml += `<p>${step.explanation}</p>`;
+                feedbackHtml += `<strong>The correct order is:</strong><ol>`;
+                step.correctOrder.forEach(sentence => {
+                    feedbackHtml += `<li>${sentence}</li>`;
+                });
+                feedbackHtml += `</ol>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+                
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+
+            function showFinalResults() {
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <h2>Mission Complete!</h2>
+                        <p>You've completed ${lessonData.subtitle}.</p>
+                        <h3>Your Score: ${score} / ${totalQuestions * lessonData.pointsPerQuestion}</h3>
+                        <p>You answered ${questionsAnswered} questions.</p>
+                        <a href="../index.html" class="button">Return to Dashboard</a>
+                    </div>
+                `;
+                markLessonAsComplete();
+            }
+            
+            function markLessonAsComplete() {
+                if (completionId) {
+                    const completedLessons = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                    completedLessons.add(completionId);
+                    localStorage.setItem('completedLessons', JSON.stringify([...completedLessons]));
+                }
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "shsat-prep-website",
+  "version": "1.0.0",
+  "description": "A simple website to view SHSAT prep materials.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "marked": "^2.0.0"
+  }
+} 

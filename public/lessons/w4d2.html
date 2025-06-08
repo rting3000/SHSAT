@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D2: ELA Editing & Number Properties</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: ELA Editing & Number Properties",
+            subtitle: "Week 4, Day 2",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d2',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Polishing Prose and Mastering Numbers',
+                    content: `
+                        <p>Agent, today's review sharpens two distinct but equally important skills.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> We're focusing on <strong>Revising and Editing</strong>. You'll need a keen eye to spot errors in grammar, punctuation, and sentence structure.</li>
+                            <li><strong>Math:</strong> We'll dive into <strong>Number Properties</strong>. This includes topics like prime numbers, factors, multiples, and the order of operations.</li>
+                        </ul>
+                        <p>Attention to detail is your greatest asset on this mission. Proceed.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Punctuation',
+                    passage: 'The team celebrated its victory, a hard-won triumph, with a parade through the city.',
+                    prompt: 'Which part of the sentence is a non-essential clause that is correctly set off by commas?',
+                    options: ['The team celebrated its victory', 'a hard-won triumph', 'with a parade', 'through the city'],
+                    correctAnswer: 'a hard-won triumph',
+                    explanation: 'The phrase "a hard-won triumph" provides extra information about the victory but is not essential to the sentence\'s basic meaning. It is correctly set off by commas.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Verb Tense',
+                    passage: 'Yesterday, I go to the library and check out three books.',
+                    prompt: 'How should the underlined verb be corrected?',
+                    options: ['gone', 'went', 'will go', 'going'],
+                    correctAnswer: 'went',
+                    explanation: 'The word "Yesterday" indicates the past tense, so the verb "go" should be "went".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Subject-Verb Agreement',
+                    passage: 'Each of the students are responsible for their own project.',
+                    prompt: 'How should the underlined verb be corrected?',
+                    options: ['is', 'were', 'be', 'No correction needed'],
+                    correctAnswer: 'is',
+                    explanation: 'The subject of the sentence is "Each," which is singular. Therefore, the verb must also be singular: "is".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Pronoun-Antecedent Agreement',
+                    passage: 'A person should always do their best.',
+                    prompt: 'Which of the following is the most grammatically precise correction for "their"?',
+                    options: ['his or her', 'our', 'its', 'No correction needed'],
+                    correctAnswer: 'his or her',
+                    explanation: 'The antecedent "A person" is singular. While "their" is often used in speech, "his or her" is traditionally considered the grammatically correct singular pronoun in formal writing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Misplaced Modifier',
+                    passage: 'Covered in mud, the pig was bathed by the farmer.',
+                    prompt: 'Which of the following sentences corrects the misplaced modifier issue?',
+                    options: [
+                        'The farmer bathed the pig covered in mud.',
+                        'The pig was bathed by the farmer covered in mud.',
+                        'The sentence is correct as is.',
+                        'The farmer, covered in mud, bathed the pig.'
+                    ],
+                    correctAnswer: 'The farmer, covered in mud, bathed the pig.',
+                    explanation: 'The original sentence is ambiguous. It\'s unclear if the pig or the farmer is covered in mud. This corrected version clarifies that the farmer was the one covered in mud.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Punctuation (Semicolon)',
+                    passage: 'I have a big test tomorrow, I can\'t go out tonight.',
+                    prompt: 'How can this sentence be correctly rewritten?',
+                    options: [
+                        'I have a big test tomorrow; I can\'t go out tonight.',
+                        'I have a big test tomorrow, so, I can\'t go out tonight.',
+                        'I have a big test tomorrow I can\'t go out tonight.',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: 'I have a big test tomorrow; I can\'t go out tonight.',
+                    explanation: 'This is a comma splice. Two independent clauses are joined by only a comma. A semicolon is one correct way to join two closely related independent clauses.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Order of Operations',
+                    prompt: 'Calculate: 5 + 3 * (10 - 4) / 2',
+                    correctAnswer: '14',
+                    explanation: 'Follow PEMDAS: Parentheses (10-4=6), then Multiplication (3*6=18), then Division (18/2=9), then Addition (5+9=14).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Prime Numbers',
+                    prompt: 'What is the sum of the first five prime numbers?',
+                    correctAnswer: '28',
+                    explanation: 'The first five prime numbers are 2, 3, 5, 7, and 11. (Note: 1 is not a prime number). Their sum is 2 + 3 + 5 + 7 + 11 = 28.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Factors',
+                    prompt: 'How many distinct prime factors does the number 60 have?',
+                    correctAnswer: '3',
+                    explanation: 'The prime factorization of 60 is 2 * 2 * 3 * 5, or 2^2 * 3 * 5. The distinct (different) prime factors are 2, 3, and 5. There are 3 of them.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Least Common Multiple (LCM)',
+                    prompt: 'What is the least common multiple of 8 and 12?',
+                    correctAnswer: '24',
+                    explanation: 'Multiples of 8 are 8, 16, 24, 32... Multiples of 12 are 12, 24, 36... The smallest number they have in common is 24.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Greatest Common Factor (GCF)',
+                    prompt: 'What is the greatest common factor of 36 and 54?',
+                    correctAnswer: '18',
+                    explanation: 'Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36. Factors of 54: 1, 2, 3, 6, 9, 18, 27, 54. The largest factor they share is 18.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Number Properties',
+                    prompt: 'What is the smallest positive integer that is divisible by 2, 3, and 5?',
+                    correctAnswer: '30',
+                    explanation: 'This is asking for the least common multiple (LCM) of 2, 3, and 5. Since they are all prime, their LCM is their product: 2 * 3 * 5 = 30.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Parallel Structure',
+                    passage: 'The new manager is responsible for hiring new staff, training them, and to conduct weekly meetings.',
+                    prompt: 'How should the sentence be corrected for parallel structure?',
+                    options: [
+                        'hiring new staff, to train them, and conducting weekly meetings',
+                        'hiring new staff, training them, and conducting weekly meetings',
+                        'to hire new staff, to train them, and conduct weekly meetings',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: 'hiring new staff, training them, and conducting weekly meetings',
+                    explanation: 'Parallel structure requires that items in a list be in the same grammatical form. "Hiring" and "training" are gerunds (-ing form), so "to conduct" should be changed to "conducting".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Order of Operations',
+                    prompt: 'Calculate: 4^2 - (5 - 2)^2 + 10 / 2',
+                    correctAnswer: '12',
+                    explanation: 'PEMDAS: Parentheses (5-2=3), Exponents (4^2=16 and 3^2=9), Division (10/2=5), then Subtraction and Addition from left to right (16 - 9 = 7, then 7 + 5 = 12).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Comma Usage',
+                    passage: 'Although the weather was bad we still had a great time.',
+                    prompt: 'Where should a comma be added?',
+                    options: [
+                        'After "Although"',
+                        'After "weather"',
+                        'After "bad"',
+                        'After "still"'
+                    ],
+                    correctAnswer: 'After "bad"',
+                    explanation: 'When a dependent clause (like "Although the weather was bad") comes before an independent clause, it should be followed by a comma.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Prime Factorization',
+                    prompt: 'What is the largest prime factor of 130?',
+                    correctAnswer: '13',
+                    explanation: 'To find the prime factors of 130, you can start dividing by prime numbers. 130 is even, so 130 = 2 * 65. 65 ends in a 5, so 65 = 5 * 13. 13 is a prime number. The prime factorization is 2 * 5 * 13. The largest prime factor is 13.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Sentence Fragments',
+                    prompt: 'Which of the following is a complete sentence?',
+                    options: [
+                        'While the team was practicing on the field.',
+                        'Because the rain started to fall.',
+                        'The championship game was postponed.',
+                        'Running through the park at dusk.'
+                    ],
+                    correctAnswer: 'The championship game was postponed.',
+                    explanation: 'This is the only option that expresses a complete thought and has both a subject ("game") and a verb ("was postponed"). The other options are dependent clauses or phrases.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Multiples',
+                    prompt: 'How many multiples of 7 are there between 50 and 100?',
+                    correctAnswer: '7',
+                    explanation: 'The first multiple of 7 greater than 50 is 7*8=56. The largest multiple of 7 less than 100 is 7*14=98. The multiples are from 7*8 to 7*14, so there are 14 - 8 + 1 = 7 multiples.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Word Choice (Affect vs. Effect)',
+                    passage: 'The new law will have a major affect on the economy.',
+                    prompt: 'How should the underlined word be corrected?',
+                    options: [
+                        'effect',
+                        'effects',
+                        'affects',
+                        'No correction needed'
+                    ],
+                    correctAnswer: 'effect',
+                    explanation: '"Effect" is a noun meaning "a result" or "an influence." "Affect" is a verb meaning "to influence." In this sentence, a noun is needed, so "effect" is correct.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: GCF and LCM',
+                    prompt: 'The product of two numbers is 240. If their Greatest Common Factor (GCF) is 4, what is their Least Common Multiple (LCM)?',
+                    correctAnswer: '60',
+                    explanation: 'A key number property is that the product of two numbers is equal to the product of their GCF and LCM. So, 240 = 4 * LCM. Divide by 4: LCM = 60.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = true;
+                for(let i = 0; i < correctOrder.length; i++) {
+                    if(submittedOrder[i] !== correctOrder[i]) {
+                        correct = false;
+                        break;
+                    }
+                }
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

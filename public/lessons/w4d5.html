@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D5: Author's Intent & Data Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Author's Intent & Data Insights",
+            subtitle: "Week 4, Day 5",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d5',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Understanding Motives, Interpreting Data',
+                    content: `
+                        <p>Agent, your mission today focuses on interpretation, both of language and of numbers.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> We will review <strong>Author's Purpose and Tone/Mood</strong>. You must determine *why* a text was written and the *feeling* it is meant to evoke.</li>
+                            <li><strong>Math:</strong> You'll be working with <strong>Percentages and Data Analysis</strong>, turning raw numbers from charts and tables into meaningful conclusions.</li>
+                        </ul>
+                        <p>Look beyond the surface. Let's begin.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Author\'s Purpose',
+                    passage: 'A leading climate scientist has written a new book detailing the severe, cascading effects of rising global temperatures, citing hundreds of peer-reviewed studies. The final chapter outlines an urgent, ten-point plan for governments to adopt renewable energy policies.',
+                    prompt: 'The author\'s primary purpose is most likely to:',
+                    options: [
+                        'Entertain with a fictional story about climate change.',
+                        'Inform the reader about the history of climate science.',
+                        'Persuade policymakers and the public to take immediate action on climate change.',
+                        'Describe the life of a climate scientist.'
+                    ],
+                    correctAnswer: 'Persuade policymakers and the public to take immediate action on climate change.',
+                    explanation: 'The inclusion of an "urgent, ten-point plan" is a clear call to action, which is the hallmark of persuasive writing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Tone/Mood',
+                    passage: 'The clown, a single tear painted on his cheek, silently juggled three rainbow balls under the dim, flickering spotlight. The circus tent was empty except for the wind whistling through a tear in the canvas.',
+                    prompt: 'The mood of this passage is best described as:',
+                    options: ['Joyful and chaotic', 'Melancholy and lonely', 'Tense and frightening', 'Exciting and festive'],
+                    correctAnswer: 'Melancholy and lonely',
+                    explanation: 'Words like "single tear," "silently," "dim," "flickering," and "empty" all contribute to a sad and lonely atmosphere.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Author\'s Purpose',
+                    passage: 'The user manual for the "Hyper-Blender 5000" begins with a detailed diagram of all 15 parts. It then provides step-by-step directions for assembly, operation, and cleaning.',
+                    prompt: 'The author\'s purpose is to:',
+                    options: ['Persuade you to buy a blender', 'Entertain with a story about a blender', 'Inform and instruct the user on how to use the blender', 'Describe the blender\'s appearance'],
+                    correctAnswer: 'Inform and instruct the user on how to use the blender',
+                    explanation: 'The presence of diagrams and step-by-step directions clearly indicates that this is an instructional text.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Tone',
+                    passage: 'It is simply not acceptable that our city\'s parks are littered with trash. This is a failure of leadership and a failure of civic pride. The mayor must allocate more funding for sanitation, and citizens must take more responsibility for their public spaces.',
+                    prompt: 'The author\'s tone is:',
+                    options: ['Hesitant and uncertain', 'Humorous and lighthearted', 'Forceful and critical', 'Objective and neutral'],
+                    correctAnswer: 'Forceful and critical',
+                    explanation: 'Phrases like "simply not acceptable" and "failure of leadership," along with the use of "must," create a strong, critical, and demanding tone.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Percentages',
+                    prompt: 'A jacket is originally priced at $80. It is on sale for 25% off. What is the sale price?',
+                    correctAnswer: '60',
+                    explanation: 'The discount is 25% of $80, which is 0.25 * 80 = $20. The sale price is the original price minus the discount: $80 - $20 = $60.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Data Analysis (Mean)',
+                    prompt: 'A student scores 85, 90, 75, and 100 on four tests. What is their mean (average) score?',
+                    correctAnswer: '87.5',
+                    explanation: 'To find the mean, add all the scores and divide by the number of scores. (85 + 90 + 75 + 100) / 4 = 350 / 4 = 87.5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Percent Increase',
+                    prompt: 'Last year, a club had 40 members. This year, it has 50 members. What is the percent increase in membership?',
+                    correctAnswer: '25',
+                    explanation: 'The increase is 50 - 40 = 10 members. Percent increase = (Increase / Original Amount) * 100. (10 / 40) * 100 = 0.25 * 100 = 25%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Data Analysis (Median)',
+                    prompt: 'Find the median of the following data set: 12, 5, 23, 15, 7, 9, 20.',
+                    correctAnswer: '12',
+                    explanation: 'First, order the numbers: 5, 7, 9, 12, 15, 20, 23. The median is the middle number in an ordered set. Here, the middle number is 12.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Data Analysis (Range)',
+                    prompt: 'What is the range of the test scores: 65, 98, 77, 81, 72, 89?',
+                    correctAnswer: '33',
+                    explanation: 'The range is the difference between the highest and lowest values. Highest is 98, lowest is 65. Range = 98 - 65 = 33.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Percentages',
+                    prompt: 'If 30% of a number is 45, what is the number?',
+                    correctAnswer: '150',
+                    explanation: 'Let the number be x. The equation is 0.30 * x = 45. To find x, divide both sides by 0.30. x = 45 / 0.30 = 150.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Data Analysis (Mode)',
+                    prompt: 'Find the mode of the data set: 4, 8, 2, 7, 8, 5, 8, 4, 3.',
+                    correctAnswer: '8',
+                    explanation: 'The mode is the number that appears most frequently. The number 8 appears three times, more than any other number.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

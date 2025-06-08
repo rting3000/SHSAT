@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W6D3: Inference & Circles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Inference & Circles",
+            subtitle: "Week 6, Day 3",
+            pointsPerQuestion: 10,
+            completion_id: 'w6d3',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Reading Between the Lines',
+                    content: `
+                        <p>Agent, your analytical skills are paramount today.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> We return to a crucial skill: <strong>Inference</strong>. You must draw conclusions based on evidence and reasoning presented in a text, not just what is explicitly stated.</li>
+                            <li><strong>Math:</strong> We venture into the world of <strong>Circles</strong>. You will learn the formulas for circumference and area and apply them to various problems.</li>
+                        </ul>
+                        <p>What is the text *really* saying? What is the exact measure? Let's find out.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Inference',
+                    passage: 'When the mail carrier arrived, Sarah\'s dog, Buster, ran to the door, tail wagging furiously. The mail carrier, however, stayed on the sidewalk and nervously held the mail out at arm\'s length.',
+                    prompt: 'What can you infer from this passage?',
+                    options: [
+                        'Buster is a very friendly dog.',
+                        'The mail carrier has likely had a bad experience with a dog before.',
+                        'Sarah was expecting an important package.',
+                        'Buster does not like the mail carrier.'
+                    ],
+                    correctAnswer: 'The mail carrier has likely had a bad experience with a dog before.',
+                    explanation: 'Buster\'s tail wagging suggests he is friendly. The mail carrier\'s nervousness ("nervously," "held the mail out at arm\'s length") despite the dog\'s apparent friendliness implies a pre-existing fear or caution around dogs.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Inference',
+                    passage: 'The classroom was silent except for the frantic scratching of pencils on paper. The teacher stood at the front of the room, arms crossed, with a stern expression, occasionally glancing at the clock.',
+                    prompt: 'What is most likely happening in the classroom?',
+                    options: [
+                        'The students are taking a timed test.',
+                        'The students are working on a fun art project.',
+                        'The teacher is angry at the students for misbehaving.',
+                        'It is the first day of school.'
+                    ],
+                    correctAnswer: 'The students are taking a timed test.',
+                    explanation: 'The combination of silence, "frantic scratching," the teacher\'s "stern expression," and the focus on the clock are all classic indicators of a timed exam environment.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Inference',
+                    passage: 'After the stock market crashed, Mr. Henderson, who had always worn designer suits and driven a luxury car, began taking the bus to work and packing his own lunch.',
+                    prompt: 'It is reasonable to infer that Mr. Henderson:',
+                    options: [
+                        'Became more environmentally conscious.',
+                        'Decided he needed more exercise.',
+                        'Lost a significant amount of money in the crash.',
+                        'Was promoted to a new position.'
+                    ],
+                    correctAnswer: 'Lost a significant amount of money in the crash.',
+                    explanation: 'The stock market crash is the key detail. His sudden shift from a luxurious lifestyle to a frugal one strongly implies that his financial situation was negatively affected by the crash.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Inference',
+                    passage: 'A light suddenly flashed in the dark sky. A few seconds later, a low rumble echoed through the valley.',
+                    prompt: 'What can be inferred from these sentences?',
+                    options: [
+                        'A fireworks show has started.',
+                        'A storm is approaching.',
+                        'A plane is flying overhead.',
+                        'The power has gone out.'
+                    ],
+                    correctAnswer: 'A storm is approaching.',
+                    explanation: 'A flash of light followed by the sound of rumbling is the classic sequence of lightning and thunder, which indicates a thunderstorm.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Circumference of a Circle',
+                    prompt: 'A circle has a radius of 5 cm. What is its circumference? (Use 3.14 for π)',
+                    correctAnswer: '31.4',
+                    explanation: 'The formula for circumference is 2 * π * r. So, Circumference = 2 * 3.14 * 5 = 10 * 3.14 = 31.4 cm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Area of a Circle',
+                    prompt: 'A circle has a diameter of 20 inches. What is its area? (Use 3.14 for π)',
+                    correctAnswer: '314',
+                    explanation: 'First, find the radius, which is half the diameter. Radius = 20 / 2 = 10 inches. The formula for area is π * r^2. So, Area = 3.14 * (10^2) = 3.14 * 100 = 314 square inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Finding Radius from Circumference',
+                    prompt: 'The circumference of a circle is 62.8 feet. What is its radius? (Use 3.14 for π)',
+                    correctAnswer: '10',
+                    explanation: 'Use the formula C = 2 * π * r. So, 62.8 = 2 * 3.14 * r. This simplifies to 62.8 = 6.28 * r. Divide by 6.28: r = 10 feet.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Area of a Semicircle',
+                    prompt: 'What is the area of a semicircle with a radius of 8? (Use 3.14 for π)',
+                    correctAnswer: '100.48',
+                    explanation: 'First, find the area of the full circle: A = π * r^2 = 3.14 * (8^2) = 3.14 * 64 = 200.96. The area of a semicircle is half of that, so 200.96 / 2 = 100.48.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Area of a Shaded Region',
+                    prompt: 'A square with a side length of 10 cm has a circle inscribed perfectly inside it. What is the area of the shaded region between the square and the circle? (Use 3.14 for π)',
+                    correctAnswer: '21.5',
+                    explanation: 'The area of the square is side * side = 10 * 10 = 100 cm^2. The diameter of the inscribed circle is equal to the side length of the square, so the diameter is 10 and the radius is 5. The area of the circle is π * r^2 = 3.14 * 5^2 = 3.14 * 25 = 78.5 cm^2. The shaded area is the Area of the Square - Area of the Circle = 100 - 78.5 = 21.5 cm^2.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

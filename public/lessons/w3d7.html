@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D7: Week 3 Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Week 3 Review",
+            subtitle: "Comprehensive Assessment",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d7',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Week 3 Knowledge Consolidation',
+                    content: `
+                        <p>Welcome to your end-of-week review. This mission will test your understanding of all the topics covered in Week 3. Take a deep breath, focus, and show us what you've learned.</p>
+                        <ul>
+                            <li><strong>ELA Topics:</strong> Main Idea, Author's Purpose, Analyzing Arguments, Figurative Language, Tone/Mood, and Inference.</li>
+                            <li><strong>Math Topics:</strong> Advanced Ratios, Percentages, Basic Geometry, Data Analysis, Coordinate Geometry, and Probability.</li>
+                        </ul>
+                        <p>This is a longer assessment. Pace yourself and read each question carefully. Good luck, agent.</p>
+                    `
+                },
+                // ELA Questions (15)
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 1: Main Idea',
+                    passage: 'The Venus flytrap, a carnivorous plant native to subtropical wetlands, has fascinated biologists for centuries. Its leaves form a trap that snaps shut in a fraction of a second when triggered by an unsuspecting insect. The plant then secretes digestive enzymes to consume its prey, providing it with essential nutrients, like nitrogen, that are scarce in its boggy soil environment.',
+                    prompt: 'What is the main idea of the passage?',
+                    options: [
+                        'The Venus flytrap lives in wetlands.',
+                        'The Venus flytrap is a unique carnivorous plant that traps and digests insects to supplement its nutrient intake.',
+                        'The Venus flytrap\'s trap is the fastest in the plant kingdom.',
+                        'Nitrogen is an important nutrient for all plants.'
+                    ],
+                    correctAnswer: 'The Venus flytrap is a unique carnivorous plant that traps and digests insects to supplement its nutrient intake.',
+                    explanation: 'This option best summarizes all the key points: the plant\'s carnivorous nature, its trapping mechanism, and the reason for this adaptation (nutrient-poor soil).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 2: Author\'s Purpose',
+                    passage: 'Our public library\'s hours have been drastically cut due to city budget shortfalls. This denies children access to safe after-school study spaces and limits resources for job seekers. We must vote "Yes" on Proposition G to restore library funding and protect this vital community hub.',
+                    prompt: 'The author\'s primary purpose is to:',
+                    options: ['Inform readers about the library\'s history.', 'Entertain with a story set in a library.', 'Persuade readers to support a specific ballot measure.', 'Describe the library\'s architecture.'],
+                    correctAnswer: 'Persuade readers to support a specific ballot measure.',
+                    explanation: 'The passage identifies a problem, presents negative consequences, and explicitly calls for a specific action ("vote \'Yes\' on Proposition G"), which is classic persuasion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 3: Figurative Language',
+                    prompt: 'Identify the literary device in: "The news of his victory was music to my ears."',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'This is a metaphor, as the news is being directly compared to "music" to describe how pleasant it was, without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 4: Tone/Mood',
+                    passage: 'The old house groaned under the weight of the storm. Rain hammered against the roof like a frantic drumbeat, and the wind shrieked, a lost soul in the night.',
+                    prompt: 'What is the mood of this passage?',
+                    options: ['Peaceful', 'Humorous', 'Tense and foreboding', 'Joyful'],
+                    correctAnswer: 'Tense and foreboding',
+                    explanation: 'The use of personification ("groaned," "shrieked") and simile ("like a frantic drumbeat") creates a mood of tension and danger.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 5: Inference',
+                    passage: 'Without a word, the man placed a worn, leather-bound book on the counter. He pushed it towards the librarian, who scanned its cover, her eyes widening slightly. She disappeared into the back room and returned with a pair of white gloves and a magnifying glass.',
+                    prompt: 'What can be inferred about the book?',
+                    options: ['It is a new bestseller.', 'It is overdue and has a large fine.', 'It is a common, uninteresting book.', 'It is rare and valuable.'],
+                    correctAnswer: 'It is rare and valuable.',
+                    explanation: 'The librarian\'s reaction—eyes widening, retrieving special equipment like white gloves—suggests the book is not ordinary and requires careful handling, implying it is rare or valuable.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 6: Analyzing Arguments',
+                    passage: 'The city must build more bike lanes. A recent study showed that cities with extensive bike-lane networks have 40% fewer traffic accidents and significantly lower carbon emissions. While costly, the long-term public health and environmental benefits are undeniable.',
+                    prompt: 'What evidence does the author use to support the argument for more bike lanes?',
+                    options: ['Personal stories from cyclists.', 'The high cost of construction.', 'A study linking bike lanes to safety and lower emissions.', 'The opinions of local politicians.'],
+                    correctAnswer: 'A study linking bike lanes to safety and lower emissions.',
+                    explanation: 'The author explicitly cites "a recent study" and its findings about accidents and emissions as the primary evidence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 7: Main Idea',
+                    passage: 'The discovery of penicillin by Alexander Fleming in 1928 was a watershed moment in medical history. Before penicillin, infections that are now easily treatable were often a death sentence. The development of antibiotics revolutionized medicine, saving countless lives and making complex surgeries possible.',
+                    prompt: 'Which statement best expresses the main idea?',
+                    options: [
+                        'Alexander Fleming was a brilliant scientist.',
+                        'Penicillin was discovered by accident.',
+                        'The development of antibiotics, starting with penicillin, was a major turning point that transformed modern medicine.',
+                        'Surgery was very dangerous before antibiotics.'
+                    ],
+                    correctAnswer: 'The development of antibiotics, starting with penicillin, was a major turning point that transformed modern medicine.',
+                    explanation: 'This sentence best captures the overall significance and broad impact of the event as described in the passage.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 8: Author\'s Purpose',
+                    passage: 'This manual will guide you through the assembly of the "Monarch" bookshelf. Begin by identifying all parts listed on page 2. Step 1: Attach the side panels (A) to the base (B) using the provided screws (C). Do not overtighten.',
+                    prompt: 'The purpose of this text is to:',
+                    options: ['Persuade', 'Entertain', 'Describe', 'Inform/Instruct'],
+                    correctAnswer: 'Inform/Instruct',
+                    explanation: 'The passage is a set of step-by-step instructions for completing a task, which is a clear example of informational or instructional writing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 9: Figurative Language',
+                    prompt: 'What is the literary device in: "The politician\'s words were a wall between him and the voters"?',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Alliteration'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'The politician\'s words are directly compared to a "wall" to suggest they create a barrier, without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 10: Tone/Mood',
+                    passage: 'And so, with a final, weary sigh, the old king closed his eyes, and the kingdom he had built with his own hands fell silent, mourning the loss of a great and gentle leader.',
+                    prompt: 'The tone of this passage is:',
+                    options: ['Sarcastic', 'Solemn and respectful', 'Joyful and celebratory', 'Confused'],
+                    correctAnswer: 'Solemn and respectful',
+                    explanation: 'Words like "weary sigh," "fell silent," "mourning," and "great and gentle leader" create a tone of seriousness, sadness, and respect for the king.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 11: Inference',
+                    passage: 'The customer tapped his fingers impatiently on the counter. He checked his watch for the third time in as many minutes. "Is my order ready yet?" he asked, his voice tight.',
+                    prompt: 'What can you infer about the customer?',
+                    options: ['He is patient and understanding.', 'He is in a hurry and becoming annoyed.', 'He has never been to this restaurant before.', 'He is very happy with the service.'],
+                    correctAnswer: 'He is in a hurry and becoming annoyed.',
+                    explanation: 'His body language (tapping fingers, checking watch) and tone of voice ("tight") all indicate impatience and growing frustration.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 12: Analyzing Arguments',
+                    passage: 'It is essential that we invest in renewable energy sources like solar and wind. Our dependence on fossil fuels is not only environmentally destructive but also economically volatile. Transitioning to renewables will create new jobs, reduce pollution, and provide long-term energy security.',
+                    prompt: 'Which of the following, if true, would most WEAKEN the author\'s argument?',
+                    options: [
+                        'A new report shows that the manufacturing of solar panels creates significant toxic waste.',
+                        'The cost of solar panels has decreased by 50% in the last decade.',
+                        'Fossil fuel prices have been stable for the last year.',
+                        'Many people support the use of renewable energy.'
+                    ],
+                    correctAnswer: 'A new report shows that the manufacturing of solar panels creates significant toxic waste.',
+                    explanation: 'This weakens the argument by introducing a significant negative environmental impact associated with the proposed solution, countering the claim that it is less "environmentally destructive."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 13: Figurative Language',
+                    prompt: 'Which sentence contains personification?',
+                    options: [
+                        'The thunder was a distant drum.',
+                        'He is as strong as a bull.',
+                        'The wind sang a sad song through the eaves.',
+                        'I have told you a million times.'
+                    ],
+                    correctAnswer: 'The wind sang a sad song through the eaves.',
+                    explanation: 'Personification gives a human quality (singing a song) to a non-human thing (the wind).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 14: Tone/Mood',
+                    passage: 'This is, without a doubt, the single worst movie I have ever had the misfortune to sit through. The plot is nonsensical, the acting is wooden, and the dialogue sounds like it was written by a particularly untalented robot. Avoid at all costs.',
+                    prompt: 'The author\'s tone is:',
+                    options: ['Neutral', 'Enthusiastic', 'Sorrowful', 'Scathing and critical'],
+                    correctAnswer: 'Scathing and critical',
+                    explanation: 'The use of superlatives ("worst ever"), strong negative words ("misfortune," "nonsensical," "wooden"), and insults shows an intensely critical and scathing tone.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Review 15: Inference',
+                    passage: 'The family huddled together, their clothes soaked and their faces smudged with soot. Behind them, smoke still curled from the blackened shell of what was once their home. The father was clutching a single framed photograph.',
+                    prompt: 'You can infer that:',
+                    options: [
+                        'The family was enjoying a campfire.',
+                        'The family has just survived a house fire.',
+                        'The family is moving to a new house.',
+                        'The family is watching a fireworks display.'
+                    ],
+                    correctAnswer: 'The family has just survived a house fire.',
+                    explanation: 'The combination of being "soaked" (from fire hoses), covered in "soot," and standing before a "blackened shell" of a home are all strong indicators of a house fire.'
+                },
+                // Math Questions (15)
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 1: Ratios',
+                    prompt: 'A recipe for a smoothie requires 3 bananas for every 2 oranges. If you use 12 bananas, how many oranges do you need?',
+                    correctAnswer: '8',
+                    explanation: 'The ratio is 3 bananas : 2 oranges. You are using 12 bananas, which is 3 * 4. So you must use 2 * 4 = 8 oranges.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 2: Percentages',
+                    prompt: 'A TV that costs $500 is on sale for 15% off. What is the final price in dollars?',
+                    correctAnswer: '425',
+                    explanation: 'First, find the discount amount: 15% of $500 is 0.15 * 500 = $75. Then subtract the discount from the original price: $500 - $75 = $425.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 3: Geometry',
+                    prompt: 'Two angles are supplementary. If one angle measures 70 degrees, what is the measure of the other angle?',
+                    correctAnswer: '110',
+                    explanation: 'Supplementary angles add up to 180 degrees. So, 180 - 70 = 110 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 4: Data Analysis',
+                    prompt: 'Find the median of the following set of numbers: 8, 3, 9, 2, 11, 7, 3.',
+                    correctAnswer: '7',
+                    explanation: 'First, put the numbers in order: 2, 3, 3, 7, 8, 9, 11. The median is the middle number, which is 7.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 5: Coordinate Geometry',
+                    prompt: 'What is the distance between the points (2, 3) and (8, 11)?',
+                    correctAnswer: '10',
+                    explanation: 'Using the distance formula, d = sqrt((8-2)^2 + (11-3)^2) = sqrt(6^2 + 8^2) = sqrt(36 + 64) = sqrt(100) = 10. This is a 6-8-10 right triangle.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 6: Probability',
+                    prompt: 'A bag contains 4 red, 6 blue, and 5 yellow marbles. What is the probability of NOT drawing a blue marble? (Enter as a fraction)',
+                    correctAnswer: '3/5',
+                    explanation: 'There are 4+6+5 = 15 marbles total. The number of non-blue marbles is 4 (red) + 5 (yellow) = 9. The probability is 9/15, which simplifies to 3/5.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Review 7: Ratios',
+                    prompt: 'The ratio of boys to girls in a club is 5:7. If there are 42 girls, how many boys are there?',
+                    correctAnswer: '30',
+                    explanation: 'The ratio is 5 boys / 7 girls. Set up a proportion: 5/7 = x/42. To get from 7 to 42, you multiply by 6. So, x = 5 * 6 = 30.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 8: Percentages',
+                    prompt: '24 is 60% of what number?',
+                    correctAnswer: '40',
+                    explanation: 'Set up the equation: 24 = 0.60 * x. Solve for x by dividing both sides by 0.60. x = 24 / 0.6 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 9: Geometry',
+                    prompt: 'A circle has a radius of 5 cm. What is its area? (Use 3.14 for π)',
+                    correctAnswer: '78.5',
+                    explanation: 'Area of a circle = π * r^2. Area = 3.14 * 5^2 = 3.14 * 25 = 78.5 cm^2.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 10: Data Analysis',
+                    prompt: 'What is the mean (average) of the numbers 10, 20, 30, 40, 50?',
+                    correctAnswer: '30',
+                    explanation: 'To find the mean, add the numbers together (10+20+30+40+50 = 150) and divide by the count of numbers (5). 150 / 5 = 30.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 11: Coordinate Geometry',
+                    prompt: 'What is the midpoint of the line segment with endpoints (-2, 4) and (6, 10)? (Enter as x,y with no spaces)',
+                    correctAnswer: '2,7',
+                    explanation: 'Midpoint formula: ((x1+x2)/2, (y1+y2)/2). ((-2+6)/2, (4+10)/2) = (4/2, 14/2) = (2, 7).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 12: Probability',
+                    prompt: 'You flip a coin three times. What is the probability of getting tails all three times? (Enter as a fraction)',
+                    correctAnswer: '1/8',
+                    explanation: 'The probability of getting tails on one flip is 1/2. For three independent flips, you multiply the probabilities: (1/2) * (1/2) * (1/2) = 1/8.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 13: Percentages',
+                    prompt: 'A restaurant bill is $80. You want to leave a 20% tip. What is the total amount you will pay?',
+                    correctAnswer: '96',
+                    explanation: 'The tip is 20% of $80, which is 0.20 * 80 = $16. The total amount is the bill plus the tip: $80 + $16 = $96.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 14: Geometry',
+                    prompt: 'What is the perimeter of a rectangle with a length of 12 meters and a width of 5 meters?',
+                    correctAnswer: '34',
+                    explanation: 'Perimeter of a rectangle = 2 * (length + width). P = 2 * (12 + 5) = 2 * 17 = 34 meters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Review 15: Data Analysis',
+                    prompt: 'What is the mode of the following data set: 5, 2, 8, 2, 9, 5, 2, 7?',
+                    correctAnswer: '2',
+                    explanation: 'The mode is the number that appears most frequently in a data set. The number 2 appears three times, which is more than any other number.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                         const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                // Visually mark selected and correct/incorrect answers
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true; // Disable all buttons after one is chosen
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = lessonData.steps[currentStep].correctAnswer.toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = true;
+                for(let i = 0; i < correctOrder.length; i++) {
+                    if(submittedOrder[i] !== correctOrder[i]) {
+                        correct = false;
+                        break;
+                    }
+                }
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: submittedSentences.map(s => s.textContent), correct: correct });
+                
+                // Disable dragging
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                document.getElementById('feedback-next-btn').addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

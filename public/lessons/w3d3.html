@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D3: Arguments & Geometry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Arguments & Geometry",
+            subtitle: "Week 3, Day 3",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d3',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Logic and Shapes',
+                    content: `
+                        <p>In today's mission, we'll be strengthening our skills in two critical areas: ELA's <strong>Analyzing Arguments</strong> and Math's <strong>Basic Geometry</strong>.</p>
+                        <ul>
+                            <li><strong>Analyzing Arguments:</strong> This involves more than just finding the main idea. You need to identify the author's claim and the evidence they use to support it. Look for facts, statistics, expert opinions, and examples. Also, be ready to identify what would strengthen or weaken the argument.</li>
+                            <li><strong>Basic Geometry:</strong> We will focus on the building blocks of geometry: angles (complementary, supplementary, vertical), properties of triangles, and the area and perimeter of basic shapes like squares and rectangles.</li>
+                        </ul>
+                    `
+                },
+                // 15 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Analyzing Arguments',
+                    passage: 'A city council proposal to ban plastic grocery bags is a crucial step toward environmental responsibility. Opponents claim it inconveniences shoppers, but the long-term damage from plastic pollution is a far greater inconvenience to us all. A reusable bag is a small price to pay for a healthier planet.',
+                    prompt: 'What is the author\'s main argument?',
+                    options: [
+                        'Reusable bags are more convenient than plastic bags.',
+                        'The environmental benefits of a plastic bag ban outweigh the inconvenience.',
+                        'Plastic pollution is only a problem in rivers and oceans.',
+                        'The city council is overstepping its authority.'
+                    ],
+                    correctAnswer: 'The environmental benefits of a plastic bag ban outweigh the inconvenience.',
+                    explanation: 'The author directly contrasts the "inconvenience" with the "long-term damage" and concludes that protecting the planet is more important.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Analyzing Arguments',
+                    passage: 'School uniforms should be mandatory in all public schools. They promote a sense of discipline and equality among students, reducing peer pressure related to clothing. Furthermore, they can improve safety by making it easier to identify intruders on campus.',
+                    prompt: 'Which of the following statements, if true, would most WEAKEN the author\'s argument?',
+                    options: [
+                        'A study shows that school uniforms do not significantly impact academic performance.',
+                        'In a survey, a majority of students reported that uniforms restrict their self-expression, leading to feelings of resentment.',
+                        'Many parents find that uniforms are more affordable than regular clothing.',
+                        'Intruder incidents are extremely rare in the district.'
+                    ],
+                    correctAnswer: 'In a survey, a majority of students reported that uniforms restrict their self-expression, leading to feelings of resentment.',
+                    explanation: 'This weakens the argument by introducing a significant negative consequence (resentment) that directly counters the claimed benefit of "discipline and equality."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Analyzing Arguments',
+                    passage: 'Year-round schooling would be a major benefit to students. The traditional long summer break leads to "summer slide," where students forget a significant amount of what they learned. A year-round calendar with shorter, more frequent breaks would improve knowledge retention.',
+                    prompt: 'What is the primary evidence the author uses to support their claim?',
+                    options: [
+                        'The idea that students need frequent breaks.',
+                        'The existence of the "summer slide" phenomenon.',
+                        'The claim that teachers spend too much time on review.',
+                        'The suggestion that a new calendar would be popular.'
+                    ],
+                    correctAnswer: 'The existence of the "summer slide" phenomenon.',
+                    explanation: 'The "summer slide" is presented as the core problem that year-round schooling would solve, making it the central piece of evidence for the argument.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Analyzing Arguments',
+                    passage: 'Zoos are cruel and outdated institutions. Caging wild animals, even in large enclosures, is unethical and causes them psychological distress. The conservation claims made by zoos are often exaggerated; true conservation should focus on protecting animals in their natural habitats.',
+                    prompt: 'Which statement best expresses the author\'s claim?',
+                    options: [
+                        'Zoos are not successful at conservation.',
+                        'Keeping animals in captivity is unethical and harmful to them.',
+                        'Animals are better off in the wild.',
+                        'Zoos should have larger enclosures.'
+                    ],
+                    correctAnswer: 'Keeping animals in captivity is unethical and harmful to them.',
+                    explanation: 'This is the core of the argument. The author calls zoos "cruel" and says caging animals is "unethical" and causes "psychological distress."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Analyzing Arguments',
+                    passage: 'The internet has democratized information, but it has also led to a crisis of misinformation. Without the traditional gatekeepers of media and publishing, false and misleading content can spread like wildfire. We need a new focus on digital literacy education to equip citizens with the skills to critically evaluate online sources.',
+                    prompt: 'The author\'s argument is that...',
+                    options: [
+                        'The internet is a bad source of information.',
+                        'Traditional media was better than the internet.',
+                        'Increased access to information requires increased critical thinking skills.',
+                        'Digital literacy is the only subject that matters.'
+                    ],
+                    correctAnswer: 'Increased access to information requires increased critical thinking skills.',
+                    explanation: 'The author presents both the positive (democratization) and negative (misinformation) sides of the internet to argue for a specific solution: digital literacy.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Analyzing Arguments',
+                    passage: 'To combat traffic congestion, our city should invest heavily in public transportation rather than widening roads. Building more lanes often induces more demand, meaning traffic quickly returns to its previous levels. In contrast, a robust system of subways and buses can move more people with a smaller footprint and less pollution.',
+                    prompt: 'Which of the following, if true, would most STRENGTHEN the author\'s argument?',
+                    options: [
+                        'A neighboring city widened its highways and saw traffic reduce for five years.',
+                        'A study of several major cities shows a direct correlation between public transit expansion and reduced commute times.',
+                        'The cost of building a new subway line is significantly higher than the cost of widening a highway.',
+                        'Many citizens prefer the comfort and privacy of their own cars.'
+                    ],
+                    correctAnswer: 'A study of several major cities shows a direct correlation between public transit expansion and reduced commute times.',
+                    explanation: 'This provides direct, empirical evidence that supports the author\'s proposed solution, strengthening their claim that public transit is the better investment.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Analyzing Arguments',
+                    passage: 'The legal voting age should be lowered to 16. At 16, citizens can drive, work, and pay taxes. If they are expected to contribute to society in these ways, they should also have a voice in shaping its laws. It is a matter of fairness and representation.',
+                    prompt: 'The author supports their argument primarily by:',
+                    options: [
+                        'Using emotional language.',
+                        'Citing statistics about teenage tax revenue.',
+                        'Drawing a parallel between civic responsibilities and voting rights.',
+                        'Quoting famous political philosophers.'
+                    ],
+                    correctAnswer: 'Drawing a parallel between civic responsibilities and voting rights.',
+                    explanation: 'The core of the argument is that since 16-year-olds have certain responsibilities (driving, working, paying taxes), they should also have the right to vote.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Analyzing Arguments',
+                    passage: 'Standardized tests are an unreliable measure of student ability. They fail to account for creativity, critical thinking, and a student\'s background. A student who is an excellent, insightful writer might perform poorly on a multiple-choice test. A portfolio of a student\'s work throughout the year would be a much more accurate assessment.',
+                    prompt: 'What is the main weakness the author identifies in standardized tests?',
+                    options: [
+                        'They are too long.',
+                        'They are too focused on writing.',
+                        'They measure a narrow set of skills and ignore others.',
+                        'They are not graded fairly.'
+                    ],
+                    correctAnswer: 'They measure a new set of skills and ignore others.',
+                    explanation: 'The author specifically mentions that tests fail to account for "creativity, critical thinking," and other factors, suggesting their scope is too narrow.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Analyzing Arguments',
+                    passage: 'Learning a second language has profound cognitive benefits. Studies have shown that bilingual individuals tend to have better problem-solving skills, enhanced memory, and a delayed onset of age-related cognitive decline. The effort of switching between languages acts as a workout for the brain.',
+                    prompt: 'The author\'s claim is supported by:',
+                    options: [
+                        'Personal anecdotes.',
+                        'A single, detailed story.',
+                        'References to scientific studies.',
+                        'A philosophical argument.'
+                    ],
+                    correctAnswer: 'References to scientific studies.',
+                    explanation: 'The phrase "Studies have shown" indicates that the author is basing their claim on scientific research and evidence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Analyzing Arguments',
+                    passage: 'The exploration of space is not a luxury but a necessity. The technological innovations developed for space travel—from GPS to medical imaging—have led to enormous benefits on Earth. Furthermore, as we face challenges like climate change and resource scarcity, space exploration offers potential long-term solutions for the survival of our species.',
+                    prompt: 'The author argues that space exploration is a "necessity" based on what two points?',
+                    options: [
+                        'Its popularity and entertainment value.',
+                        'The jobs it creates and its low cost.',
+                        'The immediate technological benefits and potential long-term survival solutions.',
+                        'The need to find aliens and its impact on science fiction.'
+                    ],
+                    correctAnswer: 'The immediate technological benefits and potential long-term survival solutions.',
+                    explanation: 'The author cites both the "innovations... on Earth" and the "potential long-term solutions for the survival of our species" as the reasons it is a necessity.'
+                },
+                // ... (5 more ELA questions)
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Analyzing Arguments',
+                    passage: 'Homework is a source of unnecessary stress and yields little academic benefit. Many students are already in school for seven hours, and piling on hours of homework leads to burnout and sleep deprivation, which harms learning. Class time should be used more efficiently to eliminate the need for most homework.',
+                    prompt: 'Which statement best summarizes the author\'s argument?',
+                    options: [
+                        'Homework is never beneficial.',
+                        'Homework should be replaced with more efficient in-class learning to reduce student stress.',
+                        'Students should not have to work for more than seven hours a day.',
+                        'Sleep deprivation is the biggest problem in schools.'
+                    ],
+                    correctAnswer: 'Homework should be replaced with more efficient in-class learning to reduce student stress.',
+                    explanation: 'The author identifies the problem (stress, burnout from homework) and proposes a solution (more efficient class time).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Analyzing Arguments',
+                    passage: 'All high school students should be required to volunteer in their community. This experience fosters a sense of civic responsibility and empathy. It also allows students to explore potential career paths and develop valuable real-world skills that cannot be taught in a classroom.',
+                    prompt: 'Which of the following is an underlying assumption of the argument?',
+                    options: [
+                        'All students have enough free time to volunteer.',
+                        'Volunteering is more important than academics.',
+                        'Students are not currently empathetic or responsible.',
+                        'There are not enough volunteers in the community.'
+                    ],
+                    correctAnswer: 'All students have enough free time to volunteer.',
+                    explanation: 'The argument that volunteering should be "required" assumes that students have the capacity, including the time, to fulfill this requirement.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Analyzing Arguments',
+                    passage: 'Organic food is not worth the higher price. While it is grown without synthetic pesticides, numerous studies have shown that it has no significant nutritional advantage over conventionally grown produce. The small traces of pesticides on conventional produce are well within safe limits. Consumers are paying for a perception of health, not a reality.',
+                    prompt: 'Which of the following, if true, would most WEAKEN the author\'s argument?',
+                    options: [
+                        'Organic farming practices are much better for soil health and biodiversity.',
+                        'The price of organic food has been slowly decreasing.',
+                        'Some people prefer the taste of organic produce.',
+                        'Conventional farming uses more water than organic farming.'
+                    ],
+                    correctAnswer: 'Organic farming practices are much better for soil health and biodiversity.',
+                    explanation: 'The author\'s argument focuses solely on nutritional value and pesticide residue. Introducing a significant environmental benefit to organic farming would weaken the claim that it is "not worth the higher price."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Analyzing Arguments',
+                    passage: 'The construction of a new stadium for the local football team, using taxpayer money, is a fiscally irresponsible decision. The promised economic benefits of new jobs and increased tourism rarely materialize to the extent that is promised. The funds could be better used to improve schools, roads, and other essential public services.',
+                    prompt: 'The author\'s primary reason for opposing the stadium is that it is:',
+                    options: [
+                        'Bad for the environment.',
+                        'An unfair benefit to the football team owner.',
+                        'A poor use of public funds.',
+                        'Likely to create traffic problems.'
+                    ],
+                    correctAnswer: 'A poor use of public funds.',
+                    explanation: 'The author labels the decision "fiscally irresponsible" and argues the money would be "better used" on essential services, making the core of the argument about financial priorities.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Analyzing Arguments',
+                    passage: 'History is not just a collection of dates and names; it is a vital tool for understanding the present. By studying the successes and failures of past societies, we can make more informed decisions about the challenges we face today, from political polarization to international conflict. To ignore history is to doom ourselves to repeat its mistakes.',
+                    prompt: 'The author\'s central claim is that history...',
+                    options: [
+                        'Is the most important school subject.',
+                        'Is primarily about memorizing facts.',
+                        'Is a practical tool for navigating current events.',
+                        'Is a story of constant human error.'
+                    ],
+                    correctAnswer: 'Is a practical tool for navigating current events.',
+                    explanation: 'The author argues that history is a "vital tool for understanding the present" and helps us "make more informed decisions," which supports the idea of it being a practical tool.'
+                },
+
+                // 15 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Geometry',
+                    prompt: 'Two angles are complementary. If one angle measures 40 degrees, what is the measure of the other angle in degrees?',
+                    correctAnswer: '50',
+                    explanation: 'Complementary angles add up to 90 degrees. So, 90 - 40 = 50 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Geometry',
+                    prompt: 'Two lines intersect, forming four angles. If one angle is 75 degrees, what is the measure of its vertical angle in degrees?',
+                    correctAnswer: '75',
+                    explanation: 'Vertical angles, which are opposite each other when two lines intersect, are always equal.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Geometry',
+                    prompt: 'What is the perimeter of a rectangle with a length of 12 cm and a width of 5 cm?',
+                    correctAnswer: '34',
+                    explanation: 'The formula for the perimeter of a rectangle is P = 2(length + width). P = 2(12 + 5) = 2(17) = 34 cm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Geometry',
+                    prompt: 'What is the area of a square with a side length of 9 meters?',
+                    correctAnswer: '81',
+                    explanation: 'The formula for the area of a square is Area = side * side. Area = 9 * 9 = 81 square meters.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Geometry',
+                    prompt: 'Two angles are supplementary. If one angle measures 110 degrees, what is the measure of the other angle?',
+                    correctAnswer: '70',
+                    explanation: 'Supplementary angles add up to 180 degrees. So, 180 - 110 = 70 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Geometry',
+                    prompt: 'A triangle has angles measuring 50 degrees and 70 degrees. What is the measure of the third angle?',
+                    correctAnswer: '60',
+                    explanation: 'The sum of the angles in any triangle is always 180 degrees. So, 180 - (50 + 70) = 180 - 120 = 60 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Geometry',
+                    prompt: 'What is the area of a right triangle with a base of 10 inches and a height of 4 inches?',
+                    correctAnswer: '20',
+                    explanation: 'The formula for the area of a triangle is Area = (1/2) * base * height. Area = (1/2) * 10 * 4 = 20 square inches.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Geometry',
+                    prompt: 'What is the perimeter of a square with an area of 49 square feet?',
+                    correctAnswer: '28',
+                    explanation: 'If the area is 49, the side length is the square root of 49, which is 7 feet. The perimeter is 4 * side length, so 4 * 7 = 28 feet.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Geometry',
+                    prompt: 'A straight line is divided into two angles. If one angle is 3 times as large as the other, what is the measure of the smaller angle in degrees?',
+                    correctAnswer: '45',
+                    explanation: 'Angles on a straight line add up to 180 degrees. Let the smaller angle be x. The larger angle is 3x. So, x + 3x = 180. This gives 4x = 180. Dividing by 4, we find x = 45 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Geometry',
+                    prompt: 'What is the area of a rectangle with a perimeter of 30 units and a length of 10 units?',
+                    correctAnswer: '50',
+                    explanation: 'Perimeter P = 2(L+W). 30 = 2(10+W) -> 15 = 10+W -> W = 5. The area is Length * Width = 10 * 5 = 50 square units.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Geometry',
+                    prompt: 'An isosceles triangle has a perimeter of 32 cm. Its base is 12 cm. What is the length of one of the two equal sides?',
+                    correctAnswer: '10',
+                    explanation: 'The perimeter is the sum of all sides. Subtract the base from the perimeter: 32 - 12 = 20. This 20 cm is the combined length of the two equal sides. So, one side is 20 / 2 = 10 cm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Geometry',
+                    prompt: 'Three angles of a quadrilateral measure 80, 100, and 110 degrees. What is the measure of the fourth angle?',
+                    correctAnswer: '70',
+                    explanation: 'The sum of interior angles in any quadrilateral is 360 degrees. Sum of the given angles = 80 + 100 + 110 = 290. The fourth angle is 360 - 290 = 70 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 13: Geometry',
+                    prompt: 'What is the circumference of a circle with a radius of 5? (Use 3.14 for π)',
+                    correctAnswer: '31.4',
+                    explanation: 'Circumference formula is C = 2 * π * r. C = 2 * 3.14 * 5 = 10 * 3.14 = 31.4.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Geometry',
+                    prompt: 'What is the area of a circle with a diameter of 20? (Use 3.14 for π)',
+                    correctAnswer: '314',
+                    explanation: 'The diameter is 20, so the radius is 10. The area formula is A = π * r^2. A = 3.14 * 10^2 = 3.14 * 100 = 314.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Geometry',
+                    prompt: 'A rectangular garden is 20 feet long and 15 feet wide. A fence is to be built around it. How many feet of fencing are required?',
+                    correctAnswer: '70',
+                    explanation: 'This is a perimeter problem. P = 2(L+W). P = 2(20 + 15) = 2(35) = 70 feet.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

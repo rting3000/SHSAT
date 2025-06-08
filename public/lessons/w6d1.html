@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W6D1: Logical Reasoning & Plane Geometry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Logic & Lines",
+            subtitle: "Week 6, Day 1",
+            pointsPerQuestion: 10,
+            completion_id: 'w6d1',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Logic & Lines',
+                    content: `
+                        <p>Welcome to Week 6, agent. We are moving into new territory.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> You will now be tested on <strong>Logical Reasoning</strong>. These questions require you to evaluate arguments, identify assumptions, and spot flaws in reasoning.</li>
+                            <li><strong>Math:</strong> We begin our study of <strong>Plane Geometry</strong>. Today focuses on the building blocks: angles, parallel lines, and triangles.</li>
+                        </ul>
+                        <p>Think clearly and logically. Every detail is a clue.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Deduction',
+                    passage: 'All mammals are warm-blooded. A whale is a mammal.',
+                    prompt: 'Based on these statements, which of the following must be true?',
+                    options: [
+                        'All warm-blooded animals are mammals.',
+                        'A whale is warm-blooded.',
+                        'All animals that live in the ocean are mammals.',
+                        'A whale is a fish.'
+                    ],
+                    correctAnswer: 'A whale is warm-blooded.',
+                    explanation: 'This is a classic syllogism. If all members of a group (mammals) have a certain property (warm-blooded), and an individual (a whale) is a member of that group, then the individual must have that property.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Identifying Assumptions',
+                    passage: 'The new "Smartwatch X" is the best on the market because it has more features than any other smartwatch.',
+                    prompt: 'The speaker assumes which of the following?',
+                    options: [
+                        'Smartwatch X is also the most expensive.',
+                        'Having the most features makes a smartwatch the best.',
+                        'Most consumers want a smartwatch with many features.',
+                        'Previous smartwatches were not very good.'
+                    ],
+                    correctAnswer: 'Having the most features makes a smartwatch the best.',
+                    explanation: 'The argument\'s conclusion (it\'s the best) rests entirely on a single premise (it has the most features). This only makes sense if you assume that the number of features is the primary measure of quality.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Strengthening an Argument',
+                    passage: 'Our city should build a new public library. A recent survey showed that 70% of residents want more community resources.',
+                    prompt: 'Which of the following, if true, would most strengthen this argument?',
+                    options: [
+                        'The city has a budget surplus this year.',
+                        'The survey also found that a new park was the most requested resource.',
+                        'The current library is overcrowded and has outdated materials.',
+                        'A neighboring city recently built a very popular new library.'
+                    ],
+                    correctAnswer: 'The current library is overcrowded and has outdated materials.',
+                    explanation: 'This statement directly addresses the *need* for a *new library* specifically. It provides a strong, direct reason why the proposed solution is necessary, strengthening the argument much more than the other options.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Weakening an Argument',
+                    passage: 'To reduce traffic, our city should implement a toll on the main bridge into downtown. This will encourage people to use public transportation.',
+                    prompt: 'Which of the following, if true, would most weaken the argument?',
+                    options: [
+                        'Public transportation is currently operating at maximum capacity.',
+                        'The toll would generate significant revenue for the city.',
+                        'Most people driving over the bridge live in the suburbs.',
+                        'Traffic has increased by 10% in the last year.'
+                    ],
+                    correctAnswer: 'Public transportation is currently operating at maximum capacity.',
+                    explanation: 'The argument\'s goal is to shift people to public transport. If public transport cannot handle any more people, then the proposed plan cannot achieve its intended effect, which severely weakens the argument.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Complementary & Supplementary Angles',
+                    prompt: 'Angle A and Angle B are supplementary. Angle A and Angle C are complementary. If Angle C measures 35 degrees, what is the measure of Angle B?',
+                    correctAnswer: '125',
+                    explanation: 'Complementary angles add to 90 degrees. So, Angle A = 90 - 35 = 55 degrees. Supplementary angles add to 180 degrees. So, Angle B = 180 - 55 = 125 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Angles in a Triangle',
+                    prompt: 'The angles of a triangle are in the ratio 2:3:4. What is the measure of the largest angle?',
+                    correctAnswer: '80',
+                    explanation: 'Let the angles be 2x, 3x, and 4x. The sum must be 180 degrees. So, 2x + 3x + 4x = 180. This gives 9x = 180, so x = 20. The largest angle is 4x, which is 4 * 20 = 80 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Parallel Lines',
+                    prompt: 'Two parallel lines are intersected by a transversal. If one of the alternate interior angles is 70 degrees, what is the measure of its corresponding angle?',
+                    correctAnswer: '70',
+                    explanation: 'Alternate interior angles are equal. Corresponding angles are also equal. Therefore, if the alternate interior angle is 70 degrees, its corresponding angle is also 70 degrees.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Isosceles Right Triangle',
+                    prompt: 'An isosceles right triangle has a hypotenuse of length 10. What is the length of one of its legs? (Enter your answer as a decimal rounded to one place)',
+                    correctAnswer: '7.1',
+                    explanation: 'In an isosceles right triangle, the two legs are equal (let\'s call them x). By the Pythagorean theorem, x^2 + x^2 = 10^2. So, 2x^2 = 100. Divide by 2: x^2 = 50. The length of a leg is the square root of 50, which is approximately 7.07. Rounded to one decimal place, this is 7.1.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Exterior Angle of a Polygon',
+                    prompt: 'What is the measure of one exterior angle of a regular octagon (8-sided polygon)?',
+                    correctAnswer: '45',
+                    explanation: 'The sum of the exterior angles of any convex polygon is always 360 degrees. For a regular polygon, all exterior angles are equal. So, for a regular octagon, one exterior angle is 360 / 8 = 45 degrees.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D2: Author's Purpose & Percentages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Author's Purpose & Percentages",
+            subtitle: "Week 3, Day 2",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d2',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Why was it written? How much is it?',
+                    content: `
+                        <p>Today's mission focuses on two distinct but equally important analytical skills. In ELA, we'll be identifying the <strong>Author's Purpose</strong>. In Math, we are tackling a fundamental concept: <strong>Percentages</strong>.</p>
+                        <ul>
+                            <li><strong>Author's Purpose:</strong> Why did the author write this? The three main reasons are to <strong>Persuade</strong> (convince you of something), <strong>Inform</strong> (give you facts), or <strong>Entertain</strong> (tell you a story). Look for clues in the tone and language.</li>
+                            <li><strong>Percentages:</strong> A percentage is just a fraction out of 100. We'll practice converting between fractions, decimals, and percents, and solving "percent of a number" problems. Remember that 'of' almost always means 'multiply'.</li>
+                        </ul>
+                    `
+                },
+                // 15 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Author\'s Purpose',
+                    passage: 'Our city’s recycling program is failing. Despite good intentions, less than 10% of our waste is actually recycled due to contamination. We must invest in a new single-stream system and a public awareness campaign. Call your city council representative today and demand action for a greener tomorrow.',
+                    prompt: 'What is the primary purpose of this passage?',
+                    options: ['To inform readers about how recycling works', 'To entertain readers with a story about waste', 'To persuade readers to take political action', 'To describe the history of the city’s recycling'],
+                    correctAnswer: 'To persuade readers to take political action',
+                    explanation: 'The passage presents a problem and then explicitly asks the reader to "call your city council representative" and "demand action," which is a clear call to persuasion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Author\'s Purpose',
+                    passage: 'The Nile River, flowing north for over 4,132 miles from central Africa to the Mediterranean Sea, is the longest river in the world. Ancient Egyptian civilization was critically dependent on the river for agriculture, transportation, and spiritual life. Its annual flooding deposited rich silt that made the surrounding lands fertile.',
+                    prompt: 'What is the author’s main purpose?',
+                    options: ['To persuade you to visit Egypt', 'To inform you about the geography and history of the Nile River', 'To entertain you with myths about the Nile', 'To argue that the Nile is the most important river'],
+                    correctAnswer: 'To inform you about the geography and history of the-nile-river',
+                    explanation: 'The passage is filled with facts (length, direction of flow, historical significance) and presents them in a neutral, objective tone. This is characteristic of writing meant to inform.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Author\'s Purpose',
+                    passage: 'The old wizard hobbled through the enchanted forest, his long white beard tangled with leaves and twigs. A mischievous pixie, no bigger than his thumb, zipped past his ear, giggling. "You’ll never catch me, old man!" she chirped, leaving a trail of sparkling dust in her wake. The wizard just chuckled, a deep rumble in his chest.',
+                    prompt: 'The author wrote this passage primarily to:',
+                    options: ['Inform the reader about different types of magical creatures', 'Persuade the reader to explore forests', 'Entertain the reader with a scene from a fantasy story', 'Explain the science of pixie dust'],
+                    correctAnswer: 'Entertain the reader with a scene from a fantasy story',
+                    explanation: 'The use of characters (wizard, pixie), setting (enchanted forest), and playful action are all elements of storytelling, designed to entertain the reader.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Author\'s Purpose',
+                    passage: 'A balanced diet should include a variety of fruits, vegetables, whole grains, lean proteins, and healthy fats. The USDA recommends that adults consume at least five servings of fruits and vegetables per day. These foods provide essential vitamins and minerals that are necessary for bodily function, including immune response and cell repair.',
+                    prompt: 'What is the primary purpose of this text?',
+                    options: ['To entertain with stories about food', 'To persuade you to buy a specific diet plan', 'To inform you about the components of a healthy diet', 'To describe the taste of fruits and vegetables'],
+                    correctAnswer: 'To inform you about the components of a healthy diet',
+                    explanation: 'The passage provides factual information and recommendations from a government source (USDA). The tone is objective and educational, making its purpose to inform.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Author\'s Purpose',
+                    passage: 'The practice of leaving out water for bees and other pollinators is a simple yet effective way to help them, especially during hot, dry weather. All you need is a shallow dish, some pebbles or marbles for the bees to land on, and fresh water. This small act can make a big difference for our tiny, hardworking friends. You should set one up in your yard today!',
+                    prompt: 'What is the author\'s purpose?',
+                    options: ['To inform readers about bee anatomy', 'To entertain with a story about a thirsty bee', 'To persuade readers to provide water for pollinators', 'To describe the different types of pollinators'],
+                    correctAnswer: 'To persuade readers to provide water for pollinators',
+                    explanation: 'The passage explains a problem and a solution, and then directly encourages the reader to take action ("You should set one up..."). This is persuasion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Author\'s Purpose',
+                    passage: 'Jupiter is the fifth planet from the Sun and the largest in our Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined. The planet is known for its Great Red Spot, a giant storm that has raged for at least 350 years.',
+                    prompt: 'The author\'s main purpose in this passage is to:',
+                    options: ['Entertain', 'Persuade', 'Inform', 'Argue'],
+                    correctAnswer: 'Inform',
+                    explanation: 'The passage consists of a series of verifiable facts about the planet Jupiter. The language is neutral and objective, indicating an informational purpose.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Author\'s Purpose',
+                    passage: 'It was a dark and stormy night. I was alone in the old house, the wind howling like a hungry wolf outside my window. Suddenly, I heard a creak on the staircase. I held my breath, my heart pounding in my chest. Was it just the old house settling, or was it something else?',
+                    prompt: 'The primary purpose of this passage is to:',
+                    options: ['Inform the reader about weather patterns', 'Persuade the reader to buy a new house', 'Entertain the reader by creating suspense', 'Explain the architecture of old houses'],
+                    correctAnswer: 'Entertain the reader by creating suspense',
+                    explanation: 'The author uses classic suspense techniques—dark setting, scary sounds, a character\'s fearful reaction—to create an entertaining and thrilling mood.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Author\'s Purpose',
+                    passage: 'An annual flu shot is the single best way to protect yourself and others from the influenza virus. The Centers for Disease Control and Prevention (CDC) recommends everyone six months of age and older get a flu vaccine every season. Vaccination can reduce flu illnesses, doctors\' visits, and missed work and school, as well as prevent flu-related hospitalizations.',
+                    prompt: 'The author’s purpose is most likely to:',
+                    options: ['Inform readers about the history of the flu', 'Persuade readers to get a flu vaccine', 'Entertain with a story about a person who got the flu', 'Describe the chemical makeup of the vaccine'],
+                    correctAnswer: 'Persuade readers to get a flu vaccine',
+                    explanation: 'The passage presents the flu shot as the "single best way" to protect against the flu and lists numerous benefits, all aimed at convincing the reader to get vaccinated.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Author\'s Purpose',
+                    passage: 'The Komodo dragon is a species of lizard found in the Indonesian islands. It is the largest living species of lizard, growing to a maximum length of 10 feet and weighing up to 150 pounds. Their saliva contains a toxic mix of bacteria that can be fatal to their prey.',
+                    prompt: 'The purpose of this passage is to:',
+                    options: ['Persuade people to stay away from Indonesia', 'Entertain with a fictional story about a dragon', 'Inform the reader about the Komodo dragon', 'Argue that Komodo dragons are the best lizards'],
+                    correctAnswer: 'Inform the reader about the Komodo dragon',
+                    explanation: 'The passage provides objective, factual details about the Komodo dragon (location, size, characteristics). This is informational writing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Author\'s Purpose',
+                    passage: 'The school’s proposed new dress code is an unnecessary restriction on students\' freedom of expression. It will not improve discipline and will be a financial burden on families who have to buy new clothes. We must attend the next school board meeting to voice our opposition.',
+                    prompt: 'The author’s main purpose is to:',
+                    options: ['Entertain students with fashion tips', 'Inform students about the school board', 'Persuade students and parents to oppose the new dress code', 'Describe the clothes in the new dress code'],
+                    correctAnswer: 'Persuade students and parents to oppose the new dress code',
+                    explanation: 'The author takes a clear stance against the dress code, states negative consequences, and calls for a specific action (attending a meeting). This is persuasion.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Author\'s Purpose',
+                    passage: 'Step 1: Preheat the oven to 350°F (175°C). Step 2: In a large bowl, cream together the butter and sugar until smooth. Step 3: Beat in the eggs one at a time, then stir in the vanilla. Step 4: Combine the flour and baking powder; stir into the creamed mixture. Step 5: Bake for 30 to 35 minutes.',
+                    prompt: 'The purpose of this passage is to:',
+                    options: ['Persuade you to become a baker', 'Entertain you with a story about a cake', 'Inform you by giving instructions', 'Argue that this is the best cake recipe'],
+                    correctAnswer: 'Inform you by giving instructions',
+                    explanation: 'This is a recipe, a set of sequential steps to accomplish a task. This form of writing is meant to inform or instruct.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Author\'s Purpose',
+                    passage: 'The city dog park is in a deplorable state. The fences are broken, the water fountain is non-functional, and the ground is mostly dirt and mud. This is unsafe for our pets and unpleasant for owners. It is imperative that the parks department allocate funds to renovate this essential community space.',
+                    prompt: 'What is the author\'s primary purpose?',
+                    options: ['To inform readers about where the dog park is located', 'To persuade the city to fix the dog park', 'To entertain with funny stories about dogs', 'To describe different dog breeds'],
+                    correctAnswer: 'To persuade the city to fix the dog park',
+                    explanation: 'The author uses strong negative language ("deplorable," "unsafe") to describe the park\'s condition and makes a direct appeal for action ("it is imperative that..."). This is persuasive writing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Author\'s Purpose',
+                    passage: 'Photosynthesis is the process used by plants, algae, and some bacteria to convert light energy into chemical energy, through a process that converts carbon dioxide and water into glucose (sugar) and oxygen. This process is the foundation of nearly all life on Earth.',
+                    prompt: 'The author\'s purpose in this text is to:',
+                    options: ['Persuade you to water your plants', 'Entertain you with a poem about the sun', 'Inform you about the process of photosynthesis', 'Argue about the importance of oxygen'],
+                    correctAnswer: 'Inform you about the process of photosynthesis',
+                    explanation: 'The passage provides a scientific definition and explanation of a biological process in a neutral, factual tone.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Author\'s Purpose',
+                    passage: 'Once upon a time, in a kingdom nestled between shimmering mountains and a whispering sea, lived a princess who preferred inventing gadgets to attending royal balls. Her greatest creation was a pair of mechanical wings, though she hadn\'t quite worked out the landing part yet.',
+                    prompt: 'The main purpose of this passage is to:',
+                    options: ['Inform about aerodynamics', 'Persuade readers to take up inventing', 'Entertain readers with the beginning of a story', 'Describe the geography of a kingdom'],
+                    correctAnswer: 'Entertain readers with the beginning of a story',
+                    explanation: 'The classic "Once upon a time" opening, a unique character (inventor princess), and a whimsical setting are all hallmarks of writing meant to entertain.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Author\'s Purpose',
+                    passage: 'Using reusable shopping bags is a simple step every person can take to reduce plastic waste. Single-use plastic bags often end up in our oceans, where they harm marine life. Make a conscious choice to bring your own bags to the store. The planet will thank you.',
+                    prompt: 'What is the author trying to do?',
+                    options: ['Inform people about how plastic bags are made', 'Entertain with a story of a sea turtle', 'Persuade people to use reusable bags', 'Describe the different types of reusable bags'],
+                    correctAnswer: 'Persuade people to use reusable bags',
+                    explanation: 'The passage presents a problem (plastic waste), a solution (reusable bags), and directly encourages the reader to adopt the new behavior.'
+                },
+                // 15 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Percent of a Number',
+                    prompt: 'What is 25% of 80?',
+                    correctAnswer: '20',
+                    explanation: 'To find the percent of a number, convert the percentage to a decimal and multiply. 25% = 0.25. So, 0.25 * 80 = 20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Convert Fraction to Percent',
+                    prompt: 'What is 3/5 as a percentage?',
+                    correctAnswer: '60',
+                    explanation: 'To convert a fraction to a percentage, first divide the numerator by the denominator: 3 ÷ 5 = 0.6. Then, multiply the decimal by 100: 0.6 * 100 = 60%. Just enter the number.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Finding the Whole',
+                    prompt: '12 is 40% of what number?',
+                    correctAnswer: '30',
+                    explanation: 'Set up the equation: 12 = 0.40 * x. To solve for x, divide both sides by 0.40. 12 / 0.40 = 30.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Percent Increase',
+                    prompt: 'A shirt originally costing $50 is on sale for $40. What is the percent decrease in price?',
+                    correctAnswer: '20',
+                    explanation: 'The decrease in price is $50 - $40 = $10. To find the percent decrease, divide the decrease by the original price: $10 / $50 = 0.2. Convert the decimal to a percentage: 0.2 * 100 = 20%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Simple Interest',
+                    prompt: 'You invest $200 at a simple interest rate of 5% per year. How much interest will you earn in 3 years? (in dollars)',
+                    correctAnswer: '30',
+                    explanation: 'Simple interest is calculated as Principal × Rate × Time. First, calculate the interest for one year: 5% of $200 is 0.05 * 200 = $10. Then, multiply by the number of years: $10 * 3 = $30.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Convert Percent to Decimal',
+                    prompt: 'What is 150% as a decimal?',
+                    correctAnswer: '1.5',
+                    explanation: 'To convert a percentage to a decimal, divide by 100. 150 / 100 = 1.5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Finding a Percentage',
+                    prompt: 'What percentage of 200 is 30?',
+                    correctAnswer: '15',
+                    explanation: 'To find what percentage one number is of another, divide the part by the whole and multiply by 100. (30 / 200) * 100 = 0.15 * 100 = 15%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Percent Decrease',
+                    prompt: 'A town\'s population decreased from 5,000 to 4,500. What was the percent decrease?',
+                    correctAnswer: '10',
+                    explanation: 'The decrease is 5000 - 4500 = 500. The percent decrease is (Decrease / Original) * 100. (500 / 5000) * 100 = 0.1 * 100 = 10%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Multi-step Percentage',
+                    prompt: 'A jacket costs $80. It is on sale for 20% off. What is the final price in dollars?',
+                    correctAnswer: '64',
+                    explanation: 'First, find the discount amount: 20% of $80 is 0.20 * 80 = $16. Then, subtract the discount from the original price: $80 - $16 = $64.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Finding the Original Price',
+                    prompt: 'After a 10% discount, a book costs $18. What was the original price in dollars?',
+                    correctAnswer: '20',
+                    explanation: 'If the book is 10% off, you are paying 90% of the original price. Set up the equation: 0.90 * x = $18. Solve for x by dividing both sides by 0.90: $18 / 0.90 = $20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Percent of a Percent',
+                    prompt: 'What is 50% of 50% of 160?',
+                    correctAnswer: '40',
+                    explanation: 'Work from right to left. 50% of 160 is 0.5 * 160 = 80. Now find 50% of that result: 50% of 80 is 0.5 * 80 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Sales Tax',
+                    prompt: 'The price of a meal is $40. If the sales tax is 8%, what is the total cost in dollars?',
+                    correctAnswer: '43.2',
+                    explanation: 'First, calculate the tax amount: 8% of $40 is 0.08 * 40 = $3.20. Then, add the tax to the original price: $40 + $3.20 = $43.20. You can also multiply $40 by 1.08.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 13: Percent Increase',
+                    prompt: 'A company had 200 employees. One year later, it had 250 employees. What was the percent increase in the number of employees?',
+                    correctAnswer: '25',
+                    explanation: 'The increase in employees is 250 - 200 = 50. The percent increase is (Increase / Original) * 100. (50 / 200) * 100 = 0.25 * 100 = 25%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Complex Discount',
+                    prompt: 'A phone priced at $500 is offered with a 10% discount. Then, an additional 5% is taken off the discounted price. What is the final price?',
+                    correctAnswer: '427.5',
+                    explanation: 'First discount: 10% of $500 is $50. The price becomes $500 - $50 = $450. Second discount: 5% of $450 is 0.05 * 450 = $22.50. The final price is $450 - $22.50 = $427.50.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Tip Calculation',
+                    prompt: 'A dinner bill is $75. You want to leave a 20% tip. What is the total amount you will pay in dollars?',
+                    correctAnswer: '90',
+                    explanation: 'Calculate the tip: 20% of $75 is 0.20 * 75 = $15. Add the tip to the bill: $75 + $15 = $90. Alternatively, multiply the bill by 1.20: $75 * 1.20 = $90.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

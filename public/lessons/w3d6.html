@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D6: Inference & Probability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Inference & Probability",
+            subtitle: "Week 3, Day 6",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d6',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Reading Between the Lines & Calculating the Odds',
+                    content: `
+                        <p>Agent, your mission today involves drawing conclusions from limited data. For your ELA task, you will be making an <strong>Inference</strong>—using clues from the text to figure out what the author doesn't say directly. For Math, you'll be calculating <strong>Probability</strong>, the likelihood of an event occurring.</p>
+                        <ul>
+                            <li><strong>Inference:</strong> Combine what you read in the text with what you already know about the world to make a logical guess. An inference is an educated guess, not a wild one.</li>
+                            <li><strong>Probability:</strong> This is calculated as the number of favorable outcomes divided by the total number of possible outcomes. The answer is often expressed as a fraction, decimal, or percent.</li>
+                        </ul>
+                    `
+                },
+                // 12 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Inference',
+                    passage: 'The windows were boarded up, and the paint was peeling. A "For Sale" sign, faded and tilted, was half-hidden in the overgrown weeds of the front lawn. A single child\'s tricycle lay rusted on its side on the porch.',
+                    prompt: 'What can you infer about the house?',
+                    options: [
+                        'The family who lived there was wealthy.',
+                        'The house is brand new.',
+                        'The house has been empty and neglected for some time.',
+                        'The owners are on a short vacation.'
+                    ],
+                    correctAnswer: 'The house has been empty and neglected for some time.',
+                    explanation: 'The clues—boarded windows, peeling paint, overgrown weeds, a rusted tricycle—all point to long-term neglect and abandonment.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Inference',
+                    passage: 'When the concert tickets went on sale, Maria was first in the virtual line. She set three alarms the night before and had her mom\'s credit card ready on the desk. As soon as the clock struck 10:00 AM, she clicked "Purchase."',
+                    prompt: 'From this passage, you can infer that:',
+                    options: [
+                        'Maria is not very responsible.',
+                        'The concert was very important to Maria.',
+                        'Maria does not like the band that is playing.',
+                        'Maria\'s mom forced her to buy the tickets.'
+                    ],
+                    correctAnswer: 'The concert was very important to Maria.',
+                    explanation: 'Her detailed preparation (multiple alarms, having the credit card ready, being first in line) strongly suggests her high level of interest and excitement.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Inference',
+                    passage: 'A man in a suit rushes past the ticket counter, glancing nervously at his watch. He keeps adjusting his tie and checking the departures board. He is pulling a small rolling suitcase.',
+                    prompt: 'Where is this man most likely located?',
+                    options: ['A library', 'A movie theater', 'A grocery store', 'An airport'],
+                    correctAnswer: 'An airport',
+                    explanation: 'The clues "ticket counter," "departures board," and "rolling suitcase" are all strongly associated with an airport setting.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Inference',
+                    passage: 'After the game, the players on the red team trudged back to the locker room with their heads down. In contrast, the players on the blue team were cheering, chanting, and dumping a cooler of water on their coach.',
+                    prompt: 'What can you infer from this scene?',
+                    options: [
+                        'The red team won the game.',
+                        'The blue team won the game.',
+                        'The game was cancelled due to rain.',
+                        'Both teams played poorly.'
+                    ],
+                    correctAnswer: 'The blue team won the game.',
+                    explanation: 'The contrasting behaviors—the dejection of the red team versus the celebration of the blue team—lead to the logical inference that the blue team was victorious.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Inference',
+                    passage: 'Every time the mail carrier comes, a small dog on the other side of the fence barks furiously. Today, the mail carrier is late. The dog is sitting by the fence, whining and looking down the street.',
+                    prompt: 'It can be inferred that the dog:',
+                    options: [
+                        'Is afraid of the mail carrier.',
+                        'Wants to play with the mail carrier.',
+                        'Anticipates the mail carrier\'s arrival as part of its daily routine.',
+                        'Is sick and needs to go to the vet.'
+                    ],
+                    correctAnswer: 'Anticipates the mail carrier\'s arrival as part of its daily routine.',
+                    explanation: 'The dog\'s usual behavior is barking. Today, its behavior (whining, looking down the street) indicates it is waiting for something to happen that usually does. This suggests anticipation.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Inference',
+                    passage: 'Sarah looked at her test paper, a large red "62" circled at the top. She slowly walked home, took out her history textbook, and started reading Chapter 5 again from the beginning.',
+                    prompt: 'What can you infer about Sarah?',
+                    options: [
+                        'She is happy with her test grade.',
+                        'She blames the teacher for her poor grade.',
+                        'She is determined to do better on the next test.',
+                        'She has decided to drop the class.'
+                    ],
+                    correctAnswer: 'She is determined to do better on the next test.',
+                    explanation: 'Her action of immediately starting to re-read the material, despite her low grade, suggests a resolve to understand the subject better and improve.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Inference',
+                    passage: 'The detective knelt and examined the ground. He pointed to the series of deep footprints. "Our suspect was running," he said, "and carrying something heavy."',
+                    prompt: 'What evidence most likely led the detective to infer the suspect was carrying something heavy?',
+                    options: [
+                        'The fact that there were footprints.',
+                        'The direction the footprints were going.',
+                        'The depth of the footprints.',
+                        'The size of the footprints.'
+                    ],
+                    correctAnswer: 'The depth of the footprints.',
+                    explanation: 'Deeper footprints imply more weight or force being exerted on the ground, which would be consistent with a person running while carrying a heavy object.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Inference',
+                    passage: 'As the sun began to set, the campers hastily gathered more firewood, double-checked their tent fastenings, and began telling stories in hushed, nervous voices.',
+                    prompt: 'What can be inferred about the campers\' feelings?',
+                    options: [
+                        'They are excited and eager for the night to begin.',
+                        'They are becoming anxious or fearful as darkness approaches.',
+                        'They are bored and ready to go home.',
+                        'They are angry at each other.'
+                    ],
+                    correctAnswer: 'They are becoming anxious or fearful as darkness approaches.',
+                    explanation: 'The hasty preparations and the "hushed, nervous voices" suggest a growing sense of anxiety or fear about the approaching night.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Inference',
+                    passage: 'A woman enters a restaurant, and the host immediately greets her by name, asks if she wants "the usual table," and mentions that her favorite dessert, creme brulee, is on the menu tonight.',
+                    prompt: 'From this interaction, one can infer that:',
+                    options: [
+                        'The woman has never been to this restaurant before.',
+                        'The woman is a regular and valued customer.',
+                        'The host is new at his job.',
+                        'The restaurant has very few customers.'
+                    ],
+                    correctAnswer: 'The woman is a regular and valued customer.',
+                    explanation: 'The host\'s personal knowledge of the customer\'s name, preferred table, and favorite dessert indicates a history of frequent visits.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Inference',
+                    passage: 'The CEO reviewed the quarterly report, which showed a 30% drop in profits. He then called a meeting with the entire marketing department.',
+                    prompt: 'What is the most likely reason the CEO called the meeting?',
+                    options: [
+                        'To congratulate the marketing department on their success.',
+                        'To discuss the company\'s holiday party.',
+                        'To understand why profits are down and discuss a new strategy.',
+                        'To fire the entire department.'
+                    ],
+                    correctAnswer: 'To understand why profits are down and discuss a new strategy.',
+                    explanation: 'There is a logical connection between a sharp drop in profits and meeting with the department responsible for sales and promotion. He would want to diagnose the problem and fix it.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Inference',
+                    passage: 'My cat, who normally ignores me, has spent the entire day hiding under the bed. The only time he came out was when a loud clap of thunder shook the house, at which point he ran back under the bed, trembling.',
+                    prompt: 'It is most likely that the cat is:',
+                    options: [
+                        'Angry at its owner.',
+                        'Tired and wants to sleep.',
+                        'Hungry and waiting for food.',
+                        'Scared of the storm.'
+                    ],
+                    correctAnswer: 'Scared of the storm.',
+                    explanation: 'The cat\'s hiding behavior combined with its specific, fearful reaction to the thunder strongly supports the inference that the storm is the cause of its distress.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Inference',
+                    passage: 'The resume listed ten different jobs in the last three years. The applicant was well-qualified for the position, but the hiring manager sighed and placed the resume in the "no" pile.',
+                    prompt: 'The hiring manager most likely inferred that the applicant:',
+                    options: [
+                        'Was overqualified for the job.',
+                        'Lacked the necessary skills.',
+                        'Was not a reliable or long-term employee.',
+                        'Was demanding too high a salary.'
+                    ],
+                    correctAnswer: 'Was not a reliable or long-term employee.',
+                    explanation: 'Having a large number of jobs in a short period (job-hopping) is often seen by hiring managers as a sign that the applicant will not stay with a company for very long.'
+                },
+
+                // 12 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Probability',
+                    prompt: 'A standard six-sided die is rolled. What is the probability of rolling a 4? (Enter as a fraction)',
+                    correctAnswer: '1/6',
+                    explanation: 'There is one favorable outcome (rolling a 4) and six possible outcomes (1, 2, 3, 4, 5, 6). So the probability is 1/6.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Probability',
+                    prompt: 'A bag contains 3 red marbles, 5 blue marbles, and 2 green marbles. What is the probability of drawing a blue marble? (Enter as a fraction)',
+                    correctAnswer: '1/2',
+                    explanation: 'There are 5 blue marbles (favorable outcomes). The total number of marbles is 3 + 5 + 2 = 10. The probability is 5/10, which simplifies to 1/2.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Probability',
+                    prompt: 'What is the probability of a coin landing on "heads"? (Enter as a decimal)',
+                    correctAnswer: '0.5',
+                    explanation: 'There is one favorable outcome (heads) and two possible outcomes (heads, tails). The probability is 1/2, or 0.5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Probability',
+                    prompt: 'From a standard deck of 52 cards, what is the probability of drawing a King? (Enter as a fraction)',
+                    correctAnswer: '1/13',
+                    explanation: 'There are 4 Kings in a deck of 52 cards. The probability is 4/52, which simplifies to 1/13.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Probability',
+                    prompt: 'A spinner is divided into 8 equal sections, numbered 1 through 8. What is the probability of spinning an even number? (Enter as a fraction)',
+                    correctAnswer: '1/2',
+                    explanation: 'The even numbers are 2, 4, 6, and 8. That is 4 favorable outcomes out of 8 possible outcomes. The probability is 4/8, which simplifies to 1/2.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Probability',
+                    prompt: 'If the probability of rain tomorrow is 40%, what is the probability that it will NOT rain? (Enter as a percentage)',
+                    correctAnswer: '60',
+                    explanation: 'The sum of the probabilities of an event happening and not happening is always 100%. So, 100% - 40% = 60%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Probability',
+                    prompt: 'You roll two standard six-sided dice. What is the probability that both dice show a 6? (Enter as a fraction)',
+                    correctAnswer: '1/36',
+                    explanation: 'The probability of the first die being a 6 is 1/6. The probability of the second die being a 6 is 1/6. To find the probability of both independent events happening, you multiply them: (1/6) * (1/6) = 1/36.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Probability',
+                    prompt: 'A bag contains 4 red and 6 blue marbles. You randomly draw one marble, do NOT replace it, and then draw another. What is the probability that both are red? (Enter as a fraction)',
+                    correctAnswer: '2/15',
+                    explanation: 'The probability of the first draw being red is 4/10. After drawing one red marble, there are 3 red marbles left and a total of 9 marbles. The probability of the second draw being red is 3/9. P(Both Red) = (4/10) * (3/9) = 12/90 = 2/15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Probability',
+                    prompt: 'Using the same bag (4 red, 6 blue), what is the probability of drawing a red marble then a blue marble without replacement? (Enter as a fraction)',
+                    correctAnswer: '4/15',
+                    explanation: 'P(1st is Red) = 4/10. P(2nd is Blue) = 6/9 (since there are still 6 blue marbles but only 9 total). (4/10) * (6/9) = 24/90 = 4/15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Probability',
+                    prompt: 'From a standard 52-card deck, what is the probability of drawing a heart or a queen? (Enter as a fraction)',
+                    correctAnswer: '4/13',
+                    explanation: 'There are 13 hearts and 4 queens. However, the Queen of Hearts is counted in both sets. So, P(Heart or Queen) = P(Heart) + P(Queen) - P(Queen of Hearts) = (13/52) + (4/52) - (1/52) = 16/52 = 4/13.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Probability',
+                    prompt: 'A committee of 2 people is to be selected from a group of 5 people. How many different committees are possible?',
+                    correctAnswer: '10',
+                    explanation: 'This is a combination problem. The formula is nCr = n! / (r! * (n-r)!). So, 5C2 = 5! / (2! * 3!) = (5*4)/(2*1) = 10.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Probability',
+                    prompt: 'There are 10 runners in a race. How many different ways can the runners finish in first, second, and third place?',
+                    correctAnswer: '720',
+                    explanation: 'This is a permutation problem because order matters. The formula is nPr = n! / (n-r)!. So, 10P3 = 10! / 7! = 10 * 9 * 8 = 720.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                         const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                // Visually mark selected and correct/incorrect answers
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true; // Disable all buttons after one is chosen
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = lessonData.steps[currentStep].correctAnswer.toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = true;
+                for(let i = 0; i < correctOrder.length; i++) {
+                    if(submittedOrder[i] !== correctOrder[i]) {
+                        correct = false;
+                        break;
+                    }
+                }
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: submittedSentences.map(s => s.textContent), correct: correct });
+                
+                // Disable dragging
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                document.getElementById('feedback-next-btn').addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

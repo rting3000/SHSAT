@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4D7: Milestone Review (Weeks 1-4)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Milestone Review (Weeks 1-4)",
+            subtitle: "Day 7: Comprehensive Assessment",
+            pointsPerQuestion: 10,
+            completion_id: 'w4d7',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: First Milestone',
+                    content: `
+                        <p>This is your first major checkpoint, agent. You have completed one-third of your training program.</p>
+                        <p>This mission is a 30-question assessment covering all ELA and Math topics from the past four weeks. It is designed to be a realistic simulation of a test section. It will challenge your knowledge, timing, and ability to shift between different problem types.</p>
+                        <p>Focus, manage your time wisely, and trust your training. This is a critical evaluation of your progress. Begin.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'Review Question 1: Main Idea',
+                    passage: 'The Sahara Desert, the largest hot desert in the world, covers most of North Africa. Its landscape is varied, featuring vast sand seas known as ergs, but also rocky plateaus called hammadas and gravel plains. Despite the harsh, arid conditions, a surprising number of species have adapted to life here, including the fennec fox, the addax antelope, and various reptiles. Ancient riverbeds and evidence of past vegetation also suggest the Sahara was once a much greener region.',
+                    prompt: 'What is the main idea of this passage?',
+                    options: [
+                        'The Sahara is too hot for any animals to survive.',
+                        'The Sahara is a vast, varied desert with a surprising amount of life and a complex history.',
+                        'The fennec fox is the most important animal in the Sahara.',
+                        'The Sahara desert is composed entirely of sand.'
+                    ],
+                    correctAnswer: 'The Sahara is a vast, varied desert with a surprising amount of life and a complex history.',
+                    explanation: 'This option best captures all the key points mentioned: its size and location, its varied landscape, its adapted wildlife, and its greener past.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 2: Sentence Correction',
+                    passage: 'Each of the team members, after a long season of practice, feel that they are ready for the championship.',
+                    prompt: 'How should the underlined verb be corrected?',
+                    options: ['feels', 'are feeling', 'have felt', 'No correction needed'],
+                    correctAnswer: 'feels',
+                    explanation: 'The subject of the sentence is "Each," which is singular. Therefore, the verb must be singular: "feels".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 3: Logical Reasoning',
+                    passage: 'All successful entrepreneurs are risk-takers. Jessica is not a risk-taker.',
+                    prompt: 'Based on the information above, which conclusion is most logical?',
+                    options: [
+                        'Jessica is a successful entrepreneur.',
+                        'Jessica is not a successful entrepreneur.',
+                        'All risk-takers are successful entrepreneurs.',
+                        'Jessica is an unsuccessful entrepreneur.'
+                    ],
+                    correctAnswer: 'Jessica is not a successful entrepreneur.',
+                    explanation: 'If being a risk-taker is a necessary condition for being a successful entrepreneur, and Jessica is not a risk-taker, she cannot be a successful entrepreneur.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 4: Author\'s Purpose',
+                    passage: 'This new revolutionary "Veggie-Chopper 9001" can slice, dice, and julienne any vegetable in half the time of conventional knives! With its patented titanium-edged blades and ergonomic grip, you\'ll be a gourmet chef in your own kitchen. Order now and we\'ll double the offer!',
+                    prompt: 'The primary purpose of this passage is to:',
+                    options: ['Inform the reader about kitchen safety', 'Describe the history of vegetable chopping', 'Persuade the reader to buy a product', 'Entertain with a story about a chef'],
+                    correctAnswer: 'Persuade the reader to buy a product',
+                    explanation: 'The use of exaggerated, positive language ("revolutionary," "patented"), direct commands ("Order now"), and special offers are all hallmarks of persuasive advertising.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'Review Question 5: Paragraph Order',
+                    prompt: 'Arrange the sentences to form a logical paragraph.',
+                    sentences: [
+                        { id: 1, text: 'This shift allowed for the development of permanent settlements and the growth of populations.' },
+                        { id: 2, text: 'For most of human history, people were nomadic hunter-gatherers.' },
+                        { id: 3, text: 'Eventually, about 10,000 years ago, humans began to cultivate plants and domesticate animals.' },
+                        { id: 4, text: 'They moved from place to place in search of food and resources.' }
+                    ],
+                    explanation: 'The paragraph starts by describing the general state of early humans (2), then gives more detail about that state (4). It then introduces a major change (3) and describes the result of that change (1).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 6: Tone',
+                    passage: 'I cannot express my profound disappointment. We entrusted this council with a simple task, and they have met every deadline with delay, every question with evasion, and every challenge with incompetence. Their performance has not just been poor; it has been an absolute betrayal of the public trust.',
+                    prompt: 'The author\'s tone can be best described as:',
+                    options: ['Joyful and celebratory', 'Curious and inquisitive', 'Indignant and scornful', 'Calm and objective'],
+                    correctAnswer: 'Indignant and scornful',
+                    explanation: 'Words like "profound disappointment," "incompetence," and "betrayal" convey strong anger and contempt.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 7: Ratios',
+                    prompt: 'A classroom has 14 boys and 18 girls. What is the ratio of boys to the total number of students? (Enter as a fraction in simplest form, e.g., 3/5)',
+                    correctAnswer: '7/16',
+                    explanation: 'There are 14 boys and 14 + 18 = 32 total students. The ratio is 14:32. Dividing both by 2 gives the simplest form, 7:16 or 7/16.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 8: Number Properties (LCM)',
+                    prompt: 'What is the least common multiple (LCM) of 9, 12, and 18?',
+                    correctAnswer: '36',
+                    explanation: 'Multiples of 9: 9, 18, 27, 36. Multiples of 12: 12, 24, 36. Multiples of 18: 18, 36. The smallest number they all share is 36.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 9: Algebra',
+                    prompt: 'Solve for x: (2x/3) - 4 = 6',
+                    correctAnswer: '15',
+                    explanation: 'Add 4 to both sides: 2x/3 = 10. Multiply both sides by 3: 2x = 30. Divide by 2: x = 15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 10: Geometry (Angles)',
+                    prompt: 'A straight line is intersected by another line, forming two angles. If one angle is 55 degrees, what is the measure of the other angle?',
+                    correctAnswer: '125',
+                    explanation: 'Angles on a straight line are supplementary, meaning they add up to 180 degrees. 180 - 55 = 125.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 11: Percentages',
+                    prompt: 'A video game is priced at $60. With a 7% sales tax, what is the total cost?',
+                    correctAnswer: '64.20',
+                    explanation: 'The tax is 7% of $60, which is 0.07 * 60 = $4.20. The total cost is $60 + $4.20 = $64.20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 12: Data Analysis (Mean)',
+                    prompt: 'The mean of five numbers is 20. If four of the numbers are 10, 15, 25, and 30, what is the fifth number?',
+                    correctAnswer: '20',
+                    explanation: 'If the mean of five numbers is 20, their sum must be 5 * 20 = 100. The sum of the four given numbers is 10 + 15 + 25 + 30 = 80. Therefore, the fifth number must be 100 - 80 = 20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 13: Pythagorean Theorem',
+                    prompt: 'A 25-foot ladder is placed against a wall so that its base is 7 feet from the wall. How high up the wall does the ladder reach?',
+                    correctAnswer: '24',
+                    explanation: 'The ladder is the hypotenuse (c=25), and the distance from the wall is one leg (a=7). Using a^2 + b^2 = c^2: 7^2 + b^2 = 25^2. 49 + b^2 = 625. b^2 = 576. The square root of 576 is 24. This is a 7-24-25 right triangle.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 14: Rate',
+                    prompt: 'A car travels 180 miles in 3 hours. How many miles per hour is it traveling?',
+                    correctAnswer: '60',
+                    explanation: 'Rate = Distance / Time. 180 miles / 3 hours = 60 miles per hour.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'Review Question 15: Punctuation',
+                    passage: 'The students wanted to go to the park, however, it started raining heavily.',
+                    prompt: 'Which of the following is the correctly punctuated version of the sentence?',
+                    options: [
+                        'The students wanted to go to the park, however it started raining heavily.',
+                        'The students wanted to go to the park; however, it started raining heavily.',
+                        'The students wanted to go to the park, however; it started raining heavily.',
+                        'The students, wanted to go to the park, however, it started raining heavily.'
+                    ],
+                    correctAnswer: 'The students wanted to go to the park; however, it started raining heavily.',
+                    explanation: '"However" used as a conjunctive adverb to connect two independent clauses should be preceded by a semicolon and followed by a comma.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 16: Algebra',
+                    prompt: 'If 4x + 5 = 15, what is the value of 8x + 10?',
+                    correctAnswer: '30',
+                    explanation: 'Notice that 8x + 10 is exactly 2 * (4x + 5). Since 4x + 5 = 15, then 2 * (15) = 30. You don\'t need to solve for x first.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 17: Inference',
+                    passage: 'When Leo arrived at the party, he saw empty pizza boxes stacked on the counter and a pile of coats on the bed. Music was still playing, but the living room was deserted.',
+                    prompt: 'What can you infer from this passage?',
+                    options: [
+                        'The party is about to begin.',
+                        'Leo has arrived very late to the party.',
+                        'Leo is the first guest to arrive.',
+                        'The party was cancelled.'
+                    ],
+                    correctAnswer: 'Leo has arrived very late to the party.',
+                    explanation: 'The empty boxes and coats suggest people were there, but the deserted room suggests the party is over or winding down. This makes it likely that Leo is late.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 18: Area of a Triangle',
+                    prompt: 'A triangle has a base of 10 inches and a height of 6 inches. What is its area?',
+                    correctAnswer: '30',
+                    explanation: 'The area of a triangle is (1/2) * base * height. Area = (1/2) * 10 * 6 = 30 square inches.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 19: Pronoun Agreement',
+                    passage: 'If a student wants to succeed, they must be willing to work hard.',
+                    prompt: 'Which of the following is the most traditionally correct revision?',
+                    options: [
+                        'If a student wants to succeed, you must be willing to work hard.',
+                        'If a student wants to succeed, he or she must be willing to work hard.',
+                        'If students want to succeed, he or she must be willing to work hard.',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: 'If a student wants to succeed, he or she must be willing to work hard.',
+                    explanation: 'The antecedent "a student" is singular. While singular "they" is now widely accepted, "he or she" is the most traditionally formal and grammatically correct option.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 20: Percent Decrease',
+                    prompt: 'A town\'s population decreased from 5,000 to 4,500. What was the percent decrease?',
+                    correctAnswer: '10',
+                    explanation: 'The decrease is 5000 - 4500 = 500. Percent decrease = (Decrease / Original) * 100 = (500 / 5000) * 100 = 0.1 * 100 = 10%.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 21: Misplaced Modifier',
+                    passage: 'Peering through the telescope, the distant galaxy was a beautiful swirl of light.',
+                    prompt: 'Which sentence corrects the misplaced modifier?',
+                    options: [
+                        'The distant galaxy was a beautiful swirl of light peering through the telescope.',
+                        'Peering through the telescope, I saw that the distant galaxy was a beautiful swirl of light.',
+                        'A beautiful swirl of light, the distant galaxy peered through the telescope.',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: 'Peering through the telescope, I saw that the distant galaxy was a beautiful swirl of light.',
+                    explanation: 'The original sentence implies the galaxy was peering through the telescope. The corrected version clarifies that a person ("I") was doing the peering.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 22: Data (Range and Median)',
+                    prompt: 'What is the sum of the range and the median of the set: {10, 2, 8, 15, 8}?',
+                    correctAnswer: '21',
+                    explanation: 'First, order the set: {2, 8, 8, 10, 15}. The range is 15 - 2 = 13. The median is the middle number, which is 8. The sum is 13 + 8 = 21.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 23: Parallel Structure',
+                    passage: 'The ideal candidate will be a strong communicator, a creative problem-solver, and have experience in marketing.',
+                    prompt: 'How can this sentence be revised for better parallel structure?',
+                    options: [
+                        '...a creative problem-solver, and experienced in marketing.',
+                        '...creatively solves problems, and has experience in marketing.',
+                        '...a creative problem-solver, and an experienced marketer.',
+                        'The sentence is correct as is.'
+                    ],
+                    correctAnswer: '...a creative problem-solver, and an experienced marketer.',
+                    explanation: 'The list should contain parallel noun phrases: "a strong communicator," "a creative problem-solver," and "an experienced marketer."'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 24: Probability',
+                    prompt: 'A bag contains 5 red marbles, 3 blue marbles, and 2 green marbles. What is the probability of drawing a blue marble? (Enter as a fraction in simplest form, e.g., 3/10)',
+                    correctAnswer: '3/10',
+                    explanation: 'There are 3 blue marbles and a total of 5 + 3 + 2 = 10 marbles. The probability is 3/10.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 25: Word Choice',
+                    passage: 'The council decided to adopt the new regulations, hoping they would have a positive affect on the community.',
+                    prompt: 'Which correction should be made?',
+                    options: [
+                        'change "adopt" to "adept"',
+                        'change "affect" to "effect"',
+                        'change "council" to "counsel"',
+                        'No correction is needed.'
+                    ],
+                    correctAnswer: 'change "affect" to "effect"',
+                    explanation: '"Effect" is the noun meaning "result" or "influence." "Affect" is the verb meaning "to influence." The sentence requires a noun.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 26: Geometry (Circumference)',
+                    prompt: 'A circle has a radius of 5. What is its circumference? (Use π ≈ 3.14)',
+                    correctAnswer: '31.4',
+                    explanation: 'Circumference = 2 * π * r.  C = 2 * 3.14 * 5 = 10 * 3.14 = 31.4.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 27: Comma Splice',
+                    passage: 'The team practiced for weeks, they were ready for the tournament.',
+                    prompt: 'Which of the following is NOT a correct way to fix the sentence?',
+                    options: [
+                        'The team practiced for weeks. They were ready for the tournament.',
+                        'The team practiced for weeks; they were ready for the tournament.',
+                        'Because the team practiced for weeks, they were ready for the tournament.',
+                        'The team practiced for weeks, and so, they were ready for the tournament.'
+                    ],
+                    correctAnswer: 'The team practiced for weeks, and so, they were ready for the tournament.',
+                    explanation: 'This option introduces unnecessary commas around "so". "The team practiced for weeks, so they were ready..." would be correct, but the extra commas make this option incorrect.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 28: Proportions',
+                    prompt: 'If 3 apples cost $1.50, how much will 10 apples cost?',
+                    correctAnswer: '5.00',
+                    explanation: 'First find the cost of one apple: $1.50 / 3 = $0.50 per apple. Then multiply by 10: 10 * $0.50 = $5.00.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review Question 29: Vocabulary in Context',
+                    passage: 'The CEO\'s plan was audacious; he intended to completely restructure the company and enter three new markets within a single year.',
+                    prompt: 'In this context, "audacious" most nearly means:',
+                    options: ['careful and measured', 'shy and timid', 'bold and daring', 'common and uninteresting'],
+                    correctAnswer: 'bold and daring',
+                    explanation: 'The description of the plan—a complete restructure and entering three new markets in one year—is extremely ambitious, which points to the meaning of "audacious" as bold and daring.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review Question 30: Multi-Step Problem',
+                    prompt: 'A square garden has a perimeter of 48 feet. A fence is to be built around it. If fencing costs $10 per foot, what is the total cost of the fence?',
+                    correctAnswer: '480',
+                    explanation: 'The total length of the fence needed is the perimeter of the garden, which is already given as 48 feet. The cost is the length multiplied by the price per foot: 48 feet * $10/foot = $480.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

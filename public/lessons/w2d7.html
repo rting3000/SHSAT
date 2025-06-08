@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D7: Comprehensive Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Weeks 1 & 2 Review",
+            subtitle: "Day 7: Comprehensive Drill",
+            pointsPerQuestion: 10,
+            completion_id: 'w2d7',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: The First Major Checkpoint',
+                    content: `
+                        <p>This is it. You've completed two full weeks of training. This mission will test your mastery of all subjects covered so far. It's a longer drill designed to build mental endurance and solidify your knowledge. There are 30 questions in this review.</p>
+                        <ul>
+                            <li><strong>ELA Review:</strong> Main Idea, Revising/Editing, Scrambled Paragraphs, Inferences, Tone/Mood, Word in Context, Arguments, Figurative Language, Paired Passages.</li>
+                            <li><strong>Math Review:</strong> Ratios, Rates, Proportions, Percentages, Averages, Probability, Fractions, Equations, Basic Geometry, Data Analysis, Area/Perimeter.</li>
+                        </ul>
+                    `
+                },
+                // Weeks 1 & 2 Comprehensive Review Questions
+                {
+                    type: 'mcq',
+                    header: 'Review 1: Main Idea (W1)',
+                    prompt: 'What is the main idea of the passage?',
+                    passage: 'The practice of urban farming, growing food in city spaces like rooftops and vertical farms, is expanding rapidly. It reduces "food miles," the distance food travels from farm to table, thus lowering carbon emissions. It also provides residents with fresher produce and creates green spaces in otherwise concrete environments. While it cannot replace traditional farming, it is a vital tool for creating more sustainable and resilient cities.',
+                    options: [
+                        'Urban farming uses rooftops.',
+                        'Reducing food miles is important.',
+                        'Urban farming is a key strategy for improving urban sustainability.',
+                        'Traditional farming is inefficient.'
+                    ],
+                    correctAnswer: 'Urban farming is a key strategy for improving urban sustainability.',
+                    explanation: 'This statement best captures the overall point of the passage, which discusses multiple benefits (environmental, health, aesthetic) of urban farming.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 2: Percentages (W1)',
+                    prompt: 'A jacket costs $120. It is on sale for 30% off. What is the sale price?',
+                    correctAnswer: '84',
+                    explanation: 'The discount is 30% of $120, which is 0.30 * 120 = $36. The sale price is the original price minus the discount: $120 - $36 = $84.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 3: Word in Context (W2)',
+                    prompt: 'What is the most likely meaning of "ubiquitous" in this sentence?',
+                    passage: 'In the 21st century, smartphones have become ubiquitous; it is more unusual to see someone without one than with one.',
+                    options: ['Expensive and rare', 'Complicated and difficult', 'Present and found everywhere', 'New and innovative'],
+                    correctAnswer: 'Present and found everywhere',
+                    explanation: 'The clue that it\'s "more unusual to see someone without one" directly implies that smartphones are everywhere.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 4: Geometry (W2)',
+                    prompt: 'Two angles in a triangle measure 90° and 35°. What is the measure of the third angle?',
+                    correctAnswer: '55',
+                    explanation: 'The angles in a triangle sum to 180°. So, 180 - 90 - 35 = 55°.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'Review 5: Scrambled Paragraph (W1)',
+                    prompt: 'Choose the most logical order for the sentences.',
+                    correctOrder: [
+                        'The owl is a master of nocturnal adaptation.',
+                        'Unlike humans, owls have eyes that are fixed in their sockets.',
+                        'To compensate, they have incredibly flexible necks, able to turn their heads up to 270 degrees.',
+                        'This allows them to hunt effectively in near-total darkness.'
+                    ],
+                    sentences: [
+                        'This allows them to hunt effectively in near-total darkness.',
+                        'Unlike humans, owls have eyes that are fixed in their sockets.',
+                        'To compensate, they have incredibly flexible necks, able to turn their heads up to 270 degrees.',
+                        'The owl is a master of nocturnal adaptation.'
+                    ],
+                    explanation: 'The logical flow is: general statement (master of adaptation), specific feature (fixed eyes), the compensation for that feature (flexible neck), and the resulting benefit (hunting ability).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 6: Inference (W1)',
+                    prompt: 'Based on the passage, what can be inferred about the author?',
+                    passage: 'The old bookstore was my sanctuary. The scent of aging paper and leather bindings was a perfume, and the quiet rustle of turning pages was a symphony. I could spend endless hours lost in the labyrinthine aisles, each shelf a portal to another world.',
+                    options: [
+                        'The author dislikes modern libraries.',
+                        'The author is a professional librarian.',
+                        'The author deeply loves books and reading.',
+                        'The author thinks the bookstore is too messy.'
+                    ],
+                    correctAnswer: 'The author deeply loves books and reading.',
+                    explanation: 'The use of words like "sanctuary," "perfume," and "symphony" reveals a deep and passionate love for the atmosphere of a bookstore and the act of reading.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 7: Ratios (W1)',
+                    prompt: 'A classroom has 14 boys and 16 girls. What is the ratio of boys to the total number of students, in simplest form?',
+                    correctAnswer: '7:15',
+                    explanation: 'The total number of students is 14 + 16 = 30. The ratio of boys to total students is 14:30. Both numbers can be divided by 2 to simplify the ratio to 7:15.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 8: Tone (W2)',
+                    prompt: 'What is the tone of the sentence?',
+                    passage: 'Can you believe he had the audacity to say that? After all I\'ve done for him, the sheer nerve is just astonishing!',
+                    options: ['Joyful', 'Outraged', 'Sorrowful', 'Confused'],
+                    correctAnswer: 'Outraged',
+                    explanation: 'Phrases like "audacity," "sheer nerve," and the exclamation points convey strong anger and disbelief.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 9: Area of a Rectangle (W2)',
+                    prompt: 'A rectangle has a perimeter of 46 inches. Its length is 15 inches. What is its area in square inches?',
+                    correctAnswer: '120',
+                    explanation: 'Perimeter P = 2(L+W). So, 46 = 2(15+W). Divide by 2: 23 = 15+W. So the width is 23-15=8. Area A = L*W = 15 * 8 = 120.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 10: Figurative Language (W2)',
+                    prompt: 'The sentence "The wind whispered secrets through the trees" is an example of what?',
+                    options: ['Metaphor', 'Simile', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Personification',
+                    explanation: 'The wind, an inanimate force, is given the human ability to "whisper," which is personification.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 11: Probability (W1)',
+                    prompt: 'A bag contains 5 red marbles, 4 blue marbles, and 6 green marbles. What is the probability of drawing a blue marble? Express as a fraction.',
+                    correctAnswer: '4/15',
+                    explanation: 'There are 4 blue marbles. The total number of marbles is 5 + 4 + 6 = 15. The probability is the number of favorable outcomes (4) over the total number of outcomes (15).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 12: Revising and Editing (W1)',
+                    prompt: 'Which of the following is the best revision for the underlined sentence?',
+                    passage: 'The committee members, they argued for hours. <u>The decision was not reached by them.</u>',
+                    options: [
+                        'No change is needed.',
+                        'They did not reach a decision.',
+                        'A decision, it was not reached.',
+                        'Not reaching a decision, they argued.'
+                    ],
+                    correctAnswer: 'They did not reach a decision.',
+                    explanation: 'This revision corrects the awkward passive voice ("was not reached by them") to the more direct and clear active voice.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 13: Multi-Step Equations (W2)',
+                    prompt: 'Solve for x: (3x/4) - 5 = 7',
+                    correctAnswer: '16',
+                    explanation: 'Add 5 to both sides: 3x/4 = 12. Multiply both sides by 4: 3x = 48. Divide by 3: x = 16.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 14: Argument Analysis (W2)',
+                    prompt: 'What is the function of the second sentence in this argument?',
+                    passage: '(1) All students should be required to learn an instrument. (2) Studies have consistently shown that learning music improves mathematical ability and critical thinking skills.',
+                    options: [
+                        'It is the main claim.',
+                        'It is a counterargument.',
+                        'It is irrelevant information.',
+                        'It is evidence to support the claim.'
+                    ],
+                    correctAnswer: 'It is evidence to support the claim.',
+                    explanation: 'The first sentence makes a claim. The second sentence provides evidence (studies) to support why that claim is valid.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 15: Averages (W1)',
+                    prompt: 'The average of four numbers is 15. If three of the numbers are 10, 12, and 20, what is the fourth number?',
+                    correctAnswer: '18',
+                    explanation: 'If the average of four numbers is 15, their sum is 4 * 15 = 60. The sum of the three known numbers is 10 + 12 + 20 = 42. The fourth number must be 60 - 42 = 18.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 16: Paired Passages (W2)',
+                    prompt: 'Which statement best describes the relationship between the two passages?',
+                    passage: `
+                        <p><strong>Passage 1:</strong> The internet has democratized information, giving everyone access to a world of knowledge. This unprecedented access fosters education and global understanding.</p>
+                        <p><strong>Passage 2:</strong> While the internet provides access to information, it has also led to the rapid spread of misinformation. The lack of editorial oversight means that false or biased content can be indistinguishable from fact, posing a danger to society.</p>
+                    `,
+                    options: [
+                        'Passage 2 refutes the central claim of Passage 1.',
+                        'Passage 2 provides a qualification or counterpoint to the idea in Passage 1.',
+                        'Both passages argue that the internet is a negative force.',
+                        'Passage 1 is a summary of Passage 2.'
+                    ],
+                    correctAnswer: 'Passage 2 provides a qualification or counterpoint to the idea in Passage 1.',
+                    explanation: 'Passage 1 makes a positive claim. Passage 2 says "While" that is true, it also has a significant negative side. This is a classic point-counterpoint relationship where the second passage qualifies the first.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 17: Proportions (W1)',
+                    prompt: 'If a car can travel 150 miles on 5 gallons of gas, how many miles can it travel on a full tank of 12 gallons?',
+                    correctAnswer: '360',
+                    explanation: 'Set up a proportion: 150 miles / 5 gallons = x miles / 12 gallons. First, find the unit rate: 150 / 5 = 30 miles per gallon. Then multiply by the new amount: 30 * 12 = 360 miles.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 18: Author\'s Purpose (W1)',
+                    prompt: 'What is the most likely purpose of this passage?',
+                    passage: 'Our city\'s animal shelter is overflowing with wonderful, loving dogs and cats in desperate need of a home. Adopting a pet not only saves a life but also brings immeasurable joy to a family. Visit the shelter this weekend and find your new best friend.',
+                    options: [
+                        'To inform about different animal breeds.',
+                        'To persuade people to adopt a pet from the shelter.',
+                        'To entertain with a funny story about a pet.',
+                        'To analyze the costs of pet ownership.'
+                    ],
+                    correctAnswer: 'To persuade people to adopt a pet from the shelter.',
+                    explanation: 'The passage uses emotional language ("loving," "desperate need," "immeasurable joy") and a direct call to action ("Visit the shelter") to convince the reader to do something.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 19: Advanced Fractions (W2)',
+                    prompt: 'A recipe calls for 2 1/2 cups of flour. If you want to make only 2/5 of the recipe, how many cups of flour do you need? Answer as a whole number or fraction.',
+                    correctAnswer: '1',
+                    explanation: 'First, convert 2 1/2 to an improper fraction: (2*2 + 1)/2 = 5/2. Now multiply by 2/5: (5/2) * (2/5) = 10/10 = 1.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 20: Word Meaning (W1)',
+                    prompt: 'The word "diligent" most nearly means:',
+                    options: ['Lazy', 'Intelligent', 'Hardworking and careful', 'Wealthy'],
+                    correctAnswer: 'Hardworking and careful',
+                    explanation: 'A diligent person shows care and conscientiousness in their work or duties.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 21: Data Analysis - Median (W2)',
+                    prompt: 'Find the median of the following set of numbers: 9, 2, 7, 5, 1, 8, 7',
+                    correctAnswer: '7',
+                    explanation: 'First, order the numbers: 1, 2, 5, 7, 7, 8, 9. The median is the middle value. In this set of 7 numbers, the middle value is the 4th one, which is 7.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 22: Identifying Evidence (W2)',
+                    prompt: 'Which sentence from the passage serves as evidence for the main claim?',
+                    passage: 'The city needs a new park. Green spaces are crucial for mental well-being and provide safe areas for children to play. A recent study of our residents found that 85% felt there was insufficient public recreational space.',
+                    options: [
+                        'The city needs a new park.',
+                        'Green spaces are crucial for mental well-being.',
+                        'A recent study of our residents found that 85% felt there was insufficient public recreational space.',
+                        'They provide safe areas for children to play.'
+                    ],
+                    correctAnswer: 'A recent study of our residents found that 85% felt there was insufficient public recreational space.',
+                    explanation: 'This is a specific piece of data (a study with a percentage) used to support the claim that a new park is needed.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 23: Geometry - Angles (W2)',
+                    prompt: 'Two parallel lines are intersected by a transversal. If one of the alternate interior angles is 50 degrees, what is the measure of the other alternate interior angle?',
+                    correctAnswer: '50',
+                    explanation: 'Alternate interior angles are equal when two parallel lines are cut by a transversal.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'Review 24: Simile vs. Metaphor (W2)',
+                    prompt: 'Which sentence contains a metaphor?',
+                    options: [
+                        'The explanation was as clear as mud.',
+                        'He has a heart of stone.',
+                        'The car engine purred like a contented cat.',
+                        'The flowers begged for water.'
+                    ],
+                    correctAnswer: 'He has a heart of stone.',
+                    explanation: 'This is a metaphor because it directly compares his heart to a stone without using "like" or "as." The others are a simile, another simile, and personification.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 25: Rates (W1)',
+                    prompt: 'A machine can produce 40 widgets in 8 minutes. How many widgets can it produce in one hour?',
+                    correctAnswer: '300',
+                    explanation: 'First find the unit rate: 40 widgets / 8 minutes = 5 widgets per minute. There are 60 minutes in an hour. So, 5 * 60 = 300 widgets.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 26: Inference (W1)',
+                    prompt: 'What can be inferred from this sentence?',
+                    passage: 'Although Maria practiced the piano for hours every day, she knew she would never play with the effortless grace of her instructor.',
+                    options: [
+                        'Maria is a beginner pianist.',
+                        'Maria admires her instructor\'s skill.',
+                        'Maria dislikes practicing the piano.',
+                        'Maria\'s instructor is famous.'
+                    ],
+                    correctAnswer: 'Maria admires her instructor\'s skill.',
+                    explanation: 'The phrase "effortless grace" indicates that Maria holds her instructor\'s ability in high regard and sees it as a level to aspire to, even if she feels she can\'t reach it.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 27: Area of a Triangle (W2)',
+                    prompt: 'A triangle has a base of 20 cm and an area of 100 square cm. What is its height in cm?',
+                    correctAnswer: '10',
+                    explanation: 'Area = (1/2) * base * height. So, 100 = (1/2) * 20 * h. This simplifies to 100 = 10 * h. Divide by 10 to find the height: h = 10 cm.'
+                },
+                {
+                    type: 'scrambled-paragraph',
+                    header: 'Review 28: Scrambled Paragraph (W1)',
+                    prompt: 'Choose the most logical order for the sentences.',
+                    correctOrder: [
+                        'Plants are remarkable chemical factories.',
+                        'They use energy from the sun to convert carbon dioxide and water into food.',
+                        'This process, called photosynthesis, is vital for life on Earth.',
+                        'Ultimately, this energy supports almost all ecosystems.'
+                    ],
+                    sentences: [
+                        'This process, called photosynthesis, is vital for life on Earth.',
+                        'They use energy from the sun to convert carbon dioxide and water into food.',
+                        'Ultimately, this energy supports almost all ecosystems.',
+                        'Plants are remarkable chemical factories.'
+                    ],
+                    explanation: 'Z introduces the topic (plants as factories). X explains what they do. W names the process and its importance. Y provides the concluding thought on the far-reaching impact.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Review 29: Word in Context (W2)',
+                    prompt: 'What does "gregarious" mean?',
+                    passage: 'Unlike his brother, who was quiet and reserved, Mark was a gregarious person who loved parties and was energized by being in a crowd.',
+                    options: ['Shy', 'Sociable', 'Intelligent', 'Anxious'],
+                    correctAnswer: 'Sociable',
+                    explanation: 'The passage contrasts "gregarious" with "quiet and reserved" and provides examples like loving parties and crowds, which points to the meaning of sociable.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Review 30: Multi-Step Equation with Fractions (W2)',
+                    prompt: 'Solve for y: (y/3) + 2 = (y/2) - 1',
+                    correctAnswer: '18',
+                    explanation: 'To eliminate fractions, multiply every term by the least common multiple of 3 and 2, which is 6. This gives: 2y + 12 = 3y - 6. Subtract 2y from both sides: 12 = y - 6. Add 6 to both sides: y = 18.'
+                }
+            ]
+        };
+
+        // Standard lesson engine script
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+            let completedQuestions = new Set(JSON.parse(localStorage.getItem(completionId)) || []);
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<h2>${step.header}</h2>`;
+                if (step.passage) {
+                    content += `<div class="passage">${step.passage}</div>`;
+                }
+                if (step.prompt) {
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                }
+                
+                if (step.type === 'mcq') {
+                    content += '<div class="options">';
+                    step.options.forEach(option => {
+                        content += `<button class="option">${option}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `
+                        <div class="grid-in-container">
+                            <input type="text" class="grid-in-input" maxlength="10">
+                            <button class="submit-btn">Submit</button>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    content += `<div id="scrambled-container"></div>`;
+                    content += `<button id="check-scrambled-btn" class="submit-btn">Check Order</button>`;
+                } else if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button class="next-btn">Continue</button>`;
+                }
+
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+                
+                if (step.type === 'scrambled-paragraph') {
+                    setupScrambledParagraph(step);
+                }
+
+                addCardEventListeners(step);
+            }
+
+            function addCardEventListeners(step) {
+                if (step.type === 'mcq') {
+                    const optionButtons = document.querySelectorAll('.option');
+                    optionButtons.forEach(button => {
+                        button.addEventListener('click', () => handleAnswer(step, button.textContent));
+                    });
+                } else if (step.type === 'grid-in') {
+                    const submitButton = document.querySelector('.submit-btn');
+                    const inputField = document.querySelector('.grid-in-input');
+                    submitButton.addEventListener('click', () => handleAnswer(step, inputField.value.trim()));
+                    inputField.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            handleAnswer(step, inputField.value.trim());
+                        }
+                    });
+                } else if (step.type === 'scrambled-paragraph') {
+                    document.getElementById('check-scrambled-btn').addEventListener('click', () => {
+                         handleScrambledAnswer(step);
+                    });
+                } else if (step.type === 'briefing') {
+                    document.querySelector('.next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                }
+            }
+            
+            function handleAnswer(step, selectedAnswer) {
+                const isCorrect = selectedAnswer === step.correctAnswer;
+                if (step.type !== 'briefing') {
+                    questionsAnswered++;
+                    if (isCorrect) {
+                        score += lessonData.pointsPerQuestion;
+                    }
+                }
+                
+                showFeedback(step, isCorrect, selectedAnswer);
+            }
+
+            function showFeedback(step, isCorrect, selectedAnswer) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                
+                if (!isCorrect) {
+                     feedbackHtml += `<p><strong>Your answer:</strong> ${selectedAnswer}</p>`;
+                     feedbackHtml += `<p><strong>Correct answer:</strong> ${step.correctAnswer}</p>`;
+                }
+
+                feedbackHtml += `<div class="explanation"><p>${step.explanation}</p></div>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+            function setupScrambledParagraph(step) {
+                const container = document.getElementById('scrambled-container');
+                const sentences = [...step.sentences]; // Create a mutable copy
+                // Simple shuffle
+                for (let i = sentences.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                }
+
+                sentences.forEach((sentence, index) => {
+                    const sentenceDiv = document.createElement('div');
+                    sentenceDiv.className = 'scrambled-sentence';
+                    sentenceDiv.textContent = sentence;
+                    sentenceDiv.dataset.originalIndex = step.sentences.indexOf(sentence);
+                    sentenceDiv.setAttribute('draggable', true);
+                    sentenceDiv.id = `sentence-${index}`;
+                    
+                    sentenceDiv.addEventListener('dragstart', handleDragStart);
+                    sentenceDiv.addEventListener('dragover', handleDragOver);
+                    sentenceDiv.addEventListener('drop', handleDrop);
+                    sentenceDiv.addEventListener('dragend', handleDragEnd);
+
+                    container.appendChild(sentenceDiv);
+                });
+            }
+            
+            let draggedItem = null;
+
+            function handleDragStart(e) {
+                draggedItem = this;
+                setTimeout(() => {
+                    this.style.display = 'none';
+                }, 0);
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    const allItems = Array.from(document.querySelectorAll('.scrambled-sentence'));
+                    const draggedIndex = allItems.indexOf(draggedItem);
+                    const targetIndex = allItems.indexOf(this);
+
+                    if (draggedIndex < targetIndex) {
+                        this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                    } else {
+                        this.parentNode.insertBefore(draggedItem, this);
+                    }
+                }
+            }
+            
+            function handleDragEnd() {
+                setTimeout(() => {
+                    if (draggedItem) {
+                        draggedItem.style.display = 'block';
+                        draggedItem = null;
+                    }
+                }, 0);
+            }
+
+            function handleScrambledAnswer(step) {
+                const container = document.getElementById('scrambled-container');
+                const currentOrder = Array.from(container.children).map(child => child.textContent);
+                
+                let isCorrect = true;
+                for(let i = 0; i < currentOrder.length; i++) {
+                    if(currentOrder[i] !== step.correctOrder[i]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                
+                questionsAnswered++;
+                 if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                }
+
+                showScrambledFeedback(step, isCorrect);
+            }
+            
+            function showScrambledFeedback(step, isCorrect) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                feedbackHtml += `<p>${step.explanation}</p>`;
+                feedbackHtml += `<strong>The correct order is:</strong><ol>`;
+                step.correctOrder.forEach(sentence => {
+                    feedbackHtml += `<li>${sentence}</li>`;
+                });
+                feedbackHtml += `</ol>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+                
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+
+            function showFinalResults() {
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <h2>Mission Complete!</h2>
+                        <p>You've completed ${lessonData.subtitle}.</p>
+                        <h3>Your Score: ${score} / ${totalQuestions * lessonData.pointsPerQuestion}</h3>
+                        <p>You answered ${questionsAnswered} questions.</p>
+                        <a href="../index.html" class="button">Return to Dashboard</a>
+                    </div>
+                `;
+                markLessonAsComplete();
+            }
+            
+            function markLessonAsComplete() {
+                if (completionId) {
+                    const completedLessons = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                    completedLessons.add(completionId);
+                    localStorage.setItem('completedLessons', JSON.stringify([...completedLessons]));
+                }
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

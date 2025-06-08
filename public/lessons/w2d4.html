@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D4: Figurative Language & Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Figurative Language & Data",
+            subtitle: "Week 2, Day 4",
+            pointsPerQuestion: 10,
+            completion_id: 'w2d4',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Expressive Language and Interpreting Data',
+                    content: `
+                        <p>Today's mission is about looking beyond the literal. In ELA, you'll be identifying and understanding <strong>Figurative Language</strong> (similes, metaphors, personification). In Math, you'll be doing <strong>Data Analysis</strong>, which involves interpreting charts and graphs.</p>
+                        <ul>
+                            <li><strong>Figurative Language:</strong> This is when authors use words in a non-literal way to create a more powerful image. A <strong>simile</strong> compares two things using "like" or "as." A <strong>metaphor</strong> makes a direct comparison by saying one thing *is* another. <strong>Personification</strong> gives human qualities to inanimate objects.</li>
+                            <li><strong>Data Analysis:</strong> Pay close attention to the title, labels on the x-axis and y-axis, and the key or legend of any chart or graph. Read the question carefully to ensure you're looking for the correct piece of information.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Simile',
+                    prompt: 'Which of the following sentences contains a simile?',
+                    passage: '',
+                    options: [
+                        'The sea was a raging bull.',
+                        'The stars were diamonds scattered on velvet.',
+                        'His voice was like thunder.',
+                        'The wind sang a sad song.'
+                    ],
+                    correctAnswer: 'His voice was like thunder.',
+                    explanation: 'This is a simile because it uses the word "like" to compare his voice to thunder.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Metaphor',
+                    prompt: 'Which sentence contains a metaphor?',
+                    passage: '',
+                    options: [
+                        'The politician\'s speech was a roaring fire, igniting passion in the crowd.',
+                        'The lake was as smooth as glass.',
+                        'The trees danced in the wind.',
+                        'The pizza was delicious.'
+                    ],
+                    correctAnswer: 'The politician\'s speech was a roaring fire, igniting passion in the crowd.',
+                    explanation: 'This is a metaphor because it directly compares the speech to a "roaring fire" without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Personification',
+                    prompt: 'Which sentence best demonstrates personification?',
+                    passage: '',
+                    options: [
+                        'The sun was a glaring eye in the sky.',
+                        'The ancient car coughed and sputtered before finally starting.',
+                        'Her smile was as bright as the sun.',
+                        'The news hit him like a ton of bricks.'
+                    ],
+                    correctAnswer: 'The ancient car coughed and sputtered before finally starting.',
+                    explanation: 'This gives the human actions of coughing and sputtering to the car, which is an inanimate object. This is a classic example of personification.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Identifying Figurative Language',
+                    prompt: 'What type of figurative language is used in the sentence: "The classroom was a zoo"?',
+                    passage: '',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'This is a metaphor because it is a direct comparison between the classroom and a zoo without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Identifying Figurative Language',
+                    prompt: 'What is the primary figurative device in "The fog crept in on little cat feet"?',
+                    passage: '',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Alliteration'],
+                    correctAnswer: 'Personification',
+                    explanation: 'The fog, an inanimate thing, is given the human/animal quality of "creeping" on "little cat feet."'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Simile',
+                    prompt: 'Identify the simile in the following options.',
+                    passage: '',
+                    options: [
+                        'Her ideas were a breath of fresh air.',
+                        'He is a snake.',
+                        'The water is calling my name.',
+                        'The child chattered like a monkey.'
+                    ],
+                    correctAnswer: 'The child chattered like a monkey.',
+                    explanation: 'This sentence uses "like" to compare the way the child chatters to a monkey.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Metaphor',
+                    prompt: 'Which of the following is a metaphor?',
+                    passage: '',
+                    options: [
+                        'The baby was as quiet as a mouse.',
+                        'The world is a stage.',
+                        'The angry storm pounded on the roof.',
+                        'The test was very difficult.'
+                    ],
+                    correctAnswer: 'The world is a stage.',
+                    explanation: 'This is a direct comparison of the world to a stage, famously from Shakespeare.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Personification',
+                    prompt: 'Which sentence gives human qualities to an object?',
+                    passage: '',
+                    options: [
+                        'The history book was very informative.',
+                        'The alarm clock yelled at me to get out of bed.',
+                        'The runner was a blur of motion.',
+                        'The dog was as fluffy as a cloud.'
+                    ],
+                    correctAnswer: 'The alarm clock yelled at me to get out of bed.',
+                    explanation: 'Alarm clocks cannot "yell," so this is giving a human quality to an inanimate object.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Effect of Figurative Language',
+                    prompt: 'What is the effect of the metaphor in "The politician\'s words were a wall between him and the voters"?',
+                    passage: '',
+                    options: [
+                        'It shows the words were loud.',
+                        'It implies the words created a barrier and prevented connection or understanding.',
+                        'It suggests the words were strong and well-built.',
+                        'It shows the politician was a good builder.'
+                    ],
+                    correctAnswer: 'It implies the words created a barrier and prevented connection or understanding.',
+                    explanation: 'A wall is a barrier. The metaphor suggests that the politician\'s words were not connecting with people but rather separating him from them.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Identifying the Device',
+                    prompt: 'The phrase "as busy as a bee" is an example of what?',
+                    passage: '',
+                    options: ['Metaphor', 'Personification', 'Simile', 'Irony'],
+                    correctAnswer: 'Simile',
+                    explanation: 'The use of the word "as" makes this a direct comparison, which is the definition of a simile.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Reading a Bar Chart',
+                    prompt: 'A bar chart shows the number of books read by students in a month: Amy-8, Ben-6, Chloe-10, David-6. What is the average number of books read by this group?',
+                    correctAnswer: '7.5',
+                    explanation: 'To find the average (mean), add the total number of books: 8 + 6 + 10 + 6 = 30. Then divide by the number of students, which is 4.  30 / 4 = 7.5.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 2: Reading a Pie Chart',
+                    prompt: 'A pie chart shows a school\'s budget. 40% is for Salaries, 30% for Facilities, 20% for Supplies, and 10% for Other. If the total budget is $500,000, how much is spent on Supplies?',
+                    passage: '',
+                    options: ['$50,000', '$100,000', '$150,000', '$200,000'],
+                    correctAnswer: '$100,000',
+                    explanation: 'To find the amount for supplies, calculate 20% of the total budget. 20% of $500,000 is 0.20 * 500,000, which equals $100,000.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Line Graph Analysis',
+                    prompt: 'A line graph shows a company\'s profit over 4 years: Year 1: $10k, Year 2: $15k, Year 3: $12k, Year 4: $18k. What was the range of the profit?',
+                    correctAnswer: '8000',
+                    explanation: 'The range is the difference between the highest and lowest values. The highest profit was $18k and the lowest was $10k. The range is 18,000 - 10,000 = $8,000.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Bar Chart - Difference',
+                    prompt: 'A bar chart shows ticket sales for a concert: Friday: 200, Saturday: 350, Sunday: 250. How many more tickets were sold on Saturday than on Friday?',
+                    correctAnswer: '150',
+                    explanation: 'Subtract the number of tickets sold on Friday from the number sold on Saturday: 350 - 200 = 150.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 5: Pie Chart - Central Angle',
+                    prompt: 'In a pie chart, a category represents 25% of the total. What is the central angle of that sector in degrees?',
+                    options: ['45', '60', '90', '120'],
+                    correctAnswer: '90',
+                    explanation: 'A full circle has 360°. To find the angle for a sector, multiply its percentage by 360.  0.25 * 360 = 90°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Line Graph - Greatest Increase',
+                    prompt: 'A line graph shows monthly temperatures: Jan: 30, Feb: 35, Mar: 50, Apr: 60. Between which two consecutive months was the temperature increase the greatest?',
+                    correctAnswer: 'Feb-Mar',
+                    explanation: 'Calculate the increase for each period. Jan-Feb: 35-30=5. Feb-Mar: 50-35=15. Mar-Apr: 60-50=10. The greatest increase was 15, between February and March.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Data Table - Median',
+                    prompt: 'A data table shows the number of goals scored in 5 games: Game 1: 3, Game 2: 0, Game 3: 2, Game 4: 4, Game 5: 2. What is the median number of goals scored?',
+                    correctAnswer: '2',
+                    explanation: 'First, order the data: 0, 2, 2, 3, 4. The median is the middle value in the sorted list, which is 2.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 8: Bar Chart - Total',
+                    prompt: 'A bar chart shows the number of pets owned by students: Dogs: 15, Cats: 12, Fish: 8, Hamsters: 5. What is the total number of pets counted?',
+                    options: ['30', '35', '40', '45'],
+                    correctAnswer: '40',
+                    explanation: 'Add the number of each type of pet: 15 + 12 + 8 + 5 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Line Graph - Average Rate of Change',
+                    prompt: 'A line graph shows a plant\'s height. At Week 1, it was 5 cm. At Week 5, it was 25 cm. What was the average growth rate in cm per week?',
+                    correctAnswer: '5',
+                    explanation: 'The total growth is 25 cm - 5 cm = 20 cm. The time period is 5 weeks - 1 week = 4 weeks. The average rate is Total Growth / Time = 20 cm / 4 weeks = 5 cm per week.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 10: Pie Chart - Ratio',
+                    prompt: 'A pie chart shows votes for class president: Alice gets 50%, Bob gets 30%, and Carol gets 20%. What is the ratio of Bob\'s votes to Carol\'s votes?',
+                    options: ['5:3', '3:2', '5:2', '2:1'],
+                    correctAnswer: '3:2',
+                    explanation: 'The ratio is the comparison of their percentages. Bob has 30% and Carol has 20%. The ratio is 30:20, which simplifies to 3:2.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    const questionNumber = stepIndex;
+                    const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                    const progress = Math.round(((questionNumber) / totalQuestions) * 100);
+                    
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                }
+
+                content += `<div class="feedback" style="display: none;"></div>`;
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else if (step.type === 'mcq') {
+                    document.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step));
+                    });
+                } else if (step.type === 'grid-in') {
+                    document.getElementById('submit-grid-in').addEventListener('click', () => {
+                        const input = document.getElementById('grid-in-input').value;
+                        handleAnswer(input, step);
+                    });
+                }
+            }
+
+            function handleAnswer(selectedAnswer, step) {
+                const feedbackDiv = document.querySelector('.feedback');
+                let isCorrect = selectedAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                completedAnswers.set(lessonData.steps.indexOf(step), selectedAnswer);
+                feedbackDiv.style.display = 'block';
+
+                document.querySelectorAll('.option-btn, #submit-grid-in').forEach(btn => btn.disabled = true);
+                
+                setTimeout(() => {
+                    currentStep++;
+                    showStep(currentStep);
+                }, 3000); 
+            }
+
+            function showFinalResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100);
+
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                            <button id="restart-btn">Try Again</button>
+                            <a href="/" class="button">Back to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('restart-btn').addEventListener('click', () => {
+                    currentStep = 0;
+                    score = 0;
+                    completedAnswers.clear();
+                    resultsScreen.style.display = 'none';
+                    lessonDeck.style.display = 'block';
+                    startLesson();
+                });
+
+                // Mark lesson as complete
+                let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || {};
+                completedLessons[completionId] = { score: score, total: totalQuestions * lessonData.pointsPerQuestion };
+                localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

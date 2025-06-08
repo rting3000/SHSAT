@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W6D7: Milestone Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 6 Milestone Review",
+            subtitle: "Logical Reasoning & Plane Geometry",
+            pointsPerQuestion: 10,
+            completion_id: 'w6d7',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Week 6 Assessment',
+                    content: `
+                        <p>Welcome to your Week 6 Milestone Review. This is a comprehensive test of all the logical reasoning and geometry concepts we have covered.</p>
+                        <p>You will face 30 questions. Take your time, read carefully, and apply the formulas and logical principles you have learned. Good luck.</p>
+                    `
+                },
+                // ELA Questions (15)
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Logical Flaw',
+                    passage: 'If we allow students to use calculators in math class, they will become dependent on them and their basic math skills will atrophy. Soon, they won\'t be able to do any math without a calculator, and our country\'s STEM capabilities will collapse.',
+                    prompt: 'This argument is an example of what logical flaw?',
+                    options: ['Hasty Generalization', 'Slippery Slope', 'Ad Hominem', 'Circular Reasoning'],
+                    correctAnswer: 'Slippery Slope',
+                    explanation: 'The slippery slope fallacy occurs when an argument claims that a relatively small first step will lead to a chain of related events culminating in some significant (usually negative) effect.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Inference',
+                    passage: 'Even though the sky was clear, Maria packed an umbrella, a heavy coat, and boots. Her phone showed a weather advisory for a neighboring state.',
+                    prompt: 'What can be inferred about Maria?',
+                    options: ['She doesn\'t trust the weather forecast.', 'She is probably traveling soon.', 'She always carries rain gear.', 'She is going to the beach.'],
+                    correctAnswer: 'She is probably traveling soon.',
+                    explanation: 'Packing for weather (heavy coat, boots, umbrella) that doesn\'t match the current conditions, combined with looking at weather in another state, strongly suggests she is preparing for a trip.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Assumption',
+                    passage: 'The movie is rated R, so my 15-year-old cousin will not be able to see it without a parent.',
+                    prompt: 'This conclusion relies on the assumption that:',
+                    options: ['The movie is popular.', 'The movie theater enforces the MPAA rating system.', 'The cousin wants to see the movie.', 'The cousin\'s parents are available.'],
+                    correctAnswer: 'The movie theater enforces the MPAA rating system.',
+                    explanation: 'The entire conclusion rests on the unstated premise that the theater will actually check IDs and prevent the cousin from entering. If the theater is lax about rules, the conclusion doesn\'t hold.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Paradox',
+                    passage: 'This statement is false.',
+                    prompt: 'This sentence is a classic example of a:',
+                    options: ['Tautology', 'Paradox', 'Fallacy', 'Analogy'],
+                    correctAnswer: 'Paradox',
+                    explanation: 'This is a liar\'s paradox. If the statement is true, then it must be false. But if it\'s false, then it must be true. It contradicts itself.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Logical Flaw',
+                    passage: 'The CEO of the oil company says that drilling in the arctic is safe for the environment. He has a PhD in geology, so he must be correct.',
+                    prompt: 'What is the logical flaw?',
+                    options: ['Hasty Generalization', 'Appeal to Ignorance', 'Appeal to Authority', 'Straw Man'],
+                    correctAnswer: 'Appeal to Authority',
+                    explanation: 'This is a fallacious appeal to authority because it relies on the CEO\'s expertise in one field (geology) to validate a claim in another (environmental safety), while ignoring his obvious bias as CEO of an oil company.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Strengthening an Argument',
+                    passage: 'Our city needs to invest in building more bike lanes to reduce traffic congestion.',
+                    prompt: 'Which statement, if true, would most strengthen this argument?',
+                    options: [
+                        'Many people in the city do not own bikes.',
+                        'The city of Portland, similar in size, reduced traffic by 20% after implementing a bike lane initiative.',
+                        'Building bike lanes can be expensive and disrupt traffic during construction.',
+                        'A survey shows residents prefer driving cars.'
+                    ],
+                    correctAnswer: 'The city of Portland, similar in size, reduced traffic by 20% after implementing a bike lane initiative.',
+                    explanation: 'This provides a concrete, successful example (a case study) that directly supports the argument\'s claim that bike lanes can achieve the stated goal of reducing traffic.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Weakening an Argument',
+                    passage: 'To improve academic performance, our school should require all students to wear uniforms. This will reduce distractions and create a more serious learning environment.',
+                    prompt: 'Which of the following, if true, would most weaken the argument?',
+                    options: [
+                        'A study of 100 schools found no significant difference in academic scores between schools with and without uniform policies.',
+                        'Uniforms can be a financial burden for some families.',
+                        'Students have expressed a desire to choose their own clothing.',
+                        'Some famous private schools require uniforms.'
+                    ],
+                    correctAnswer: 'A study of 100 schools found no significant difference in academic scores between schools with and without uniform policies.',
+                    explanation: 'This directly attacks the argument\'s central claim by providing evidence that the proposed solution (uniforms) does not actually lead to the desired outcome (improved academics).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Logical Flaw',
+                    passage: 'No one has ever been able to prove that ghosts don\'t exist, so they must be real.',
+                    prompt: 'This is an example of which logical fallacy?',
+                    options: ['Appeal to Ignorance', 'Bandwagon Appeal', 'False Dilemma', 'Circular Reasoning'],
+                    correctAnswer: 'Appeal to Ignorance',
+                    explanation: 'The appeal to ignorance fallacy argues that a proposition is true simply on the basis that it has not been proven false, or that it is false because it has not been proven true.'
+                },
+                // ... More ELA questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Necessary vs Sufficient',
+                    passage: 'Getting a perfect score on the final exam is a sufficient condition for getting an A in the class.',
+                    prompt: 'If the above statement is true, which of the following must also be true?',
+                    options: [
+                        'If a student got an A, they must have gotten a perfect score on the final.',
+                        'If a student did not get a perfect score on the final, they cannot get an A.',
+                        'If a student gets a perfect score on the final, they will get an A.',
+                        'A student can get an A without a perfect score on the final.'
+                    ],
+                    correctAnswer: 'If a student gets a perfect score on the final, they will get an A.',
+                    explanation: 'A sufficient condition guarantees the outcome. If X is sufficient for Y, it means that if you have X, you are guaranteed to have Y.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Logical Flaw',
+                    passage: 'My grandfather smoked a pack of cigarettes every day and lived to be 95. Therefore, smoking is not dangerous.',
+                    prompt: 'What is the primary flaw in this reasoning?',
+                    options: ['Appeal to Tradition', 'Anecdotal Evidence', 'Slippery Slope', 'Ad Hominem'],
+                    correctAnswer: 'Anecdotal Evidence',
+                    explanation: 'This is a hasty generalization based on a single personal story (anecdote) rather than on large-scale scientific evidence. One person\'s experience does not disprove the well-established health risks of smoking.'
+                },
+                 {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Main Point',
+                    passage: 'While some argue that self-driving cars will eliminate accidents, the technology is still in its infancy. The software can be vulnerable to hacking, and the cars\' sensors struggle in extreme weather conditions. Furthermore, ethical programming for accident scenarios remains a contentious and unresolved issue. We must proceed with extreme caution.',
+                    prompt: 'What is the main point of the passage?',
+                    options: [
+                        'Self-driving cars are a complete failure.',
+                        'The ethical problems of self-driving cars are the biggest challenge.',
+                        'Despite their promise, there are significant safety and ethical hurdles to overcome before self-driving cars are viable.',
+                        'Hacking is the primary reason to be wary of self-driving cars.'
+                    ],
+                    correctAnswer: 'Despite their promise, there are significant safety and ethical hurdles to overcome before self-driving cars are viable.',
+                    explanation: 'This option best summarizes all the points made in the passage: it acknowledges the promise ("eliminate accidents") but focuses on the multiple challenges (hacking, weather, ethics) and the concluding call for caution.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Inference',
+                    passage: 'The lights in the office were on, and a half-eaten sandwich sat on Mr. Gable\'s desk, but his car was gone from its usual parking spot.',
+                    prompt: 'What is the most logical inference?',
+                    options: [
+                        'Mr. Gable is working late.',
+                        'Mr. Gable was interrupted and left unexpectedly.',
+                        'Mr. Gable sold his car.',
+                        'Someone broke into the office.'
+                    ],
+                    correctAnswer: 'Mr. Gable was interrupted and left unexpectedly.',
+                    explanation: 'The signs of recent activity (lights, half-eaten food) combined with his absence and the absence of his car suggest a sudden departure rather than a planned one.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Logical Flaw',
+                    passage: 'Interviewer: "What is your plan to deal with the budget deficit?" Politician: "I\'m glad you asked. I have a deep love for this country and have always worked to support our veterans, who are the true backbone of our nation."',
+                    prompt: 'The politician\'s response is an example of what fallacy?',
+                    options: ['Straw Man', 'Ad Hominem', 'Red Herring', 'Appeal to Pity'],
+                    correctAnswer: 'Red Herring',
+                    explanation: 'A red herring is a fallacy in which an irrelevant topic is introduced in an argument to divert the attention of listeners or readers from the original issue. The politician completely ignores the deficit question and changes the subject.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Assumption',
+                    passage: 'You should buy this brand of toothpaste because a famous movie star endorses it.',
+                    prompt: 'For this advertisement to be persuasive, it must assume that...',
+                    options: [
+                        'The movie star is an expert on dental health.',
+                        'The toothpaste is the cheapest option available.',
+                        'The movie star\'s endorsement makes the product desirable or trustworthy.',
+                        'The toothpaste has a pleasant flavor.'
+                    ],
+                    correctAnswer: 'The movie star\'s endorsement makes the product desirable or trustworthy.',
+                    explanation: 'Celebrity endorsements work by transferring the positive feelings a consumer has for the celebrity to the product itself. The underlying assumption is that the celebrity\'s fame and appeal lend credibility or desirability to the item.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Weakening an Argument',
+                    passage: 'The best way to learn a new language is through total immersion in a country where it is spoken.',
+                    prompt: 'Which of the following, if true, would most weaken this assertion?',
+                    options: [
+                        'Many people do not have the financial means to travel to another country.',
+                        'Recent studies show that learners using advanced language apps with structured lessons outperform immersion learners on grammar tests.',
+                        'Total immersion can be a very stressful experience.',
+                        'Some languages are only spoken in one country.'
+                    ],
+                    correctAnswer: 'Recent studies show that learners using advanced language apps with structured lessons outperform immersion learners on grammar tests.',
+                    explanation: 'This directly attacks the argument that immersion is the "best way" by providing evidence that an alternative method can produce superior results in at least one key area (grammar).'
+                },
+
+
+                // Math Questions (15)
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Triangle Angles',
+                    prompt: 'An isosceles triangle has one angle of 100 degrees. What is the measure of one of the other two angles?',
+                    correctAnswer: '40',
+                    explanation: 'The sum of angles is 180. The 100-degree angle must be the vertex angle, as two 100-degree angles would exceed 180. The remaining 80 degrees is split equally between the two base angles, so 80 / 2 = 40 degrees each.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Area of a Parallelogram',
+                    prompt: 'A parallelogram has a base of 12 and a height of 5. What is its area?',
+                    correctAnswer: '60',
+                    explanation: 'Area of a parallelogram = base * height = 12 * 5 = 60.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Area of a Circle',
+                    prompt: 'A circle has a radius of 10. What is its area? (Use 3.14 for π)',
+                    correctAnswer: '314',
+                    explanation: 'Area = π * r^2 = 3.14 * 10^2 = 3.14 * 100 = 314.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Volume of a Cube',
+                    prompt: 'The volume of a cube is 27 cubic units. What is the length of one of its edges?',
+                    correctAnswer: '3',
+                    explanation: 'The volume of a cube is edge^3. The cube root of 27 is 3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Surface Area of a Cylinder',
+                    prompt: 'A cylinder has a radius of 1 and a height of 1. What is its total surface area? (Use 3.14 for π)',
+                    correctAnswer: '12.56',
+                    explanation: 'Surface Area = 2πrh + 2πr^2 = (2 * 3.14 * 1 * 1) + (2 * 3.14 * 1^2) = 6.28 + 6.28 = 12.56.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Distance Formula',
+                    prompt: 'What is the distance between (0, 0) and (5, 12)?',
+                    correctAnswer: '13',
+                    explanation: 'd = sqrt((5-0)^2 + (12-0)^2) = sqrt(25 + 144) = sqrt(169) = 13. This is a classic 5-12-13 Pythagorean triple.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Slope',
+                    prompt: 'What is the slope of a line parallel to y = -2x + 7?',
+                    correctAnswer: '-2',
+                    explanation: 'Parallel lines have the same slope. The slope of y = mx + b is m, which is -2 in this case.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Midpoint',
+                    prompt: 'What is the midpoint of the segment connecting (3, -1) and (7, 5)?',
+                    correctAnswer: '5,2',
+                    explanation: 'Midpoint = ((3+7)/2, (-1+5)/2) = (10/2, 4/2) = (5, 2). Please enter in x,y format.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Area of a Trapezoid',
+                    prompt: 'A trapezoid has a height of 4 and its median (average of bases) is 10. What is its area?',
+                    correctAnswer: '40',
+                    explanation: 'The area of a trapezoid can also be calculated as median * height. Area = 10 * 4 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Volume of a Sphere',
+                    prompt: 'If the radius of a sphere is doubled, its volume increases by a factor of what?',
+                    correctAnswer: '8',
+                    explanation: 'The volume formula is (4/3)πr^3. Since the radius is cubed, doubling it (2r) results in (2r)^3 = 8r^3. The volume increases by a factor of 8.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Slope of a Perpendicular Line',
+                    prompt: 'Line A has a slope of 3/4. What is the slope of a line perpendicular to Line A?',
+                    correctAnswer: '-4/3',
+                    explanation: 'The slope of a perpendicular line is the negative reciprocal of the original slope. The reciprocal of 3/4 is 4/3, and the negative of that is -4/3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Area of a Shaded Region',
+                    prompt: 'A circle with a radius of 2 is inscribed in a square. What is the area of one of the corner regions outside the circle? (Use 3.14 for π)',
+                    correctAnswer: '0.86',
+                    explanation: 'The side of the square is the diameter of the circle, which is 4. Area of square = 4*4 = 16. Area of circle = π*2^2 = 12.56. Total area of the four corners = 16 - 12.56 = 3.44. The area of one corner is 3.44 / 4 = 0.86.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 13: Volume of a Rectangular Prism',
+                    prompt: 'A box has a length of 6, a width of 4, and a height of 5. What is its volume?',
+                    correctAnswer: '120',
+                    explanation: 'Volume = length * width * height = 6 * 4 * 5 = 120.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Equation of a Line',
+                    prompt: 'What is the y-intercept of the line that passes through points (1, 6) and (3, 10)?',
+                    correctAnswer: '4',
+                    explanation: 'First, find the slope: m = (10-6)/(3-1) = 4/2 = 2. Then use y=mx+b with one point: 6 = 2(1) + b => 6 = 2 + b => b = 4.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Circumference',
+                    prompt: 'The area of a circle is 28.26 square units. What is its circumference? (Use 3.14 for π)',
+                    correctAnswer: '18.84',
+                    explanation: 'First, find the radius from the area: A = πr^2 => 28.26 = 3.14 * r^2 => r^2 = 9 => r = 3. Now find the circumference: C = 2πr = 2 * 3.14 * 3 = 18.84.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

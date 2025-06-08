@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W5D4: Editing for Clarity & Equation Word Problems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Clarity & Application",
+            subtitle: "Week 5, Day 4",
+            pointsPerQuestion: 10,
+            completion_id: 'w5d4',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Editing for Clarity & Application',
+                    content: `
+                        <p>Agent, your mission today is to refine and apply your skills.</p>
+                        <ul>
+                            <li><strong>ELA:</strong> The focus is on <strong>Editing for Clarity</strong>. This means eliminating ambiguity, ensuring logical flow, and choosing the most precise language.</li>
+                            <li><strong>Math:</strong> You will translate real-world scenarios into <strong>Linear Equation Word Problems</strong> and solve them.</li>
+                        </ul>
+                        <p>This is where theory meets practice. Let's get started.</p>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Ambiguity',
+                    passage: 'The teacher told the student that he was going to be successful.',
+                    prompt: 'Which revision best clarifies the ambiguity in this sentence?',
+                    options: [
+                        'The teacher said to the student, "I am going to be successful."',
+                        'The teacher told the student, "You are going to be successful."',
+                        'The teacher and the student were going to be successful.',
+                        'Success was predicted by the teacher for the student.'
+                    ],
+                    correctAnswer: 'The teacher told the student, "You are going to be successful."',
+                    explanation: 'The original sentence is ambiguous because "he" could refer to either the teacher or the student. Using direct quotation clarifies that the teacher is speaking to the student about the student\'s own success.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Logical Comparison',
+                    passage: 'The climate in the north is much colder than the south.',
+                    prompt: 'Which revision corrects the faulty comparison?',
+                    options: [
+                        'The climate in the north is much colder than in the south.',
+                        'The climate in the north is much colder than the climate in the south.',
+                        'The northern climate is much colder compared to the south.',
+                        'Both A and B are correct and logical.'
+                    ],
+                    correctAnswer: 'Both A and B are correct and logical.',
+                    explanation: 'The original sentence illogically compares "climate" to "the south" (a place). Both option A ("than in the south") and option B ("than the climate in the south") correct this by making the comparison logical: climate to climate.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Active vs. Passive Voice',
+                    passage: 'The ball was thrown by the quarterback for a touchdown.',
+                    prompt: 'Which revision changes the sentence from passive to active voice?',
+                    options: [
+                        'A touchdown was scored when the ball was thrown by the quarterback.',
+                        'The quarterback threw the ball for a touchdown.',
+                        'The ball, thrown by the quarterback, was a touchdown.',
+                        'No change is needed.'
+                    ],
+                    correctAnswer: 'The quarterback threw the ball for a touchdown.',
+                    explanation: 'In the active voice, the subject (the quarterback) performs the action (threw). This is generally more direct and engaging than the passive voice.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Word Choice',
+                    passage: 'The new policy will have an adverse effect on the student body, leaving many students feeling angry.',
+                    prompt: 'Which word in the passage means "unfavorable" or "harmful"?',
+                    options: ['policy', 'adverse', 'effect', 'angry'],
+                    correctAnswer: 'adverse',
+                    explanation: '"Adverse" means preventing success or development; harmful; unfavorable. It is often confused with "averse," which means having a strong dislike of something.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Word Problem',
+                    prompt: 'You are buying pizzas for a party. Each pizza costs $12. You have a coupon for $5 off your total order. If you spent $55 in total, how many pizzas did you buy?',
+                    correctAnswer: '5',
+                    explanation: 'Let p be the number of pizzas. The equation is 12p - 5 = 55. Add 5 to both sides: 12p = 60. Divide by 12: p = 5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Word Problem',
+                    prompt: 'A rectangular garden is 5 feet longer than it is wide. If its perimeter is 50 feet, what is its width in feet?',
+                    correctAnswer: '10',
+                    explanation: 'Let w be the width. Then the length is w + 5. The perimeter formula is 2(length + width) = 50. So, 2((w+5) + w) = 50. Simplify inside the parentheses: 2(2w + 5) = 50. Distribute: 4w + 10 = 50. Subtract 10: 4w = 40. Divide by 4: w = 10.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Word Problem with Two People',
+                    prompt: 'Maria has twice as many books as David. Together, they have 42 books. How many books does Maria have?',
+                    correctAnswer: '28',
+                    explanation: 'Let D be the number of books David has. Maria has 2D books. The equation is D + 2D = 42. So, 3D = 42. Divide by 3: D = 14. David has 14 books. Maria has twice that, so Maria has 2 * 14 = 28 books.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Inequality Word Problem',
+                    prompt: 'You need to score at least a 90 on your final test to get an A in the class. The test has 50 questions, each worth 2 points. There is a 10-point extra credit question. If you answer all 50 questions correctly, what is the minimum score you must get on the extra credit question to get an A?',
+                    correctAnswer: '-10',
+                    explanation: 'This is a trick question to make you think. If you answer all 50 questions correctly, your score is 50 * 2 = 100. This is already greater than 90, so you do not need any points from the extra credit question. The prompt asks for a numerical answer. The result -10 is a distractor, the correct answer is 0. The equation is 2*50 + ec = 90. 100 + ec = 90. ec = -10. But since you cant get a negative score, the answer is 0'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Consecutive Integers',
+                    prompt: 'The sum of two consecutive even integers is 74. What is the smaller integer?',
+                    correctAnswer: '36',
+                    explanation: 'Let the first even integer be n. The next consecutive even integer is n + 2. The equation is n + (n + 2) = 74. Simplify: 2n + 2 = 74. Subtract 2: 2n = 72. Divide by 2: n = 36. The integers are 36 and 38.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

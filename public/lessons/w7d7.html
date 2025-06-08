@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W7D7: Milestone Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Week 7 Milestone Review",
+            subtitle: "Author's Voice & Probability",
+            pointsPerQuestion: 10,
+            completion_id: 'w7d7',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Week 7 Assessment',
+                    content: `
+                        <p>Welcome to your Week 7 Milestone Review. This is a comprehensive test of all the Author's Voice and Probability/Statistics concepts we have covered.</p>
+                        <p>You will face 30 questions. Take your time, read carefully, and apply what you have learned about interpreting text and data. Good luck.</p>
+                    `
+                },
+                // ELA Questions (15)
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Tone',
+                    passage: 'The proposal is a flimsy, ill-conceived fantasy. The numbers don\'t add up, the timeline is a joke, and the so-called "experts" backing it have a track record of failure. To proceed would be an act of fiscal insanity.',
+                    prompt: 'The author\'s tone is best described as:',
+                    options: ['Whimsical and lighthearted', 'Scornful and dismissive', 'Objective and neutral', 'Hopeful and optimistic'],
+                    correctAnswer: 'Scornful and dismissive',
+                    explanation: 'Words like "flimsy," "ill-conceived," "joke," and "insanity" convey contempt and a complete lack of respect for the proposal.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Purpose',
+                    passage: 'This cookbook contains over 200 recipes, each with a full-color photo and step-by-step instructions. Sections are organized by course, from appetizers to desserts, and a full glossary of cooking terms is included in the back.',
+                    prompt: 'The primary purpose of this text is to:',
+                    options: ['Persuade you to become a chef', 'Entertain with stories about food', 'Inform readers how to prepare various dishes', 'Analyze the chemical properties of ingredients'],
+                    correctAnswer: 'Inform readers how to prepare various dishes',
+                    explanation: 'A cookbook is fundamentally an informational text, designed to provide instructions for others to follow.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Literary Device',
+                    passage: 'The silence in the room was deafening.',
+                    prompt: 'This phrase is an example of a(n):',
+                    options: ['Simile', 'Oxymoron', 'Alliteration', 'Personification'],
+                    correctAnswer: 'Oxymoron',
+                    explanation: 'An oxymoron is a figure of speech that combines contradictory terms. "Deafening" and "silence" are opposites, creating a paradoxical effect to emphasize the intensity of the quiet.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Inference from Tone',
+                    passage: 'She glanced at the diamond necklace, a gaudy monstrosity of glitter and gold. It was the kind of thing that screamed for attention, but had nothing interesting to say. She sighed, a small puff of air in the chilled, sterile silence of the jewelry store.',
+                    prompt: 'We can infer that the character viewing the necklace feels:',
+                    options: ['Awe and desire', 'Envy and resentment', 'Disdain and disappointment', 'Excitement and joy'],
+                    correctAnswer: 'Disdain and disappointment',
+                    explanation: 'The tone is critical and unimpressed. Words like "gaudy monstrosity," "screamed for attention," and "sterile silence" create a feeling of distaste and a lack of emotional connection.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Textual Evidence',
+                    passage: 'The city park, once a vibrant hub of community life, has fallen into disrepair. The benches are broken, the fountain is dry, and weeds choke the flowerbeds. This sad decline reflects a broader civic neglect that must be addressed.',
+                    prompt: 'Which phrase best serves as evidence for the author\'s claim of "sad decline"?',
+                    options: ['vibrant hub of community life', 'broader civic neglect', 'weeds choke the flowerbeds', 'must be addressed'],
+                    correctAnswer: 'weeds choke the flowerbeds',
+                    explanation: 'This is a concrete, observable detail that directly supports the abstract idea of "decline" and "disrepair." It is a specific piece of evidence.'
+                },
+                // ... 10 more ELA questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Literary Device',
+                    passage: 'The world is a stage, and all the men and women merely players.',
+                    prompt: 'This is a famous example of a(n):',
+                    options: ['Metaphor', 'Simile', 'Hyperbole', 'Irony'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'This is a classic metaphor from Shakespeare, directly comparing the world to a stage without using "like" or "as".'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Tone',
+                    passage: 'And so, with a heavy heart, he watched her train pull away from the station, a fading speck in the vast, indifferent landscape.',
+                    prompt: 'The tone is:',
+                    options: ['Celebratory', 'Melancholy', 'Comical', 'Suspenseful'],
+                    correctAnswer: 'Melancholy',
+                    explanation: 'Words like "heavy heart," "fading speck," and "indifferent landscape" create a mood of sadness and loss.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Purpose',
+                    passage: 'A political speech arguing that a specific tax cut will boost the economy by encouraging spending and investment, citing economic models and historical precedents.',
+                    prompt: 'The primary purpose is to:',
+                    options: ['Inform', 'Persuade', 'Entertain', 'Confuse'],
+                    correctAnswer: 'Persuade',
+                    explanation: 'Although it uses information (models, precedents), the ultimate goal of a political speech is to convince the audience to adopt a certain viewpoint or take a specific action (support the tax cut).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Literary Device',
+                    passage: 'The buzz of the bee was a tiny engine in the summer air.',
+                    prompt: 'The phrase "buzz of the bee" uses which device?',
+                    options: ['Simile', 'Alliteration', 'Onomatopoeia', 'Paradox'],
+                    correctAnswer: 'Onomatopoeia',
+                    explanation: 'Onomatopoeia is a word that phonetically imitates, resembles, or suggests the sound that it describes. "Buzz" sounds like the noise a bee makes.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Inference from Purpose',
+                    passage: 'This medication may cause dizziness, fatigue, and nausea. Do not operate heavy machinery after taking. If you experience any severe side effects, contact your doctor immediately.',
+                    prompt: 'The unstated purpose of this text is to:',
+                    options: ['Discourage people from taking the medication.', 'Limit the manufacturer\'s legal liability for potential harm.', 'Entertain readers with a list of symptoms.', 'Persuade you to buy a different product.'],
+                    correctAnswer: 'Limit the manufacturer\'s legal liability for potential harm.',
+                    explanation: 'While informing the user is a purpose, the underlying legal and business purpose for providing such explicit warnings is to protect the company from lawsuits by ensuring users are aware of the risks.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Tone',
+                    passage: 'Oh, brilliant. You spilled coffee on the report right before the big presentation. Just fantastic.',
+                    prompt: 'The speaker\'s tone is:',
+                    options: ['Genuinely pleased', 'Sarcastic', 'Confused', 'Objective'],
+                    correctAnswer: 'Sarcastic',
+                    explanation: 'The speaker says positive words ("brilliant," "fantastic") about a negative event, indicating they mean the opposite of what they are saying. This is sarcasm.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Literary Device',
+                    passage: 'Peter Piper picked a peck of pickled peppers.',
+                    prompt: 'This is a well-known example of:',
+                    options: ['Assonance', 'Metaphor', 'Alliteration', 'Simile'],
+                    correctAnswer: 'Alliteration',
+                    explanation: 'Alliteration is the repetition of the same sound at the beginning of words in a phrase or sentence, in this case, the "p" sound.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 13: Purpose',
+                    passage: 'A biography detailing the life of Marie Curie, from her childhood in Poland to her groundbreaking scientific discoveries in France.',
+                    prompt: 'The purpose is to:',
+                    options: ['Entertain with a fictional story.', 'Persuade readers to become scientists.', 'Inform readers about the life and work of a historical figure.', 'Analyze the ethics of radioactivity.'],
+                    correctAnswer: 'Inform readers about the life and work of a historical figure.',
+                    explanation: 'A biography is a factual account of a person\'s life, making its primary purpose informational.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 14: Tone vs. Mood',
+                    passage: 'The author described the clown\'s frantic, wide-eyed grin and oversized shoes with cold, clinical precision, detailing every crack in the makeup.',
+                    prompt: 'The author\'s TONE is objective, but the resulting MOOD for the reader is likely:',
+                    options: ['Joyful', 'Peaceful', 'Uneasy or creepy', 'Romantic'],
+                    correctAnswer: 'Uneasy or creepy',
+                    explanation: 'This question highlights the difference between tone (author\'s attitude) and mood (reader\'s feeling). The author\'s detached tone when describing something that should be cheerful makes the scene feel unsettling.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 15: Textual Evidence',
+                    passage: 'The new CEO\'s leadership has been a disaster. In just six months, profits have plummeted, employee morale is at an all-time low, and the company has lost its three biggest clients.',
+                    prompt: 'Which phrase is the author\'s main claim, not a piece of evidence?',
+                    options: ['profits have plummeted', 'employee morale is at an all-time low', 'the company has lost its three biggest clients', 'The new CEO\'s leadership has been a disaster'],
+                    correctAnswer: 'The new CEO\'s leadership has been a disaster',
+                    explanation: 'This is the central argument or claim. The other three options are specific, factual pieces of evidence used to support that claim.'
+                },
+
+                // Math Questions (15)
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Probability',
+                    prompt: 'A bag has 5 red, 4 blue, and 6 yellow marbles. What is the probability of NOT drawing a red marble?',
+                    correctAnswer: '2/3',
+                    explanation: 'There are 15 total marbles (5+4+6). There are 10 non-red marbles (4 blue + 6 yellow). The probability is 10/15, which simplifies to 2/3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Mean',
+                    prompt: 'The mean of four numbers is 10. If three of the numbers are 5, 7, and 12, what is the fourth number?',
+                    correctAnswer: '16',
+                    explanation: 'If the mean of four numbers is 10, their sum must be 4 * 10 = 40. The sum of the three known numbers is 5 + 7 + 12 = 24. The fourth number is 40 - 24 = 16.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Median',
+                    prompt: 'What is the median of the following list of numbers: 8, 1, 4, 9, 2, 1, 5?',
+                    correctAnswer: '4',
+                    explanation: 'First, sort the numbers: 1, 1, 2, 4, 5, 8, 9. The middle number in the list of seven values is the 4th one, which is 4.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Mode',
+                    prompt: 'What is the mode of the data set: {apple, pear, banana, apple, orange, pear, apple}?',
+                    correctAnswer: 'apple',
+                    explanation: 'The mode is the item that appears most frequently. "Apple" appears 3 times, more than any other fruit.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Compound Probability',
+                    prompt: 'You draw a card from a standard 52-card deck, DO NOT replace it, and draw another. What is the probability of drawing two aces in a row?',
+                    correctAnswer: '1/221',
+                    explanation: 'P(first ace) = 4/52. P(second ace) = 3/51 (since one ace and one card are gone). P = (4/52) * (3/51) = (1/13) * (1/17) = 1/221.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 6: Data Interpretation (Pie Chart)',
+                    image: 'https://i.imgur.com/M9yL6o9.png', // Pie chart: 50% Cars, 25% Buses, 25% Bikes
+                    prompt: 'If 80 students travel by bus, what is the total number of students surveyed?',
+                    options: ['160', '240', '320', '400'],
+                    correctAnswer: '320',
+                    explanation: 'Buses represent 25% of the total. If 25% of the total is 80, then the total is 80 / 0.25 = 320.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 7: Data Interpretation (Line Graph)',
+                    image: 'https://i.imgur.com/sS4aTz4.png', // Line graph showing temperature: 1pm: 70, 2pm: 75, 3pm: 72, 4pm: 68
+                    prompt: 'What was the average temperature from 1pm to 4pm inclusive?',
+                    options: ['70.5', '71.25', '72', '75'],
+                    correctAnswer: '71.25',
+                    explanation: 'Average = (70 + 75 + 72 + 68) / 4 = 285 / 4 = 71.25.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Range',
+                    prompt: 'The daily temperatures for a week were 45, 50, 48, 52, 55, 43, 51. What is the range?',
+                    correctAnswer: '12',
+                    explanation: 'Range = Highest value - Lowest value = 55 - 43 = 12.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Probability "OR"',
+                    prompt: 'From a standard 52-card deck, what is the probability of drawing a Queen OR a Spade?',
+                    correctAnswer: '4/13',
+                    explanation: 'P(Queen) = 4/52. P(Spade) = 13/52. We must subtract the overlap (the Queen of Spades), which is 1/52. P(Q or S) = P(Q) + P(S) - P(Q and S) = 4/52 + 13/52 - 1/52 = 16/52, which simplifies to 4/13.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 10: Outliers',
+                    prompt: 'Which measure of central tendency is most affected by a very high or very low outlier?',
+                    options: ['Mean', 'Median', 'Mode', 'Range'],
+                    correctAnswer: 'Mean',
+                    explanation: 'The mean uses every value in its calculation, so it is pulled up or down by extreme outliers. The median is only affected by the position of the middle number, and the mode only by frequency.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Finding a Missing Value for Median',
+                    prompt: 'The set {5, 10, 12, X, 20} is in order. If the median is 14, what is X?',
+                    correctAnswer: '14',
+                    explanation: 'The median is the middle value of a sorted set. In a set of 5 numbers, the 3rd number is the median. Therefore, X must be 14.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Probability with Dice',
+                    prompt: 'When two six-sided dice are rolled, what is the probability that the sum of the numbers is 5?',
+                    correctAnswer: '1/9',
+                    explanation: 'There are 36 possible outcomes (6*6). The combinations that sum to 5 are (1,4), (4,1), (2,3), and (3,2). That is 4 favorable outcomes. The probability is 4/36, which simplifies to 1/9.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 13: Data Interpretation (Bar Chart)',
+                    image: 'https://i.imgur.com/2G30jZk.png', // Bar chart: Apples: 5, Oranges: 8, Bananas: 3
+                    prompt: 'The number of oranges sold is what percentage of the number of apples sold?',
+                    options: ['62.5%', '100%', '125%', '160%'],
+                    correctAnswer: '160%',
+                    explanation: 'The question is asking (Oranges / Apples) * 100. (8 / 5) * 100 = 1.6 * 100 = 160%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 14: Probability of Certainty',
+                    prompt: 'A bag contains only red marbles. What is the probability of drawing a red marble?',
+                    correctAnswer: '1',
+                    explanation: 'If all outcomes are favorable outcomes, the event is certain to happen. The probability of a certain event is 1.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 15: Finding a Missing Value for Mean',
+                    prompt: 'A student has test scores of 88, 92, and 95. What score do they need on the fourth test to have a mean score of 90?',
+                    correctAnswer: '85',
+                    explanation: 'To have a mean of 90 on 4 tests, the total score must be 90 * 4 = 360. The current total is 88 + 92 + 95 = 275. The required score is 360 - 275 = 85.'
+                }
+
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                     const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            ${step.image ? `<img src="${step.image}" alt="Question-related image" class="question-image">` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in or Scrambled Paragraph
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                        const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            if(e.target) e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true;
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = String(lessonData.steps[currentStep].correctAnswer).toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = JSON.stringify(submittedOrder) === JSON.stringify(correctOrder);
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                const savedAnswer = submittedSentences.map(s => s.textContent);
+                completedAnswers.set(currentStep, { answer: savedAnswer, correct: correct });
+                
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                const feedbackBtn = document.getElementById('feedback-next-btn');
+                if(feedbackBtn) feedbackBtn.addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

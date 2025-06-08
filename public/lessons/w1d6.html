@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1D6: Advanced ELA and Math Concepts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Advanced Operations",
+            subtitle: "Week 1, Day 6",
+            pointsPerQuestion: 10,
+            completion_id: 'w1d6',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Level Up Your Skills',
+                    content: `
+                        <p>Welcome to Day 6. Today, we're building on the foundations we've laid this week, tackling more complex problems and nuanced ELA concepts. This is about moving from knowing the rules to applying them strategically.</p>
+                        <ul>
+                            <li><strong>ELA Focus:</strong> Identifying Author's Purpose and Point of View, Analyzing Figurative Language.</li>
+                            <li><strong>Math Focus:</strong> Solving Multi-Step Equations, Problems with Fractions and Decimals.</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Author\'s Purpose',
+                    prompt: 'Read the following passage and determine the author\'s primary purpose.',
+                    passage: 'The state of our city\'s public parks is a disgrace. Lawns are overgrown, playground equipment is rusted and dangerous, and litter is everywhere. We, the citizens, must demand the city council allocate more funding to our parks. It is not just about aesthetics; it is about community health and safety.',
+                    options: ['To entertain readers with a story about a park', 'To persuade citizens to demand action from the city council', 'To inform readers about the history of the city\'s parks', 'To describe the different types of trees in the parks'],
+                    correctAnswer: 'To persuade citizens to demand action from the city council',
+                    explanation: 'The author uses strong, persuasive language ("disgrace," "demand") and presents a clear call to action, which points to the purpose of persuasion.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Multi-Step Equations',
+                    prompt: 'Solve for x: 3(x + 2) - 4 = 2(x + 5)',
+                    correctAnswer: '8',
+                    explanation: 'First, distribute on both sides: 3x + 6 - 4 = 2x + 10. Simplify: 3x + 2 = 2x + 10. Subtract 2x from both sides: x + 2 = 10. Subtract 2 from both sides: x = 8.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Point of View',
+                    prompt: 'From which point of view is this passage written?',
+                    passage: 'I never knew what it was to be truly alone until I found myself stranded on the island. The silence was deafening, broken only by the rhythmic crash of waves against the shore. I had to find a way to survive.',
+                    options: ['First-person', 'Second-person', 'Third-person limited', 'Third-person omniscient'],
+                    correctAnswer: 'First-person',
+                    explanation: 'The use of the pronoun "I" indicates that the narrator is a character in the story, telling it from their own perspective.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Fractions and Decimals',
+                    prompt: 'A recipe calls for 2.5 cups of flour. If you have a measuring cup that holds 1/4 of a cup, how many times will you need to fill it to get the right amount of flour?',
+                    correctAnswer: '10',
+                    explanation: 'This is a division problem: 2.5 ÷ (1/4). First, convert 2.5 to a fraction, which is 5/2. Then, to divide by a fraction, multiply by its reciprocal: (5/2) * 4 = 20/2 = 10.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Figurative Language Analysis',
+                    prompt: 'What type of figurative language is "The wind whispered secrets through the trees," and what is its effect?',
+                    options: [
+                        'Simile; it compares the wind to a whisper to make it sound gentle.',
+                        'Metaphor; it suggests the wind is literally telling secrets.',
+                        'Personification; it gives the wind a human quality (whispering) to create a mysterious or gentle mood.',
+                        'Hyperbole; it exaggerates the sound of the wind for dramatic effect.'
+                    ],
+                    correctAnswer: 'Personification; it gives the wind a human quality (whispering) to create a mysterious or gentle mood.',
+                    explanation: 'Personification gives human traits to inanimate objects. The effect is to create a specific atmosphere or mood, in this case, one of secrecy and mystery.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math: Order of Operations with Fractions',
+                    prompt: 'Calculate: (5/6) * (3/10) + 1/2',
+                    correctAnswer: '0.75',
+                    explanation: 'Follow PEMDAS. First, multiply: (5/6) * (3/10) = 15/60. Simplify this fraction to 1/4. Now, add: 1/4 + 1/2. The common denominator is 4, so it becomes 1/4 + 2/4 = 3/4. The decimal equivalent is 0.75.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Author\'s Point of View vs. Purpose',
+                    prompt: 'An author writes a detailed, factual article about the negative environmental effects of plastic bottle manufacturing, using a neutral and objective tone. What is the most accurate description of the author\'s purpose and point of view?',
+                    options: [
+                        'Purpose: To entertain; Point of View: First-person',
+                        'Purpose: To persuade; Point of View: Biased',
+                        'Purpose: To inform; Point of View: Third-person objective',
+                        'Purpose: To satirize; Point of View: Sarcastic'
+                    ],
+                    correctAnswer: 'Purpose: To inform; Point of View: Third-person objective',
+                    explanation: 'The author is presenting facts without personal opinion (objective) with the primary goal of informing the reader, not persuading them with emotional appeals.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Solving for a Variable',
+                    prompt: 'If 4y - 8 = 2y + 12, what is the value of y?',
+                    correctAnswer: '10',
+                    explanation: 'Subtract 2y from both sides: 2y - 8 = 12. Add 8 to both sides: 2y = 20. Divide by 2: y = 10.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Figurative Language',
+                    prompt: 'The line "Her smile was a ray of sunshine on a cloudy day" is an example of:',
+                    options: ['Simile', 'Metaphor', 'Personification', 'Hyperbole'],
+                    correctAnswer: 'Metaphor',
+                    explanation: 'It\'s a direct comparison between a smile and sunshine without using "like" or "as".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Fraction Operations',
+                    prompt: 'A carpenter has a piece of wood that is 15 1/2 feet long. He needs to cut pieces that are 1 3/4 feet long. How many full pieces can he cut?',
+                    correctAnswer: '8',
+                    explanation: 'Convert to improper fractions: 15 1/2 = 31/2 and 1 3/4 = 7/4. Divide: (31/2) ÷ (7/4). Multiply by the reciprocal: (31/2) * (4/7) = 124/14. Simplify: 124/14 is approx 8.85. He can only cut 8 full pieces.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Author\'s Purpose - Inference',
+                    prompt: 'A story begins with a detailed description of a detective finding a single, muddy boot at a crime scene. What is the most likely purpose of this opening?',
+                    options: [
+                        'To provide a detailed weather report.',
+                        'To introduce the main character\'s fashion sense.',
+                        'To establish a sense of mystery and suspense.',
+                        'To inform the reader about different types of footwear.'
+                    ],
+                    correctAnswer: 'To establish a sense of mystery and suspense.',
+                    explanation: 'Focusing on a single, out-of-place clue is a classic literary technique to create intrigue and make the reader wonder what happened.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Equation with Decimals',
+                    prompt: 'Solve for n: 0.5(n - 2.5) = 1.75',
+                    correctAnswer: '6',
+                    explanation: 'Divide both sides by 0.5: n - 2.5 = 3.5. Add 2.5 to both sides: n = 6.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Analyzing Point of View',
+                    prompt: 'If a story about a family vacation is told from the perspective of the family dog, what is the primary effect of this point of view?',
+                    options: [
+                        'It provides a more accurate and factual account of the events.',
+                        'It allows for a deep exploration of complex human emotions.',
+                        'It creates a humorous or unique perspective on human behavior.',
+                        'It makes the plot more complex and difficult to follow.'
+                    ],
+                    correctAnswer: 'It creates a humorous or unique perspective on human behavior.',
+                    explanation: 'Seeing events from a non-human perspective often highlights the absurdity or comedy of human actions and provides a fresh, unusual viewpoint.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Percentage and Fractions',
+                    prompt: 'A store offers a 20% discount on an item that originally costs $45. What is the price of the item in dollars after a 1/4 reduction from the original price?',
+                    correctAnswer: '33.75',
+                    explanation: 'A 1/4 reduction is a 25% discount. The final price would be 45 * (1 - 0.25) = 45 * 0.75 = 33.75. The 20% discount information is extra.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Identifying Tone',
+                    prompt: 'What is the tone of the sentence: "Oh, great. Another flat tire. That\'s just what I needed on the hottest day of the year."',
+                    options: ['Joyful', 'Sarcastic', 'Formal', 'Nostalgic'],
+                    correctAnswer: 'Sarcastic',
+                    explanation: 'The positive words ("Oh, great") are used to express the opposite meaning in a frustrating situation, which is the definition of sarcasm.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Multi-Step Word Problem',
+                    prompt: 'You buy 3 notebooks at $2.50 each and 5 pens at $0.75 each. You pay with a $20 bill. How much change do you receive in dollars?',
+                    correctAnswer: '8.75',
+                    explanation: 'Cost of notebooks: 3 * $2.50 = $7.50. Cost of pens: 5 * $0.75 = $3.75. Total cost: $7.50 + $3.75 = $11.25. Change: $20 - $11.25 = $8.75.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Hyperbole',
+                    prompt: 'Which of the following is an example of hyperbole?',
+                    options: [
+                        'I\'m so hungry I could eat a horse.',
+                        'The cat is sleeping on the mat.',
+                        'The sun is a golden ball.',
+                        'The bird sang a sweet song.'
+                    ],
+                    correctAnswer: 'I\'m so hungry I could eat a horse.',
+                    explanation: 'This is an extreme exaggeration used for emphasis and is not meant to be taken literally.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math: Solving for a variable in a fraction',
+                    prompt: 'Solve for x: (x/3) + 5 = 11',
+                    correctAnswer: '18',
+                    explanation: 'Subtract 5 from both sides: x/3 = 6. Multiply both sides by 3: x = 18.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA: Point of view',
+                    prompt: 'You are reading a novel where the narrator knows the thoughts and feelings of all characters. Which point of view is this?',
+                    options: [
+                        'First-person',
+                        'Second-person',
+                        'Third-person limited',
+                        'Third-person omniscient'
+                    ],
+                    correctAnswer: 'Third-person omniscient',
+                    explanation: '"Omniscient" means all-knowing. This narrator is outside the story but can reveal the inner worlds of every character.'
+                },
+                {
+                    type: 'briefing',
+                    header: 'Debriefing: Mission Accomplished',
+                    content: `
+                        <p>Excellent work, recruit. You've navigated some of our most complex drills yet. Every problem you solved today has sharpened your ability to think critically and strategically under pressure.</p>
+                        <p>Take some time to review your results. Tomorrow is the weekly review, a chance to put everything you've learned in Week 1 to the test.</p>
+                    `
+                }
+            ]
+        };
+
+        // Standard lesson engine script
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+            let completedQuestions = new Set(JSON.parse(localStorage.getItem(completionId)) || []);
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) {
+                    showFinalResults();
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<h2>${step.header}</h2>`;
+                if (step.passage) {
+                    content += `<div class="passage">${step.passage}</div>`;
+                }
+                if (step.prompt) {
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                }
+                
+                if (step.type === 'mcq') {
+                    content += '<div class="options">';
+                    step.options.forEach(option => {
+                        content += `<button class="option">${option}</button>`;
+                    });
+                    content += '</div>';
+                } else if (step.type === 'grid-in') {
+                    content += `
+                        <div class="grid-in-container">
+                            <input type="text" class="grid-in-input" maxlength="10">
+                            <button class="submit-btn">Submit</button>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    content += `<div id="scrambled-container"></div>`;
+                    content += `<button id="check-scrambled-btn" class="submit-btn">Check Order</button>`;
+                } else if (step.type === 'briefing') {
+                    content += `<div class="briefing-content">${step.content}</div>`;
+                    content += `<button class="next-btn">Continue</button>`;
+                }
+
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+                
+                if (step.type === 'scrambled-paragraph') {
+                    setupScrambledParagraph(step);
+                }
+
+                addCardEventListeners(step);
+            }
+
+            function addCardEventListeners(step) {
+                if (step.type === 'mcq') {
+                    const optionButtons = document.querySelectorAll('.option');
+                    optionButtons.forEach(button => {
+                        button.addEventListener('click', () => handleAnswer(step, button.textContent));
+                    });
+                } else if (step.type === 'grid-in') {
+                    const submitButton = document.querySelector('.submit-btn');
+                    const inputField = document.querySelector('.grid-in-input');
+                    submitButton.addEventListener('click', () => handleAnswer(step, inputField.value.trim()));
+                    inputField.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            handleAnswer(step, inputField.value.trim());
+                        }
+                    });
+                } else if (step.type === 'scrambled-paragraph') {
+                    document.getElementById('check-scrambled-btn').addEventListener('click', () => {
+                         handleScrambledAnswer(step);
+                    });
+                } else if (step.type === 'briefing') {
+                    document.querySelector('.next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                }
+            }
+            
+            function handleAnswer(step, selectedAnswer) {
+                const isCorrect = selectedAnswer === step.correctAnswer;
+                if (step.type !== 'briefing') {
+                    questionsAnswered++;
+                    if (isCorrect) {
+                        score += lessonData.pointsPerQuestion;
+                    }
+                }
+                
+                showFeedback(step, isCorrect, selectedAnswer);
+            }
+
+            function showFeedback(step, isCorrect, selectedAnswer) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                
+                if (!isCorrect) {
+                     feedbackHtml += `<p><strong>Your answer:</strong> ${selectedAnswer}</p>`;
+                     feedbackHtml += `<p><strong>Correct answer:</strong> ${step.correctAnswer}</p>`;
+                }
+
+                feedbackHtml += `<div class="explanation"><p>${step.explanation}</p></div>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+            function setupScrambledParagraph(step) {
+                const container = document.getElementById('scrambled-container');
+                const sentences = [...step.sentences]; // Create a mutable copy
+                // Simple shuffle
+                for (let i = sentences.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                }
+
+                sentences.forEach((sentence, index) => {
+                    const sentenceDiv = document.createElement('div');
+                    sentenceDiv.className = 'scrambled-sentence';
+                    sentenceDiv.textContent = sentence;
+                    sentenceDiv.dataset.originalIndex = step.sentences.indexOf(sentence);
+                    sentenceDiv.setAttribute('draggable', true);
+                    sentenceDiv.id = `sentence-${index}`;
+                    
+                    sentenceDiv.addEventListener('dragstart', handleDragStart);
+                    sentenceDiv.addEventListener('dragover', handleDragOver);
+                    sentenceDiv.addEventListener('drop', handleDrop);
+                    sentenceDiv.addEventListener('dragend', handleDragEnd);
+
+                    container.appendChild(sentenceDiv);
+                });
+            }
+            
+            let draggedItem = null;
+
+            function handleDragStart(e) {
+                draggedItem = this;
+                setTimeout(() => {
+                    this.style.display = 'none';
+                }, 0);
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    const allItems = Array.from(document.querySelectorAll('.scrambled-sentence'));
+                    const draggedIndex = allItems.indexOf(draggedItem);
+                    const targetIndex = allItems.indexOf(this);
+
+                    if (draggedIndex < targetIndex) {
+                        this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                    } else {
+                        this.parentNode.insertBefore(draggedItem, this);
+                    }
+                }
+            }
+            
+            function handleDragEnd() {
+                setTimeout(() => {
+                    if (draggedItem) {
+                        draggedItem.style.display = 'block';
+                        draggedItem = null;
+                    }
+                }, 0);
+            }
+
+            function handleScrambledAnswer(step) {
+                const container = document.getElementById('scrambled-container');
+                const currentOrder = Array.from(container.children).map(child => child.textContent);
+                
+                let isCorrect = true;
+                for(let i = 0; i < currentOrder.length; i++) {
+                    if(currentOrder[i] !== step.correctOrder[i]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                
+                questionsAnswered++;
+                 if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                }
+
+                showScrambledFeedback(step, isCorrect);
+            }
+            
+            function showScrambledFeedback(step, isCorrect) {
+                const card = document.querySelector('.card');
+                let feedbackHtml = `<h2>${isCorrect ? 'Correct!' : 'Incorrect'}</h2>`;
+                feedbackHtml += `<p>${step.explanation}</p>`;
+                feedbackHtml += `<strong>The correct order is:</strong><ol>`;
+                step.correctOrder.forEach(sentence => {
+                    feedbackHtml += `<li>${sentence}</li>`;
+                });
+                feedbackHtml += `</ol>`;
+                feedbackHtml += `<button class="next-btn">Next</button>`;
+                
+                card.innerHTML = feedbackHtml;
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    currentStep++;
+                    showStep(currentStep);
+                });
+            }
+
+
+            function showFinalResults() {
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                resultsScreen.innerHTML = `
+                    <div class="card active">
+                        <h2>Mission Complete!</h2>
+                        <p>You've completed ${lessonData.subtitle}.</p>
+                        <h3>Your Score: ${score} / ${totalQuestions * lessonData.pointsPerQuestion}</h3>
+                        <p>You answered ${questionsAnswered} questions.</p>
+                        <a href="../index.html" class="button">Return to Dashboard</a>
+                    </div>
+                `;
+                markLessonAsComplete();
+            }
+            
+            function markLessonAsComplete() {
+                if (completionId) {
+                    const completedLessons = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                    completedLessons.add(completionId);
+                    localStorage.setItem('completedLessons', JSON.stringify([...completedLessons]));
+                }
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html>

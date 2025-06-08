@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1D1: SHSAT Recon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: SHSAT Recon",
+            subtitle: "Week 1, Day 1",
+            pointsPerQuestion: 50,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Know the Test',
+                    content: `
+                        <p>Welcome, Agent. Your first mission is to understand the fundamentals of the SHSAT. A good agent always knows the terrain.</p>
+                        <ul>
+                            <li>The SHSAT is a <strong>180-minute</strong> exam with two main sections, each with 57 questions.</li>
+                            <li><strong>Remember:</strong> No calculators are allowed, and there's no penalty for guessing. Answer every question!</li>
+                        </ul>
+                    `
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 1: Grid-In Questions',
+                    prompt: 'Solve the problem and enter your answer in the box.',
+                    passage: 'A club has 20 members. If the ratio of boys to girls is 2:3, how many girls are in the club?',
+                    correctAnswer: '12',
+                    explanation: 'A ratio of 2:3 creates a "group" of 5 (2 boys + 3 girls). In 20 members, there are 4 such groups (20 / 5). With 3 girls per group, that\'s 4 x 3 = <strong>12 girls</strong>.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 2: Revising/Editing',
+                    prompt: 'Choose the best correction for the sentence.',
+                    passage: 'The student, that has the highest grade, will win the award.',
+                    options: [
+                        'The student, that has the highest grade will win the award.',
+                        'The student who has the highest grade will win the award.',
+                        'The student which has the highest grade will win the award.',
+                        'No change is needed.'
+                    ],
+                    correctAnswer: 'The student who has the highest grade will win the award.',
+                    explanation: 'Use "who" for people and "that" for things. Since the subject is a "student," "who" is correct. The commas are also unnecessary here.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 3: Basic Arithmetic',
+                    prompt: 'What is the value of 5 + 3 * 2?',
+                    passage: 'Remember the order of operations (PEMDAS/BODMAS).',
+                    correctAnswer: '11',
+                    explanation: 'Multiplication comes before addition. So, 3 * 2 = 6, and then 5 + 6 = 11.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 4: Vocabulary',
+                    prompt: 'Choose the word that is most nearly opposite in meaning to "mitigate".',
+                    passage: '',
+                    options: ['Alleviate', 'Intensify', 'Soothe', 'Reduce'],
+                    correctAnswer: 'Intensify',
+                    explanation: '"Mitigate" means to make something less severe or painful. "Intensify" is the opposite.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 5: Fractions',
+                    prompt: 'If a pizza is cut into 8 equal slices and you eat 3 of them, what fraction of the pizza is left?',
+                    passage: 'Express your answer as a fraction (e.g., 5/8).',
+                    correctAnswer: '5/8',
+                    explanation: 'If there are 8 slices and you eat 3, there are 8 - 3 = 5 slices left. So, 5/8 of the pizza is left.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 6: Punctuation',
+                    prompt: 'Which of the following sentences is punctuated correctly?',
+                    passage: '',
+                    options: [
+                        "The teams captain, was a great leader.",
+                        "The team's captain was a great leader.",
+                        "The teams' captain was a great leader.",
+                        "The team captain was a great leader."
+                    ],
+                    correctAnswer: "The team's captain was a great leader.",
+                    explanation: 'The possessive form for a singular noun ("team") is formed by adding an apostrophe and "s".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 7: Percentages',
+                    prompt: 'A shirt originally costing $40 is on sale for 25% off. What is the sale price in dollars?',
+                    passage: '',
+                    correctAnswer: '30',
+                    explanation: '25% of $40 is (0.25) * 40 = $10. The sale price is $40 - $10 = $30.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 8: Reading Comprehension',
+                    prompt: 'What is the main idea of the passage?',
+                    passage: 'The chameleon is a master of camouflage, able to change its skin color to blend in with its surroundings. This adaptation helps it avoid predators and ambush prey. The color change is achieved by special cells called chromatophores, which can expand or contract to reveal different pigments.',
+                    options: [
+                        'Chameleons have special cells.',
+                        'Chameleons are good hunters.',
+                        'Chameleons change color for protection and hunting.',
+                        'Chromatophores are pigments.'
+                    ],
+                    correctAnswer: 'Chameleons change color for protection and hunting.',
+                    explanation: 'The passage introduces the chameleon\'s camouflage and then explains its dual purpose: avoiding predators (protection) and ambushing prey (hunting).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 9: Averages',
+                    prompt: 'Find the average (arithmetic mean) of the following numbers: 10, 20, 30, 40.',
+                    passage: '',
+                    correctAnswer: '25',
+                    explanation: 'To find the average, sum the numbers and divide by the count. (10 + 20 + 30 + 40) / 4 = 100 / 4 = 25.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 10: Sentence Structure',
+                    prompt: 'Which of the following is a sentence fragment?',
+                    passage: '',
+                    options: [
+                        'She ran.',
+                        'Because he was late.',
+                        'The game will be played tomorrow.',
+                        'Stop!'
+                    ],
+                    correctAnswer: 'Because he was late.',
+                    explanation: 'A sentence fragment is a group of words that looks like a sentence but isn\'t. "Because he was late" is a dependent clause and cannot stand on its own.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 11: Geometry',
+                    prompt: 'A rectangle has a length of 10 cm and a width of 5 cm. What is its area in square cm?',
+                    passage: '',
+                    correctAnswer: '50',
+                    explanation: 'The area of a rectangle is length × width. So, 10 cm * 5 cm = 50 cm².'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 12: Logical Reasoning',
+                    prompt: 'Which statement best completes the paragraph?',
+                    passage: 'All students in the music program must attend the concert. Sarah is in the music program. Therefore, ______.',
+                    options: [
+                        'Sarah might go to the concert.',
+                        'Sarah must go to the concert.',
+                        'Sarah does not like concerts.',
+                        'The concert is for music students.'
+                    ],
+                    correctAnswer: 'Sarah must go to the concert.',
+                    explanation: 'The first sentence sets a rule for all members. The second sentence confirms Sarah is a member. The logical conclusion is that the rule applies to her.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 13: Solving for x',
+                    prompt: 'If 3x + 5 = 20, what is the value of x?',
+                    passage: '',
+                    correctAnswer: '5',
+                    explanation: 'Subtract 5 from both sides: 3x = 15. Then, divide by 3: x = 5.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 14: Verb Tense',
+                    prompt: 'Choose the correct verb to complete the sentence.',
+                    passage: 'Yesterday, I _______ to the store.',
+                    options: ['go', 'goes', 'went', 'have gone'],
+                    correctAnswer: 'went',
+                    explanation: 'The word "yesterday" indicates the past tense. "Went" is the simple past tense of "go".'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 15: Probability',
+                    prompt: 'A bag contains 3 red marbles and 2 blue marbles. What is the probability of drawing a red marble?',
+                    passage: 'Express your answer as a fraction (e.g., 3/5).',
+                    correctAnswer: '3/5',
+                    explanation: 'There are 3 red marbles and a total of 5 marbles (3 + 2). The probability is the number of favorable outcomes divided by the total number of outcomes, which is 3/5.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 16: Paragraph Organization',
+                    prompt: 'Which sentence does not belong in the paragraph?',
+                    passage: '(1) The sun provides the energy for almost all life on Earth. (2) Plants use sunlight to create food through photosynthesis. (3) The sun is a star, a massive ball of hot gas. (4) Animals then get energy by eating plants or other animals. (5) This flow of energy is crucial for ecosystems.',
+                    options: ['Sentence 2', 'Sentence 3', 'Sentence 4', 'Sentence 5'],
+                    correctAnswer: 'Sentence 3',
+                    explanation: 'The paragraph is about the flow of energy from the sun through ecosystems. Sentence 3, which describes what the sun is made of, is a detail that distracts from this main idea.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 17: Rate and Speed',
+                    prompt: 'A car travels at 60 miles per hour. How many miles will it travel in 2.5 hours?',
+                    passage: '',
+                    correctAnswer: '150',
+                    explanation: 'Distance = Speed × Time. So, 60 mph * 2.5 hours = 150 miles.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 18: Author\'s Purpose',
+                    prompt: 'What is the most likely purpose of a car manual?',
+                    passage: '',
+                    options: [
+                        'To entertain the reader with stories about cars.',
+                        'To persuade the reader to buy a different car.',
+                        'To inform the reader about how to operate the car.',
+                        'To express feelings about driving.'
+                    ],
+                    correctAnswer: 'To inform the reader about how to operate the car.',
+                    explanation: 'The primary purpose of a technical manual is to provide instructions and information on how to use a product.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 19: Proportions',
+                    prompt: 'If 4 apples cost $2.00, how much will 10 apples cost in dollars?',
+                    passage: '',
+                    correctAnswer: '5',
+                    explanation: 'First, find the cost of one apple: $2.00 / 4 = $0.50. Then, multiply by 10: $0.50 * 10 = $5.00.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Challenge 20: Spelling',
+                    prompt: 'Which word is spelled correctly?',
+                    passage: '',
+                    options: ['Accomodate', 'Reccomend', 'Necessary', 'Definately'],
+                    correctAnswer: 'Necessary',
+                    explanation: 'The correct spellings are "accommodate", "recommend", and "definitely". "Necessary" is spelled correctly.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Challenge 21: Final Challenge',
+                    prompt: 'Solve: 100 - (5 * (3 + 2))',
+                    passage: '',
+                    correctAnswer: '75',
+                    explanation: 'Follow PEMDAS. First, the parentheses: 3 + 2 = 5. Then, the multiplication inside the main parentheses: 5 * 5 = 25. Finally, the subtraction: 100 - 25 = 75.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+
+                    content += `<p class="prompt">${step.prompt}</p>`;
+
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    if (step.type === 'mcq') {
+                        document.querySelectorAll('.option-btn').forEach(btn => {
+                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
+                        });
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w1d1-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

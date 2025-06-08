@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1D2: Main Idea & Ratios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Main Idea & Ratios",
+            subtitle: "Week 1, Day 2",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: The Core of the Argument',
+                    content: `
+                        <p>Welcome back, Agent. Today's mission targets two key skills: identifying the <strong>Main Idea</strong> in ELA passages and mastering <strong>Ratios & Proportions</strong> in Math.</p>
+                        <ul>
+                            <li>The <strong>Main Idea</strong> is the central point of a passage. Ask yourself, "What is the single most important message the author wants me to take away?"</li>
+                            <li>A <strong>Ratio</strong> compares two quantities, while a <strong>Proportion</strong> states that two ratios are equal.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1',
+                    prompt: 'Read the passage and identify the main idea.',
+                    passage: 'The honeybee plays a vital role in agriculture. Beyond producing honey, these insects are responsible for pollinating approximately one-third of the food crops humans consume. Fruits like apples, almonds, and blueberries are almost entirely dependent on bee pollination. Without the honeybee, the cost of these foods would skyrocket, and their availability would plummet. The decline in bee populations is, therefore, a significant threat to global food security.',
+                    options: [
+                        'Honeybees produce honey.',
+                        'The decline in bee populations is a major threat to global food security because of their crucial role in pollination.',
+                        'Apples and almonds depend on pollination.',
+                        'Bee populations are declining.'
+                    ],
+                    correctAnswer: 'The decline in bee populations is a major threat to global food security because of their crucial role in pollination.',
+                    explanation: 'While the other options are true statements mentioned in the passage, they are all supporting details. The central argument and "big picture" is the link between the bee decline and its serious impact on the world\'s food supply.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2',
+                    prompt: 'Read the passage and identify the main idea.',
+                    passage: 'Modern smartphones are technological marvels, but their functionality comes at a cost to our attention. Constant notifications from social media, emails, and news apps create a state of perpetual distraction. This makes it difficult to focus on complex tasks, engage in deep conversation, or simply be present in the moment. While these devices offer convenience, we must be mindful of their power to fragment our focus and actively manage their interruptions.',
+                    options: [
+                        'Smartphones are technological marvels.',
+                        'You should turn off your notifications.',
+                        'Smartphones offer convenience but can negatively impact our ability to focus if not managed properly.',
+                        'Social media is a source of distraction.'
+                    ],
+                    correctAnswer: 'Smartphones offer convenience but can negatively impact our ability to focus if not managed properly.',
+                    explanation: 'The passage presents both the positive ("convenience") and negative ("cost to our attention") aspects of smartphones. The main idea is this balanced conclusion—that we must manage the device to reap its benefits without the downsides.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3',
+                    prompt: 'Identify the primary purpose of the passage.',
+                    passage: 'Our city\'s recycling program has been a resounding success. In the last year alone, we have diverted over 10,000 tons of waste from landfills. This has not only saved valuable landfill space but has also reduced greenhouse gas emissions equivalent to taking 2,000 cars off the road. We urge all citizens to continue their diligent efforts in sorting their recyclables.',
+                    options: [
+                        'To entertain readers with a story about recycling.',
+                        'To criticize the city\'s waste management.',
+                        'To inform citizens about the success of the recycling program and encourage continued participation.',
+                        'To provide instructions on how to recycle.'
+                    ],
+                    correctAnswer: 'To inform citizens about the success of the recycling program and encourage continued participation.',
+                    explanation: 'The passage provides information (statistics on success) and makes a direct appeal to the reader ("We urge all citizens..."), showing a purpose to both inform and persuade/encourage.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1',
+                    prompt: 'Solve the proportion.',
+                    passage: 'If a baker can make 3 cakes in 2 hours, how many hours will it take to make 15 cakes?',
+                    correctAnswer: '10',
+                    explanation: 'Set up a proportion: (3 cakes / 2 hours) = (15 cakes / x hours). To get from 3 cakes to 15, you multiply by 5. Therefore, you must multiply the hours by 5 as well: 2 * 5 = 10 hours.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2',
+                    prompt: 'Solve the ratio problem.',
+                    passage: 'In a class of 35 students, the ratio of students who play soccer to students who play basketball is 3:4. How many students play basketball?',
+                    correctAnswer: '20',
+                    explanation: 'The ratio 3:4 means there are 3+4=7 parts in total. Divide the total number of students by the total number of parts: 35 / 7 = 5 students per part. Since basketball has 4 parts, multiply 4 by 5 to get 20 students.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 3',
+                    prompt: 'A map has a scale of 1 inch : 25 miles. If the distance between two cities on the map is 5.5 inches, what is the actual distance between them?',
+                    passage: '',
+                    options: [
+                        '125.5 miles',
+                        '137.5 miles',
+                        '142.5 miles',
+                        '150 miles'
+                    ],
+                    correctAnswer: '137.5 miles',
+                    explanation: 'Set up a proportion: (1 inch / 25 miles) = (5.5 inches / x miles). To solve for x, multiply 25 by 5.5. (25 * 5 = 125) and (25 * 0.5 = 12.5). Add them together: 125 + 12.5 = 137.5 miles.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4',
+                    prompt: 'A recipe calls for 2 cups of flour to make 18 cookies. How many cups of flour are needed to make 27 cookies?',
+                    passage: '',
+                    correctAnswer: '3',
+                    explanation: 'First, find the amount of flour per cookie: 2 cups / 18 cookies = 1/9 cup per cookie. Then, multiply by the desired number of cookies: (1/9) * 27 = 3 cups.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4',
+                    prompt: 'What is the tone of the following sentence?',
+                    passage: 'This brilliant new invention will, without a doubt, revolutionize the entire industry and bring about an age of prosperity we could only have dreamed of.',
+                    options: ['Neutral', 'Skeptical', 'Enthusiastic', 'Sarcastic'],
+                    correctAnswer: 'Enthusiastic',
+                    explanation: 'Words like "brilliant," "revolutionize," and "age of prosperity" convey a strong sense of excitement and optimism, which defines an enthusiastic tone.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5',
+                    prompt: 'The ratio of red paint to blue paint in a mixture is 5:2. If there are 28 gallons of paint in total, how many gallons are red?',
+                    passage: '',
+                    correctAnswer: '20',
+                    explanation: 'The total number of parts in the ratio is 5 + 2 = 7. Divide the total volume by the number of parts: 28 / 7 = 4 gallons per part. Multiply this by the number of red parts: 4 * 5 = 20 gallons of red paint.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5',
+                    prompt: 'Which of the following would be the best title for the passage?',
+                    passage: 'The Great Wall of China is not a single, continuous wall but a system of fortifications built over centuries. Its primary purpose was to protect Chinese states and empires against raids and invasions from various nomadic groups. Construction began as early as the 7th century BC, and the most well-known sections were built by the Ming Dynasty (1368–1644). The wall also served for border control, allowing the imposition of duties on goods transported along the Silk Road.',
+                    options: [
+                        'The Ming Dynasty',
+                        'The Silk Road',
+                        'History and Purpose of the Great Wall',
+                        'Ancient Chinese Construction'
+                    ],
+                    correctAnswer: 'History and Purpose of the Great Wall',
+                    explanation: 'The passage covers both the historical timeline ("7th century BC," "Ming Dynasty") and the reasons for the wall\'s construction ("protect against raids," "border control"), making this title the most comprehensive summary.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6',
+                    prompt: 'If a car travels 180 miles on 6 gallons of gas, how many miles can it travel on 10 gallons of gas?',
+                    passage: '',
+                    correctAnswer: '300',
+                    explanation: 'First, find the car\'s fuel efficiency: 180 miles / 6 gallons = 30 miles per gallon (mpg). Then, multiply this by the new amount of gas: 30 mpg * 10 gallons = 300 miles.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6',
+                    prompt: 'What is the author\'s main point?',
+                    passage: 'While often seen as a solitary activity, reading is deeply social. We discuss books with friends, join book clubs, and read reviews written by others. The stories we read shape our understanding of the world and our conversations with each other. They provide a shared cultural language, allowing us to connect with people across time and space through the ideas and emotions embedded in the text.',
+                    options: [
+                        'Book clubs are a popular activity.',
+                        'Reading can be a social act that connects people.',
+                        'You should read more reviews.',
+                        'Reading is a good way to understand history.'
+                    ],
+                    correctAnswer: 'Reading can be a social act that connects people.',
+                    explanation: 'The entire passage works to counter the idea of reading as "solitary" and provides multiple examples (book clubs, reviews, shared language) to support the main point that it is a "deeply social" activity.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7',
+                    prompt: 'A blueprint has a scale of 1 cm = 3 feet. A room on the blueprint is 6 cm long. What is the actual length of the room in feet?',
+                    passage: '',
+                    correctAnswer: '18',
+                    explanation: 'This is a simple proportion. Multiply the blueprint length by the scale factor: 6 cm * 3 feet/cm = 18 feet.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7',
+                    prompt: 'Which sentence best supports the main idea that learning a musical instrument is beneficial?',
+                    passage: 'Countless studies have shown that musical training can enhance cognitive abilities. It improves memory, concentration, and problem-solving skills. Furthermore, the discipline required to master an instrument builds perseverance and a strong work ethic.',
+                    options: [
+                        'Playing music is a popular hobby.',
+                        'Musical training has been shown to improve memory and concentration.',
+                        'Some instruments are very expensive.',
+                        'Concerts are enjoyable to attend.'
+                    ],
+                    correctAnswer: 'Musical training has been shown to improve memory and concentration.',
+                    explanation: 'This option directly states a specific, positive cognitive benefit ("improve memory and concentration") that supports the broader claim that learning an instrument is "beneficial."'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8',
+                    prompt: 'The ratio of winning tickets to losing tickets in a lottery is 3:17. If there are 400 tickets in total, how many are winning tickets?',
+                    passage: '',
+                    correctAnswer: '60',
+                    explanation: 'The total number of ratio parts is 3 + 17 = 20. Divide the total tickets by the parts: 400 / 20 = 20 tickets per part. Multiply this by the number of winning parts: 20 * 3 = 60 winning tickets.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8',
+                    prompt: 'What is the main idea?',
+                    passage: 'The rise of remote work has fundamentally changed the modern workplace. Employees enjoy greater flexibility and no commute, but can suffer from isolation and blurred work-life boundaries. Companies can access a wider talent pool and save on office costs, but may face challenges in maintaining company culture and collaboration. It represents a major shift with both clear advantages and disadvantages.',
+                    options: [
+                        'Remote work is bad for company culture.',
+                        'Employees with no commute are happier.',
+                        'The shift to remote work is a complex change with both positive and negative consequences.',
+                        'Companies can save money with remote work.'
+                    ],
+                    correctAnswer: 'The shift to remote work is a complex change with both positive and negative consequences.',
+                    explanation: 'The passage explicitly mentions both pros and cons for employees and companies, so the main idea is this overall complexity and dual nature of the trend.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9',
+                    prompt: 'A photograph is 4 inches wide and 6 inches long. If it is enlarged so that the length is 15 inches, what is the new width in inches?',
+                    passage: '',
+                    correctAnswer: '10',
+                    explanation: 'Set up a proportion of width to length: 4/6 = x/15. To solve, you can cross-multiply: 4 * 15 = 6 * x, which gives 60 = 6x. Divide by 6 to find x = 10 inches.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9',
+                    prompt: 'What is the most likely reason the author wrote this passage?',
+                    passage: 'The Venus flytrap, a carnivorous plant native to subtropical wetlands, has a fascinating trapping mechanism. Its "trap" is made of two hinged lobes at the end of each leaf. When an insect or spider crawling along the leaves contacts a hair, the trap is ready to close. It snaps shut only if another contact is made within about twenty seconds. This two-trigger system prevents the plant from wasting energy on non-prey stimuli like raindrops.',
+                    options: [
+                        'To persuade people to buy Venus flytraps.',
+                        'To entertain readers with a fictional story.',
+                        'To inform readers about a unique adaptation of the Venus flytrap.',
+                        'To warn readers about the dangers of carnivorous plants.'
+                    ],
+                    correctAnswer: 'To inform readers about a unique adaptation of the Venus flytrap.',
+                    explanation: 'The passage is written in a factual, descriptive style. It explains the "how" and "why" of the plant\'s trapping mechanism, which is a classic example of informational writing.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10',
+                    prompt: 'The ratio of boys to girls in a school band is 4:5. If there are 36 boys, how many girls are there?',
+                    passage: '',
+                    correctAnswer: '45',
+                    explanation: 'Set up a proportion: 4 boys / 5 girls = 36 boys / x girls. To get from 4 boys to 36 boys, you multiply by 9. So, you must do the same for the girls: 5 * 9 = 45 girls.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10',
+                    prompt: 'Identify the main idea.',
+                    passage: 'For centuries, the lighthouse has been a symbol of safety and guidance for sailors. Perched on rocky shores, these towers cast powerful beams of light, cutting through fog and darkness to mark dangerous coastlines and safe harbors. While modern GPS and radar have made them less essential for navigation, lighthouses remain powerful cultural symbols of hope and vigilance.',
+                    options: [
+                        'Lighthouses are no longer useful.',
+                        'Lighthouses, traditionally vital for maritime safety, now serve as important cultural symbols.',
+                        'GPS is a more modern navigation tool.',
+                        'Lighthouses are built on rocky shores.'
+                    ],
+                    correctAnswer: 'Lighthouses, traditionally vital for maritime safety, now serve as important cultural symbols.',
+                    explanation: 'This statement captures the full scope of the passage, acknowledging the lighthouse\'s historical role ("traditionally vital for maritime safety") and its modern significance ("now serve as important cultural symbols").'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+
+                    content += `<p class="prompt">${step.prompt}</p>`;
+
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    if (step.type === 'mcq') {
+                        document.querySelectorAll('.option-btn').forEach(btn => {
+                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
+                        });
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w1d2-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

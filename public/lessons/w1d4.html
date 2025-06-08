@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1D4: Clarity & Percentages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Clarity & Percentages",
+            subtitle: "Week 1, Day 4",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Precision and Parts',
+                    content: `
+                        <p>Today's targets are precision and parts of a whole. For ELA, we're honing <strong>Revising/Editing</strong> skills, focusing on making sentences clear and concise. For Math, we're mastering <strong>Percentages</strong>.</p>
+                        <ul>
+                            <li><strong>Clarity & Conciseness:</strong> Good writing is direct. Eliminate redundant words and phrases that say the same thing twice (e.g., "twelve noon" is just "noon").</li>
+                            <li><strong>Percentages:</strong> A percentage is just a special fraction where the denominator is always 100. To find a percentage of a number, convert the percent to a decimal or fraction and multiply.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions: Revising/Editing for Clarity and Conciseness
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 1: Redundancy',
+                    prompt: 'Choose the best revision for the sentence.',
+                    passage: 'The reason the team won was because they had practiced a great deal in advance beforehand.',
+                    options: [
+                        'The reason the team won was because they practiced a great deal.',
+                        'The team won because they had practiced a great deal beforehand.',
+                        'The team won because they practiced a great deal.',
+                        'The winning team won because of a great deal of practice.'
+                    ],
+                    correctAnswer: 'The team won because they practiced a great deal.',
+                    explanation: 'This is the most concise and direct option. "The reason...was because" is redundant. "In advance" and "beforehand" mean the same thing.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 2: Wordiness',
+                    prompt: 'Which of the following sentences is the most concise?',
+                    passage: '',
+                    options: [
+                        'She was happy and glad to accept the award that was given to her.',
+                        'She was happy to accept the award.',
+                        'It was with happiness that she accepted the award.',
+                        'The award, which she accepted, made her glad and happy.'
+                    ],
+                    correctAnswer: 'She was happy to accept the award.',
+                    explanation: '"Happy" and "glad" are synonyms, so you only need one. The other options add unnecessary words.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 3: Combining Sentences',
+                    prompt: 'Which is the best way to combine the two sentences?',
+                    passage: 'The artist was famous. Her paintings sold for millions.',
+                    options: [
+                        'The artist was famous, and her paintings sold for millions.',
+                        "The famous artist's paintings sold for millions.",
+                        'The artist was famous, so her paintings sold for millions.',
+                        'Her paintings sold for millions, and she was a famous artist.'
+                    ],
+                    correctAnswer: "The famous artist's paintings sold for millions.",
+                    explanation: 'This option concisely combines the two ideas by using "famous" as an adjective directly describing the artist.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 4: Passive Voice',
+                    prompt: 'Choose the most direct and active revision.',
+                    passage: 'The ball was hit by the boy.',
+                    options: [
+                        'The ball was hit by the boy, and it went far.',
+                        'The boy hit the ball.',
+                        'Hitting the ball was what the boy did.',
+                        'It was the boy who hit the ball.'
+                    ],
+                    correctAnswer: 'The boy hit the ball.',
+                    explanation: 'This sentence uses the active voice (Subject-Verb-Object), which is more direct and concise than the passive voice.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 5: Redundancy',
+                    prompt: 'Choose the best revision for the sentence.',
+                    passage: 'The final outcome of the experiment was a surprise to everyone.',
+                    options: [
+                        'The final outcome of the experiment surprised all the people.',
+                        'The outcome of the experiment was a surprise to everyone.',
+                        'The final result of the experiment was a surprise.',
+                        "The experiment's outcome was a final surprise."
+                    ],
+                    correctAnswer: 'The outcome of the experiment was a surprise to everyone.',
+                    explanation: '"Final outcome" is redundant because an outcome is inherently final. Removing "final" makes the sentence more concise.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 6: Wordiness',
+                    prompt: 'Which sentence is the most concise?',
+                    passage: '',
+                    options: [
+                        'At this point in time, we should probably go ahead and get started.',
+                        'It is time for us to begin now.',
+                        'We should begin.',
+                        'The time is now for us to make a start.'
+                    ],
+                    correctAnswer: 'We should begin.',
+                    explanation: 'This option cuts out all the filler words like "At this point in time" and "go ahead and" to state the idea directly.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 7: Clarity',
+                    prompt: 'Choose the clearest revision.',
+                    passage: 'After mixing the chemicals, the solution turned blue, which was interesting.',
+                    options: [
+                        'The solution turned blue after mixing the chemicals, and it was interesting.',
+                        'It was interesting that the solution turned blue after mixing the chemicals.',
+                        'The chemist found it interesting that the solution turned blue after the chemicals were mixed.',
+                        'The interesting solution turned blue after mixing the chemicals.'
+                    ],
+                    correctAnswer: 'The chemist found it interesting that the solution turned blue after the chemicals were mixed.',
+                    explanation: 'The original sentence has a vague "which". This revision clarifies who found the result interesting (the chemist).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 8: Combining Sentences',
+                    prompt: 'Which is the best way to combine the sentences?',
+                    passage: 'The cat is old. It sleeps most of the day. Its name is Sam.',
+                    options: [
+                        'The old cat, Sam, sleeps most of the day.',
+                        "Sam is the cat's name, and it is old and sleeps most of the day.",
+                        'The cat is old, its name is Sam, and it sleeps most of the day.',
+                        'Sleeping most of the day, the old cat is named Sam.'
+                    ],
+                    correctAnswer: 'The old cat, Sam, sleeps most of the day.',
+                    explanation: 'This option uses an appositive phrase ("Sam") and an adjective ("old") to combine all the information smoothly and concisely.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 9: Redundancy',
+                    prompt: 'Choose the best revision for the sentence.',
+                    passage: 'Each and every student is required to attend the assembly.',
+                    options: [
+                        'Each student is required to attend the assembly.',
+                        'Every single student is required to attend.',
+                        'Attendance at the assembly is required for each and every student.',
+                        'The students are all required to attend the assembly.'
+                    ],
+                    correctAnswer: 'Each student is required to attend the assembly.',
+                    explanation: '"Each" and "every" mean the same thing in this context, so using both is redundant. "Each student" is sufficient.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Challenge 10: Wordiness',
+                    prompt: 'Which sentence is the most concise?',
+                    passage: '',
+                    options: [
+                        'The decision that she made was to study biology.',
+                        'Her decision was to make a study of biology.',
+                        'She made a decision, and that decision was to study biology.',
+                        'She decided to study biology.'
+                    ],
+                    correctAnswer: 'She decided to study biology.',
+                    explanation: 'This option uses the strong verb "decided" and avoids the clunky phrase "The decision that she made was...".'
+                },
+
+                // Math Questions: Percentages
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 1: Basic Percentage',
+                    prompt: 'What is 35% of 80?',
+                    passage: '',
+                    correctAnswer: '28',
+                    explanation: 'Convert 35% to a decimal (0.35) and multiply by 80.  0.35 * 80 = 28.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 2: Percent Discount',
+                    prompt: 'A shirt originally costing $50 is on sale for 20% off. What is the new price in dollars?',
+                    passage: '',
+                    correctAnswer: '40',
+                    explanation: 'First, find the discount amount: 20% of $50 is (0.20 * 50) = $10. Then, subtract the discount from the original price: $50 - $10 = $40.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 3: Percent Increase',
+                    prompt: 'A population of bacteria increases from 200 to 250. What is the percent increase?',
+                    passage: '',
+                    options: ['20%', '25%', '50%', '125%'],
+                    correctAnswer: '25%',
+                    explanation: 'The formula for percent increase is [(New Value - Original Value) / Original Value] * 100. The increase is 250 - 200 = 50. So, (50 / 200) * 100 = (1/4) * 100 = 25%.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 4: Finding the Whole',
+                    prompt: '12 is 30% of what number?',
+                    passage: '',
+                    correctAnswer: '40',
+                    explanation: 'Set up the equation: 0.30 * x = 12. To solve for x, divide both sides by 0.30. x = 12 / 0.30 = 40.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 5: Sales Tax',
+                    prompt: 'A video game costs $60. If the sales tax is 8%, what is the total cost in dollars?',
+                    passage: '',
+                    correctAnswer: '64.80',
+                    explanation: 'First, calculate the tax amount: 8% of $60 is (0.08 * 60) = $4.80. Then, add the tax to the original price: $60 + $4.80 = $64.80.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 6: Multi-step Percentage',
+                    prompt: 'A store buys a jacket for $80. They mark it up by 50%. Then, they sell it at a 20% discount off the marked-up price. What is the final selling price?',
+                    passage: '',
+                    options: ['$96', '$88', '$100', '$120'],
+                    correctAnswer: '$96',
+                    explanation: 'First, find the marked-up price: $80 * 1.50 = $120. Then, find the discount amount on the new price: 20% of $120 is (0.20 * 120) = $24. Finally, subtract the discount: $120 - $24 = $96.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 7: Percent of a Percent',
+                    prompt: 'What is 50% of 20% of 300?',
+                    passage: '',
+                    correctAnswer: '30',
+                    explanation: 'Convert percentages to decimals and multiply: 0.50 * 0.20 * 300 = 0.10 * 300 = 30.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 8: Reverse Percentage',
+                    prompt: 'After a 15% discount, a phone costs $340. What was its original price?',
+                    passage: '',
+                    correctAnswer: '400',
+                    explanation: 'If the phone was discounted by 15%, the current price is 100% - 15% = 85% of the original price. Set up the equation: 0.85 * x = 340. Solve for x: x = 340 / 0.85 = 400. The original price was $400.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Challenge 9: Commission',
+                    prompt: 'A salesperson earns a 5% commission on their sales. If they sell a car for $22,000, how much commission do they earn?',
+                    passage: '',
+                    options: ['$1,100', '$1,000', '$2,200', '$550'],
+                    correctAnswer: '$1,100',
+                    explanation: 'Calculate 5% of $22,000. Convert 5% to a decimal (0.05) and multiply: 0.05 * 22000 = 1100. The commission is $1,100.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 10: Simple Interest',
+                    prompt: 'You invest $2000 at a 5% simple annual interest rate. How much interest will you earn in 3 years?',
+                    passage: '',
+                    correctAnswer: '300',
+                    explanation: 'Simple interest formula is I = P*R*T. Interest = Principal * Rate * Time. I = 2000 * 0.05 * 3.  I = 100 * 3 = $300.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Challenge 10: Percent Error',
+                    prompt: 'A student measured a length to be 95 cm. The actual length was 100 cm. What is the percent error?',
+                    passage: 'Percent Error = [(|Measured Value - Actual Value|) / Actual Value] * 100',
+                    correctAnswer: '5',
+                    explanation: 'The difference is |95 - 100| = 5 cm. The percent error is (5 / 100) * 100 = 5%.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                const card = document.createElement('div');
+                card.className = 'card active';
+
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered -1) / (lessonData.steps.length -1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+
+                    if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+
+                    content += `<p class="prompt">${step.prompt}</p>`;
+
+                    if (step.type === 'mcq') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    if (step.type === 'mcq') {
+                        document.querySelectorAll('.option-btn').forEach(btn => {
+                            btn.addEventListener('click', (e) => handleAnswer(e.target.dataset.answer, step, e.target.parentElement));
+                        });
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                let isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                
+                // Allow for answers like "$96" or "96"
+                if (step.correctAnswer.includes('$')) {
+                    isCorrect = userAnswer.trim().replace(/\$/g, '') === step.correctAnswer.trim().replace(/\$/g, '');
+                }
+
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w1d4-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score * lessonData.pointsPerQuestion} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

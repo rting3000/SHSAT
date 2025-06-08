@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3D5: Tone/Mood & Coordinate Geometry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Tone/Mood & Coordinate Geometry",
+            subtitle: "Week 3, Day 5",
+            pointsPerQuestion: 10,
+            completion_id: 'w3d5',
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Feeling the Vibe, Finding the Point',
+                    content: `
+                        <p>Welcome, recruit. Today we are exploring how authors create feeling and how we describe location in space. In ELA, we'll analyze <strong>Tone and Mood</strong>. In Math, we are plotting points in <strong>Coordinate Geometry</strong>.</p>
+                        <ul>
+                            <li><strong>Tone & Mood:</strong> Tone is the author\'s attitude toward the subject (e.g., sarcastic, sincere, critical). Mood is the feeling the reader gets from the text (e.g., mysterious, cheerful, tense). Look at word choice and sentence structure for clues.</li>
+                            <li><strong>Coordinate Geometry:</strong> This involves the coordinate plane (x- and y-axes). We'll practice plotting points (x, y), calculating distances between them, and finding midpoints.</li>
+                        </ul>
+                    `
+                },
+                // 12 ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Tone/Mood',
+                    passage: 'The sun was a cheerful eye in a sky of brilliant blue. Children\'s laughter echoed in the park as a gentle breeze rustled the leaves of the ancient, friendly oaks.',
+                    prompt: 'What is the overall mood of this passage?',
+                    options: ['Melancholy', 'Suspenseful', 'Joyful and peaceful', 'Tense'],
+                    correctAnswer: 'Joyful and peaceful',
+                    explanation: 'Words like "cheerful," "brilliant blue," "laughter," and "gentle breeze" all contribute to a positive and serene feeling for the reader.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Tone/Mood',
+                    passage: 'So, you actually believe that this ridiculous plan, a plan so absurd it must have been conceived by a committee of squirrels, is going to work? Astonishing.',
+                    prompt: 'What is the author\'s tone?',
+                    options: ['Sincere and hopeful', 'Sarcastic and critical', 'Neutral and objective', 'Fearful and worried'],
+                    correctAnswer: 'Sarcastic and critical',
+                    explanation: 'The author uses insults ("ridiculous," "absurd") and mocks the idea ("conceived by a committee of squirrels") to show their contempt. The word "Astonishing" is used sarcastically.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Tone/Mood',
+                    passage: 'The shadows danced like specters in the corners of the room. A floorboard creaked overhead. The wind rattled the windowpane, a skeletal finger tapping, tapping, tapping...',
+                    prompt: 'The author creates a mood of...',
+                    options: ['Celebration', 'Suspense and fear', 'Humor', 'Nostalgia'],
+                    correctAnswer: 'Suspense and fear',
+                    explanation: 'The author uses imagery of darkness ("shadows"), unsettling sounds ("creaked," "rattled"), and personification ("skeletal finger") to make the reader feel tense and afraid.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Tone/Mood',
+                    passage: 'This new recycling initiative is a well-intentioned but ultimately flawed policy. While the goal of reducing waste is commendable, the report fails to address the high implementation cost and the lack of public awareness programs needed to make it effective.',
+                    prompt: 'The tone of this passage is best described as:',
+                    options: ['Enthusiastic and supportive', 'Angry and dismissive', 'Objective and analytical', 'Sad and resigned'],
+                    correctAnswer: 'Objective and analytical',
+                    explanation: 'The author acknowledges both the pros ("well-intentioned," "commendable") and cons ("flawed," "high cost") in a balanced way, indicating an analytical and objective tone.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Tone/Mood',
+                    passage: 'I shall never forget the day my grandfather taught me to fish. The sun on our faces, the quiet lapping of the water against the boat, the thrill of the first tug on the line—it\'s a memory I will cherish forever.',
+                    prompt: 'The tone of this passage is:',
+                    options: ['Anxious', 'Regretful', 'Nostalgic and fond', 'Ironic'],
+                    correctAnswer: 'Nostalgic and fond',
+                    explanation: 'The author is fondly looking back on a cherished memory from the past. Words like "never forget" and "cherish forever" clearly convey this nostalgic tone.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Tone/Mood',
+                    passage: 'The virus spread with terrifying speed. Hospitals overflowed. The silence on the streets was more deafening than any siren. A grim new reality had dawned.',
+                    prompt: 'What mood does the author create?',
+                    options: ['Hopeful', 'Comical', 'Bleak and somber', 'Romantic'],
+                    correctAnswer: 'Bleak and somber',
+                    explanation: 'Words like "terrifying," "overflowed," "deafening silence," and "grim" create a feeling of hopelessness and seriousness.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Tone/Mood',
+                    passage: 'It is an undeniable fact that regular exercise improves cardiovascular health. Numerous peer-reviewed studies have confirmed this correlation. Therefore, a public health campaign encouraging physical activity is a logical and necessary step.',
+                    prompt: 'The author\'s tone is:',
+                    options: ['Whimsical', 'Skeptical', 'Authoritative and confident', 'Apologetic'],
+                    correctAnswer: 'Authoritative and confident',
+                    explanation: 'Phrases like "undeniable fact" and "numerous... studies have confirmed" show that the author is very confident in their position and presenting the information as factual.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Tone/Mood',
+                    passage: 'Why? Why would they do this? After all our work, all our sacrifice, to see it all crumble to dust... It is more than a heart can bear.',
+                    prompt: 'The tone of this passage is best described as:',
+                    options: ['Joyful', 'Anguished and despairing', 'Curious and inquisitive', 'Peaceful'],
+                    correctAnswer: 'Anguished and despairing',
+                    explanation: 'The rhetorical questions, the reference to sacrifice and crumbling, and the phrase "more than a heart can bear" all convey a tone of deep pain and loss.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Tone/Mood',
+                    passage: 'The little kitten, a ball of pure white fluff, tumbled over its own paws, let out a tiny "mew," and then fell asleep in a sunbeam.',
+                    prompt: 'This passage creates a mood of:',
+                    options: ['Tension', 'Sadness', 'Amusement and affection', 'Anger'],
+                    correctAnswer: 'Amusement and affection',
+                    explanation: 'The description of the clumsy, fluffy kitten is designed to make the reader feel amused and fond of the creature.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Tone/Mood',
+                    passage: 'The assignment is to write a five-page essay, double-spaced, using Times New Roman font, size 12. Citations must be in MLA format. The deadline is Friday at 5:00 PM sharp.',
+                    prompt: 'The tone of these instructions is:',
+                    options: ['Emotional', 'Sarcastic', 'Formal and direct', 'Playful'],
+                    correctAnswer: 'Formal and direct',
+                    explanation: 'The passage is a list of clear, specific instructions with no emotional or figurative language, indicating a formal and direct tone.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 11: Tone/Mood',
+                    passage: 'He waited. The clock on the wall seemed to mock him, each tick a tiny hammer blow against his sanity. Where was she? She had promised. Every passing car headlight that swept across the wall was a fresh jolt of false hope.',
+                    prompt: 'The mood of this passage is:',
+                    options: ['Calm', 'Anxious and tense', 'Relieved', 'Silly'],
+                    correctAnswer: 'Anxious and tense',
+                    explanation: 'The personification of the clock ("mock him"), the physical description of his reaction ("jolt"), and the repeated question create a feeling of anxiety and tension.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 12: Tone/Mood',
+                    passage: 'Oh, a surprise party? For me? You all shouldn\'t have. No, really, you should not have done this. I specifically told you I hate surprises.',
+                    prompt: 'The speaker\'s tone shifts from:',
+                    options: ['Happy to sad', 'Angry to grateful', 'Feigned politeness to genuine annoyance', 'Confused to certain'],
+                    correctAnswer: 'Feigned politeness to genuine annoyance',
+                    explanation: 'The tone begins with a conventional, polite phrase ("You all shouldn\'t have") and then shifts to direct, honest annoyance ("I specifically told you I hate surprises").'
+                },
+                
+                // 12 Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Coordinate Plane',
+                    prompt: 'In the coordinate plane, what quadrant does the point (-4, 2) lie in?',
+                    correctAnswer: '2',
+                    explanation: 'The coordinate plane is divided into four quadrants. Quadrant I is (+,+). Quadrant II is (-,+). Quadrant III is (-,-). Quadrant IV is (+,-). Since x is negative and y is positive, the point is in Quadrant II.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Coordinate Plane',
+                    prompt: 'A point is located at (5, 0). On which axis does it lie?',
+                    correctAnswer: 'x-axis',
+                    explanation: 'If the y-coordinate is 0, the point lies on the x-axis. If the x-coordinate is 0, the point lies on the y-axis.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Midpoint Formula',
+                    prompt: 'What is the midpoint of the line segment connecting the points (2, 3) and (6, 7)? (Enter as x,y with no spaces)',
+                    correctAnswer: '4,5',
+                    explanation: 'The midpoint formula is ((x1+x2)/2, (y1+y2)/2). So, ((2+6)/2, (3+7)/2) = (8/2, 10/2) = (4, 5).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Distance Formula',
+                    prompt: 'What is the distance between the points (1, 2) and (4, 6)?',
+                    correctAnswer: '5',
+                    explanation: 'Using the distance formula, d = sqrt((x2-x1)^2 + (y2-y1)^2). d = sqrt((4-1)^2 + (6-2)^2) = sqrt(3^2 + 4^2) = sqrt(9 + 16) = sqrt(25) = 5. This is a 3-4-5 right triangle.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Coordinate Plane',
+                    prompt: 'A square has vertices at (1,1), (1,4), (4,4), and (4,1). What is its area?',
+                    correctAnswer: '9',
+                    explanation: 'The length of a side can be found by the distance between two adjacent vertices, e.g., (1,1) and (1,4). The distance is 3. The area of a square is side^2, so 3*3 = 9.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Midpoint Formula',
+                    prompt: 'Find the midpoint of the segment with endpoints (-1, -2) and (5, 8). (Enter as x,y with no spaces)',
+                    correctAnswer: '2,3',
+                    explanation: 'Midpoint: ((-1+5)/2, (-2+8)/2) = (4/2, 6/2) = (2, 3).'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Distance Formula',
+                    prompt: 'Calculate the distance between (-2, 3) and (3, -9).',
+                    correctAnswer: '13',
+                    explanation: 'd = sqrt((3 - (-2))^2 + (-9 - 3)^2) = sqrt(5^2 + (-12)^2) = sqrt(25 + 144) = sqrt(169) = 13. This is a 5-12-13 right triangle.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Reflections',
+                    prompt: 'If the point (3, -5) is reflected across the y-axis, what are its new coordinates? (Enter as x,y with no spaces)',
+                    correctAnswer: '-3,-5',
+                    explanation: 'Reflecting across the y-axis negates the x-coordinate. Reflecting across the x-axis negates the y-coordinate.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Reflections',
+                    prompt: 'The point (-2, 4) is reflected across the x-axis. What are the new coordinates? (Enter as x,y with no spaces)',
+                    correctAnswer: '-2,-4',
+                    explanation: 'Reflecting across the x-axis negates the y-coordinate.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Area of a Triangle',
+                    prompt: 'What is the area of a triangle with vertices at (1,1), (5,1), and (5,4)?',
+                    correctAnswer: '6',
+                    explanation: 'The triangle is a right triangle. The base is the distance between (1,1) and (5,1), which is 4. The height is the distance between (5,1) and (5,4), which is 3. Area = (1/2) * base * height = (1/2) * 4 * 3 = 6.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 11: Perimeter',
+                    prompt: 'A rectangle has vertices at (-2,2), (4,2), (4,-1), and (-2,-1). What is its perimeter?',
+                    correctAnswer: '18',
+                    explanation: 'The length is the distance between (-2,2) and (4,2), which is 6. The width is the distance between (4,2) and (4,-1), which is 3. Perimeter = 2 * (length + width) = 2 * (6 + 3) = 18.'
+                },
+                 {
+                    type: 'grid-in',
+                    header: 'Math Question 12: Slope',
+                    prompt: 'What is the slope of the line passing through (2,5) and (4,11)?',
+                    correctAnswer: '3',
+                    explanation: 'Slope (m) = (y2-y1)/(x2-x1). So, m = (11-5)/(4-2) = 6/2 = 3.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            const completionId = lessonData.completion_id;
+
+            let currentStep = 0;
+            let score = 0;
+            let completedAnswers = new Map();
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+
+                let content = '';
+                if (step.type === 'briefing') {
+                    content = `
+                        <div class="card briefing-card">
+                            <h2>${step.header}</h2>
+                            ${step.content}
+                            <button id="next-btn">Start Mission</button>
+                        </div>
+                    `;
+                } else if (step.type === 'mcq') {
+                    const optionsHtml = step.options.map((option, index) => {
+                        const isSelected = completedAnswers.has(stepIndex) && completedAnswers.get(stepIndex).answer === option;
+                        return `<button class="option-btn ${isSelected ? 'selected' : ''}" data-option="${option}">${option}</button>`;
+                    }).join('');
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="mcq-options">${optionsHtml}</div>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'grid-in') {
+                    const savedAnswer = completedAnswers.has(stepIndex) ? completedAnswers.get(stepIndex).answer : '';
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            ${step.passage ? `<div class="passage">${step.passage}</div>` : ''}
+                            <p class="prompt">${step.prompt}</p>
+                            <input type="text" class="grid-in-input" value="${savedAnswer}">
+                            <button class="submit-btn">Submit</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                } else if (step.type === 'scrambled-paragraph') {
+                    let sentences = [...step.sentences]; // Make a copy
+                    if (completedAnswers.has(stepIndex)) {
+                        const savedOrder = completedAnswers.get(stepIndex).answer;
+                        sentences = savedOrder.map(text => step.sentences.find(s => s.text === text));
+                    } else {
+                        // Fisher-Yates shuffle
+                        for (let i = sentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+                        }
+                    }
+
+                    const sentencesHtml = sentences.map(sentence =>
+                        `<div class="scrambled-sentence" draggable="true" data-id="${sentence.id}">${sentence.text}</div>`
+                    ).join('');
+
+                    content = `
+                        <div class="card">
+                            <h2>${step.header}</h2>
+                            <p class="prompt">${step.prompt}</p>
+                            <div class="scramble-container">${sentencesHtml}</div>
+                            <button class="submit-btn">Check Order</button>
+                            <div class="feedback"></div>
+                        </div>
+                    `;
+                }
+
+                lessonDeck.innerHTML = content;
+                addCardEventListeners();
+            }
+
+            function addCardEventListeners() {
+                // For MCQ
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => handleMcqSelection(btn));
+                });
+
+                // For Grid-in
+                const submitBtn = lessonDeck.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', () => {
+                         const stepType = lessonData.steps[currentStep].type;
+                        if (stepType === 'grid-in') {
+                            handleGridInSubmission();
+                        } else if (stepType === 'scrambled-paragraph') {
+                            handleScrambledParagraphSubmission();
+                        }
+                    });
+                }
+                
+                // For Scrambled Paragraph Drag and Drop
+                const container = lessonDeck.querySelector('.scramble-container');
+                if (container) {
+                    let draggedItem = null;
+                    container.addEventListener('dragstart', e => {
+                        draggedItem = e.target;
+                        setTimeout(() => e.target.style.display = 'none', 0);
+                    });
+                    container.addEventListener('dragend', e => {
+                        setTimeout(() => {
+                            e.target.style.display = '';
+                            draggedItem = null;
+                        }, 0);
+                    });
+                    container.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(container, e.clientY);
+                        const draggable = document.querySelector('.dragging');
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    });
+                }
+
+
+                // For "Next" button on briefing
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', showNextStep);
+                }
+            }
+            
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.scrambled-sentence:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            function handleMcqSelection(selectedButton) {
+                if (completedAnswers.has(currentStep)) return;
+
+                const selectedAnswer = selectedButton.dataset.option;
+                const correct = selectedAnswer === lessonData.steps[currentStep].correctAnswer;
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: selectedAnswer, correct: correct });
+
+                // Visually mark selected and correct/incorrect answers
+                lessonDeck.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.disabled = true; // Disable all buttons after one is chosen
+                    if(btn.dataset.option === lessonData.steps[currentStep].correctAnswer) {
+                        btn.classList.add('correct');
+                    } else if (btn === selectedButton) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function handleGridInSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const input = lessonDeck.querySelector('.grid-in-input');
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = lessonData.steps[currentStep].correctAnswer.toLowerCase();
+                const correct = userAnswer === correctAnswer;
+
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+
+                if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.disabled = true;
+                completedAnswers.set(currentStep, { answer: input.value, correct: correct });
+            }
+            
+            function handleScrambledParagraphSubmission() {
+                if (completedAnswers.has(currentStep)) return;
+
+                const container = lessonDeck.querySelector('.scramble-container');
+                const submittedSentences = [...container.querySelectorAll('.scrambled-sentence')];
+                const submittedOrder = submittedSentences.map(s => parseInt(s.dataset.id));
+                const correctOrder = lessonData.steps[currentStep].sentences.map(s => s.id);
+                
+                let correct = true;
+                for(let i = 0; i < correctOrder.length; i++) {
+                    if(submittedOrder[i] !== correctOrder[i]) {
+                        correct = false;
+                        break;
+                    }
+                }
+                
+                showFeedback(correct, lessonData.steps[currentStep].explanation);
+                
+                 if (correct) {
+                    score += lessonData.pointsPerQuestion;
+                }
+                completedAnswers.set(currentStep, { answer: submittedSentences.map(s => s.textContent), correct: correct });
+                
+                // Disable dragging
+                submittedSentences.forEach(el => el.setAttribute('draggable', 'false'));
+            }
+
+
+            function showFeedback(isCorrect, explanation) {
+                const feedbackDiv = lessonDeck.querySelector('.feedback');
+                let feedbackHtml = `
+                    <div class="feedback-content ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+                        <p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong></p>
+                        <p>${explanation}</p>
+                        <button id="feedback-next-btn">Next</button>
+                    </div>`;
+                feedbackDiv.innerHTML = feedbackHtml;
+                feedbackDiv.style.display = 'block';
+                document.getElementById('feedback-next-btn').addEventListener('click', showNextStep);
+            }
+
+            function showNextStep() {
+                currentStep++;
+                if (currentStep < lessonData.steps.length) {
+                    showStep(currentStep);
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+                const totalQuestions = lessonData.steps.filter(s => s.type !== 'briefing').length;
+                const percentage = totalQuestions > 0 ? Math.round((score / (totalQuestions * lessonData.pointsPerQuestion)) * 100) : 0;
+                
+                resultsScreen.innerHTML = `
+                    <div class="card results-card">
+                        <h2>Mission Complete!</h2>
+                        <p>You scored ${score} out of ${totalQuestions * lessonData.pointsPerQuestion} (${percentage}%)</p>
+                        <button onclick="window.location.href='../index.html'">Return to Dashboard</button>
+                    </div>
+                `;
+                markLessonComplete();
+            }
+
+            function markLessonComplete() {
+                 let completed = new Set(JSON.parse(localStorage.getItem('completedLessons')) || []);
+                 completed.add(completionId);
+                 localStorage.setItem('completedLessons', JSON.stringify([...completed]));
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

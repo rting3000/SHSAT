@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D2: Word Meanings & Equations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Word Meanings & Equations",
+            subtitle: "Week 2, Day 2",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Context Clues and Algebraic Logic',
+                    content: `
+                        <p>Agent, today's mission focuses on precision in language and logic. For ELA, you'll be deciphering <strong>Word Meanings in Context</strong>. For Math, you'll solve <strong>Multi-Step Equations</strong>.</p>
+                        <ul>
+                            <li><strong>Word Meanings in Context:</strong> The SHSAT will test your vocabulary, but often gives you clues. Look at the surrounding sentences to determine the meaning of an unfamiliar word. Ask yourself: does the context suggest a positive or negative meaning? Is it a synonym or antonym of another word in the passage?</li>
+                            <li><strong>Multi-Step Equations:</strong> These require a sequence of steps to solve. Remember to perform the same operation on both sides of the equation to maintain balance. Your goal is to isolate the variable.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Context Clues',
+                    prompt: 'Based on the context, what is the best meaning of the word "ephemeral"?',
+                    passage: 'The artist was known for his ephemeral creations. He would build intricate sculptures on the beach, knowing that the next high tide would wash them away completely.',
+                    options: ['Permanent and lasting', 'Complex and detailed', 'Short-lived and temporary', 'Beautiful and inspiring'],
+                    correctAnswer: 'Short-lived and temporary',
+                    explanation: 'The context clue is that the sculptures are washed away by the tide, which directly implies that they do not last long.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Context Clues',
+                    prompt: 'What does the word "mitigated" most likely mean?',
+                    passage: 'The government installed sound barriers along the highway to have mitigated the noise pollution for the nearby residents.',
+                    options: ['To worsen or intensify', 'To lessen the severity of', 'To analyze and study', 'To ignore or neglect'],
+                    correctAnswer: 'To lessen the severity of',
+                    explanation: 'Sound barriers are built to reduce noise. Therefore, the context indicates that "mitigate" means to lessen or reduce the negative impact of the noise.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Context Clues',
+                    prompt: 'What is the most likely meaning of "ubiquitous"?',
+                    passage: 'In the modern era, smartphones have become ubiquitous; it is rare to see someone without one.',
+                    options: ['Expensive and rare', 'Found everywhere', 'Complicated to use', 'A recent invention'],
+                    correctAnswer: 'Found everywhere',
+                    explanation: 'The clue "it is rare to see someone without one" directly suggests that smartphones are present everywhere.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Context Clues',
+                    prompt: 'What does "gregarious" mean in this sentence?',
+                    passage: 'Unlike his quiet and retiring brother, John was a gregarious person who loved being the center of attention at parties.',
+                    options: ['Shy and reserved', 'Sociable and outgoing', 'Intelligent and witty', 'Jealous and possessive'],
+                    correctAnswer: 'Sociable and outgoing',
+                    explanation: 'The sentence sets up a contrast with his "quiet and retiring" brother and mentions his love of parties, indicating that "gregarious" means sociable.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Context Clues',
+                    prompt: 'Based on context, what does "precarious" mean?',
+                    passage: 'The climber found himself in a precarious position, clinging to a narrow ledge with a sheer drop below.',
+                    options: ['Safe and secure', 'Comfortable and relaxing', 'Dangerously unstable', 'High and scenic'],
+                    correctAnswer: 'Dangerously unstable',
+                    explanation: 'The phrases "clinging to a narrow ledge" and "sheer drop below" strongly suggest a situation that is dangerous and not secure.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Context Clues',
+                    prompt: 'What is the meaning of "pragmatic"?',
+                    passage: 'While others debated the theoretical ethics of the situation, the pragmatic leader focused on a simple, workable solution that would help the most people.',
+                    options: ['Idealistic and hopeful', 'Argumentative and stubborn', 'Practical and sensible', 'Emotional and impulsive'],
+                    correctAnswer: 'Practical and sensible',
+                    explanation: 'The context contrasts "theoretical" debate with a "workable solution," indicating that pragmatic means focused on practical results.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Context Clues',
+                    prompt: 'What does "ostentatious" mean here?',
+                    passage: 'He lived a quiet, simple life, avoiding the ostentatious displays of wealth common among his peers, like gold-plated cars and diamond-encrusted watches.',
+                    options: ['Tasteful and elegant', 'Hidden and secret', 'Designed to impress or attract notice; showy', 'Related to charity'],
+                    correctAnswer: 'Designed to impress or attract notice; showy',
+                    explanation: 'The examples given—gold-plated cars and diamond watches—are clear examples of showing off wealth. "Ostentatious" describes this kind of flashy display.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Context Clues',
+                    prompt: 'What is the best meaning for "deleterious"?',
+                    passage: 'The scientists warned that the chemical could have a deleterious effect on the local water supply, potentially harming both plants and animals.',
+                    options: ['Beneficial', 'Neutral', 'Causing harm or damage', 'Unknown'],
+                    correctAnswer: 'Causing harm or damage',
+                    explanation: 'The clue "harming both plants and animals" directly explains what kind of effect the chemical would have.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Context Clues',
+                    prompt: 'What does "cogent" mean?',
+                    passage: 'The lawyer presented a cogent argument, complete with clear evidence and logical reasoning that was impossible to ignore.',
+                    options: ['Confusing and unclear', 'Emotional and passionate', 'Clear, logical, and convincing', 'Long and complicated'],
+                    correctAnswer: 'Clear, logical, and convincing',
+                    explanation: 'The description of the argument as having "clear evidence and logical reasoning" serves as a definition for "cogent" in this context.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Context Clues',
+                    prompt: 'What does "eschew" mean?',
+                    passage: 'A devout minimalist, she tried to eschew all unnecessary possessions, preferring a simple and uncluttered home.',
+                    options: ['To collect and hoard', 'To deliberately avoid using; to abstain from', 'To buy and sell', 'To decorate and embellish'],
+                    correctAnswer: 'To deliberately avoid using; to abstain from',
+                    explanation: 'The context of being a "minimalist" and preferring a "simple and uncluttered home" indicates that she avoids unnecessary items.'
+                },
+
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Multi-Step Equation',
+                    prompt: 'Solve for x: 3(x + 5) = 2(2x - 1)',
+                    correctAnswer: '17',
+                    explanation: 'First, distribute on both sides: 3x + 15 = 4x - 2. Then, subtract 3x from both sides: 15 = x - 2. Finally, add 2 to both sides to isolate x: x = 17.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Equation with Fractions',
+                    prompt: 'Solve for y: (y/4) + 7 = 12',
+                    correctAnswer: '20',
+                    explanation: 'First, subtract 7 from both sides to isolate the term with y: (y/4) = 5. Then, multiply both sides by 4 to solve for y: y = 20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Variables on Both Sides',
+                    prompt: 'Solve for n: 5n + 4 = 7n - 8',
+                    correctAnswer: '6',
+                    explanation: 'Subtract 5n from both sides: 4 = 2n - 8. Add 8 to both sides: 12 = 2n. Divide by 2: n = 6.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Equation with Parentheses',
+                    prompt: 'Solve for a: 10 - (2a + 3) = 1',
+                    correctAnswer: '3',
+                    explanation: 'Distribute the negative sign: 10 - 2a - 3 = 1. Combine the constant terms: 7 - 2a = 1. Subtract 7 from both sides: -2a = -6. Divide by -2: a = 3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 5: Solving for a Variable',
+                    prompt: 'If 2x + 3y = 15 and x = 3, what is the value of y?',
+                    correctAnswer: '3',
+                    explanation: 'Substitute x = 3 into the equation: 2(3) + 3y = 15. This simplifies to 6 + 3y = 15. Subtract 6 from both sides: 3y = 9. Divide by 3: y = 3.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Equation from a Word Problem',
+                    prompt: 'A number is doubled and then 5 is subtracted. The result is 15. What is the number?',
+                    correctAnswer: '10',
+                    explanation: 'Let the number be n. The equation is 2n - 5 = 15. Add 5 to both sides: 2n = 20. Divide by 2: n = 10.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Consecutive Integers',
+                    prompt: 'The sum of three consecutive integers is 63. What is the smallest of the three integers?',
+                    correctAnswer: '20',
+                    explanation: 'Let the integers be n, n+1, and n+2. The equation is n + (n+1) + (n+2) = 63. Combine like terms: 3n + 3 = 63. Subtract 3: 3n = 60. Divide by 3: n = 20.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 8: Equation with Decimals',
+                    prompt: 'Solve for z: 0.5z + 2.5 = 5',
+                    correctAnswer: '5',
+                    explanation: 'Subtract 2.5 from both sides: 0.5z = 2.5. Divide by 0.5 (or multiply by 2): z = 5.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Multi-Step Word Problem',
+                    prompt: 'You buy 3 shirts that cost $x each and a pair of pants that costs $25. The total cost is $70. What is the cost of one shirt?',
+                    correctAnswer: '15',
+                    explanation: 'Set up the equation: 3x + 25 = 70. Subtract 25 from both sides: 3x = 45. Divide by 3: x = 15. Each shirt costs $15.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Perimeter Problem',
+                    prompt: 'A rectangle has a perimeter of 40. Its length is 4 more than its width. What is the width?',
+                    correctAnswer: '8',
+                    explanation: 'Let the width be w. Then the length is w+4. The perimeter formula is 2L + 2W = P. So, 2(w+4) + 2w = 40. Distribute: 2w + 8 + 2w = 40. Combine terms: 4w + 8 = 40. Subtract 8: 4w = 32. Divide by 4: w = 8.'
+                }
+            ]
+        };
+
+        // Standard lesson engine script starts here
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+                const card = document.createElement('div');
+                card.className = 'card active';
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered - 1) / (lessonData.steps.length - 1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.type === 'scrambled-paragraph' && step.sentences) {
+                        content += `<div class="passage">${step.sentences.map(s => `<p><strong>${s.id}.</strong> ${s.text}</p>`).join('')}</div>`;
+                    } else if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    const setupAnswerHandler = (isMcq) => {
+                        const selector = isMcq ? '.option-btn' : '#submit-grid-in';
+                        const container = isMcq ? (el) => el.parentElement : () => document.querySelector('.grid-in-container');
+                        document.querySelectorAll(selector).forEach(btn => {
+                            btn.addEventListener('click', (e) => {
+                                const userAnswer = isMcq ? e.target.dataset.answer : document.getElementById('grid-in-input').value;
+                                handleAnswer(userAnswer, step, container(e.target));
+                            });
+                        });
+                    };
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                       setupAnswerHandler(true);
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w2d2-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 

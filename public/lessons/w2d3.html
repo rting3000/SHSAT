@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2D3: Arguments & Geometry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="lesson-header"></header>
+        <div id="lesson-deck"></div>
+        <div id="results-screen" style="display: none;"></div>
+    </div>
+
+    <script>
+        const lessonData = {
+            title: "Mission: Arguments & Geometry",
+            subtitle: "Week 2, Day 3",
+            pointsPerQuestion: 10,
+            steps: [
+                {
+                    type: 'briefing',
+                    header: 'Briefing: Deconstructing Logic and Space',
+                    content: `
+                        <p>Your mission today involves breaking things down to their core components. In ELA, you'll be <strong>Analyzing Arguments</strong> by identifying claims, evidence, and reasoning. In Math, we begin our study of <strong>Basic Geometry</strong>, focusing on angles, lines, and triangles.</p>
+                        <ul>
+                            <li><strong>Analyzing Arguments:</strong> A <strong>claim</strong> is the author's main point. <strong>Evidence</strong> is the facts, data, and examples used to support the claim. <strong>Reasoning</strong> is the explanation of *how* the evidence supports the claim.</li>
+                            <li><strong>Basic Geometry:</strong> Key facts to remember: A straight line is 180°. The sum of angles in a triangle is 180°. Parallel lines cut by a transversal create corresponding angles that are equal.</li>
+                        </ul>
+                    `
+                },
+                // ELA Questions
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 1: Identifying the Claim',
+                    prompt: 'What is the author\'s main claim in this passage?',
+                    passage: 'While some argue that year-round schooling is a solution to summer learning loss, the evidence suggests otherwise. The high costs of maintaining school buildings and the burnout experienced by both students and teachers far outweigh the potential benefits. Furthermore, many families rely on summer for essential childcare and vacation time. A traditional school calendar remains the most effective model.',
+                    options: [
+                        'Year-round schooling is expensive.',
+                        'Students and teachers experience burnout.',
+                        'The traditional school calendar is superior to year-round schooling.',
+                        'Summer learning loss is a major problem.'
+                    ],
+                    correctAnswer: 'The traditional school calendar is superior to year-round schooling.',
+                    explanation: 'This is the author\'s central argument that they spend the rest of the passage supporting. The other options are pieces of evidence or reasoning used to support this main claim.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 2: Identifying Evidence',
+                    prompt: 'Which of the following is used as evidence to support the author\'s claim?',
+                    passage: 'Bicycling should be encouraged as a primary mode of urban transportation. For one, it has significant health benefits, improving cardiovascular fitness and reducing stress. A recent study in Copenhagen found that cyclists took, on average, fewer sick days per year than non-cyclists. Moreover, it reduces traffic congestion and air pollution, making cities more livable for everyone.',
+                    options: [
+                        'Bicycling makes cities more livable.',
+                        'A study in Copenhagen showed cyclists took fewer sick days.',
+                        'Bicycling is a good form of transportation.',
+                        'Bicycling reduces stress.'
+                    ],
+                    correctAnswer: 'A study in Copenhagen showed cyclists took fewer sick days.',
+                    explanation: 'This is a specific piece of data (a study) used to support the broader point about health benefits. The other options are claims or reasoning, not specific evidence.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 3: Identifying Reasoning',
+                    prompt: 'What is the reasoning in this argument?',
+                    passage: 'The city must invest in a new subway line. According to the latest census, our population has grown by 20% in the last decade. This population increase directly leads to more cars on the road and therefore more traffic congestion.',
+                    options: [
+                        'The city must invest in a new subway line.',
+                        'The population has grown by 20%.',
+                        'The population increase leads to more traffic, justifying the need for a subway.',
+                        'There are more cars on the road.'
+                    ],
+                    correctAnswer: 'The population increase leads to more traffic, justifying the need for a subway.',
+                    explanation: 'This sentence provides the logical connection (the "because") that explains why the evidence (population growth) supports the claim (we need a subway).'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 4: Identifying the Claim',
+                    prompt: 'What is the main claim of the passage?',
+                    passage: 'Public libraries are more important than ever. They provide free access to computers and the internet for those who cannot afford them. They also offer essential community programs, from job-seeking workshops to children\'s reading hours. In an age of information, libraries ensure that everyone has the opportunity to learn and connect.',
+                    options: [
+                        'Libraries have free internet.',
+                        'Libraries offer community programs.',
+                        'Libraries are vital community resources for learning and connection.',
+                        'Information is important.'
+                    ],
+                    correctAnswer: 'Libraries are vital community resources for learning and connection.',
+                    explanation: 'This is the central argument of the passage. The other statements are pieces of evidence that support this claim.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 5: Identifying Evidence',
+                    prompt: 'Which sentence serves as evidence for the claim that bees are crucial?',
+                    passage: 'The decline in bee populations is a serious ecological threat. Bees are responsible for pollinating roughly one-third of the crops humans eat. Without them, the availability of fruits like apples, almonds, and avocados would plummet.',
+                    options: [
+                        'The decline in bee populations is a serious threat.',
+                        'Bees pollinate roughly one-third of human crops.',
+                        'The loss of bees would be very bad.',
+                        'We should protect the bees.'
+                    ],
+                    correctAnswer: 'Bees pollinate roughly one-third of human crops.',
+                    explanation: 'This is a specific, verifiable fact that is used to support the claim that the bee decline is a serious threat.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 6: Analyzing an Argument',
+                    prompt: 'What is the author\'s primary argument?',
+                    passage: 'Mandatory school uniforms are beneficial for students and schools. They reduce peer pressure related to clothing choices, which can be a major source of stress for young people. Additionally, they can improve safety by making it easier to identify intruders on campus. While some argue they stifle individuality, the focus on learning and safety should be the priority.',
+                    options: [
+                        'School uniforms stifle individuality.',
+                        'School uniforms are a good idea because they reduce stress and improve safety.',
+                        'Peer pressure is a major source of stress.',
+                        'Intruders are a problem at schools.'
+                    ],
+                    correctAnswer: 'School uniforms are a good idea because they reduce stress and improve safety.',
+                    explanation: 'This statement best captures the author\'s main claim and the two key reasons provided to support it.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 7: Weakness in an Argument',
+                    prompt: 'What is a potential weakness in the author\'s argument?',
+                    passage: 'My cousin tried the new "Super-Gro" fertilizer and his tomatoes grew to be twice the size of his neighbor\'s. Therefore, Super-Gro is the best fertilizer on the market.',
+                    options: [
+                        'The author is an expert on gardening.',
+                        'The argument relies on data from a scientific study.',
+                        'The argument is based on a single piece of anecdotal evidence, not a large-scale study.',
+                        'The author compares two different types of plants.'
+                    ],
+                    correctAnswer: 'The argument is based on a single piece of anecdotal evidence, not a large-scale study.',
+                    explanation: 'Anecdotal evidence (a personal story) is not enough to make a broad claim. Other factors could have affected the tomato growth, and one person\'s experience is not a reliable sample.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 8: Identifying the Claim',
+                    prompt: 'What is the main claim?',
+                    passage: 'Learning a second language has profound cognitive benefits. Studies show that bilingual individuals often have better problem-solving skills and enhanced creativity. The process of switching between languages also strengthens the brain\'s executive functions. It is an investment in your mental hardware.',
+                    options: [
+                        'Bilingual people are smarter.',
+                        'Everyone should learn another language.',
+                        'Learning a second language improves brain function.',
+                        'The brain has executive functions.'
+                    ],
+                    correctAnswer: 'Learning a second language improves brain function.',
+                    explanation: 'The passage focuses on the "cognitive benefits" and how language learning "strengthens the brain," making this the central claim.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 9: Identifying Evidence',
+                    prompt: 'Which sentence is a piece of evidence?',
+                    passage: 'Renewable energy is the key to a sustainable future. Solar panel prices have dropped by over 80% in the last decade, making them more accessible than ever. This affordability is crucial for widespread adoption.',
+                    options: [
+                        'Renewable energy is the key to a sustainable future.',
+                        'Solar panel prices have dropped by over 80% in the last decade.',
+                        'Affordability is crucial.',
+                        'We should adopt solar power.'
+                    ],
+                    correctAnswer: 'Solar panel prices have dropped by over 80% in the last decade.',
+                    explanation: 'This is a specific, quantifiable piece of data used to support the idea that solar is becoming more accessible and is a key part of a sustainable future.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'ELA Question 10: Analyzing Reasoning',
+                    prompt: 'What is the underlying assumption in the author\'s reasoning?',
+                    passage: 'The candidate has fifteen years of experience as a CEO, managing thousands of employees and billion-dollar budgets. This experience makes her perfectly qualified to be mayor.',
+                    options: [
+                        'The candidate is a good person.',
+                        'The skills required to be a successful CEO are directly transferable to being a successful mayor.',
+                        'The current mayor is not qualified.',
+                        'The city has a large budget.'
+                    ],
+                    correctAnswer: 'The skills required to be a successful CEO are directly transferable to being a successful mayor.',
+                    explanation: 'The reasoning connects the evidence (CEO experience) to the claim (qualified to be mayor). This connection only works if you assume that business skills are the same as governing skills, which is an unstated assumption.'
+                },
+                // Math Questions
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 1: Angles in a Triangle',
+                    prompt: 'A triangle has two angles that measure 40° and 60°. What is the measure of the third angle in degrees?',
+                    correctAnswer: '80',
+                    explanation: 'The sum of the angles in any triangle is 180°. The two known angles sum to 40 + 60 = 100°. Therefore, the third angle must be 180 - 100 = 80°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 2: Supplementary Angles',
+                    prompt: 'Two angles are supplementary. If one angle measures 115°, what is the measure of the other angle?',
+                    correctAnswer: '65',
+                    explanation: 'Supplementary angles are two angles that add up to 180°. To find the missing angle, subtract the known angle from 180: 180 - 115 = 65°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 3: Complementary Angles',
+                    prompt: 'Two angles are complementary. If one angle is 38°, what is the measure of the other angle?',
+                    correctAnswer: '52',
+                    explanation: 'Complementary angles are two angles that add up to 90°. To find the missing angle, subtract the known angle from 90: 90 - 38 = 52°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 4: Isosceles Triangle',
+                    prompt: 'An isosceles triangle has a vertex angle of 50°. What is the measure of one of the base angles?',
+                    correctAnswer: '65',
+                    explanation: 'The two base angles of an isosceles triangle are equal. The total degrees in a triangle is 180°. So, 180 - 50 = 130° for the two base angles. Since they are equal, each one is 130 / 2 = 65°.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 5: Parallel Lines',
+                    prompt: 'In the figure, if line A is parallel to line B, what is the value of x?',
+                    passage: 'Angle corresponding to 120° is x.',
+                    options: ['60', '120', '180', 'Cannot be determined'],
+                    correctAnswer: '120',
+                    explanation: 'When a transversal line intersects two parallel lines, the corresponding angles are equal. Therefore, x must be equal to 120°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 6: Vertical Angles',
+                    prompt: 'Two lines intersect. One of the angles formed is 75°. What is the measure of its vertical angle?',
+                    correctAnswer: '75',
+                    explanation: 'Vertical angles are the angles opposite each other when two lines cross. They are always equal. So the vertical angle is also 75°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 7: Right Triangle',
+                    prompt: 'A right triangle has one angle that measures 25°. What is the measure of the other acute angle?',
+                    correctAnswer: '65',
+                    explanation: 'A right triangle has one 90° angle. The sum of angles is 180°. So, 180 - 90 = 90° remaining for the other two angles. If one is 25°, the other is 90 - 25 = 65°.'
+                },
+                {
+                    type: 'mcq',
+                    header: 'Math Question 8: Sum of Angles in a Quadrilateral',
+                    prompt: 'What is the sum of the interior angles of any quadrilateral (a four-sided figure)?',
+                    options: ['180°', '270°', '360°', '540°'],
+                    correctAnswer: '360°',
+                    explanation: 'A quadrilateral can always be divided into two triangles by drawing a diagonal. Since each triangle has 180°, the total sum of angles is 2 * 180° = 360°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 9: Alternate Interior Angles',
+                    prompt: 'Two parallel lines are cut by a transversal. If one interior angle is 45°, what is the measure of the alternate interior angle?',
+                    correctAnswer: '45',
+                    explanation: 'Alternate interior angles are equal when two parallel lines are cut by a transversal. So the other angle is also 45°.'
+                },
+                {
+                    type: 'grid-in',
+                    header: 'Math Question 10: Equilateral Triangle',
+                    prompt: 'What is the measure of a single interior angle in an equilateral triangle?',
+                    correctAnswer: '60',
+                    explanation: 'An equilateral triangle has three equal sides and three equal angles. The total is 180°, so each angle must be 180 / 3 = 60°.'
+                }
+            ]
+        };
+
+        // Standard lesson engine script
+        document.addEventListener('DOMContentLoaded', () => {
+            const lessonHeader = document.getElementById('lesson-header');
+            const lessonDeck = document.getElementById('lesson-deck');
+            const resultsScreen = document.getElementById('results-screen');
+            let currentStep = 0;
+            let score = 0;
+            let questionsAnswered = 0;
+
+            function startLesson() {
+                lessonHeader.innerHTML = `<h1>${lessonData.title}</h1><p>${lessonData.subtitle}</p>`;
+                showStep(currentStep);
+            }
+
+            function showStep(stepIndex) {
+                const step = lessonData.steps[stepIndex];
+                if (!step) return;
+                const card = document.createElement('div');
+                card.className = 'card active';
+                let content = `<div class="card-header"><h2>${step.header || ''}</h2></div>`;
+                if (step.type === 'briefing') {
+                    content += `<div class="card-content">${step.content}</div>`;
+                    content += `<div class="card-actions"><button id="next-btn">Start Mission</button></div>`;
+                } else {
+                    questionsAnswered++;
+                    const progress = Math.round(((questionsAnswered - 1) / (lessonData.steps.length - 1)) * 100);
+                    content += `<div class="progress-bar-container"><div class="progress-bar" style="width: ${progress}%"></div></div>`;
+                    content += `<div class="card-content">`;
+                    if (step.type === 'scrambled-paragraph' && step.sentences) {
+                        content += `<div class="passage">${step.sentences.map(s => `<p><strong>${s.id}.</strong> ${s.text}</p>`).join('')}</div>`;
+                    } else if (step.passage) {
+                        content += `<p class="passage">${step.passage}</p>`;
+                    }
+                    content += `<p class="prompt">${step.prompt}</p>`;
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                        content += `<div class="options">`;
+                        step.options.forEach((option) => {
+                            content += `<button class="option-btn" data-answer="${option}">${option}</button>`;
+                        });
+                        content += `</div>`;
+                    } else if (step.type === 'grid-in') {
+                        content += `<div class="grid-in-container"><input type="text" id="grid-in-input" class="grid-in-input"><button id="submit-grid-in">Submit</button></div>`;
+                    }
+                    content += `</div><div class="feedback" style="display: none;"></div>`;
+                }
+                card.innerHTML = content;
+                lessonDeck.innerHTML = '';
+                lessonDeck.appendChild(card);
+                if (step.type === 'briefing') {
+                    document.getElementById('next-btn').addEventListener('click', () => {
+                        currentStep++;
+                        showStep(currentStep);
+                    });
+                } else {
+                    const setupAnswerHandler = (isMcq) => {
+                        const selector = isMcq ? '.option-btn' : '#submit-grid-in';
+                        const container = isMcq ? (el) => el.parentElement : () => document.querySelector('.grid-in-container');
+                        document.querySelectorAll(selector).forEach(btn => {
+                            btn.addEventListener('click', (e) => {
+                                const userAnswer = isMcq ? e.target.dataset.answer : document.getElementById('grid-in-input').value;
+                                handleAnswer(userAnswer, step, container(e.target));
+                            });
+                        });
+                    };
+                    if (step.type === 'mcq' || step.type === 'scrambled-paragraph') {
+                       setupAnswerHandler(true);
+                    } else if (step.type === 'grid-in') {
+                        document.getElementById('submit-grid-in').addEventListener('click', () => {
+                            const userAnswer = document.getElementById('grid-in-input').value;
+                            handleAnswer(userAnswer, step, document.querySelector('.grid-in-container'));
+                        });
+                    }
+                }
+            }
+
+            function handleAnswer(userAnswer, step, container) {
+                const feedbackDiv = container.parentElement.querySelector('.feedback');
+                const isCorrect = userAnswer.trim().toLowerCase() === step.correctAnswer.trim().toLowerCase();
+                if (isCorrect) {
+                    score += lessonData.pointsPerQuestion;
+                    feedbackDiv.innerHTML = `<p class="correct"><strong>Correct!</strong> ${step.explanation}</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="incorrect"><strong>Incorrect.</strong> The correct answer is <strong>${step.correctAnswer}</strong>. ${step.explanation}</p>`;
+                }
+                container.querySelectorAll('button, input').forEach(el => el.disabled = true);
+                feedbackDiv.style.display = 'block';
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.className = 'next-btn';
+                feedbackDiv.appendChild(nextButton);
+                nextButton.addEventListener('click', () => {
+                    currentStep++;
+                    if (currentStep < lessonData.steps.length) {
+                        showStep(currentStep);
+                    } else {
+                        showResults();
+                    }
+                });
+            }
+
+            function showResults() {
+                localStorage.setItem('w2d3-complete', 'true');
+                const totalPossibleScore = (lessonData.steps.length - 1) * lessonData.pointsPerQuestion;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                resultsScreen.innerHTML = `
+                    <div class="card">
+                        <div class="card-header"><h2>Mission Complete!</h2></div>
+                        <div class="card-content">
+                            <p>Your Score: ${score} / ${totalPossibleScore}</p>
+                            <p>Accuracy: ${percentage}%</p>
+                            <a href="../index.html" class="button">Return to Dashboard</a>
+                        </div>
+                    </div>
+                `;
+                lessonDeck.style.display = 'none';
+                resultsScreen.style.display = 'block';
+            }
+
+            startLesson();
+        });
+    </script>
+</body>
+</html> 
